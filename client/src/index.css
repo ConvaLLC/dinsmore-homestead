@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -43,83 +44,71 @@
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+  /* ── Vintage Museum Palette ── */
+  --radius: 0.25rem;
+  /* Warm parchment backgrounds */
+  --background: oklch(93% 0.025 75);
+  --foreground: oklch(22% 0.04 50);
+  --card: oklch(96% 0.018 80);
+  --card-foreground: oklch(22% 0.04 50);
+  --popover: oklch(96% 0.018 80);
+  --popover-foreground: oklch(22% 0.04 50);
+  /* Museum red primary */
+  --primary: oklch(38% 0.12 22);
+  --primary-foreground: oklch(96% 0.018 80);
+  /* Aged paper secondary */
+  --secondary: oklch(87% 0.032 72);
+  --secondary-foreground: oklch(30% 0.05 52);
+  --muted: oklch(87% 0.032 72);
+  --muted-foreground: oklch(46% 0.06 56);
+  /* Gold accent */
+  --accent: oklch(68% 0.12 75);
+  --accent-foreground: oklch(22% 0.04 50);
+  --destructive: oklch(50% 0.18 25);
+  --destructive-foreground: oklch(96% 0.018 80);
+  --border: oklch(72% 0.05 62);
+  --input: oklch(82% 0.04 65);
+  --ring: oklch(38% 0.12 22);
+  /* Sidebar (admin) */
+  --sidebar: oklch(22% 0.04 50);
+  --sidebar-foreground: oklch(93% 0.025 75);
+  --sidebar-primary: oklch(68% 0.12 75);
+  --sidebar-primary-foreground: oklch(22% 0.04 50);
+  --sidebar-accent: oklch(30% 0.05 52);
+  --sidebar-accent-foreground: oklch(93% 0.025 75);
+  --sidebar-border: oklch(38% 0.055 54);
+  --sidebar-ring: oklch(68% 0.12 75);
+  /* Charts */
+  --chart-1: oklch(38% 0.12 22);
+  --chart-2: oklch(55% 0.11 72);
+  --chart-3: oklch(35% 0.08 155);
+  --chart-4: oklch(46% 0.06 56);
+  --chart-5: oklch(62% 0.06 60);
 }
 
-.dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.85 0.005 65);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.85 0.005 65);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.85 0.005 65);
-  --secondary: oklch(0.24 0.006 286.033);
-  --secondary-foreground: oklch(0.7 0.005 65);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.85 0.005 65);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
-}
+/* No dark mode — vintage museum site uses warm light theme */
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
+  * { @apply border-border outline-ring/50; }
+  html { scroll-behavior: smooth; }
   body {
     @apply bg-background text-foreground;
+    font-family: 'EB Garamond', 'Libre Baskerville', Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.75;
   }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: oklch(22% 0.04 50);
+  }
+  h1 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 700; }
+  h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 600; }
+  h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 600; }
+  h4 { font-size: 1.25rem; font-weight: 500; }
+  a { color: oklch(38% 0.12 22); transition: color 0.2s ease; }
+  a:hover { color: oklch(48% 0.14 22); }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),
@@ -130,6 +119,100 @@
   input[type="checkbox"]:not(:disabled),
   input[type="radio"]:not(:disabled) {
     @apply cursor-pointer;
+  }
+}
+
+/* ─── Vintage Utility Classes ─────────────────────────────────────────── */
+@layer utilities {
+  .font-display { font-family: 'Playfair Display', Georgia, serif; }
+  .font-body { font-family: 'EB Garamond', Georgia, serif; }
+  .text-shadow-vintage { text-shadow: 0 2px 20px oklch(0% 0 0 / 0.65), 0 1px 4px oklch(0% 0 0 / 0.4); }
+  .section-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: oklch(55% 0.11 72);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .card-vintage {
+    background: oklch(96% 0.018 80);
+    border: 1px solid oklch(82% 0.04 65);
+    box-shadow: 0 2px 8px oklch(0% 0 0 / 0.07);
+    border-radius: 2px;
+  }
+  .btn-vintage {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.625rem 1.75rem;
+    border: 2px solid oklch(38% 0.12 22);
+    color: oklch(38% 0.12 22);
+    background: transparent;
+    transition: all 0.2s ease;
+    display: inline-block;
+  }
+  .btn-vintage:hover {
+    background: oklch(38% 0.12 22);
+    color: oklch(96% 0.018 80);
+  }
+  .btn-vintage-filled {
+    background: oklch(38% 0.12 22);
+    color: oklch(96% 0.018 80);
+    border: 2px solid oklch(38% 0.12 22);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.625rem 1.75rem;
+    transition: all 0.2s ease;
+    display: inline-block;
+  }
+  .btn-vintage-filled:hover {
+    background: oklch(48% 0.14 22);
+    border-color: oklch(48% 0.14 22);
+  }
+  .section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, oklch(72% 0.05 62), oklch(55% 0.11 72), oklch(72% 0.05 62), transparent);
+    margin: 2rem 0;
+  }
+  .pull-quote {
+    border-left: 4px solid oklch(55% 0.11 72);
+    padding: 1rem 1.5rem;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: oklch(46% 0.06 56);
+    background: oklch(87% 0.032 72);
+    margin: 1.5rem 0;
+  }
+  .img-vintage {
+    border: 3px solid oklch(82% 0.04 65);
+    box-shadow: 0 0 0 1px oklch(72% 0.05 62), 4px 4px 0 oklch(72% 0.05 62);
+    filter: sepia(15%) contrast(1.05);
+  }
+  .badge-vintage {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.75rem;
+    border: 1px solid currentColor;
+    display: inline-block;
+  }
+  .nav-link-vintage {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: oklch(93% 0.025 75);
+    transition: color 0.2s ease;
+  }
+  .nav-link-vintage:hover, .nav-link-vintage.active {
+    color: oklch(68% 0.12 75);
   }
 }
 
