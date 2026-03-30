@@ -6,16 +6,16 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: "oklch(22% 0.04 50)",
-        color: "oklch(87% 0.032 72)",
-        borderTop: "3px solid oklch(55% 0.11 72)",
+        background: "oklch(20% 0.03 145)",
+        color: "oklch(86.6% 0.079 130.9)",
+        borderTop: "3px solid oklch(64.3% 0.161 143.4)",
       }}
     >
       {/* Ornamental top border */}
       <div
         style={{
           height: "4px",
-          background: "linear-gradient(to right, oklch(22% 0.04 50), oklch(55% 0.11 72), oklch(68% 0.12 75), oklch(55% 0.11 72), oklch(22% 0.04 50))",
+          background: "linear-gradient(to right, oklch(20% 0.03 145), oklch(64.3% 0.161 143.4), oklch(64.3% 0.161 143.4), oklch(64.3% 0.161 143.4), oklch(20% 0.03 145))",
         }}
       />
 
@@ -32,7 +32,7 @@ export default function Footer() {
               style={{
                 fontFamily: "'EB Garamond', serif",
                 fontSize: "0.9rem",
-                color: "oklch(72% 0.05 62)",
+                color: "oklch(78% 0.055 135)",
                 lineHeight: 1.6,
               }}
             >
@@ -43,7 +43,7 @@ export default function Footer() {
                 href="https://www.facebook.com/DinsmoreHomestead"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "oklch(72% 0.05 62)" }}
+                style={{ color: "oklch(78% 0.055 135)" }}
                 className="hover:text-[oklch(68%_0.12_75)] transition-colors"
                 aria-label="Facebook"
               >
@@ -53,7 +53,7 @@ export default function Footer() {
                 href="https://www.instagram.com/dinsmorehomestead"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "oklch(72% 0.05 62)" }}
+                style={{ color: "oklch(78% 0.055 135)" }}
                 className="hover:text-[oklch(68%_0.12_75)] transition-colors"
                 aria-label="Instagram"
               >
@@ -61,7 +61,7 @@ export default function Footer() {
               </a>
               <a
                 href="mailto:info@dinsmorefarm.org"
-                style={{ color: "oklch(72% 0.05 62)" }}
+                style={{ color: "oklch(78% 0.055 135)" }}
                 className="hover:text-[oklch(68%_0.12_75)] transition-colors"
                 aria-label="Email"
               >
@@ -78,7 +78,7 @@ export default function Footer() {
                 fontSize: "0.75rem",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "oklch(68% 0.12 75)",
+                color: "oklch(64.3% 0.161 143.4)",
                 marginBottom: "1rem",
               }}
             >
@@ -86,25 +86,25 @@ export default function Footer() {
             </h4>
             <div className="space-y-2">
               <div className="flex items-start gap-2">
-                <MapPin size={14} style={{ color: "oklch(55% 0.11 72)", marginTop: "0.2rem", flexShrink: 0 }} />
-                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(72% 0.05 62)", margin: 0 }}>
+                <MapPin size={14} style={{ color: "oklch(64.3% 0.161 143.4)", marginTop: "0.2rem", flexShrink: 0 }} />
+                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(78% 0.055 135)", margin: 0 }}>
                   5656 Burlington Pike<br />
                   Burlington, KY 41005
                 </p>
               </div>
               <div className="flex items-start gap-2">
-                <Clock size={14} style={{ color: "oklch(55% 0.11 72)", marginTop: "0.2rem", flexShrink: 0 }} />
-                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(72% 0.05 62)" }}>
+                <Clock size={14} style={{ color: "oklch(64.3% 0.161 143.4)", marginTop: "0.2rem", flexShrink: 0 }} />
+                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(78% 0.055 135)" }}>
                   <p style={{ margin: 0 }}>Wed–Sat: 11am–4pm</p>
                   <p style={{ margin: 0 }}>Sunday: 1pm–4pm</p>
                   <p style={{ margin: 0 }}>April–December</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Phone size={14} style={{ color: "oklch(55% 0.11 72)", flexShrink: 0 }} />
+                <Phone size={14} style={{ color: "oklch(64.3% 0.161 143.4)", flexShrink: 0 }} />
                 <a
                   href="tel:+18593862631"
-                  style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(72% 0.05 62)" }}
+                  style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(78% 0.055 135)" }}
                 >
                   (859) 386-2631
                 </a>
@@ -120,7 +120,7 @@ export default function Footer() {
                 fontSize: "0.75rem",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "oklch(68% 0.12 75)",
+                color: "oklch(64.3% 0.161 143.4)",
                 marginBottom: "1rem",
               }}
             >
@@ -141,11 +141,11 @@ export default function Footer() {
                     style={{
                       fontFamily: "'EB Garamond', serif",
                       fontSize: "0.9rem",
-                      color: "oklch(72% 0.05 62)",
+                      color: "oklch(78% 0.055 135)",
                       transition: "color 0.2s",
                     }}
-                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "oklch(68% 0.12 75)")}
-                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "oklch(72% 0.05 62)")}
+                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "oklch(64.3% 0.161 143.4)")}
+                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "oklch(78% 0.055 135)")}
                   >
                     {link.label}
                   </Link>
@@ -162,7 +162,7 @@ export default function Footer() {
                 fontSize: "0.75rem",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "oklch(68% 0.12 75)",
+                color: "oklch(64.3% 0.161 143.4)",
                 marginBottom: "1rem",
               }}
             >
@@ -172,7 +172,7 @@ export default function Footer() {
               style={{
                 fontFamily: "'EB Garamond', serif",
                 fontSize: "0.9rem",
-                color: "oklch(72% 0.05 62)",
+                color: "oklch(78% 0.055 135)",
                 marginBottom: "1rem",
                 fontStyle: "italic",
               }}
@@ -194,8 +194,8 @@ export default function Footer() {
                 fontSize: "0.75rem",
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
-                color: "oklch(68% 0.12 75)",
-                border: "1px solid oklch(55% 0.11 72)",
+                color: "oklch(64.3% 0.161 143.4)",
+                border: "1px solid oklch(64.3% 0.161 143.4)",
                 padding: "0.5rem 1rem",
                 transition: "all 0.2s",
               }}
@@ -208,7 +208,7 @@ export default function Footer() {
                 style={{
                   fontFamily: "'EB Garamond', serif",
                   fontSize: "0.85rem",
-                  color: "oklch(55% 0.11 72)",
+                  color: "oklch(64.3% 0.161 143.4)",
                   transition: "color 0.2s",
                 }}
               >
@@ -221,7 +221,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div
           style={{
-            borderTop: "1px solid oklch(38% 0.055 54)",
+            borderTop: "1px solid oklch(42.3% 0.087 144.3)",
             marginTop: "2.5rem",
             paddingTop: "1.5rem",
             display: "flex",
@@ -235,7 +235,7 @@ export default function Footer() {
             style={{
               fontFamily: "'EB Garamond', serif",
               fontSize: "0.8rem",
-              color: "oklch(46% 0.06 56)",
+              color: "oklch(44% 0.055 144)",
               margin: 0,
             }}
           >
@@ -253,7 +253,7 @@ export default function Footer() {
                 style={{
                   fontFamily: "'EB Garamond', serif",
                   fontSize: "0.75rem",
-                  color: "oklch(46% 0.06 56)",
+                  color: "oklch(44% 0.055 144)",
                   transition: "color 0.2s",
                 }}
               >

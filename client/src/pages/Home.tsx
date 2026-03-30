@@ -8,7 +8,7 @@ import { format } from "date-fns";
 function SectionDivider({ label }: { label?: string }) {
   return (
     <div className="flex items-center gap-4 my-8">
-      <div style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, oklch(72% 0.05 62))" }} />
+      <div style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, oklch(78% 0.055 135))" }} />
       {label && (
         <span
           style={{
@@ -16,14 +16,14 @@ function SectionDivider({ label }: { label?: string }) {
             fontSize: "0.7rem",
             letterSpacing: "0.25em",
             textTransform: "uppercase",
-            color: "oklch(55% 0.11 72)",
+            color: "oklch(64.3% 0.161 143.4)",
             whiteSpace: "nowrap",
           }}
         >
           ✦ {label} ✦
         </span>
       )}
-      <div style={{ flex: 1, height: "1px", background: "linear-gradient(to left, transparent, oklch(72% 0.05 62))" }} />
+      <div style={{ flex: 1, height: "1px", background: "linear-gradient(to left, transparent, oklch(78% 0.055 135))" }} />
     </div>
   );
 }
@@ -34,7 +34,7 @@ function EventCard({ event }: { event: any }) {
     <Link href={`/events/${event.slug}`} className="block group">
       <div
         className="card-vintage overflow-hidden transition-all duration-300 group-hover:shadow-lg"
-        style={{ border: "1px solid oklch(82% 0.04 65)" }}
+        style={{ border: "1px solid oklch(86.6% 0.079 130.9)" }}
       >
         {/* Image */}
         <div className="relative overflow-hidden" style={{ height: "200px" }}>
@@ -48,9 +48,9 @@ function EventCard({ event }: { event: any }) {
           ) : (
             <div
               className="w-full h-full flex items-center justify-center"
-              style={{ background: "oklch(87% 0.032 72)" }}
+              style={{ background: "oklch(86.6% 0.079 130.9)" }}
             >
-              <Calendar size={40} style={{ color: "oklch(55% 0.11 72)" }} />
+              <Calendar size={40} style={{ color: "oklch(64.3% 0.161 143.4)" }} />
             </div>
           )}
           {/* Date badge */}
@@ -59,8 +59,8 @@ function EventCard({ event }: { event: any }) {
               position: "absolute",
               top: "0.75rem",
               left: "0.75rem",
-              background: "oklch(38% 0.12 22)",
-              color: "oklch(96% 0.018 80)",
+              background: "oklch(33.1% 0.064 144.7)",
+              color: "oklch(96% 0.014 110)",
               padding: "0.25rem 0.75rem",
               fontFamily: "'Playfair Display', serif",
               fontSize: "0.7rem",
@@ -80,7 +80,7 @@ function EventCard({ event }: { event: any }) {
               fontFamily: "'Playfair Display', serif",
               fontSize: "1.1rem",
               fontWeight: 600,
-              color: "oklch(22% 0.04 50)",
+              color: "oklch(20% 0.03 145)",
               marginBottom: "0.5rem",
             }}
           >
@@ -91,7 +91,7 @@ function EventCard({ event }: { event: any }) {
               style={{
                 fontFamily: "'EB Garamond', serif",
                 fontSize: "0.9rem",
-                color: "oklch(46% 0.06 56)",
+                color: "oklch(44% 0.055 144)",
                 marginBottom: "0.75rem",
                 lineHeight: 1.5,
                 display: "-webkit-box",
@@ -108,7 +108,7 @@ function EventCard({ event }: { event: any }) {
               style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: "0.8rem",
-                color: "oklch(38% 0.12 22)",
+                color: "oklch(33.1% 0.064 144.7)",
                 fontWeight: 600,
               }}
             >
@@ -120,7 +120,7 @@ function EventCard({ event }: { event: any }) {
                 fontSize: "0.7rem",
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
-                color: "oklch(38% 0.12 22)",
+                color: "oklch(33.1% 0.064 144.7)",
               }}
               className="group-hover:underline"
             >
@@ -145,7 +145,7 @@ export default function Home() {
       <div
         style={{
           background: "oklch(27% 0.045 50)",
-          borderBottom: "1px solid oklch(38% 0.055 54)",
+          borderBottom: "1px solid oklch(42.3% 0.087 144.3)",
         }}
       >
         <div className="container py-3">
@@ -170,9 +170,9 @@ export default function Home() {
               <div
                 key={item.label}
                 className="flex items-center justify-center gap-2"
-                style={{ color: "oklch(87% 0.032 72)" }}
+                style={{ color: "oklch(86.6% 0.079 130.9)" }}
               >
-                <span style={{ color: "oklch(68% 0.12 75)" }}>{item.icon}</span>
+                <span style={{ color: "oklch(64.3% 0.161 143.4)" }}>{item.icon}</span>
                 <span
                   style={{
                     fontFamily: "'EB Garamond', serif",
@@ -185,7 +185,7 @@ export default function Home() {
                       fontSize: "0.7rem",
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
-                      color: "oklch(68% 0.12 75)",
+                      color: "oklch(64.3% 0.161 143.4)",
                       marginRight: "0.4rem",
                     }}
                   >
@@ -200,7 +200,7 @@ export default function Home() {
       </div>
 
       {/* Welcome Section */}
-      <section className="py-16" style={{ background: "oklch(96% 0.018 80)" }}>
+      <section className="py-16" style={{ background: "oklch(96% 0.014 110)" }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -212,7 +212,7 @@ export default function Home() {
                 style={{
                   width: "60px",
                   height: "3px",
-                  background: "oklch(55% 0.11 72)",
+                  background: "oklch(64.3% 0.161 143.4)",
                   marginBottom: "1.5rem",
                 }}
               />
@@ -220,7 +220,7 @@ export default function Home() {
                 style={{
                   fontFamily: "'EB Garamond', serif",
                   fontSize: "1.1rem",
-                  color: "oklch(38% 0.055 54)",
+                  color: "oklch(42.3% 0.087 144.3)",
                   marginBottom: "1rem",
                 }}
               >
@@ -233,7 +233,7 @@ export default function Home() {
                 style={{
                   fontFamily: "'EB Garamond', serif",
                   fontSize: "1.05rem",
-                  color: "oklch(46% 0.06 56)",
+                  color: "oklch(44% 0.055 144)",
                   marginBottom: "1.5rem",
                 }}
               >
@@ -262,8 +262,8 @@ export default function Home() {
                   position: "absolute",
                   bottom: "-1rem",
                   right: "-1rem",
-                  background: "oklch(38% 0.12 22)",
-                  color: "oklch(96% 0.018 80)",
+                  background: "oklch(33.1% 0.064 144.7)",
+                  color: "oklch(96% 0.014 110)",
                   padding: "1rem 1.5rem",
                   fontFamily: "'Playfair Display', serif",
                   fontSize: "0.8rem",
@@ -283,7 +283,7 @@ export default function Home() {
       </section>
 
       {/* Upcoming Events */}
-      <section className="py-16" style={{ background: "oklch(93% 0.025 75)" }}>
+      <section className="py-16" style={{ background: "oklch(93.6% 0.037 136.6)" }}>
         <div className="container">
           <div className="text-center mb-10">
             <span className="section-label">Mark Your Calendar</span>
@@ -299,8 +299,8 @@ export default function Home() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <Calendar size={48} style={{ color: "oklch(72% 0.05 62)", margin: "0 auto 1rem" }} />
-              <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(46% 0.06 56)", fontSize: "1.1rem" }}>
+              <Calendar size={48} style={{ color: "oklch(78% 0.055 135)", margin: "0 auto 1rem" }} />
+              <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(44% 0.055 144)", fontSize: "1.1rem" }}>
                 New events are being scheduled. Check back soon!
               </p>
             </div>
@@ -341,7 +341,7 @@ export default function Home() {
                 fontSize: "0.7rem",
                 letterSpacing: "0.25em",
                 textTransform: "uppercase",
-                color: "oklch(68% 0.12 75)",
+                color: "oklch(64.3% 0.161 143.4)",
                 display: "block",
                 marginBottom: "0.75rem",
               }}
@@ -350,7 +350,7 @@ export default function Home() {
             </span>
             <h2
               style={{
-                color: "oklch(96% 0.018 80)",
+                color: "oklch(96% 0.014 110)",
                 fontFamily: "'Playfair Display', serif",
                 marginBottom: "1rem",
               }}
@@ -361,7 +361,7 @@ export default function Home() {
               style={{
                 fontFamily: "'EB Garamond', serif",
                 fontSize: "1.05rem",
-                color: "oklch(87% 0.032 72)",
+                color: "oklch(86.6% 0.079 130.9)",
                 marginBottom: "1.5rem",
                 lineHeight: 1.7,
               }}
@@ -378,7 +378,7 @@ export default function Home() {
       </section>
 
       {/* Three Pillars */}
-      <section className="py-16" style={{ background: "oklch(96% 0.018 80)" }}>
+      <section className="py-16" style={{ background: "oklch(96% 0.014 110)" }}>
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -413,9 +413,9 @@ export default function Home() {
               >
                 <div
                   style={{
-                    color: "oklch(38% 0.12 22)",
+                    color: "oklch(33.1% 0.064 144.7)",
                     padding: "1rem",
-                    background: "oklch(87% 0.032 72)",
+                    background: "oklch(86.6% 0.079 130.9)",
                     borderRadius: "50%",
                   }}
                 >
@@ -426,7 +426,7 @@ export default function Home() {
                     fontFamily: "'Playfair Display', serif",
                     fontSize: "1.25rem",
                     fontWeight: 600,
-                    color: "oklch(22% 0.04 50)",
+                    color: "oklch(20% 0.03 145)",
                   }}
                 >
                   {pillar.title}
@@ -435,7 +435,7 @@ export default function Home() {
                   style={{
                     fontFamily: "'EB Garamond', serif",
                     fontSize: "0.95rem",
-                    color: "oklch(46% 0.06 56)",
+                    color: "oklch(44% 0.055 144)",
                     lineHeight: 1.6,
                     flex: 1,
                   }}
@@ -452,7 +452,7 @@ export default function Home() {
       </section>
 
       {/* History Teaser */}
-      <section className="py-16" style={{ background: "oklch(93% 0.025 75)" }}>
+      <section className="py-16" style={{ background: "oklch(93.6% 0.037 136.6)" }}>
         <div className="container">
           <div className="text-center mb-10">
             <span className="section-label">The Story of Dinsmore</span>
@@ -480,7 +480,7 @@ export default function Home() {
                       fontFamily: "'Playfair Display', serif",
                       fontSize: "0.85rem",
                       fontWeight: 600,
-                      color: "oklch(22% 0.04 50)",
+                      color: "oklch(20% 0.03 145)",
                       marginBottom: "0.1rem",
                     }}
                   >
@@ -490,7 +490,7 @@ export default function Home() {
                     style={{
                       fontFamily: "'EB Garamond', serif",
                       fontSize: "0.75rem",
-                      color: "oklch(55% 0.11 72)",
+                      color: "oklch(64.3% 0.161 143.4)",
                       fontStyle: "italic",
                     }}
                   >
@@ -512,7 +512,7 @@ export default function Home() {
       <section
         className="py-16 text-center"
         style={{
-          background: "oklch(38% 0.12 22)",
+          background: "oklch(33.1% 0.064 144.7)",
           backgroundImage: `url(${IMAGES.heritageFinal})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -533,7 +533,7 @@ export default function Home() {
               fontSize: "0.7rem",
               letterSpacing: "0.25em",
               textTransform: "uppercase",
-              color: "oklch(68% 0.12 75)",
+              color: "oklch(64.3% 0.161 143.4)",
               display: "block",
               marginBottom: "0.75rem",
             }}
@@ -542,7 +542,7 @@ export default function Home() {
           </span>
           <h2
             style={{
-              color: "oklch(96% 0.018 80)",
+              color: "oklch(96% 0.014 110)",
               fontFamily: "'Playfair Display', serif",
               marginBottom: "1rem",
             }}
@@ -553,7 +553,7 @@ export default function Home() {
             style={{
               fontFamily: "'EB Garamond', serif",
               fontSize: "1.1rem",
-              color: "oklch(87% 0.032 72)",
+              color: "oklch(86.6% 0.079 130.9)",
               maxWidth: "600px",
               margin: "0 auto 2rem",
             }}
@@ -565,9 +565,9 @@ export default function Home() {
             <Link
               href="/donate"
               style={{
-                background: "oklch(68% 0.12 75)",
-                color: "oklch(22% 0.04 50)",
-                border: "2px solid oklch(68% 0.12 75)",
+                background: "oklch(64.3% 0.161 143.4)",
+                color: "oklch(20% 0.03 145)",
+                border: "2px solid oklch(64.3% 0.161 143.4)",
                 fontFamily: "'Playfair Display', serif",
                 fontSize: "0.8rem",
                 letterSpacing: "0.1em",
@@ -583,7 +583,7 @@ export default function Home() {
               href="/donate#membership"
               style={{
                 background: "transparent",
-                color: "oklch(93% 0.025 75)",
+                color: "oklch(93.6% 0.037 136.6)",
                 border: "2px solid oklch(87% 0.032 72 / 0.6)",
                 fontFamily: "'Playfair Display', serif",
                 fontSize: "0.8rem",

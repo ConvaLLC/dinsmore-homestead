@@ -18,9 +18,9 @@ export default function EducationContentPage() {
   if (!isAuthenticated) {
     return (
       <div className="py-24 text-center container">
-        <Lock size={48} style={{ color: "oklch(55% 0.11 72)", margin: "0 auto 1rem" }} />
+        <Lock size={48} style={{ color: "oklch(64.3% 0.161 143.4)", margin: "0 auto 1rem" }} />
         <h2>Sign In Required</h2>
-        <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(46% 0.06 56)", maxWidth: "500px", margin: "0 auto 1.5rem" }}>
+        <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(44% 0.055 144)", maxWidth: "500px", margin: "0 auto 1.5rem" }}>
           Please sign in and verify your educator access to view this resource.
         </p>
         <div className="flex gap-3 justify-center flex-wrap">
@@ -34,9 +34,9 @@ export default function EducationContentPage() {
   if (!hasAccess) {
     return (
       <div className="py-24 text-center container">
-        <Lock size={48} style={{ color: "oklch(55% 0.11 72)", margin: "0 auto 1rem" }} />
+        <Lock size={48} style={{ color: "oklch(64.3% 0.161 143.4)", margin: "0 auto 1rem" }} />
         <h2>Educator Verification Required</h2>
-        <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(46% 0.06 56)", maxWidth: "500px", margin: "0 auto 1.5rem" }}>
+        <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(44% 0.055 144)", maxWidth: "500px", margin: "0 auto 1.5rem" }}>
           Please complete the email verification process to access educational resources.
         </p>
         <Link href="/education/register" className="btn-vintage-filled">Complete Verification</Link>
@@ -47,7 +47,7 @@ export default function EducationContentPage() {
   if (isLoading) {
     return (
       <div className="py-20 text-center">
-        <div style={{ width: "40px", height: "40px", border: "3px solid oklch(82% 0.04 65)", borderTopColor: "oklch(38% 0.12 22)", borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto" }} />
+        <div style={{ width: "40px", height: "40px", border: "3px solid oklch(86.6% 0.079 130.9)", borderTopColor: "oklch(33.1% 0.064 144.7)", borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto" }} />
       </div>
     );
   }
@@ -55,7 +55,7 @@ export default function EducationContentPage() {
   if (!item) {
     return (
       <div className="py-20 text-center container">
-        <FileText size={48} style={{ color: "oklch(55% 0.11 72)", margin: "0 auto 1rem" }} />
+        <FileText size={48} style={{ color: "oklch(64.3% 0.161 143.4)", margin: "0 auto 1rem" }} />
         <h2>Resource Not Found</h2>
         <Link href="/education" className="btn-vintage mt-4 inline-block">Back to Portal</Link>
       </div>
@@ -68,19 +68,19 @@ export default function EducationContentPage() {
       <div className="relative overflow-hidden" style={{ height: "220px" }}>
         <div style={{ position: "absolute", inset: 0, background: "oklch(27% 0.045 50)" }} />
         <div className="container relative h-full flex flex-col justify-end pb-8">
-          <nav style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: "oklch(72% 0.05 62)", marginBottom: "0.75rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <Link href="/education" style={{ color: "oklch(72% 0.05 62)" }}>Education Portal</Link>
+          <nav style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: "oklch(78% 0.055 135)", marginBottom: "0.75rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <Link href="/education" style={{ color: "oklch(78% 0.055 135)" }}>Education Portal</Link>
             <ChevronRight size={12} />
-            <span style={{ color: "oklch(87% 0.032 72)" }}>{item.title}</span>
+            <span style={{ color: "oklch(86.6% 0.079 130.9)" }}>{item.title}</span>
           </nav>
-          <span className="section-label" style={{ color: "oklch(68% 0.12 75)" }}>
+          <span className="section-label" style={{ color: "oklch(64.3% 0.161 143.4)" }}>
             {item.category.replace("_", " ")}
           </span>
-          <h1 style={{ color: "oklch(96% 0.018 80)", fontSize: "1.75rem" }}>{item.title}</h1>
+          <h1 style={{ color: "oklch(96% 0.014 110)", fontSize: "1.75rem" }}>{item.title}</h1>
         </div>
       </div>
 
-      <section className="py-10" style={{ background: "oklch(96% 0.018 80)" }}>
+      <section className="py-10" style={{ background: "oklch(96% 0.014 110)" }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <div className="lg:col-span-3">
@@ -92,7 +92,7 @@ export default function EducationContentPage() {
                   style={{
                     fontFamily: "'EB Garamond', serif",
                     fontSize: "1.05rem",
-                    color: "oklch(38% 0.055 54)",
+                    color: "oklch(42.3% 0.087 144.3)",
                     lineHeight: 1.8,
                   }}
                 >
@@ -117,18 +117,18 @@ export default function EducationContentPage() {
                 <dl className="space-y-2">
                   {item.gradeLevel && (
                     <>
-                      <dt style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "oklch(55% 0.11 72)" }}>Grade Level</dt>
-                      <dd style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(38% 0.055 54)", marginBottom: "0.5rem" }}>{item.gradeLevel}</dd>
+                      <dt style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "oklch(64.3% 0.161 143.4)" }}>Grade Level</dt>
+                      <dd style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(42.3% 0.087 144.3)", marginBottom: "0.5rem" }}>{item.gradeLevel}</dd>
                     </>
                   )}
                   {item.subject && (
                     <>
-                      <dt style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "oklch(55% 0.11 72)" }}>Subject</dt>
-                      <dd style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(38% 0.055 54)", marginBottom: "0.5rem" }}>{item.subject}</dd>
+                      <dt style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "oklch(64.3% 0.161 143.4)" }}>Subject</dt>
+                      <dd style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(42.3% 0.087 144.3)", marginBottom: "0.5rem" }}>{item.subject}</dd>
                     </>
                   )}
-                  <dt style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "oklch(55% 0.11 72)" }}>Category</dt>
-                  <dd style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(38% 0.055 54)" }}>{item.category.replace("_", " ")}</dd>
+                  <dt style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "oklch(64.3% 0.161 143.4)" }}>Category</dt>
+                  <dd style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(42.3% 0.087 144.3)" }}>{item.category.replace("_", " ")}</dd>
                 </dl>
               </div>
               <Link href="/education" className="btn-vintage block text-center text-xs">

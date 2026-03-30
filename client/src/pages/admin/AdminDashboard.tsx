@@ -31,7 +31,7 @@ function AdminNav() {
   return (
     <nav
       style={{
-        background: "oklch(22% 0.04 50)",
+        background: "oklch(20% 0.03 145)",
         borderBottom: "1px solid oklch(32% 0.04 50)",
         padding: "0.5rem 0",
       }}
@@ -44,7 +44,7 @@ function AdminNav() {
               fontSize: "0.7rem",
               letterSpacing: "0.15em",
               textTransform: "uppercase",
-              color: "oklch(55% 0.11 72)",
+              color: "oklch(64.3% 0.161 143.4)",
               marginRight: "1rem",
               padding: "0.4rem 0",
             }}
@@ -64,8 +64,8 @@ function AdminNav() {
                 fontSize: "0.75rem",
                 letterSpacing: "0.05em",
                 textTransform: "uppercase",
-                color: location.startsWith(item.href) && (item.href !== "/admin" || location === "/admin") ? "oklch(68% 0.12 75)" : "oklch(72% 0.05 62)",
-                borderBottom: location.startsWith(item.href) && (item.href !== "/admin" || location === "/admin") ? "2px solid oklch(68% 0.12 75)" : "2px solid transparent",
+                color: location.startsWith(item.href) && (item.href !== "/admin" || location === "/admin") ? "oklch(64.3% 0.161 143.4)" : "oklch(78% 0.055 135)",
+                borderBottom: location.startsWith(item.href) && (item.href !== "/admin" || location === "/admin") ? "2px solid oklch(64.3% 0.161 143.4)" : "2px solid transparent",
                 transition: "all 0.2s",
                 textDecoration: "none",
               }}
@@ -86,9 +86,9 @@ export default function AdminDashboard() {
   if (!isAuthenticated) {
     return (
       <div className="py-24 text-center container">
-        <Lock size={48} style={{ color: "oklch(55% 0.11 72)", margin: "0 auto 1rem" }} />
+        <Lock size={48} style={{ color: "oklch(64.3% 0.161 143.4)", margin: "0 auto 1rem" }} />
         <h2>Admin Access Required</h2>
-        <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(46% 0.06 56)", marginBottom: "1.5rem" }}>
+        <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(44% 0.055 144)", marginBottom: "1.5rem" }}>
           Please sign in with an admin account to access the dashboard.
         </p>
         <a href={getLoginUrl()} className="btn-vintage-filled">Sign In</a>
@@ -99,9 +99,9 @@ export default function AdminDashboard() {
   if ((user as any)?.role !== "admin") {
     return (
       <div className="py-24 text-center container">
-        <Lock size={48} style={{ color: "oklch(55% 0.11 72)", margin: "0 auto 1rem" }} />
+        <Lock size={48} style={{ color: "oklch(64.3% 0.161 143.4)", margin: "0 auto 1rem" }} />
         <h2>Insufficient Permissions</h2>
-        <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(46% 0.06 56)", marginBottom: "1.5rem" }}>
+        <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(44% 0.055 144)", marginBottom: "1.5rem" }}>
           Your account does not have admin privileges. Contact the site administrator.
         </p>
         <Link href="/" className="btn-vintage">Return to Site</Link>
@@ -131,12 +131,12 @@ export default function AdminDashboard() {
   return (
     <div>
       <AdminNav />
-      <div className="py-8" style={{ background: "oklch(96% 0.018 80)", minHeight: "calc(100vh - 120px)" }}>
+      <div className="py-8" style={{ background: "oklch(96% 0.014 110)", minHeight: "calc(100vh - 120px)" }}>
         <div className="container">
           <div className="mb-8">
             <span className="section-label">Control Panel</span>
             <h2 style={{ fontSize: "1.75rem" }}>Admin Dashboard</h2>
-            <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(46% 0.06 56)" }}>
+            <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(44% 0.055 144)" }}>
               Welcome back, {user?.name}. Here's an overview of the Dinsmore Homestead website.
             </p>
           </div>
@@ -147,13 +147,13 @@ export default function AdminDashboard() {
               <Link key={stat.label} href={stat.href} className="block group">
                 <div className="card-vintage p-5 transition-all duration-200 group-hover:shadow-md">
                   <div className="flex items-start justify-between mb-3">
-                    <span style={{ color: "oklch(55% 0.11 72)" }}>{stat.icon}</span>
+                    <span style={{ color: "oklch(64.3% 0.161 143.4)" }}>{stat.icon}</span>
                     <span
                       style={{
                         fontFamily: "'Playfair Display', serif",
                         fontSize: "1.5rem",
                         fontWeight: 700,
-                        color: "oklch(38% 0.12 22)",
+                        color: "oklch(33.1% 0.064 144.7)",
                       }}
                     >
                       {stat.value}
@@ -165,7 +165,7 @@ export default function AdminDashboard() {
                       fontSize: "0.75rem",
                       letterSpacing: "0.08em",
                       textTransform: "uppercase",
-                      color: "oklch(46% 0.06 56)",
+                      color: "oklch(44% 0.055 144)",
                       margin: 0,
                     }}
                   >
@@ -191,7 +191,7 @@ export default function AdminDashboard() {
                   <h4 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", marginBottom: "0.4rem" }}>
                     {action.title}
                   </h4>
-                  <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(46% 0.06 56)", marginBottom: "1rem" }}>
+                  <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(44% 0.055 144)", marginBottom: "1rem" }}>
                     {action.desc}
                   </p>
                   <Link href={action.href} className="btn-vintage text-xs">

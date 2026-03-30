@@ -60,7 +60,7 @@ export default function HistoryFamilyPage() {
   );
 
   return (
-    <div className="min-h-screen" style={{ background: "oklch(96% 0.018 80)" }}>
+    <div className="min-h-screen" style={{ background: "oklch(96% 0.014 110)" }}>
       {/* Hero Banner */}
       <div
         className="relative py-20 text-center"
@@ -71,15 +71,15 @@ export default function HistoryFamilyPage() {
         }}
       >
         <div className="container">
-          <p className="section-label" style={{ color: "oklch(68% 0.12 75)" }}>The Dinsmore Legacy</p>
+          <p className="section-label" style={{ color: "oklch(64.3% 0.161 143.4)" }}>The Dinsmore Legacy</p>
           <h1 style={{ color: "oklch(97% 0.01 80)", fontFamily: "'Playfair Display', serif", fontSize: "clamp(2rem,5vw,3.5rem)", margin: "0.5rem 0 1rem" }}>
             The Family
           </h1>
-          <p style={{ color: "oklch(87% 0.032 72)", fontFamily: "'EB Garamond', serif", fontSize: "1.1rem", maxWidth: "600px", margin: "0 auto 1.5rem" }}>
+          <p style={{ color: "oklch(86.6% 0.079 130.9)", fontFamily: "'EB Garamond', serif", fontSize: "1.1rem", maxWidth: "600px", margin: "0 auto 1.5rem" }}>
             Five generations of the Dinsmore family shaped this homestead and left their mark on American history.
           </p>
           <nav style={{ fontSize: "0.85rem", color: "oklch(75% 0.03 72)" }}>
-            <Link href="/" style={{ color: "oklch(68% 0.12 75)" }}>Home</Link>
+            <Link href="/" style={{ color: "oklch(64.3% 0.161 143.4)" }}>Home</Link>
             <span className="mx-2">›</span>
             <span>The Family</span>
           </nav>
@@ -95,7 +95,7 @@ export default function HistoryFamilyPage() {
         >
           <div
             className="max-w-3xl w-full max-h-[90vh] overflow-y-auto rounded-sm shadow-2xl"
-            style={{ background: "oklch(96% 0.018 80)", border: "2px solid oklch(55% 0.11 72)" }}
+            style={{ background: "oklch(96% 0.014 110)", border: "2px solid oklch(64.3% 0.161 143.4)" }}
             onClick={e => e.stopPropagation()}
           >
             <div className="p-8">
@@ -104,17 +104,17 @@ export default function HistoryFamilyPage() {
                   src={getPortrait(selectedBio)}
                   alt={selectedBio.name}
                   className="flex-shrink-0 object-cover"
-                  style={{ width: 120, height: 150, border: "3px solid oklch(55% 0.11 72)", filter: "sepia(20%)" }}
+                  style={{ width: 120, height: 150, border: "3px solid oklch(64.3% 0.161 143.4)", filter: "sepia(20%)" }}
                   onError={e => { (e.target as HTMLImageElement).src = FALLBACK_IMG; }}
                 />
                 <div>
-                  <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", color: "oklch(22% 0.04 50)", marginBottom: "0.3rem" }}>
+                  <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", color: "oklch(20% 0.03 145)", marginBottom: "0.3rem" }}>
                     {selectedBio.name}
                   </h2>
                   {selectedBio.lifespan && (
-                    <p style={{ color: "oklch(55% 0.11 72)", fontStyle: "italic", marginBottom: "0.5rem" }}>{selectedBio.lifespan}</p>
+                    <p style={{ color: "oklch(64.3% 0.161 143.4)", fontStyle: "italic", marginBottom: "0.5rem" }}>{selectedBio.lifespan}</p>
                   )}
-                  <span style={{ display: "inline-block", padding: "2px 10px", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", background: "oklch(55% 0.11 72 / 0.15)", color: "oklch(55% 0.11 72)", borderRadius: "2px" }}>
+                  <span style={{ display: "inline-block", padding: "2px 10px", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", background: "oklch(55% 0.11 72 / 0.15)", color: "oklch(64.3% 0.161 143.4)", borderRadius: "2px" }}>
                     {selectedBio.relation}
                   </span>
                 </div>
@@ -156,11 +156,11 @@ export default function HistoryFamilyPage() {
       <div className="container py-16">
         {/* Core Family */}
         <div className="text-center mb-12">
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "2rem", color: "oklch(22% 0.04 50)", marginBottom: "0.5rem" }}>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "2rem", color: "oklch(20% 0.03 145)", marginBottom: "0.5rem" }}>
             Core Family Members
           </h2>
           <div className="ornamental-divider" />
-          <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(38% 0.055 54)", maxWidth: "600px", margin: "1rem auto 0", lineHeight: 1.7 }}>
+          <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(42.3% 0.087 144.3)", maxWidth: "600px", margin: "1rem auto 0", lineHeight: 1.7 }}>
             The Dinsmore family lived at this homestead for five generations, from its construction in 1842 through the 20th century.
             Click any portrait to read their full biography.
           </p>
@@ -173,7 +173,7 @@ export default function HistoryFamilyPage() {
               onClick={() => setSelected(bio.slug)}
               className="group text-left"
             >
-              <div className="overflow-hidden mb-3" style={{ border: "2px solid oklch(55% 0.11 72)", aspectRatio: "3/4" }}>
+              <div className="overflow-hidden mb-3" style={{ border: "2px solid oklch(64.3% 0.161 143.4)", aspectRatio: "3/4" }}>
                 <img
                   src={getPortrait(bio)}
                   alt={bio.name}
@@ -182,12 +182,12 @@ export default function HistoryFamilyPage() {
                   onError={e => { (e.target as HTMLImageElement).src = FALLBACK_IMG; }}
                 />
               </div>
-              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.9rem", color: "oklch(22% 0.04 50)", lineHeight: 1.3 }}
+              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.9rem", color: "oklch(20% 0.03 145)", lineHeight: 1.3 }}
                   className="group-hover:text-[oklch(55%_0.11_72)] transition-colors">
                 {bio.name}
               </h3>
               {bio.lifespan && (
-                <p style={{ fontSize: "0.75rem", color: "oklch(55% 0.11 72)", marginTop: "0.2rem", fontStyle: "italic" }}>{bio.lifespan}</p>
+                <p style={{ fontSize: "0.75rem", color: "oklch(64.3% 0.161 143.4)", marginTop: "0.2rem", fontStyle: "italic" }}>{bio.lifespan}</p>
               )}
             </button>
           ))}
@@ -196,7 +196,7 @@ export default function HistoryFamilyPage() {
         {/* All Other Members */}
         <div style={{ borderTop: "1px solid oklch(55% 0.11 72 / 0.3)", paddingTop: "3rem" }}>
           <div className="flex items-center justify-between mb-6">
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5rem", color: "oklch(22% 0.04 50)" }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5rem", color: "oklch(20% 0.03 145)" }}>
               Extended Family &amp; Associates
             </h2>
             <input
@@ -210,7 +210,7 @@ export default function HistoryFamilyPage() {
                 fontSize: "0.9rem",
                 background: "white",
                 border: "1px solid oklch(55% 0.11 72 / 0.5)",
-                color: "oklch(22% 0.04 50)",
+                color: "oklch(20% 0.03 145)",
                 outline: "none",
                 width: 220,
               }}
@@ -236,18 +236,18 @@ export default function HistoryFamilyPage() {
                     />
                   </div>
                   <div className="min-w-0">
-                    <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.85rem", color: "oklch(22% 0.04 50)", lineHeight: 1.3 }}
+                    <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.85rem", color: "oklch(20% 0.03 145)", lineHeight: 1.3 }}
                         className="group-hover:text-[oklch(55%_0.11_72)] transition-colors">
                       {bio.name}
                     </h3>
                     {bio.lifespan && (
-                      <p style={{ fontSize: "0.7rem", color: "oklch(55% 0.11 72)", fontStyle: "italic", marginTop: "0.15rem" }}>{bio.lifespan}</p>
+                      <p style={{ fontSize: "0.7rem", color: "oklch(64.3% 0.161 143.4)", fontStyle: "italic", marginTop: "0.15rem" }}>{bio.lifespan}</p>
                     )}
                     <p style={{ fontSize: "0.65rem", color: "oklch(50% 0.04 54)", textTransform: "uppercase", letterSpacing: "0.08em", marginTop: "0.25rem" }}>
                       {bio.relation}
                     </p>
                     {bio.shortBio && (
-                      <p style={{ fontSize: "0.8rem", color: "oklch(38% 0.055 54)", marginTop: "0.4rem", lineHeight: 1.5, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                      <p style={{ fontSize: "0.8rem", color: "oklch(42.3% 0.087 144.3)", marginTop: "0.4rem", lineHeight: 1.5, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
                         {bio.shortBio.slice(0, 120)}
                       </p>
                     )}
@@ -267,7 +267,7 @@ export default function HistoryFamilyPage() {
         {/* Videos */}
         <div style={{ borderTop: "1px solid oklch(55% 0.11 72 / 0.3)", paddingTop: "3rem", marginTop: "3rem" }}>
           <div className="text-center mb-10">
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", color: "oklch(22% 0.04 50)", marginBottom: "0.5rem" }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", color: "oklch(20% 0.03 145)", marginBottom: "0.5rem" }}>
               Family History Videos
             </h2>
             <div className="ornamental-divider" />
@@ -281,7 +281,7 @@ export default function HistoryFamilyPage() {
                 <div style={{ aspectRatio: "16/9", marginBottom: "0.75rem" }}>
                   <iframe src={v.src} className="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title={v.title} />
                 </div>
-                <h3 style={{ fontFamily: "'Playfair Display', serif", color: "oklch(22% 0.04 50)", marginBottom: "0.25rem" }}>{v.title}</h3>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", color: "oklch(20% 0.03 145)", marginBottom: "0.25rem" }}>{v.title}</h3>
                 <p style={{ fontSize: "0.85rem", color: "oklch(50% 0.04 54)", fontStyle: "italic" }}>{v.subtitle}</p>
               </div>
             ))}

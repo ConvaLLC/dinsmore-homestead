@@ -44,46 +44,63 @@
 }
 
 :root {
-  /* ── Vintage Museum Palette ── */
+  /* ── Dinsmore Heritage Palette ── */
+  /* Sampled directly from dinsmorefarm.org:
+     #1f3e20 dark forest green  -> oklch(33.1% 0.064 144.7)
+     #2d5a2e mid forest green   -> oklch(42.3% 0.087 144.3)
+     #46a546 heritage green     -> oklch(64.3% 0.161 143.4)
+     #67a671 sage green         -> oklch(66.8% 0.102 148.3)
+     #c1dea8 light sage         -> oklch(86.6% 0.079 130.9)
+     #dff0d8 pale sage          -> oklch(93.6% 0.037 136.6)
+  */
   --radius: 0.25rem;
-  /* Warm parchment backgrounds */
-  --background: oklch(93% 0.025 75);
-  --foreground: oklch(22% 0.04 50);
-  --card: oklch(96% 0.018 80);
-  --card-foreground: oklch(22% 0.04 50);
-  --popover: oklch(96% 0.018 80);
-  --popover-foreground: oklch(22% 0.04 50);
-  /* Museum red primary */
-  --primary: oklch(38% 0.12 22);
-  --primary-foreground: oklch(96% 0.018 80);
-  /* Aged paper secondary */
-  --secondary: oklch(87% 0.032 72);
-  --secondary-foreground: oklch(30% 0.05 52);
-  --muted: oklch(87% 0.032 72);
-  --muted-foreground: oklch(46% 0.06 56);
-  /* Gold accent */
-  --accent: oklch(68% 0.12 75);
-  --accent-foreground: oklch(22% 0.04 50);
+
+  /* Warm parchment + pale sage backgrounds */
+  --background: oklch(94% 0.018 100);       /* warm parchment */
+  --foreground: oklch(20% 0.03 145);        /* near-black with green undertone */
+  --card: oklch(96% 0.014 110);             /* slightly warm white */
+  --card-foreground: oklch(20% 0.03 145);
+  --popover: oklch(97% 0.012 110);
+  --popover-foreground: oklch(20% 0.03 145);
+
+  /* Dinsmore dark forest green — primary */
+  --primary: oklch(33.1% 0.064 144.7);      /* #1f3e20 */
+  --primary-foreground: oklch(97% 0.012 110);
+
+  /* Light sage — secondary / aged paper */
+  --secondary: oklch(86.6% 0.079 130.9);    /* #c1dea8 */
+  --secondary-foreground: oklch(28% 0.055 144);
+
+  --muted: oklch(90% 0.045 130);            /* between pale sage and light sage */
+  --muted-foreground: oklch(44% 0.055 144);
+
+  /* Heritage green — accent */
+  --accent: oklch(64.3% 0.161 143.4);       /* #46a546 */
+  --accent-foreground: oklch(97% 0.012 110);
+
   --destructive: oklch(50% 0.18 25);
-  --destructive-foreground: oklch(96% 0.018 80);
-  --border: oklch(72% 0.05 62);
-  --input: oklch(82% 0.04 65);
-  --ring: oklch(38% 0.12 22);
-  /* Sidebar (admin) */
-  --sidebar: oklch(22% 0.04 50);
-  --sidebar-foreground: oklch(93% 0.025 75);
-  --sidebar-primary: oklch(68% 0.12 75);
-  --sidebar-primary-foreground: oklch(22% 0.04 50);
-  --sidebar-accent: oklch(30% 0.05 52);
-  --sidebar-accent-foreground: oklch(93% 0.025 75);
-  --sidebar-border: oklch(38% 0.055 54);
-  --sidebar-ring: oklch(68% 0.12 75);
+  --destructive-foreground: oklch(97% 0.012 110);
+
+  --border: oklch(78% 0.055 135);           /* sage border */
+  --input: oklch(88% 0.048 132);
+  --ring: oklch(42.3% 0.087 144.3);         /* #2d5a2e */
+
+  /* Sidebar (admin) — deep forest green */
+  --sidebar: oklch(26% 0.055 144.7);        /* slightly lighter than #1f3e20 */
+  --sidebar-foreground: oklch(93.6% 0.037 136.6);
+  --sidebar-primary: oklch(64.3% 0.161 143.4);
+  --sidebar-primary-foreground: oklch(97% 0.012 110);
+  --sidebar-accent: oklch(33.1% 0.064 144.7);
+  --sidebar-accent-foreground: oklch(93.6% 0.037 136.6);
+  --sidebar-border: oklch(42.3% 0.087 144.3);
+  --sidebar-ring: oklch(64.3% 0.161 143.4);
+
   /* Charts */
-  --chart-1: oklch(38% 0.12 22);
-  --chart-2: oklch(55% 0.11 72);
-  --chart-3: oklch(35% 0.08 155);
-  --chart-4: oklch(46% 0.06 56);
-  --chart-5: oklch(62% 0.06 60);
+  --chart-1: oklch(33.1% 0.064 144.7);     /* dark forest */
+  --chart-2: oklch(64.3% 0.161 143.4);     /* heritage green */
+  --chart-3: oklch(66.8% 0.102 148.3);     /* sage */
+  --chart-4: oklch(86.6% 0.079 130.9);     /* light sage */
+  --chart-5: oklch(55% 0.10 75);           /* warm gold accent */
 }
 
 /* No dark mode — vintage museum site uses warm light theme */
@@ -107,8 +124,8 @@
   h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 600; }
   h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 600; }
   h4 { font-size: 1.25rem; font-weight: 500; }
-  a { color: oklch(38% 0.12 22); transition: color 0.2s ease; }
-  a:hover { color: oklch(48% 0.14 22); }
+  a { color: oklch(33.1% 0.064 144.7); transition: color 0.2s ease; }  /* dark forest green */
+  a:hover { color: oklch(42.3% 0.087 144.3); }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),
@@ -132,13 +149,13 @@
     font-size: 0.75rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: oklch(55% 0.11 72);
+    color: oklch(64.3% 0.161 143.4);   /* heritage green */
     display: block;
     margin-bottom: 0.5rem;
   }
   .card-vintage {
-    background: oklch(96% 0.018 80);
-    border: 1px solid oklch(82% 0.04 65);
+    background: oklch(96% 0.014 110);
+    border: 1px solid oklch(78% 0.055 135);
     box-shadow: 0 2px 8px oklch(0% 0 0 / 0.07);
     border-radius: 2px;
   }
@@ -148,20 +165,20 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 0.625rem 1.75rem;
-    border: 2px solid oklch(38% 0.12 22);
-    color: oklch(38% 0.12 22);
+    border: 2px solid oklch(33.1% 0.064 144.7);  /* dark forest green */
+    color: oklch(33.1% 0.064 144.7);
     background: transparent;
     transition: all 0.2s ease;
     display: inline-block;
   }
   .btn-vintage:hover {
-    background: oklch(38% 0.12 22);
-    color: oklch(96% 0.018 80);
+    background: oklch(33.1% 0.064 144.7);
+    color: oklch(97% 0.012 110);
   }
   .btn-vintage-filled {
-    background: oklch(38% 0.12 22);
-    color: oklch(96% 0.018 80);
-    border: 2px solid oklch(38% 0.12 22);
+    background: oklch(33.1% 0.064 144.7);         /* dark forest green */
+    color: oklch(97% 0.012 110);
+    border: 2px solid oklch(33.1% 0.064 144.7);
     font-family: 'Playfair Display', serif;
     font-size: 0.8rem;
     letter-spacing: 0.1em;
@@ -171,28 +188,28 @@
     display: inline-block;
   }
   .btn-vintage-filled:hover {
-    background: oklch(48% 0.14 22);
-    border-color: oklch(48% 0.14 22);
+    background: oklch(42.3% 0.087 144.3);          /* mid forest green */
+    border-color: oklch(42.3% 0.087 144.3);
   }
   .section-divider {
     border: none;
     height: 1px;
-    background: linear-gradient(to right, transparent, oklch(72% 0.05 62), oklch(55% 0.11 72), oklch(72% 0.05 62), transparent);
+    background: linear-gradient(to right, transparent, oklch(78% 0.055 135), oklch(64.3% 0.161 143.4), oklch(78% 0.055 135), transparent);
     margin: 2rem 0;
   }
   .pull-quote {
-    border-left: 4px solid oklch(55% 0.11 72);
+    border-left: 4px solid oklch(64.3% 0.161 143.4);  /* heritage green */
     padding: 1rem 1.5rem;
     font-style: italic;
     font-size: 1.15rem;
-    color: oklch(46% 0.06 56);
-    background: oklch(87% 0.032 72);
+    color: oklch(33.1% 0.064 144.7);
+    background: oklch(93.6% 0.037 136.6);              /* pale sage */
     margin: 1.5rem 0;
   }
   .img-vintage {
-    border: 3px solid oklch(82% 0.04 65);
-    box-shadow: 0 0 0 1px oklch(72% 0.05 62), 4px 4px 0 oklch(72% 0.05 62);
-    filter: sepia(15%) contrast(1.05);
+    border: 3px solid oklch(78% 0.055 135);
+    box-shadow: 0 0 0 1px oklch(66.8% 0.102 148.3), 4px 4px 0 oklch(66.8% 0.102 148.3);
+    filter: sepia(8%) contrast(1.05);
   }
   .badge-vintage {
     font-family: 'Playfair Display', serif;
@@ -208,11 +225,11 @@
     font-size: 0.8rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: oklch(93% 0.025 75);
+    color: oklch(93.6% 0.037 136.6);    /* pale sage — readable on dark forest nav */
     transition: color 0.2s ease;
   }
   .nav-link-vintage:hover, .nav-link-vintage.active {
-    color: oklch(68% 0.12 75);
+    color: oklch(86.6% 0.079 130.9);    /* light sage — hover highlight */
   }
 }
 

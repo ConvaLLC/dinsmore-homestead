@@ -35,17 +35,17 @@ export default function HistoryEnslavedPage() {
   const selectedProfile = selected ? KEY_PROFILES.find(p => p.slug === selected) || null : null;
 
   return (
-    <div className="min-h-screen" style={{ background: "oklch(96% 0.018 80)" }}>
+    <div className="min-h-screen" style={{ background: "oklch(96% 0.014 110)" }}>
       <div className="relative py-20 text-center" style={{ backgroundImage: `linear-gradient(rgba(44,26,12,0.8), rgba(44,26,12,0.8)), url(${FALLBACK_IMG})`, backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
-          <p className="section-label" style={{ color: "oklch(68% 0.12 75)" }}>Honoring Their Memory</p>
+          <p className="section-label" style={{ color: "oklch(64.3% 0.161 143.4)" }}>Honoring Their Memory</p>
           <h1 style={{ color: "oklch(97% 0.01 80)", fontFamily: "'Playfair Display', serif", fontSize: "clamp(2rem,5vw,3.5rem)", margin: "0.5rem 0 1rem" }}>Enslaved People at Dinsmore</h1>
-          <p style={{ color: "oklch(87% 0.032 72)", fontFamily: "'EB Garamond', serif", fontSize: "1.1rem", maxWidth: "640px", margin: "0 auto 1.5rem" }}>
+          <p style={{ color: "oklch(86.6% 0.079 130.9)", fontFamily: "'EB Garamond', serif", fontSize: "1.1rem", maxWidth: "640px", margin: "0 auto 1.5rem" }}>
             The Dinsmore Homestead is committed to telling the complete history of all who lived and worked here, including the enslaved African Americans whose labor built and sustained this farm.
           </p>
           <nav style={{ fontSize: "0.85rem", color: "oklch(75% 0.03 72)" }}>
-            <Link href="/" style={{ color: "oklch(68% 0.12 75)" }}>Home</Link><span className="mx-2">›</span>
-            <Link href="/history/family" style={{ color: "oklch(68% 0.12 75)" }}>The Family</Link><span className="mx-2">›</span>
+            <Link href="/" style={{ color: "oklch(64.3% 0.161 143.4)" }}>Home</Link><span className="mx-2">›</span>
+            <Link href="/history/family" style={{ color: "oklch(64.3% 0.161 143.4)" }}>The Family</Link><span className="mx-2">›</span>
             <span>Enslaved People</span>
           </nav>
         </div>
@@ -53,10 +53,10 @@ export default function HistoryEnslavedPage() {
 
       {selectedProfile && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: "rgba(44,26,12,0.88)" }} onClick={() => setSelected(null)}>
-          <div className="max-w-2xl w-full max-h-[85vh] overflow-y-auto rounded-sm shadow-2xl" style={{ background: "oklch(96% 0.018 80)", border: "2px solid oklch(55% 0.11 72)" }} onClick={e => e.stopPropagation()}>
+          <div className="max-w-2xl w-full max-h-[85vh] overflow-y-auto rounded-sm shadow-2xl" style={{ background: "oklch(96% 0.014 110)", border: "2px solid oklch(64.3% 0.161 143.4)" }} onClick={e => e.stopPropagation()}>
             <div className="p-8">
-              <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", color: "oklch(22% 0.04 50)", marginBottom: "0.25rem" }}>{selectedProfile.name}</h2>
-              <p style={{ color: "oklch(55% 0.11 72)", fontStyle: "italic", marginBottom: "1.5rem", fontSize: "0.9rem" }}>{selectedProfile.years}</p>
+              <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", color: "oklch(20% 0.03 145)", marginBottom: "0.25rem" }}>{selectedProfile.name}</h2>
+              <p style={{ color: "oklch(64.3% 0.161 143.4)", fontStyle: "italic", marginBottom: "1.5rem", fontSize: "0.9rem" }}>{selectedProfile.years}</p>
               <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "1rem", lineHeight: 1.8, color: "oklch(30% 0.04 50)" }}>
                 {selectedProfile.bio.split('\n').filter(p => p.trim()).map((para, i) => <p key={i} style={{ marginBottom: "1rem" }}>{para}</p>)}
               </div>
@@ -69,7 +69,7 @@ export default function HistoryEnslavedPage() {
       <div className="container py-16">
         <div className="max-w-3xl mx-auto mb-14">
           <div className="text-center mb-8">
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", color: "oklch(22% 0.04 50)", marginBottom: "0.5rem" }}>A Complete History</h2>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", color: "oklch(20% 0.03 145)", marginBottom: "0.5rem" }}>A Complete History</h2>
             <div className="ornamental-divider" />
           </div>
           <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "1.1rem", lineHeight: 1.85, color: "oklch(30% 0.04 50)", marginBottom: "1.5rem" }}>
@@ -81,27 +81,27 @@ export default function HistoryEnslavedPage() {
         </div>
 
         <div className="mb-14">
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", color: "oklch(22% 0.04 50)", marginBottom: "1.5rem", textAlign: "center" }}>Documented Individuals</h2>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", color: "oklch(20% 0.03 145)", marginBottom: "1.5rem", textAlign: "center" }}>Documented Individuals</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {KEY_PROFILES.map(profile => (
               <button key={profile.slug} onClick={() => setSelected(profile.slug)} className="group text-left p-6 bg-white hover:bg-[oklch(55%_0.11_72_/_0.05)] transition-colors" style={{ border: "1px solid oklch(55% 0.11 72 / 0.3)" }}>
-                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", color: "oklch(22% 0.04 50)", marginBottom: "0.25rem" }} className="group-hover:text-[oklch(55%_0.11_72)] transition-colors">{profile.name}</h3>
-                <p style={{ fontSize: "0.8rem", color: "oklch(55% 0.11 72)", fontStyle: "italic", marginBottom: "0.75rem" }}>{profile.years}</p>
-                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(38% 0.055 54)", lineHeight: 1.6, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{profile.bio.slice(0, 200)}…</p>
-                <span style={{ display: "inline-block", marginTop: "0.75rem", fontSize: "0.75rem", color: "oklch(55% 0.11 72)", textDecoration: "underline" }}>Read full profile →</span>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", color: "oklch(20% 0.03 145)", marginBottom: "0.25rem" }} className="group-hover:text-[oklch(55%_0.11_72)] transition-colors">{profile.name}</h3>
+                <p style={{ fontSize: "0.8rem", color: "oklch(64.3% 0.161 143.4)", fontStyle: "italic", marginBottom: "0.75rem" }}>{profile.years}</p>
+                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(42.3% 0.087 144.3)", lineHeight: 1.6, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{profile.bio.slice(0, 200)}…</p>
+                <span style={{ display: "inline-block", marginTop: "0.75rem", fontSize: "0.75rem", color: "oklch(64.3% 0.161 143.4)", textDecoration: "underline" }}>Read full profile →</span>
               </button>
             ))}
           </div>
         </div>
 
         <div className="max-w-3xl mx-auto mb-14 p-8 bg-white" style={{ border: "1px solid oklch(55% 0.11 72 / 0.3)" }}>
-          <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.3rem", color: "oklch(22% 0.04 50)", marginBottom: "1rem" }}>Census Records</h3>
+          <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.3rem", color: "oklch(20% 0.03 145)", marginBottom: "1rem" }}>Census Records</h3>
           <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "1rem", lineHeight: 1.75, color: "oklch(30% 0.04 50)", marginBottom: "1rem" }}>Federal census records provide a statistical picture of the enslaved population at Dinsmore Farm, though they recorded enslaved people only by age and sex — not by name — in the slave schedules.</p>
           <div className="grid grid-cols-2 gap-4">
             {[{ year: "1850 Census", count: "16 enslaved people", note: "Listed in slave schedule" }, { year: "1860 Census", count: "12 enslaved people", note: "Listed in slave schedule" }, { year: "1865", count: "Emancipation", note: "Kentucky ratifies 13th Amendment" }, { year: "Post-1865", count: "Several remained", note: "As free domestic workers" }].map(row => (
-              <div key={row.year} className="p-4" style={{ background: "oklch(96% 0.018 80)", border: "1px solid oklch(55% 0.11 72 / 0.2)" }}>
-                <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.9rem", color: "oklch(22% 0.04 50)", fontWeight: 600 }}>{row.year}</p>
-                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "1rem", color: "oklch(38% 0.055 54)", marginTop: "0.25rem" }}>{row.count}</p>
+              <div key={row.year} className="p-4" style={{ background: "oklch(96% 0.014 110)", border: "1px solid oklch(55% 0.11 72 / 0.2)" }}>
+                <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.9rem", color: "oklch(20% 0.03 145)", fontWeight: 600 }}>{row.year}</p>
+                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "1rem", color: "oklch(42.3% 0.087 144.3)", marginTop: "0.25rem" }}>{row.count}</p>
                 <p style={{ fontSize: "0.75rem", color: "oklch(50% 0.04 54)", marginTop: "0.2rem", fontStyle: "italic" }}>{row.note}</p>
               </div>
             ))}

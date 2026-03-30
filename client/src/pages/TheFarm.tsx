@@ -76,17 +76,17 @@ export default function TheFarmPage() {
   const selectedSection = selected ? SECTIONS.find(s => s.slug === selected) : null;
 
   return (
-    <div className="min-h-screen" style={{ background: "oklch(96% 0.018 80)" }}>
+    <div className="min-h-screen" style={{ background: "oklch(96% 0.014 110)" }}>
       {/* Hero */}
       <div className="relative py-20 text-center" style={{ backgroundImage: `linear-gradient(rgba(44,26,12,0.72), rgba(44,26,12,0.72)), url(${IMAGES.farmHDR})`, backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
-          <p className="section-label" style={{ color: "oklch(68% 0.12 75)" }}>Explore the Grounds</p>
+          <p className="section-label" style={{ color: "oklch(64.3% 0.161 143.4)" }}>Explore the Grounds</p>
           <h1 style={{ color: "oklch(97% 0.01 80)", fontFamily: "'Playfair Display', serif", fontSize: "clamp(2rem,5vw,3.5rem)", margin: "0.5rem 0 1rem" }}>The Farm &amp; Historic Grounds</h1>
-          <p style={{ color: "oklch(87% 0.032 72)", fontFamily: "'EB Garamond', serif", fontSize: "1.1rem", maxWidth: "600px", margin: "0 auto 1.5rem" }}>
+          <p style={{ color: "oklch(86.6% 0.079 130.9)", fontFamily: "'EB Garamond', serif", fontSize: "1.1rem", maxWidth: "600px", margin: "0 auto 1.5rem" }}>
             The Dinsmore Homestead preserves 30 acres of historic farmland, the original 1842 house, and all original outbuildings — exactly as the family left them.
           </p>
           <nav style={{ fontSize: "0.85rem", color: "oklch(75% 0.03 72)" }}>
-            <Link href="/" style={{ color: "oklch(68% 0.12 75)" }}>Home</Link><span className="mx-2">›</span><span>The Farm</span>
+            <Link href="/" style={{ color: "oklch(64.3% 0.161 143.4)" }}>Home</Link><span className="mx-2">›</span><span>The Farm</span>
           </nav>
         </div>
       </div>
@@ -94,11 +94,11 @@ export default function TheFarmPage() {
       {/* Section Modal */}
       {selectedSection && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: "rgba(44,26,12,0.88)" }} onClick={() => setSelected(null)}>
-          <div className="max-w-2xl w-full max-h-[85vh] overflow-y-auto rounded-sm shadow-2xl" style={{ background: "oklch(96% 0.018 80)", border: "2px solid oklch(55% 0.11 72)" }} onClick={e => e.stopPropagation()}>
+          <div className="max-w-2xl w-full max-h-[85vh] overflow-y-auto rounded-sm shadow-2xl" style={{ background: "oklch(96% 0.014 110)", border: "2px solid oklch(64.3% 0.161 143.4)" }} onClick={e => e.stopPropagation()}>
             <div className="p-8">
               <div className="flex items-center gap-3 mb-4">
                 <span style={{ fontSize: "2rem" }}>{selectedSection.icon}</span>
-                <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", color: "oklch(22% 0.04 50)" }}>{selectedSection.title}</h2>
+                <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", color: "oklch(20% 0.03 145)" }}>{selectedSection.title}</h2>
               </div>
               {selectedSection.img && (
                 <img src={selectedSection.img} alt={selectedSection.title} className="w-full mb-6 object-cover" style={{ height: 200, filter: "sepia(15%)", border: "2px solid oklch(55% 0.11 72 / 0.4)" }} onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
@@ -114,9 +114,9 @@ export default function TheFarmPage() {
 
       <div className="container py-16">
         <div className="text-center mb-12">
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "2rem", color: "oklch(22% 0.04 50)", marginBottom: "0.5rem" }}>Explore the Homestead</h2>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "2rem", color: "oklch(20% 0.03 145)", marginBottom: "0.5rem" }}>Explore the Homestead</h2>
           <div className="ornamental-divider" />
-          <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(38% 0.055 54)", maxWidth: "600px", margin: "1rem auto 0", lineHeight: 1.7 }}>
+          <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(42.3% 0.087 144.3)", maxWidth: "600px", margin: "1rem auto 0", lineHeight: 1.7 }}>
             The Dinsmore Homestead has been preserved exactly as the family left it. Every room, every outbuilding, every artifact tells a story. Click any section below to learn more.
           </p>
         </div>
@@ -128,9 +128,9 @@ export default function TheFarmPage() {
                 <img src={section.img} alt={section.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" style={{ filter: "sepia(15%)" }} onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
               </div>
               <div className="p-5">
-                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem", color: "oklch(22% 0.04 50)", marginBottom: "0.4rem" }} className="group-hover:text-[oklch(55%_0.11_72)] transition-colors">{section.title}</h3>
-                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.88rem", color: "oklch(38% 0.055 54)", lineHeight: 1.55, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{section.summary}</p>
-                <span style={{ display: "inline-block", marginTop: "0.6rem", fontSize: "0.75rem", color: "oklch(55% 0.11 72)", textDecoration: "underline" }}>Learn more →</span>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem", color: "oklch(20% 0.03 145)", marginBottom: "0.4rem" }} className="group-hover:text-[oklch(55%_0.11_72)] transition-colors">{section.title}</h3>
+                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.88rem", color: "oklch(42.3% 0.087 144.3)", lineHeight: 1.55, display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{section.summary}</p>
+                <span style={{ display: "inline-block", marginTop: "0.6rem", fontSize: "0.75rem", color: "oklch(64.3% 0.161 143.4)", textDecoration: "underline" }}>Learn more →</span>
               </div>
             </button>
           ))}
@@ -139,7 +139,7 @@ export default function TheFarmPage() {
         {/* Living Museum callout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16 items-center">
           <div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", color: "oklch(22% 0.04 50)", marginBottom: "1rem" }}>A Living Museum</h2>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", color: "oklch(20% 0.03 145)", marginBottom: "1rem" }}>A Living Museum</h2>
             <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "1.05rem", lineHeight: 1.8, color: "oklch(30% 0.04 50)", marginBottom: "1rem" }}>
               Unlike many historic sites, the Dinsmore Homestead was never renovated or modernized. When Martha Breasted donated the house to the Foundation, she stipulated that everything remain exactly as it was — and it has. The result is one of the most authentically preserved 19th-century farmhouses in America.
             </p>

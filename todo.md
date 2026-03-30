@@ -104,3 +104,6 @@
 
 ## Bug Fixes
 - [x] Fix Create Event button in admin panel - does nothing when clicked
+
+## Color Scheme
+- [x] Sample greens from original Dinsmorefarm.org and apply to site color palette

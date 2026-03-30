@@ -19,9 +19,9 @@ function SlotTimeButton({
       disabled={isFull}
       style={{
         padding: "0.6rem 0.85rem",
-        border: `2px solid ${selected ? "oklch(38% 0.12 22)" : isFull ? "oklch(82% 0.04 65)" : "oklch(72% 0.05 62)"}`,
-        background: selected ? "oklch(38% 0.12 22)" : isFull ? "oklch(90% 0.02 72)" : "oklch(96% 0.018 80)",
-        color: selected ? "oklch(96% 0.018 80)" : isFull ? "oklch(60% 0.04 60)" : "oklch(22% 0.04 50)",
+        border: `2px solid ${selected ? "oklch(33.1% 0.064 144.7)" : isFull ? "oklch(86.6% 0.079 130.9)" : "oklch(78% 0.055 135)"}`,
+        background: selected ? "oklch(33.1% 0.064 144.7)" : isFull ? "oklch(90% 0.02 72)" : "oklch(96% 0.014 110)",
+        color: selected ? "oklch(96% 0.014 110)" : isFull ? "oklch(60% 0.04 60)" : "oklch(20% 0.03 145)",
         cursor: isFull ? "not-allowed" : "pointer",
         transition: "all 0.15s",
         textAlign: "center",
@@ -36,14 +36,14 @@ function SlotTimeButton({
         <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.75rem", opacity: 0.75 }}>to {slot.endTime}</div>
       )}
       <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.75rem", marginTop: "0.3rem",
-        color: selected ? "oklch(87% 0.032 72)" : isFull ? "oklch(50% 0.18 25)" : isLow ? "oklch(52% 0.14 55)" : "oklch(46% 0.06 56)",
+        color: selected ? "oklch(86.6% 0.079 130.9)" : isFull ? "oklch(50% 0.18 25)" : isLow ? "oklch(52% 0.14 55)" : "oklch(44% 0.055 144)",
         fontWeight: isFull ? 700 : isLow ? 600 : 400,
       }}>
         {isFull ? "SOLD OUT" : isLow ? `Only ${available} left!` : `${available} open`}
       </div>
       {slotPrice > 0 && (
         <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.75rem", marginTop: "0.15rem",
-          color: selected ? "oklch(87% 0.032 72)" : "oklch(55% 0.11 72)" }}>
+          color: selected ? "oklch(86.6% 0.079 130.9)" : "oklch(64.3% 0.161 143.4)" }}>
           ${slotPrice.toFixed(2)}/ticket
         </div>
       )}
@@ -128,8 +128,8 @@ export default function EventDetailPage() {
           style={{
             width: "40px",
             height: "40px",
-            border: "3px solid oklch(82% 0.04 65)",
-            borderTopColor: "oklch(38% 0.12 22)",
+            border: "3px solid oklch(86.6% 0.079 130.9)",
+            borderTopColor: "oklch(33.1% 0.064 144.7)",
             borderRadius: "50%",
             animation: "spin 1s linear infinite",
             margin: "0 auto",
@@ -142,7 +142,7 @@ export default function EventDetailPage() {
   if (!event) {
     return (
       <div className="py-20 text-center container">
-        <AlertCircle size={48} style={{ color: "oklch(55% 0.11 72)", margin: "0 auto 1rem" }} />
+        <AlertCircle size={48} style={{ color: "oklch(64.3% 0.161 143.4)", margin: "0 auto 1rem" }} />
         <h2>Event Not Found</h2>
         <Link href="/events" className="btn-vintage mt-4 inline-block">
           Back to Events
@@ -173,16 +173,16 @@ export default function EventDetailPage() {
             style={{
               fontFamily: "'EB Garamond', serif",
               fontSize: "0.85rem",
-              color: "oklch(72% 0.05 62)",
+              color: "oklch(78% 0.055 135)",
               marginBottom: "0.75rem",
               display: "flex",
               alignItems: "center",
               gap: "0.5rem",
             }}
           >
-            <Link href="/events" style={{ color: "oklch(72% 0.05 62)" }}>Events</Link>
+            <Link href="/events" style={{ color: "oklch(78% 0.055 135)" }}>Events</Link>
             <ChevronRight size={12} />
-            <span style={{ color: "oklch(87% 0.032 72)" }}>{event.title}</span>
+            <span style={{ color: "oklch(86.6% 0.079 130.9)" }}>{event.title}</span>
           </nav>
           <span
             style={{
@@ -190,19 +190,19 @@ export default function EventDetailPage() {
               fontSize: "0.7rem",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "oklch(68% 0.12 75)",
+              color: "oklch(64.3% 0.161 143.4)",
               display: "block",
               marginBottom: "0.5rem",
             }}
           >
             {event.eventType.replace("_", " ")}
           </span>
-          <h1 style={{ color: "oklch(96% 0.018 80)", marginBottom: "0.5rem" }}>{event.title}</h1>
+          <h1 style={{ color: "oklch(96% 0.014 110)", marginBottom: "0.5rem" }}>{event.title}</h1>
           <div
             style={{
               display: "flex",
               gap: "1.5rem",
-              color: "oklch(87% 0.032 72)",
+              color: "oklch(86.6% 0.079 130.9)",
               fontFamily: "'EB Garamond', serif",
               fontSize: "0.95rem",
               flexWrap: "wrap",
@@ -221,7 +221,7 @@ export default function EventDetailPage() {
       </div>
 
       {/* Content */}
-      <section className="py-10" style={{ background: "oklch(96% 0.018 80)" }}>
+      <section className="py-10" style={{ background: "oklch(96% 0.014 110)" }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Description */}
@@ -232,7 +232,7 @@ export default function EventDetailPage() {
                   style={{
                     width: "40px",
                     height: "2px",
-                    background: "oklch(55% 0.11 72)",
+                    background: "oklch(64.3% 0.161 143.4)",
                     marginBottom: "1.25rem",
                   }}
                 />
@@ -240,7 +240,7 @@ export default function EventDetailPage() {
                   style={{
                     fontFamily: "'EB Garamond', serif",
                     fontSize: "1.05rem",
-                    color: "oklch(38% 0.055 54)",
+                    color: "oklch(42.3% 0.087 144.3)",
                     lineHeight: 1.75,
                   }}
                   dangerouslySetInnerHTML={{
@@ -253,14 +253,14 @@ export default function EventDetailPage() {
               {event.usesTimeslots && timeslots && timeslots.length > 0 && (
                 <div className="card-vintage p-6">
                   <div className="flex items-center gap-2 mb-4">
-                    <Clock size={18} style={{ color: "oklch(38% 0.12 22)" }} />
+                    <Clock size={18} style={{ color: "oklch(33.1% 0.064 144.7)" }} />
                     <h2 style={{ fontSize: "1.25rem", margin: 0 }}>Select a Tour Time</h2>
                   </div>
-                  <div style={{ width: "40px", height: "2px", background: "oklch(55% 0.11 72)", marginBottom: "1.25rem" }} />
+                  <div style={{ width: "40px", height: "2px", background: "oklch(64.3% 0.161 143.4)", marginBottom: "1.25rem" }} />
 
                   {/* Step 1: Pick a date */}
                   <div style={{ marginBottom: "1.25rem" }}>
-                    <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "oklch(46% 0.06 56)", marginBottom: "0.6rem" }}>Step 1 — Choose a Date</p>
+                    <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "oklch(44% 0.055 144)", marginBottom: "0.6rem" }}>Step 1 — Choose a Date</p>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
                       {sortedDates.map(dateKey => {
                         const daySlots = slotsByDate[dateKey];
@@ -272,9 +272,9 @@ export default function EventDetailPage() {
                           <button key={dateKey} onClick={() => { setSelectedDate(dateKey); setSelectedSlot(null); }} disabled={allFull}
                             style={{
                               padding: "0.55rem 0.85rem", textAlign: "center", minWidth: "90px",
-                              border: `2px solid ${isSelected ? "oklch(38% 0.12 22)" : allFull ? "oklch(82% 0.04 65)" : "oklch(72% 0.05 62)"}`,
-                              background: isSelected ? "oklch(38% 0.12 22)" : allFull ? "oklch(90% 0.02 72)" : "oklch(96% 0.018 80)",
-                              color: isSelected ? "oklch(96% 0.018 80)" : allFull ? "oklch(60% 0.04 60)" : "oklch(22% 0.04 50)",
+                              border: `2px solid ${isSelected ? "oklch(33.1% 0.064 144.7)" : allFull ? "oklch(86.6% 0.079 130.9)" : "oklch(78% 0.055 135)"}`,
+                              background: isSelected ? "oklch(33.1% 0.064 144.7)" : allFull ? "oklch(90% 0.02 72)" : "oklch(96% 0.014 110)",
+                              color: isSelected ? "oklch(96% 0.014 110)" : allFull ? "oklch(60% 0.04 60)" : "oklch(20% 0.03 145)",
                               cursor: allFull ? "not-allowed" : "pointer", transition: "all 0.15s",
                             }}
                           >
@@ -282,7 +282,7 @@ export default function EventDetailPage() {
                             <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", fontWeight: 700, lineHeight: 1 }}>{format(dt, "d")}</div>
                             <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.72rem" }}>{format(dt, "MMM yyyy")}</div>
                             <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.68rem", marginTop: "0.2rem",
-                              color: isSelected ? "oklch(87% 0.032 72)" : allFull ? "oklch(50% 0.18 25)" : "oklch(46% 0.06 56)",
+                              color: isSelected ? "oklch(86.6% 0.079 130.9)" : allFull ? "oklch(50% 0.18 25)" : "oklch(44% 0.055 144)",
                               fontWeight: allFull ? 700 : 400,
                             }}>{allFull ? "Sold Out" : `${totalAvail} open`}</div>
                           </button>
@@ -294,7 +294,7 @@ export default function EventDetailPage() {
                   {/* Step 2: Pick a time on the selected date */}
                   {selectedDate && (
                     <div>
-                      <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "oklch(46% 0.06 56)", marginBottom: "0.6rem" }}>Step 2 — Choose a Time on {format(new Date(selectedDate + "T12:00:00"), "MMMM d, yyyy")}</p>
+                      <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "oklch(44% 0.055 144)", marginBottom: "0.6rem" }}>Step 2 — Choose a Time on {format(new Date(selectedDate + "T12:00:00"), "MMMM d, yyyy")}</p>
                       <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
                         {slotsForSelectedDate.map((slot: any) => (
                           <SlotTimeButton key={slot.id} slot={slot} selected={selectedSlot === slot.id} onSelect={() => setSelectedSlot(slot.id)} unitPrice={unitPrice} />
@@ -321,7 +321,7 @@ export default function EventDetailPage() {
                 >
                   Reserve Your Tickets
                 </h3>
-                <div style={{ width: "30px", height: "2px", background: "oklch(55% 0.11 72)", marginBottom: "1rem" }} />
+                <div style={{ width: "30px", height: "2px", background: "oklch(64.3% 0.161 143.4)", marginBottom: "1rem" }} />
 
                 {/* Quantity */}
                 <div className="mb-4">
@@ -331,7 +331,7 @@ export default function EventDetailPage() {
                       fontSize: "0.75rem",
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
-                      color: "oklch(46% 0.06 56)",
+                      color: "oklch(44% 0.055 144)",
                       display: "block",
                       marginBottom: "0.4rem",
                     }}
@@ -344,7 +344,7 @@ export default function EventDetailPage() {
                       style={{
                         width: "32px",
                         height: "32px",
-                        border: "1px solid oklch(72% 0.05 62)",
+                        border: "1px solid oklch(78% 0.055 135)",
                         background: "transparent",
                         fontFamily: "'Playfair Display', serif",
                         fontSize: "1.1rem",
@@ -372,7 +372,7 @@ export default function EventDetailPage() {
                       style={{
                         width: "32px",
                         height: "32px",
-                        border: "1px solid oklch(72% 0.05 62)",
+                        border: "1px solid oklch(78% 0.055 135)",
                         background: "transparent",
                         fontFamily: "'Playfair Display', serif",
                         fontSize: "1.1rem",
@@ -401,7 +401,7 @@ export default function EventDetailPage() {
                           fontSize: "0.7rem",
                           letterSpacing: "0.1em",
                           textTransform: "uppercase",
-                          color: "oklch(46% 0.06 56)",
+                          color: "oklch(44% 0.055 144)",
                           display: "block",
                           marginBottom: "0.3rem",
                         }}
@@ -416,11 +416,11 @@ export default function EventDetailPage() {
                         style={{
                           width: "100%",
                           padding: "0.5rem 0.75rem",
-                          border: "1px solid oklch(72% 0.05 62)",
-                          background: "oklch(93% 0.025 75)",
+                          border: "1px solid oklch(78% 0.055 135)",
+                          background: "oklch(93.6% 0.037 136.6)",
                           fontFamily: "'EB Garamond', serif",
                           fontSize: "0.95rem",
-                          color: "oklch(22% 0.04 50)",
+                          color: "oklch(20% 0.03 145)",
                           outline: "none",
                         }}
                       />
@@ -431,14 +431,14 @@ export default function EventDetailPage() {
                 {/* Price summary */}
                 <div
                   style={{
-                    background: "oklch(93% 0.025 75)",
-                    border: "1px solid oklch(82% 0.04 65)",
+                    background: "oklch(93.6% 0.037 136.6)",
+                    border: "1px solid oklch(86.6% 0.079 130.9)",
                     padding: "0.75rem",
                     marginBottom: "1rem",
                   }}
                 >
                   <div className="flex justify-between mb-1">
-                    <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(46% 0.06 56)" }}>
+                    <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(44% 0.055 144)" }}>
                       {quantity} × ${unitPrice.toFixed(2)}
                     </span>
                     <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.9rem", fontWeight: 600 }}>
@@ -449,7 +449,7 @@ export default function EventDetailPage() {
                     style={{
                       fontFamily: "'EB Garamond', serif",
                       fontSize: "0.75rem",
-                      color: "oklch(55% 0.11 72)",
+                      color: "oklch(64.3% 0.161 143.4)",
                       fontStyle: "italic",
                     }}
                   >
@@ -470,7 +470,7 @@ export default function EventDetailPage() {
                   style={{
                     fontFamily: "'EB Garamond', serif",
                     fontSize: "0.75rem",
-                    color: "oklch(55% 0.11 72)",
+                    color: "oklch(64.3% 0.161 143.4)",
                     textAlign: "center",
                     marginTop: "0.75rem",
                     fontStyle: "italic",

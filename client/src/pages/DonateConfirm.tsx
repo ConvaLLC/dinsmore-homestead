@@ -20,7 +20,7 @@ export default function DonateConfirmPage() {
 
   if (status === "loading") return (
     <div className="py-24 text-center">
-      <Loader2 size={48} style={{ color: "oklch(38% 0.12 22)", margin: "0 auto 1rem", animation: "spin 1s linear infinite" }} />
+      <Loader2 size={48} style={{ color: "oklch(33.1% 0.064 144.7)", margin: "0 auto 1rem", animation: "spin 1s linear infinite" }} />
       <h2>Processing Your Donation...</h2>
     </div>
   );
@@ -29,7 +29,7 @@ export default function DonateConfirmPage() {
     <div className="py-24 text-center container">
       <XCircle size={56} style={{ color: "oklch(50% 0.18 25)", margin: "0 auto 1rem" }} />
       <h2>Donation Could Not Be Processed</h2>
-      <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(46% 0.06 56)", maxWidth: "500px", margin: "0 auto 1.5rem" }}>
+      <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(44% 0.055 144)", maxWidth: "500px", margin: "0 auto 1.5rem" }}>
         Please contact us at info@dinsmorefarm.org if you believe this is an error.
       </p>
       <Link href="/donate" className="btn-vintage inline-block">Try Again</Link>
@@ -37,12 +37,12 @@ export default function DonateConfirmPage() {
   );
 
   return (
-    <div className="py-16" style={{ background: "oklch(96% 0.018 80)" }}>
+    <div className="py-16" style={{ background: "oklch(96% 0.014 110)" }}>
       <div className="container" style={{ maxWidth: "600px" }}>
         <div className="card-vintage p-8 text-center">
-          <CheckCircle size={56} style={{ color: "oklch(35% 0.08 155)", margin: "0 auto 1rem" }} />
+          <CheckCircle size={56} style={{ color: "oklch(42.3% 0.087 144.3)", margin: "0 auto 1rem" }} />
           <h1 style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>Thank You!</h1>
-          <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(46% 0.06 56)", marginBottom: "1.5rem" }}>
+          <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(44% 0.055 144)", marginBottom: "1.5rem" }}>
             Your generous donation to the Dinsmore Homestead Foundation has been received. 
             A receipt will be sent to your email address. Your support helps preserve this 
             irreplaceable piece of Kentucky history.

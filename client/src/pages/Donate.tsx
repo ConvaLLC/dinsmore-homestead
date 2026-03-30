@@ -80,15 +80,15 @@ export default function DonatePage() {
         />
         <div style={{ position: "absolute", inset: 0, background: "oklch(22% 0.04 50 / 0.7)" }} />
         <div className="container relative h-full flex flex-col justify-end pb-10">
-          <span className="section-label" style={{ color: "oklch(68% 0.12 75)" }}>
+          <span className="section-label" style={{ color: "oklch(64.3% 0.161 143.4)" }}>
             Support Preservation
           </span>
-          <h1 style={{ color: "oklch(96% 0.018 80)", marginBottom: "0.5rem" }}>
+          <h1 style={{ color: "oklch(96% 0.014 110)", marginBottom: "0.5rem" }}>
             Help Preserve Kentucky History
           </h1>
           <p
             style={{
-              color: "oklch(87% 0.032 72)",
+              color: "oklch(86.6% 0.079 130.9)",
               fontFamily: "'EB Garamond', serif",
               fontSize: "1.05rem",
             }}
@@ -99,21 +99,21 @@ export default function DonatePage() {
       </div>
 
       {/* Donation form */}
-      <section className="py-12" style={{ background: "oklch(96% 0.018 80)" }}>
+      <section className="py-12" style={{ background: "oklch(96% 0.014 110)" }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {/* Form */}
             <div className="lg:col-span-2">
               <div className="card-vintage p-6 mb-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <Heart size={20} style={{ color: "oklch(38% 0.12 22)" }} />
+                  <Heart size={20} style={{ color: "oklch(33.1% 0.064 144.7)" }} />
                   <h2 style={{ fontSize: "1.5rem", margin: 0 }}>Make a Donation</h2>
                 </div>
                 <div
                   style={{
                     width: "40px",
                     height: "2px",
-                    background: "oklch(55% 0.11 72)",
+                    background: "oklch(64.3% 0.161 143.4)",
                     marginBottom: "1.5rem",
                   }}
                 />
@@ -126,7 +126,7 @@ export default function DonatePage() {
                       fontSize: "0.75rem",
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
-                      color: "oklch(46% 0.06 56)",
+                      color: "oklch(44% 0.055 144)",
                       display: "block",
                       marginBottom: "0.75rem",
                     }}
@@ -141,9 +141,9 @@ export default function DonatePage() {
                         style={{
                           padding: "0.5rem 1.25rem",
                           border: "2px solid",
-                          borderColor: amount === preset && !customAmount ? "oklch(38% 0.12 22)" : "oklch(72% 0.05 62)",
-                          background: amount === preset && !customAmount ? "oklch(38% 0.12 22)" : "transparent",
-                          color: amount === preset && !customAmount ? "oklch(96% 0.018 80)" : "oklch(38% 0.055 54)",
+                          borderColor: amount === preset && !customAmount ? "oklch(33.1% 0.064 144.7)" : "oklch(78% 0.055 135)",
+                          background: amount === preset && !customAmount ? "oklch(33.1% 0.064 144.7)" : "transparent",
+                          color: amount === preset && !customAmount ? "oklch(96% 0.014 110)" : "oklch(42.3% 0.087 144.3)",
                           fontFamily: "'Playfair Display', serif",
                           fontSize: "0.9rem",
                           fontWeight: 600,
@@ -160,7 +160,7 @@ export default function DonatePage() {
                       style={{
                         fontFamily: "'Playfair Display', serif",
                         fontSize: "1rem",
-                        color: "oklch(38% 0.055 54)",
+                        color: "oklch(42.3% 0.087 144.3)",
                       }}
                     >
                       $
@@ -173,11 +173,11 @@ export default function DonatePage() {
                       min="1"
                       style={{
                         padding: "0.5rem 0.75rem",
-                        border: "1px solid oklch(72% 0.05 62)",
-                        background: "oklch(93% 0.025 75)",
+                        border: "1px solid oklch(78% 0.055 135)",
+                        background: "oklch(93.6% 0.037 136.6)",
                         fontFamily: "'EB Garamond', serif",
                         fontSize: "0.95rem",
-                        color: "oklch(22% 0.04 50)",
+                        color: "oklch(20% 0.03 145)",
                         outline: "none",
                         width: "150px",
                       }}
@@ -198,7 +198,7 @@ export default function DonatePage() {
                           fontSize: "0.7rem",
                           letterSpacing: "0.1em",
                           textTransform: "uppercase",
-                          color: "oklch(46% 0.06 56)",
+                          color: "oklch(44% 0.055 144)",
                           display: "block",
                           marginBottom: "0.3rem",
                         }}
@@ -212,11 +212,11 @@ export default function DonatePage() {
                         style={{
                           width: "100%",
                           padding: "0.5rem 0.75rem",
-                          border: "1px solid oklch(72% 0.05 62)",
-                          background: "oklch(93% 0.025 75)",
+                          border: "1px solid oklch(78% 0.055 135)",
+                          background: "oklch(93.6% 0.037 136.6)",
                           fontFamily: "'EB Garamond', serif",
                           fontSize: "0.95rem",
-                          color: "oklch(22% 0.04 50)",
+                          color: "oklch(20% 0.03 145)",
                           outline: "none",
                         }}
                       />
@@ -231,7 +231,7 @@ export default function DonatePage() {
                       fontSize: "0.7rem",
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
-                      color: "oklch(46% 0.06 56)",
+                      color: "oklch(44% 0.055 144)",
                       display: "block",
                       marginBottom: "0.3rem",
                     }}
@@ -246,11 +246,11 @@ export default function DonatePage() {
                     style={{
                       width: "100%",
                       padding: "0.5rem 0.75rem",
-                      border: "1px solid oklch(72% 0.05 62)",
-                      background: "oklch(93% 0.025 75)",
+                      border: "1px solid oklch(78% 0.055 135)",
+                      background: "oklch(93.6% 0.037 136.6)",
                       fontFamily: "'EB Garamond', serif",
                       fontSize: "0.95rem",
-                      color: "oklch(22% 0.04 50)",
+                      color: "oklch(20% 0.03 145)",
                       outline: "none",
                       resize: "vertical",
                     }}
@@ -262,13 +262,13 @@ export default function DonatePage() {
                     type="checkbox"
                     checked={isAnonymous}
                     onChange={(e) => setIsAnonymous(e.target.checked)}
-                    style={{ accentColor: "oklch(38% 0.12 22)" }}
+                    style={{ accentColor: "oklch(33.1% 0.064 144.7)" }}
                   />
                   <span
                     style={{
                       fontFamily: "'EB Garamond', serif",
                       fontSize: "0.9rem",
-                      color: "oklch(46% 0.06 56)",
+                      color: "oklch(44% 0.055 144)",
                     }}
                   >
                     Make this donation anonymous
@@ -277,8 +277,8 @@ export default function DonatePage() {
 
                 <div
                   style={{
-                    background: "oklch(93% 0.025 75)",
-                    border: "1px solid oklch(82% 0.04 65)",
+                    background: "oklch(93.6% 0.037 136.6)",
+                    border: "1px solid oklch(86.6% 0.079 130.9)",
                     padding: "0.75rem 1rem",
                     marginBottom: "1rem",
                     display: "flex",
@@ -290,7 +290,7 @@ export default function DonatePage() {
                     style={{
                       fontFamily: "'EB Garamond', serif",
                       fontSize: "0.9rem",
-                      color: "oklch(46% 0.06 56)",
+                      color: "oklch(44% 0.055 144)",
                     }}
                   >
                     Donation Total
@@ -300,7 +300,7 @@ export default function DonatePage() {
                       fontFamily: "'Playfair Display', serif",
                       fontSize: "1.25rem",
                       fontWeight: 700,
-                      color: "oklch(38% 0.12 22)",
+                      color: "oklch(33.1% 0.064 144.7)",
                     }}
                   >
                     ${(finalAmount || 0).toFixed(2)}
@@ -319,7 +319,7 @@ export default function DonatePage() {
                   style={{
                     fontFamily: "'EB Garamond', serif",
                     fontSize: "0.75rem",
-                    color: "oklch(55% 0.11 72)",
+                    color: "oklch(64.3% 0.161 143.4)",
                     textAlign: "center",
                     marginTop: "0.75rem",
                     fontStyle: "italic",
@@ -337,14 +337,14 @@ export default function DonatePage() {
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", marginBottom: "1rem" }}>
                   Your Impact
                 </h3>
-                <div style={{ width: "30px", height: "2px", background: "oklch(55% 0.11 72)", marginBottom: "1rem" }} />
+                <div style={{ width: "30px", height: "2px", background: "oklch(64.3% 0.161 143.4)", marginBottom: "1rem" }} />
                 <div className="space-y-3">
                   {IMPACT.map((item) => (
                     <div key={item.amount} className="flex items-start gap-3">
                       <span
                         style={{
-                          color: "oklch(38% 0.12 22)",
-                          background: "oklch(87% 0.032 72)",
+                          color: "oklch(33.1% 0.064 144.7)",
+                          background: "oklch(86.6% 0.079 130.9)",
                           padding: "0.4rem",
                           borderRadius: "4px",
                           flexShrink: 0,
@@ -358,7 +358,7 @@ export default function DonatePage() {
                             fontFamily: "'Playfair Display', serif",
                             fontSize: "0.85rem",
                             fontWeight: 700,
-                            color: "oklch(38% 0.12 22)",
+                            color: "oklch(33.1% 0.064 144.7)",
                           }}
                         >
                           {item.amount}
@@ -367,7 +367,7 @@ export default function DonatePage() {
                           style={{
                             fontFamily: "'EB Garamond', serif",
                             fontSize: "0.85rem",
-                            color: "oklch(46% 0.06 56)",
+                            color: "oklch(44% 0.055 144)",
                             margin: 0,
                           }}
                         >
@@ -398,7 +398,7 @@ export default function DonatePage() {
                 style={{
                   fontFamily: "'EB Garamond', serif",
                   fontSize: "1rem",
-                  color: "oklch(46% 0.06 56)",
+                  color: "oklch(44% 0.055 144)",
                   maxWidth: "500px",
                   margin: "0.5rem auto 0",
                 }}
@@ -416,7 +416,7 @@ export default function DonatePage() {
                     style={{
                       fontFamily: "'Playfair Display', serif",
                       fontSize: "1.1rem",
-                      color: "oklch(22% 0.04 50)",
+                      color: "oklch(20% 0.03 145)",
                       marginBottom: "0.25rem",
                     }}
                   >
@@ -427,7 +427,7 @@ export default function DonatePage() {
                       fontFamily: "'Playfair Display', serif",
                       fontSize: "1rem",
                       fontWeight: 700,
-                      color: "oklch(38% 0.12 22)",
+                      color: "oklch(33.1% 0.064 144.7)",
                       marginBottom: "0.75rem",
                     }}
                   >
@@ -437,7 +437,7 @@ export default function DonatePage() {
                     style={{
                       fontFamily: "'EB Garamond', serif",
                       fontSize: "0.85rem",
-                      color: "oklch(46% 0.06 56)",
+                      color: "oklch(44% 0.055 144)",
                       paddingLeft: "1.1rem",
                       flex: 1,
                       margin: "0 0 1rem",

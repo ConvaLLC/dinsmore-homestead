@@ -141,7 +141,7 @@ export default function HeroSlider() {
                   style={{
                     width: "60px",
                     height: "2px",
-                    background: "oklch(68% 0.12 75)",
+                    background: "oklch(64.3% 0.161 143.4)",
                     marginBottom: "1rem",
                     opacity: index === current ? 1 : 0,
                     transform: index === current ? "scaleX(1)" : "scaleX(0)",
@@ -152,7 +152,7 @@ export default function HeroSlider() {
                 <h1
                   className="text-shadow-vintage"
                   style={{
-                    color: "oklch(96% 0.018 80)",
+                    color: "oklch(96% 0.014 110)",
                     fontFamily: "'Playfair Display', serif",
                     fontWeight: 700,
                     marginBottom: "0.75rem",
@@ -166,7 +166,7 @@ export default function HeroSlider() {
                 <p
                   className="text-shadow-vintage"
                   style={{
-                    color: "oklch(87% 0.032 72)",
+                    color: "oklch(86.6% 0.079 130.9)",
                     fontFamily: "'EB Garamond', serif",
                     fontSize: "clamp(1rem, 2vw, 1.25rem)",
                     marginBottom: "1.5rem",
@@ -208,7 +208,7 @@ export default function HeroSlider() {
           zIndex: 10,
           background: "oklch(0% 0 0 / 0.4)",
           border: "1px solid oklch(72% 0.05 62 / 0.5)",
-          color: "oklch(93% 0.025 75)",
+          color: "oklch(93.6% 0.037 136.6)",
           width: "44px",
           height: "44px",
           display: "flex",
@@ -233,7 +233,7 @@ export default function HeroSlider() {
           zIndex: 10,
           background: "oklch(0% 0 0 / 0.4)",
           border: "1px solid oklch(72% 0.05 62 / 0.5)",
-          color: "oklch(93% 0.025 75)",
+          color: "oklch(93.6% 0.037 136.6)",
           width: "44px",
           height: "44px",
           display: "flex",
@@ -267,7 +267,7 @@ export default function HeroSlider() {
             style={{
               width: i === current ? "24px" : "8px",
               height: "8px",
-              background: i === current ? "oklch(68% 0.12 75)" : "oklch(93% 0.025 75 / 0.5)",
+              background: i === current ? "oklch(64.3% 0.161 143.4)" : "oklch(93% 0.025 75 / 0.5)",
               border: "none",
               cursor: "pointer",
               transition: "all 0.3s ease",

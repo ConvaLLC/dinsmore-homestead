@@ -75,8 +75,8 @@ export default function Navigation() {
       {/* Top bar */}
       <div
         style={{
-          background: "oklch(22% 0.04 50)",
-          borderBottom: "1px solid oklch(38% 0.055 54)",
+          background: "oklch(20% 0.03 145)",
+          borderBottom: "1px solid oklch(42.3% 0.087 144.3)",
         }}
         className="hidden md:block"
       >
@@ -84,7 +84,7 @@ export default function Navigation() {
           <p
             className="text-xs"
             style={{
-              color: "oklch(72% 0.05 62)",
+              color: "oklch(78% 0.055 135)",
               fontFamily: "'EB Garamond', serif",
               letterSpacing: "0.05em",
             }}
@@ -98,7 +98,7 @@ export default function Navigation() {
                   <Link
                     href="/education"
                     className="nav-link-vintage text-xs flex items-center gap-1"
-                    style={{ color: "oklch(68% 0.12 75)" }}
+                    style={{ color: "oklch(64.3% 0.161 143.4)" }}
                   >
                     <GraduationCap size={12} />
                     Education Portal
@@ -108,7 +108,7 @@ export default function Navigation() {
                   <Link
                     href="/admin"
                     className="nav-link-vintage text-xs"
-                    style={{ color: "oklch(68% 0.12 75)" }}
+                    style={{ color: "oklch(64.3% 0.161 143.4)" }}
                   >
                     Admin
                   </Link>
@@ -117,7 +117,7 @@ export default function Navigation() {
                   <Link
                     href="/education/register"
                     className="nav-link-vintage text-xs"
-                    style={{ color: "oklch(72% 0.05 62)" }}
+                    style={{ color: "oklch(78% 0.055 135)" }}
                   >
                     Educator Access
                   </Link>
@@ -128,7 +128,7 @@ export default function Navigation() {
                 <Link
                   href="/education/register"
                   className="nav-link-vintage text-xs flex items-center gap-1"
-                  style={{ color: "oklch(72% 0.05 62)" }}
+                  style={{ color: "oklch(78% 0.055 135)" }}
                 >
                   <GraduationCap size={12} />
                   Educator Access
@@ -136,7 +136,7 @@ export default function Navigation() {
                 <a
                   href={getLoginUrl()}
                   className="nav-link-vintage text-xs"
-                  style={{ color: "oklch(72% 0.05 62)" }}
+                  style={{ color: "oklch(78% 0.055 135)" }}
                 >
                   Sign In
                 </a>
@@ -150,7 +150,7 @@ export default function Navigation() {
       <nav
         style={{
           background: "oklch(27% 0.045 50)",
-          borderBottom: "3px solid oklch(55% 0.11 72)",
+          borderBottom: "3px solid oklch(64.3% 0.161 143.4)",
           position: "sticky",
           top: 0,
           zIndex: 50,
@@ -192,7 +192,7 @@ export default function Navigation() {
                     className={`nav-link-vintage px-3 py-2 flex items-center gap-1 bg-transparent border-none ${
                       item.children?.some((c) => isActive(c.href)) ? "active" : ""
                     }`}
-                    style={{ color: "oklch(93% 0.025 75)" }}
+                    style={{ color: "oklch(93.6% 0.037 136.6)" }}
                   >
                     {item.label}
                     <ChevronDown
@@ -213,9 +213,9 @@ export default function Navigation() {
                       top: "100%",
                       left: 0,
                       minWidth: "200px",
-                      background: "oklch(96% 0.018 80)",
-                      border: "1px solid oklch(72% 0.05 62)",
-                      borderTop: "3px solid oklch(55% 0.11 72)",
+                      background: "oklch(96% 0.014 110)",
+                      border: "1px solid oklch(78% 0.055 135)",
+                      borderTop: "3px solid oklch(64.3% 0.161 143.4)",
                       boxShadow: "0 8px 24px oklch(0% 0 0 / 0.15)",
                       zIndex: 100,
                     }}
@@ -230,17 +230,17 @@ export default function Navigation() {
                           fontFamily: "'Playfair Display', serif",
                           fontSize: "0.8rem",
                           letterSpacing: "0.05em",
-                          color: "oklch(30% 0.05 52)",
-                          borderBottom: "1px solid oklch(87% 0.032 72)",
+                          color: "oklch(28% 0.055 144)",
+                          borderBottom: "1px solid oklch(86.6% 0.079 130.9)",
                           transition: "all 0.15s ease",
                         }}
                         onMouseEnter={(e) => {
-                          (e.target as HTMLElement).style.background = "oklch(87% 0.032 72)";
-                          (e.target as HTMLElement).style.color = "oklch(38% 0.12 22)";
+                          (e.target as HTMLElement).style.background = "oklch(86.6% 0.079 130.9)";
+                          (e.target as HTMLElement).style.color = "oklch(33.1% 0.064 144.7)";
                         }}
                         onMouseLeave={(e) => {
                           (e.target as HTMLElement).style.background = "transparent";
-                          (e.target as HTMLElement).style.color = "oklch(30% 0.05 52)";
+                          (e.target as HTMLElement).style.color = "oklch(28% 0.055 144)";
                         }}
                       >
                         {child.label}
@@ -260,14 +260,14 @@ export default function Navigation() {
                   fontFamily: "'Playfair Display', serif",
                   letterSpacing: "0.06em",
                   color: "oklch(85% 0.14 72)",
-                  border: "1px solid oklch(55% 0.11 72)",
+                  border: "1px solid oklch(64.3% 0.161 143.4)",
                   borderRadius: "2px",
                   background: "oklch(22% 0.04 50 / 0.6)",
                   transition: "all 0.2s ease",
                 }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLElement;
-                  el.style.background = "oklch(55% 0.11 72)";
+                  el.style.background = "oklch(64.3% 0.161 143.4)";
                   el.style.color = "oklch(98% 0.01 80)";
                 }}
                 onMouseLeave={(e) => {
@@ -290,7 +290,7 @@ export default function Navigation() {
           {/* Mobile menu button */}
           <button
             className="lg:hidden p-2"
-            style={{ color: "oklch(93% 0.025 75)", background: "transparent", border: "none" }}
+            style={{ color: "oklch(93.6% 0.037 136.6)", background: "transparent", border: "none" }}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -302,8 +302,8 @@ export default function Navigation() {
         {mobileOpen && (
           <div
             style={{
-              background: "oklch(22% 0.04 50)",
-              borderTop: "1px solid oklch(38% 0.055 54)",
+              background: "oklch(20% 0.03 145)",
+              borderTop: "1px solid oklch(42.3% 0.087 144.3)",
             }}
           >
             <div className="container py-4 flex flex-col gap-1">
@@ -320,7 +320,7 @@ export default function Navigation() {
                     <>
                       <button
                         className="nav-link-vintage block py-2 px-3 w-full text-left bg-transparent border-none flex items-center justify-between"
-                        style={{ color: "oklch(72% 0.05 62)" }}
+                        style={{ color: "oklch(78% 0.055 135)" }}
                         onClick={() =>
                           setOpenDropdown(openDropdown === item.label ? null : item.label)
                         }
@@ -340,7 +340,7 @@ export default function Navigation() {
                               key={child.href}
                               href={child.href}
                               className="nav-link-vintage block py-1.5 px-3 text-xs"
-                              style={{ color: "oklch(72% 0.05 62)" }}
+                              style={{ color: "oklch(78% 0.055 135)" }}
                             >
                               {child.label}
                             </Link>
@@ -351,7 +351,7 @@ export default function Navigation() {
                   )}
                 </div>
               ))}
-              <hr style={{ borderColor: "oklch(38% 0.055 54)", margin: "0.5rem 0" }} />
+              <hr style={{ borderColor: "oklch(42.3% 0.087 144.3)", margin: "0.5rem 0" }} />
               <Link href="/donate" className="btn-vintage-filled text-center text-xs py-2">
                 Donate to Dinsmore
               </Link>
@@ -370,7 +370,7 @@ export default function Navigation() {
                         fontFamily: "'Playfair Display', serif",
                         letterSpacing: "0.06em",
                         color: "oklch(85% 0.14 72)",
-                        border: "1px solid oklch(55% 0.11 72)",
+                        border: "1px solid oklch(64.3% 0.161 143.4)",
                         borderRadius: "2px",
                         marginTop: "0.25rem",
                       }}

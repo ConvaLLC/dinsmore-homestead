@@ -22,7 +22,7 @@ function GatedMessage() {
         style={{
           width: "80px",
           height: "80px",
-          background: "oklch(87% 0.032 72)",
+          background: "oklch(86.6% 0.079 130.9)",
           borderRadius: "50%",
           display: "flex",
           alignItems: "center",
@@ -30,7 +30,7 @@ function GatedMessage() {
           margin: "0 auto 1.5rem",
         }}
       >
-        <Lock size={36} style={{ color: "oklch(55% 0.11 72)" }} />
+        <Lock size={36} style={{ color: "oklch(64.3% 0.161 143.4)" }} />
       </div>
       <h2 style={{ fontFamily: "'Playfair Display', serif", marginBottom: "0.75rem" }}>
         Educator Access Required
@@ -39,7 +39,7 @@ function GatedMessage() {
         style={{
           fontFamily: "'EB Garamond', serif",
           fontSize: "1.05rem",
-          color: "oklch(46% 0.06 56)",
+          color: "oklch(44% 0.055 144)",
           maxWidth: "500px",
           margin: "0 auto 2rem",
           lineHeight: 1.7,
@@ -87,25 +87,25 @@ export default function EducationPortalPage() {
         />
         <div style={{ position: "absolute", inset: 0, background: "oklch(22% 0.04 50 / 0.72)" }} />
         <div className="container relative h-full flex flex-col justify-end pb-8">
-          <span className="section-label" style={{ color: "oklch(68% 0.12 75)" }}>
+          <span className="section-label" style={{ color: "oklch(64.3% 0.161 143.4)" }}>
             Dinsmore Homestead Museum
           </span>
-          <h1 style={{ color: "oklch(96% 0.018 80)" }}>Education Portal</h1>
-          <p style={{ color: "oklch(87% 0.032 72)", fontFamily: "'EB Garamond', serif", fontSize: "1.05rem" }}>
+          <h1 style={{ color: "oklch(96% 0.014 110)" }}>Education Portal</h1>
+          <p style={{ color: "oklch(86.6% 0.079 130.9)", fontFamily: "'EB Garamond', serif", fontSize: "1.05rem" }}>
             Lesson plans, primary sources, and curriculum resources for educators
           </p>
         </div>
       </div>
 
-      <section className="py-10" style={{ background: "oklch(96% 0.018 80)" }}>
+      <section className="py-10" style={{ background: "oklch(96% 0.014 110)" }}>
         <div className="container">
           {!isAuthenticated ? (
             <GatedMessage />
           ) : !hasAccess ? (
             <div className="py-12 text-center">
-              <Lock size={48} style={{ color: "oklch(55% 0.11 72)", margin: "0 auto 1rem" }} />
+              <Lock size={48} style={{ color: "oklch(64.3% 0.161 143.4)", margin: "0 auto 1rem" }} />
               <h2>Verify Your Email to Access Resources</h2>
-              <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(46% 0.06 56)", maxWidth: "500px", margin: "0 auto 1.5rem" }}>
+              <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(44% 0.055 144)", maxWidth: "500px", margin: "0 auto 1.5rem" }}>
                 You're signed in, but your educator access hasn't been verified yet. 
                 Complete the verification process to access all resources.
               </p>
@@ -128,9 +128,9 @@ export default function EducationPortalPage() {
                       textTransform: "uppercase",
                       padding: "0.4rem 1rem",
                       border: "1px solid",
-                      borderColor: category === cat.value ? "oklch(38% 0.12 22)" : "oklch(72% 0.05 62)",
-                      background: category === cat.value ? "oklch(38% 0.12 22)" : "transparent",
-                      color: category === cat.value ? "oklch(96% 0.018 80)" : "oklch(46% 0.06 56)",
+                      borderColor: category === cat.value ? "oklch(33.1% 0.064 144.7)" : "oklch(78% 0.055 135)",
+                      background: category === cat.value ? "oklch(33.1% 0.064 144.7)" : "transparent",
+                      color: category === cat.value ? "oklch(96% 0.014 110)" : "oklch(44% 0.055 144)",
                       cursor: "pointer",
                       transition: "all 0.2s",
                     }}
@@ -143,7 +143,7 @@ export default function EducationPortalPage() {
               {isLoading ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                   {[1, 2, 3, 4, 5, 6].map((i) => (
-                    <div key={i} className="card-vintage" style={{ height: "160px", background: "oklch(87% 0.032 72)", animation: "pulse 2s infinite" }} />
+                    <div key={i} className="card-vintage" style={{ height: "160px", background: "oklch(86.6% 0.079 130.9)", animation: "pulse 2s infinite" }} />
                   ))}
                 </div>
               ) : content && content.length > 0 ? (
@@ -160,7 +160,7 @@ export default function EducationPortalPage() {
                           />
                         )}
                         <div className="flex items-start gap-2 mb-2">
-                          <FileText size={16} style={{ color: "oklch(55% 0.11 72)", flexShrink: 0, marginTop: "0.15rem" }} />
+                          <FileText size={16} style={{ color: "oklch(64.3% 0.161 143.4)", flexShrink: 0, marginTop: "0.15rem" }} />
                           <span className="section-label" style={{ fontSize: "0.6rem" }}>
                             {item.category.replace("_", " ")}
                           </span>
@@ -170,7 +170,7 @@ export default function EducationPortalPage() {
                             fontFamily: "'Playfair Display', serif",
                             fontSize: "1rem",
                             fontWeight: 600,
-                            color: "oklch(22% 0.04 50)",
+                            color: "oklch(20% 0.03 145)",
                             marginBottom: "0.5rem",
                             flex: 1,
                           }}
@@ -178,18 +178,18 @@ export default function EducationPortalPage() {
                           {item.title}
                         </h3>
                         {item.gradeLevel && (
-                          <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: "oklch(55% 0.11 72)", margin: 0 }}>
+                          <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: "oklch(64.3% 0.161 143.4)", margin: 0 }}>
                             Grades: {item.gradeLevel}
                           </p>
                         )}
                         <div className="flex items-center justify-between mt-3">
                           {item.fileUrl && (
-                            <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: "oklch(38% 0.12 22)" }}>
+                            <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: "oklch(33.1% 0.064 144.7)" }}>
                               <Download size={12} style={{ display: "inline", marginRight: "0.25rem" }} />
                               Download
                             </span>
                           )}
-                          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "oklch(38% 0.12 22)", marginLeft: "auto" }}>
+                          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "oklch(33.1% 0.064 144.7)", marginLeft: "auto" }}>
                             View <ChevronRight size={12} style={{ display: "inline" }} />
                           </span>
                         </div>
@@ -199,11 +199,11 @@ export default function EducationPortalPage() {
                 </div>
               ) : (
                 <div className="text-center py-16">
-                  <BookOpen size={48} style={{ color: "oklch(72% 0.05 62)", margin: "0 auto 1rem" }} />
-                  <h3 style={{ fontFamily: "'Playfair Display', serif", color: "oklch(46% 0.06 56)" }}>
+                  <BookOpen size={48} style={{ color: "oklch(78% 0.055 135)", margin: "0 auto 1rem" }} />
+                  <h3 style={{ fontFamily: "'Playfair Display', serif", color: "oklch(44% 0.055 144)" }}>
                     No resources in this category yet
                   </h3>
-                  <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(55% 0.11 72)" }}>
+                  <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(64.3% 0.161 143.4)" }}>
                     New educational content is added regularly. Check back soon!
                   </p>
                 </div>

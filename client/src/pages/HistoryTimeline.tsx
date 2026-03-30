@@ -40,9 +40,9 @@ const TIMELINE_EVENTS: TimelineEvent[] = [
 ];
 
 const CATEGORY_COLORS: Record<string, string> = {
-  family: "oklch(55% 0.11 72)",
+  family: "oklch(64.3% 0.161 143.4)",
   farm: "oklch(45% 0.12 145)",
-  history: "oklch(38% 0.12 22)",
+  history: "oklch(33.1% 0.064 144.7)",
   foundation: "oklch(40% 0.10 260)",
 };
 
@@ -59,18 +59,18 @@ export default function HistoryTimelinePage() {
   const filtered = filter === "all" ? TIMELINE_EVENTS : TIMELINE_EVENTS.filter(e => e.category === filter);
 
   return (
-    <div className="min-h-screen" style={{ background: "oklch(96% 0.018 80)" }}>
+    <div className="min-h-screen" style={{ background: "oklch(96% 0.014 110)" }}>
       {/* Hero */}
       <div className="relative py-20 text-center" style={{ backgroundImage: `linear-gradient(rgba(44,26,12,0.75), rgba(44,26,12,0.75)), url(${IMAGES.farmHDR})`, backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
-          <p className="section-label" style={{ color: "oklch(68% 0.12 75)" }}>Five Generations</p>
+          <p className="section-label" style={{ color: "oklch(64.3% 0.161 143.4)" }}>Five Generations</p>
           <h1 style={{ color: "oklch(97% 0.01 80)", fontFamily: "'Playfair Display', serif", fontSize: "clamp(2rem,5vw,3.5rem)", margin: "0.5rem 0 1rem" }}>Historical Timeline</h1>
-          <p style={{ color: "oklch(87% 0.032 72)", fontFamily: "'EB Garamond', serif", fontSize: "1.1rem", maxWidth: "600px", margin: "0 auto 1.5rem" }}>
+          <p style={{ color: "oklch(86.6% 0.079 130.9)", fontFamily: "'EB Garamond', serif", fontSize: "1.1rem", maxWidth: "600px", margin: "0 auto 1.5rem" }}>
             From the founding of the homestead in 1842 through the establishment of the Foundation in 1988 — the story of the Dinsmore family and their remarkable legacy.
           </p>
           <nav style={{ fontSize: "0.85rem", color: "oklch(75% 0.03 72)" }}>
-            <Link href="/" style={{ color: "oklch(68% 0.12 75)" }}>Home</Link><span className="mx-2">›</span>
-            <Link href="/history/family" style={{ color: "oklch(68% 0.12 75)" }}>The Family</Link><span className="mx-2">›</span>
+            <Link href="/" style={{ color: "oklch(64.3% 0.161 143.4)" }}>Home</Link><span className="mx-2">›</span>
+            <Link href="/history/family" style={{ color: "oklch(64.3% 0.161 143.4)" }}>The Family</Link><span className="mx-2">›</span>
             <span>Timeline</span>
           </nav>
         </div>
@@ -88,9 +88,9 @@ export default function HistoryTimelinePage() {
                 fontFamily: "'EB Garamond', serif",
                 fontSize: "0.85rem",
                 letterSpacing: "0.05em",
-                border: `1px solid ${cat === "all" ? "oklch(55% 0.11 72)" : (CATEGORY_COLORS[cat] || "oklch(55% 0.11 72)")}`,
-                background: filter === cat ? (cat === "all" ? "oklch(55% 0.11 72)" : (CATEGORY_COLORS[cat] || "oklch(55% 0.11 72)")) : "transparent",
-                color: filter === cat ? "white" : "oklch(38% 0.055 54)",
+                border: `1px solid ${cat === "all" ? "oklch(64.3% 0.161 143.4)" : (CATEGORY_COLORS[cat] || "oklch(64.3% 0.161 143.4)")}`,
+                background: filter === cat ? (cat === "all" ? "oklch(64.3% 0.161 143.4)" : (CATEGORY_COLORS[cat] || "oklch(64.3% 0.161 143.4)")) : "transparent",
+                color: filter === cat ? "white" : "oklch(42.3% 0.087 144.3)",
                 cursor: "pointer",
                 transition: "all 0.2s",
                 textTransform: "capitalize",
@@ -116,17 +116,17 @@ export default function HistoryTimelinePage() {
                   </span>
                 </div>
                 {/* Dot */}
-                <div style={{ width: "14px", height: "14px", borderRadius: "50%", background: CATEGORY_COLORS[event.category], border: "3px solid oklch(96% 0.018 80)", flexShrink: 0, marginTop: "0.85rem", position: "relative", zIndex: 1, boxShadow: "0 0 0 2px " + CATEGORY_COLORS[event.category] + "40" }} />
+                <div style={{ width: "14px", height: "14px", borderRadius: "50%", background: CATEGORY_COLORS[event.category], border: "3px solid oklch(96% 0.014 110)", flexShrink: 0, marginTop: "0.85rem", position: "relative", zIndex: 1, boxShadow: "0 0 0 2px " + CATEGORY_COLORS[event.category] + "40" }} />
                 {/* Content */}
                 <div className="flex-1 pb-2">
                   <div className="p-4 bg-white" style={{ border: `1px solid ${CATEGORY_COLORS[event.category]}40` }}>
                     <div className="flex items-start justify-between gap-2 mb-1">
-                      <h4 style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.95rem", color: "oklch(22% 0.04 50)", lineHeight: 1.3 }}>{event.title}</h4>
+                      <h4 style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.95rem", color: "oklch(20% 0.03 145)", lineHeight: 1.3 }}>{event.title}</h4>
                       <span style={{ flexShrink: 0, fontSize: "0.65rem", padding: "2px 8px", background: CATEGORY_COLORS[event.category] + "20", color: CATEGORY_COLORS[event.category], textTransform: "uppercase", letterSpacing: "0.1em", border: `1px solid ${CATEGORY_COLORS[event.category]}40` }}>
                         {CATEGORY_LABELS[event.category]}
                       </span>
                     </div>
-                    <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.88rem", color: "oklch(46% 0.06 56)", margin: 0, lineHeight: 1.6 }}>{event.desc}</p>
+                    <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.88rem", color: "oklch(44% 0.055 144)", margin: 0, lineHeight: 1.6 }}>{event.desc}</p>
                   </div>
                 </div>
               </div>
