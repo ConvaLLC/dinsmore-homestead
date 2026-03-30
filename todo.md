@@ -85,3 +85,6 @@
 - [x] Scrape all 10 education pages (lesson plans, programs, scout, summer, newsletters)
 - [x] Seed education portal database with 8 real lesson plan and program content items
 - [x] All 22 vitest tests passing after content integration
+
+## Navigation Improvements
+- [x] Add admin link in main navigation (visible to admin role only)

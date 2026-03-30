@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
 import { IMAGES } from "../../../shared/images";
-import { Menu, X, ChevronDown, GraduationCap } from "lucide-react";
+import { Menu, X, ChevronDown, GraduationCap, Settings } from "lucide-react";
 
 interface NavItem {
   label: string;
@@ -251,8 +251,38 @@ export default function Navigation() {
               </div>
             ))}
 
+            {/* Admin link — visible to admins only */}
+            {user?.role === "admin" && (
+              <Link
+                href="/admin"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs ml-2"
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  letterSpacing: "0.06em",
+                  color: "oklch(85% 0.14 72)",
+                  border: "1px solid oklch(55% 0.11 72)",
+                  borderRadius: "2px",
+                  background: "oklch(22% 0.04 50 / 0.6)",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.background = "oklch(55% 0.11 72)";
+                  el.style.color = "oklch(98% 0.01 80)";
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.background = "oklch(22% 0.04 50 / 0.6)";
+                  el.style.color = "oklch(85% 0.14 72)";
+                }}
+              >
+                <Settings size={12} />
+                Admin
+              </Link>
+            )}
+
             {/* Donate CTA */}
-            <Link href="/donate" className="btn-vintage-filled ml-4 text-xs">
+            <Link href="/donate" className="btn-vintage-filled ml-2 text-xs">
               Donate
             </Link>
           </div>
@@ -333,7 +363,19 @@ export default function Navigation() {
                     </Link>
                   )}
                   {user?.role === "admin" && (
-                    <Link href="/admin" className="nav-link-vintage block py-2 px-3 text-xs">
+                    <Link
+                      href="/admin"
+                      className="flex items-center gap-2 py-2 px-3 text-xs"
+                      style={{
+                        fontFamily: "'Playfair Display', serif",
+                        letterSpacing: "0.06em",
+                        color: "oklch(85% 0.14 72)",
+                        border: "1px solid oklch(55% 0.11 72)",
+                        borderRadius: "2px",
+                        marginTop: "0.25rem",
+                      }}
+                    >
+                      <Settings size={13} />
                       Admin Dashboard
                     </Link>
                   )}
