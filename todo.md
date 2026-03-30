@@ -101,3 +101,6 @@
 - [x] Public: show remaining tickets per slot on event/ticket purchase page
 - [x] Public: sold-out badge on fully booked slots
 - [x] Public: disable purchase button when slot is sold out
+
+## Bug Fixes
+- [x] Fix Create Event button in admin panel - does nothing when clicked

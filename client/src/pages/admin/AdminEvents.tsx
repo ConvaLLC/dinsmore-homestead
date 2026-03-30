@@ -76,17 +76,33 @@ export default function AdminEvents() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const payload = {
-      ...form,
-      price: form.price,
-      maxCapacity: parseInt(form.maxCapacity),
-      startDate: form.startDate,
-      endDate: form.endDate || undefined,
+    if (!form.title || !form.slug || !form.startDate) {
+      toast.error("Title, slug, and start date are required.");
+      return;
+    }
+    const basePayload = {
+      title: form.title,
+      slug: form.slug,
+      description: form.description || undefined,
+      shortDescription: form.shortDescription || undefined,
+      imageUrl: form.imageUrl || undefined,
+      eventType: form.eventType as EventType,
+      basePrice: form.price || "0.00",
+      startDate: new Date(form.startDate),
+      endDate: form.endDate ? new Date(form.endDate) : undefined,
+      defaultCapacity: parseInt(form.maxCapacity) || 20,
+      usesTimeslots: true,
+      active: form.active,
+      featured: form.featured,
     };
-    if (editingId) {
-      await updateEvent.mutateAsync({ id: editingId, ...payload, eventType: payload.eventType as EventType, startDate: payload.startDate ? new Date(payload.startDate) : undefined, endDate: payload.endDate ? new Date(payload.endDate) : undefined } as any);
-    } else {
-      await createEvent.mutateAsync(payload as any);
+    try {
+      if (editingId) {
+        await updateEvent.mutateAsync({ id: editingId, ...basePayload });
+      } else {
+        await createEvent.mutateAsync(basePayload);
+      }
+    } catch (err: any) {
+      toast.error(err?.message || "Failed to save event.");
     }
   };
 
