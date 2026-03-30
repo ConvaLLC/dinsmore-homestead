@@ -4,6 +4,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
 import {
   Calendar,
+  CalendarDays,
   Ticket,
   Heart,
   BookOpen,
@@ -20,6 +21,7 @@ function AdminNav() {
   const navItems = [
     { href: "/admin", label: "Dashboard", icon: <LayoutDashboard size={16} /> },
     { href: "/admin/events", label: "Events", icon: <Calendar size={16} /> },
+    { href: "/admin/timeslots", label: "Tour Slots", icon: <CalendarDays size={16} /> },
     { href: "/admin/hero-slides", label: "Hero Slider", icon: <Image size={16} /> },
     { href: "/admin/orders", label: "Ticket Orders", icon: <Ticket size={16} /> },
     { href: "/admin/donations", label: "Donations", icon: <Heart size={16} /> },
@@ -62,8 +64,8 @@ function AdminNav() {
                 fontSize: "0.75rem",
                 letterSpacing: "0.05em",
                 textTransform: "uppercase",
-                color: location === item.href ? "oklch(68% 0.12 75)" : "oklch(72% 0.05 62)",
-                borderBottom: location === item.href ? "2px solid oklch(68% 0.12 75)" : "2px solid transparent",
+                color: location.startsWith(item.href) && (item.href !== "/admin" || location === "/admin") ? "oklch(68% 0.12 75)" : "oklch(72% 0.05 62)",
+                borderBottom: location.startsWith(item.href) && (item.href !== "/admin" || location === "/admin") ? "2px solid oklch(68% 0.12 75)" : "2px solid transparent",
                 transition: "all 0.2s",
                 textDecoration: "none",
               }}

@@ -268,6 +268,14 @@ export default function AdminEvents() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
+                      <Link
+                        href={`/admin/timeslots?eventId=${event.id}`}
+                        onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                        className="btn-vintage-filled flex items-center gap-1"
+                        style={{ fontSize: "0.72rem", padding: "0.3rem 0.65rem", whiteSpace: "nowrap" }}
+                      >
+                        <CalendarDays size={12} /> Manage Slots
+                      </Link>
                       <button
                         onClick={(e) => { e.stopPropagation(); handleEdit(event); }}
                         style={{ background: "none", border: "none", cursor: "pointer", color: "oklch(55% 0.11 72)", padding: "0.25rem" }}

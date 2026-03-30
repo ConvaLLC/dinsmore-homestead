@@ -124,7 +124,31 @@ export default function AdminTimeslots() {
     <div className="py-24 text-center container"><Lock size={48} style={{ color:"oklch(55% 0.11 72)",margin:"0 auto 1rem" }}/><h2>Admin Access Required</h2><a href={getLoginUrl()} className="btn-vintage-filled">Sign In</a></div>
   );
   if (!eventId) return (
-    <div><AdminNav/><div className="container py-8"><p style={{ fontFamily:"'EB Garamond',serif",color:"oklch(46% 0.06 56)" }}>No event selected. <Link href="/admin/events" className="nav-link-vintage">Go to Events</Link></p></div></div>
+    <div style={{ minHeight:"100vh",background:"oklch(93% 0.025 75)" }}>
+      <AdminNav/>
+      <div className="container py-10" style={{ maxWidth:"700px" }}>
+        <h1 style={{ fontFamily:"'Playfair Display',serif",fontSize:"1.6rem",color:"oklch(22% 0.04 50)",marginBottom:"0.5rem" }}>Tour Time Slots</h1>
+        <p style={{ fontFamily:"'EB Garamond',serif",fontSize:"1rem",color:"oklch(46% 0.06 56)",marginBottom:"2rem" }}>
+          Select an event to manage its time slots, or <Link href="/admin/events" className="nav-link-vintage">create a new event</Link> first.
+        </p>
+        {events && (events as any[]).length > 0 ? (
+          <div style={{ display:"grid",gap:"0.75rem" }}>
+            {(events as any[]).map((ev: any) => (
+              <Link key={ev.id} href={`/admin/timeslots?eventId=${ev.id}`}
+                style={{ display:"block",padding:"1rem 1.25rem",background:"oklch(96% 0.018 80)",border:"1px solid oklch(82% 0.04 65)",borderLeft:"4px solid oklch(55% 0.11 72)",textDecoration:"none",transition:"all 0.15s" }}
+              >
+                <div style={{ fontFamily:"'Playfair Display',serif",fontSize:"1rem",color:"oklch(22% 0.04 50)",fontWeight:600 }}>{ev.title}</div>
+                <div style={{ fontFamily:"'EB Garamond',serif",fontSize:"0.85rem",color:"oklch(55% 0.11 72)",marginTop:"0.2rem" }}>
+                  {ev.eventType?.replace("_"," ")} &middot; {new Date(ev.startDate).toLocaleDateString()}
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <p style={{ fontFamily:"'EB Garamond',serif",color:"oklch(55% 0.11 72)" }}>No events found. <Link href="/admin/events" className="nav-link-vintage">Create an event first.</Link></p>
+        )}
+      </div>
+    </div>
   );
 
   const filteredSlots = (allSlots as Slot[]).filter(s => {

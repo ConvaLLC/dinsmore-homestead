@@ -80,6 +80,7 @@ function Router() {
       <Route path="/admin" component={() => <AdminLayout><AdminDashboard /></AdminLayout>} />
       <Route path="/admin/events" component={() => <AdminLayout><AdminEvents /></AdminLayout>} />
       <Route path="/admin/events/:id/timeslots" component={() => <AdminLayout><AdminTimeslots /></AdminLayout>} />
+      <Route path="/admin/timeslots" component={() => <AdminLayout><AdminTimeslots /></AdminLayout>} />
       <Route path="/admin/hero-slides" component={() => <AdminLayout><AdminHeroSlides /></AdminLayout>} />
       <Route path="/admin/orders" component={() => <AdminLayout><AdminOrders /></AdminLayout>} />
       <Route path="/admin/donations" component={() => <AdminLayout><AdminDonations /></AdminLayout>} />
