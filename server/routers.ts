@@ -33,6 +33,9 @@ import {
   getEventBySlug,
   getFeaturedEvents,
   getTicketOrderByOrderNumber,
+  getAllTimeslotsForEvent,
+  bulkCreateTimeslots,
+  deleteTimeslotsInRange,
   getTimeslotById,
   getTimeslotsForEvent,
   incrementTimeslotSold,
@@ -234,9 +237,17 @@ export const appRouter = router({
 
   // ── Timeslots ─────────────────────────────────────────────────────────────
   timeslots: router({
+    // Public: active slots only (for ticket purchase)
     forEvent: publicProcedure
       .input(z.object({ eventId: z.number() }))
       .query(({ input }) => getTimeslotsForEvent(input.eventId)),
+
+    // Admin: all slots including inactive
+    adminForEvent: adminProcedure
+      .input(z.object({ eventId: z.number() }))
+      .query(({ input }) => getAllTimeslotsForEvent(input.eventId)),
+
+    // Admin: create a single slot
     create: adminProcedure
       .input(z.object({
         eventId: z.number(),
@@ -248,13 +259,90 @@ export const appRouter = router({
         active: z.boolean().default(true),
       }))
       .mutation(({ input }) => createTimeslot(input as any)),
+
+    // Admin: bulk generate slots by date range + interval
+    bulkGenerate: adminProcedure
+      .input(z.object({
+        eventId: z.number(),
+        startDate: z.string(),   // "YYYY-MM-DD"
+        endDate: z.string(),     // "YYYY-MM-DD"
+        startTime: z.string(),   // "09:00"
+        endTime: z.string(),     // "17:00"  — last slot starts at or before this
+        intervalMinutes: z.number().min(15).max(480), // 30, 60, 90, 120 …
+        slotDurationMinutes: z.number().min(15).max(480).optional(), // length of each tour
+        capacity: z.number().min(1),
+        price: z.string().optional(),
+        skipDays: z.array(z.number()).optional(), // 0=Sun … 6=Sat
+        replaceExisting: z.boolean().default(false),
+      }))
+      .mutation(async ({ input }) => {
+        const {
+          eventId, startDate, endDate, startTime, endTime,
+          intervalMinutes, slotDurationMinutes, capacity, price,
+          skipDays = [], replaceExisting,
+        } = input;
+
+        // Parse date range
+        const from = new Date(startDate + 'T00:00:00');
+        const to   = new Date(endDate   + 'T23:59:59');
+        if (from > to) throw new TRPCError({ code: 'BAD_REQUEST', message: 'Start date must be before end date' });
+
+        // Optionally wipe existing slots in range
+        if (replaceExisting) {
+          await deleteTimeslotsInRange(eventId, from, to);
+        }
+
+        // Parse start/end clock times
+        const [sh, sm] = startTime.split(':').map(Number);
+        const [eh, em] = endTime.split(':').map(Number);
+        const startMinutes = sh * 60 + sm;
+        const endMinutes   = eh * 60 + em;
+
+        const slots: any[] = [];
+        const cursor = new Date(from);
+
+        while (cursor <= to) {
+          const dow = cursor.getDay();
+          if (!skipDays.includes(dow)) {
+            let slotStart = startMinutes;
+            while (slotStart <= endMinutes) {
+              const slotEnd = slotDurationMinutes ? slotStart + slotDurationMinutes : slotStart + intervalMinutes;
+              const fmtTime = (mins: number) => {
+                const h = Math.floor(mins / 60);
+                const m = mins % 60;
+                const ampm = h >= 12 ? 'PM' : 'AM';
+                const h12 = h % 12 === 0 ? 12 : h % 12;
+                return `${h12}:${String(m).padStart(2, '0')} ${ampm}`;
+              };
+              slots.push({
+                eventId,
+                slotDate: new Date(cursor),
+                startTime: fmtTime(slotStart),
+                endTime: fmtTime(slotEnd),
+                capacity,
+                ticketsSold: 0,
+                price: price || null,
+                active: true,
+              });
+              slotStart += intervalMinutes;
+            }
+          }
+          cursor.setDate(cursor.getDate() + 1);
+        }
+
+        if (slots.length === 0) throw new TRPCError({ code: 'BAD_REQUEST', message: 'No slots generated — check your date range and times' });
+        const count = await bulkCreateTimeslots(slots);
+        return { count };
+      }),
+
+    // Admin: update a single slot (capacity, time, active, price)
     update: adminProcedure
       .input(z.object({
         id: z.number(),
         slotDate: z.date().optional(),
         startTime: z.string().optional(),
         endTime: z.string().optional(),
-        capacity: z.number().optional(),
+        capacity: z.number().min(0).optional(),
         price: z.string().optional(),
         active: z.boolean().optional(),
       }))
@@ -262,9 +350,32 @@ export const appRouter = router({
         const { id, ...data } = input;
         return updateTimeslot(id, data as any);
       }),
+
+    // Admin: delete a single slot (only if no tickets sold)
     delete: adminProcedure
       .input(z.object({ id: z.number() }))
-      .mutation(({ input }) => deleteTimeslot(input.id)),
+      .mutation(async ({ input }) => {
+        const slot = await getTimeslotById(input.id);
+        if (slot && slot.ticketsSold > 0) {
+          // Soft-delete: just deactivate so order history stays intact
+          await updateTimeslot(input.id, { active: false });
+        } else {
+          await deleteTimeslot(input.id);
+        }
+      }),
+
+    // Admin: delete all slots in a date range for an event
+    deleteRange: adminProcedure
+      .input(z.object({
+        eventId: z.number(),
+        startDate: z.string(),
+        endDate: z.string(),
+      }))
+      .mutation(({ input }) => {
+        const from = new Date(input.startDate + 'T00:00:00');
+        const to   = new Date(input.endDate   + 'T23:59:59');
+        return deleteTimeslotsInRange(input.eventId, from, to);
+      }),
   }),
 
   // ── Tickets / PayPal ──────────────────────────────────────────────────────

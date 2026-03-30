@@ -1,0 +1,18 @@
+{
+  "query": "SELECT id, openId, name, email, role, createdAt FROM users ORDER BY createdAt DESC LIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3t8cMEMTnQhNXh7.03665b90a336 --database BJfSrzjRtuEsJ2dXmaEoHv --execute SELECT id, openId, name, email, role, createdAt FROM users ORDER BY createdAt DESC LIMIT 20;",
+  "rows": [
+    {
+      "id": "1",
+      "openId": "HC2Q7Mvum7zQvaCNC6eNcB",
+      "name": "johnr",
+      "email": "johnr@convait.com",
+      "role": "user",
+      "createdAt": "2026-03-25 14:34:11"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\topenId\tname\temail\trole\tcreatedAt\n1\tHC2Q7Mvum7zQvaCNC6eNcB\tjohnr\tjohnr@convait.com\tuser\t2026-03-25 14:34:11\n",
+  "stderr": "",
+  "execution_time_ms": 538
+}

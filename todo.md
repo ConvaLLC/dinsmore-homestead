@@ -88,3 +88,16 @@
 
 ## Navigation Improvements
 - [x] Add admin link in main navigation (visible to admin role only)
+
+## Tour Scheduling System Redesign
+- [x] Update backend: bulk timeslot generation by date range + interval (30min/1hr/custom)
+- [x] Update backend: per-slot capacity tracking with sold ticket count
+- [x] Update backend: individual slot edit (capacity, time, active/inactive)
+- [x] Update backend: bulk slot delete for a date range
+- [x] Admin: bulk generator UI (date range, start/end time, interval, capacity)
+- [x] Admin: capacity table view (date, time, capacity, sold, remaining, status)
+- [x] Admin: individual slot edit modal
+- [x] Admin: sold-out badge in table
+- [x] Public: show remaining tickets per slot on event/ticket purchase page
+- [x] Public: sold-out badge on fully booked slots
+- [x] Public: disable purchase button when slot is sold out

@@ -244,6 +244,41 @@ export async function getTimeslotsForEvent(eventId: number): Promise<EventTimesl
     .orderBy(eventTimeslots.slotDate);
 }
 
+// Return ALL slots (active + inactive) for admin view
+export async function getAllTimeslotsForEvent(eventId: number): Promise<EventTimeslot[]> {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(eventTimeslots)
+    .where(eq(eventTimeslots.eventId, eventId))
+    .orderBy(eventTimeslots.slotDate);
+}
+
+// Bulk-insert many timeslots at once
+export async function bulkCreateTimeslots(slots: InsertEventTimeslot[]): Promise<number> {
+  const db = await getDb();
+  if (!db) throw new Error('DB unavailable');
+  if (slots.length === 0) return 0;
+  await db.insert(eventTimeslots).values(slots);
+  return slots.length;
+}
+
+// Delete all slots for an event within a date range
+export async function deleteTimeslotsInRange(
+  eventId: number,
+  fromDate: Date,
+  toDate: Date
+): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+  await db.delete(eventTimeslots).where(
+    and(
+      eq(eventTimeslots.eventId, eventId),
+      gte(eventTimeslots.slotDate, fromDate),
+      lte(eventTimeslots.slotDate, toDate)
+    )
+  );
+}
+
 export async function getTimeslotById(id: number): Promise<EventTimeslot | undefined> {
   const db = await getDb();
   if (!db) return undefined;

@@ -1,84 +1,52 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useParams, Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { IMAGES } from "../../../shared/images";
-import { Calendar, Clock, Ticket, Users, ChevronRight, AlertCircle } from "lucide-react";
+import { Calendar, Clock, Ticket, ChevronRight, AlertCircle, ChevronDown, ChevronUp } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";
 
-function TimeslotCard({
-  slot,
-  selected,
-  onSelect,
-}: {
-  slot: any;
-  selected: boolean;
-  onSelect: () => void;
-}) {
+function SlotTimeButton({
+  slot, selected, onSelect, unitPrice,
+}: { slot: any; selected: boolean; onSelect: () => void; unitPrice: number; }) {
   const available = slot.capacity - slot.ticketsSold;
   const isFull = available <= 0;
-  const slotDate = new Date(slot.slotDate);
-
+  const isLow = !isFull && available <= 5;
+  const slotPrice = slot.price ? parseFloat(slot.price) : unitPrice;
   return (
     <button
       onClick={!isFull ? onSelect : undefined}
       disabled={isFull}
       style={{
-        width: "100%",
-        padding: "0.875rem 1rem",
-        border: `2px solid ${selected ? "oklch(38% 0.12 22)" : "oklch(72% 0.05 62)"}`,
-        background: selected ? "oklch(38% 0.12 22)" : isFull ? "oklch(87% 0.032 72)" : "oklch(96% 0.018 80)",
-        color: selected ? "oklch(96% 0.018 80)" : isFull ? "oklch(55% 0.11 72)" : "oklch(22% 0.04 50)",
+        padding: "0.6rem 0.85rem",
+        border: `2px solid ${selected ? "oklch(38% 0.12 22)" : isFull ? "oklch(82% 0.04 65)" : "oklch(72% 0.05 62)"}`,
+        background: selected ? "oklch(38% 0.12 22)" : isFull ? "oklch(90% 0.02 72)" : "oklch(96% 0.018 80)",
+        color: selected ? "oklch(96% 0.018 80)" : isFull ? "oklch(60% 0.04 60)" : "oklch(22% 0.04 50)",
         cursor: isFull ? "not-allowed" : "pointer",
-        transition: "all 0.2s",
-        textAlign: "left",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: "0.5rem",
+        transition: "all 0.15s",
+        textAlign: "center",
+        minWidth: "110px",
+        position: "relative",
       }}
     >
-      <div>
-        <div
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "0.9rem",
-            fontWeight: 600,
-          }}
-        >
-          {format(slotDate, "EEEE, MMMM d, yyyy")}
-        </div>
-        <div
-          style={{
-            fontFamily: "'EB Garamond', serif",
-            fontSize: "0.85rem",
-            opacity: 0.8,
-          }}
-        >
-          {slot.startTime}{slot.endTime ? ` – ${slot.endTime}` : ""}
-        </div>
+      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.95rem", fontWeight: 600, lineHeight: 1.2 }}>
+        {slot.startTime}
       </div>
-      <div className="text-right">
-        <div
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "0.9rem",
-            fontWeight: 600,
-          }}
-        >
-          {slot.price ? `$${slot.price}` : "See event price"}
-        </div>
-        <div
-          style={{
-            fontFamily: "'EB Garamond', serif",
-            fontSize: "0.75rem",
-            color: isFull ? "oklch(50% 0.18 25)" : available <= 5 ? "oklch(55% 0.11 72)" : "inherit",
-            opacity: 0.8,
-          }}
-        >
-          {isFull ? "Sold out" : `${available} spots left`}
-        </div>
+      {slot.endTime && (
+        <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.75rem", opacity: 0.75 }}>to {slot.endTime}</div>
+      )}
+      <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.75rem", marginTop: "0.3rem",
+        color: selected ? "oklch(87% 0.032 72)" : isFull ? "oklch(50% 0.18 25)" : isLow ? "oklch(52% 0.14 55)" : "oklch(46% 0.06 56)",
+        fontWeight: isFull ? 700 : isLow ? 600 : 400,
+      }}>
+        {isFull ? "SOLD OUT" : isLow ? `Only ${available} left!` : `${available} open`}
       </div>
+      {slotPrice > 0 && (
+        <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.75rem", marginTop: "0.15rem",
+          color: selected ? "oklch(87% 0.032 72)" : "oklch(55% 0.11 72)" }}>
+          ${slotPrice.toFixed(2)}/ticket
+        </div>
+      )}
     </button>
   );
 }
@@ -97,6 +65,7 @@ export default function EventDetailPage() {
     { eventId: event?.id || 0 },
     { enabled: !!event?.id }
   );
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const createOrder = trpc.tickets.createOrder.useMutation();
 
   const selectedTimeslot = timeslots?.find((s) => s.id === selectedSlot);
@@ -106,6 +75,19 @@ export default function EventDetailPage() {
     ? parseFloat(event.basePrice)
     : 0;
   const total = unitPrice * quantity;
+
+  // Group slots by date
+  const slotsByDate = useMemo(() => {
+    if (!timeslots) return {};
+    return timeslots.reduce<Record<string, any[]>>((acc, s) => {
+      const key = new Date(s.slotDate).toISOString().slice(0, 10);
+      if (!acc[key]) acc[key] = [];
+      acc[key].push(s);
+      return acc;
+    }, {});
+  }, [timeslots]);
+  const sortedDates = useMemo(() => Object.keys(slotsByDate).sort(), [slotsByDate]);
+  const slotsForSelectedDate = selectedDate ? (slotsByDate[selectedDate] ?? []) : [];
 
   const handlePurchase = async () => {
     if (!event) return;
@@ -275,14 +257,51 @@ export default function EventDetailPage() {
                     <h2 style={{ fontSize: "1.25rem", margin: 0 }}>Select a Tour Time</h2>
                   </div>
                   <div style={{ width: "40px", height: "2px", background: "oklch(55% 0.11 72)", marginBottom: "1.25rem" }} />
-                  {timeslots.map((slot) => (
-                    <TimeslotCard
-                      key={slot.id}
-                      slot={slot}
-                      selected={selectedSlot === slot.id}
-                      onSelect={() => setSelectedSlot(slot.id)}
-                    />
-                  ))}
+
+                  {/* Step 1: Pick a date */}
+                  <div style={{ marginBottom: "1.25rem" }}>
+                    <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "oklch(46% 0.06 56)", marginBottom: "0.6rem" }}>Step 1 — Choose a Date</p>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                      {sortedDates.map(dateKey => {
+                        const daySlots = slotsByDate[dateKey];
+                        const allFull = daySlots.every((s: any) => s.ticketsSold >= s.capacity);
+                        const totalAvail = daySlots.reduce((a: number, s: any) => a + Math.max(0, s.capacity - s.ticketsSold), 0);
+                        const isSelected = selectedDate === dateKey;
+                        const dt = new Date(dateKey + "T12:00:00");
+                        return (
+                          <button key={dateKey} onClick={() => { setSelectedDate(dateKey); setSelectedSlot(null); }} disabled={allFull}
+                            style={{
+                              padding: "0.55rem 0.85rem", textAlign: "center", minWidth: "90px",
+                              border: `2px solid ${isSelected ? "oklch(38% 0.12 22)" : allFull ? "oklch(82% 0.04 65)" : "oklch(72% 0.05 62)"}`,
+                              background: isSelected ? "oklch(38% 0.12 22)" : allFull ? "oklch(90% 0.02 72)" : "oklch(96% 0.018 80)",
+                              color: isSelected ? "oklch(96% 0.018 80)" : allFull ? "oklch(60% 0.04 60)" : "oklch(22% 0.04 50)",
+                              cursor: allFull ? "not-allowed" : "pointer", transition: "all 0.15s",
+                            }}
+                          >
+                            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.8rem", fontWeight: 600 }}>{format(dt, "EEE")}</div>
+                            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", fontWeight: 700, lineHeight: 1 }}>{format(dt, "d")}</div>
+                            <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.72rem" }}>{format(dt, "MMM yyyy")}</div>
+                            <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.68rem", marginTop: "0.2rem",
+                              color: isSelected ? "oklch(87% 0.032 72)" : allFull ? "oklch(50% 0.18 25)" : "oklch(46% 0.06 56)",
+                              fontWeight: allFull ? 700 : 400,
+                            }}>{allFull ? "Sold Out" : `${totalAvail} open`}</div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Step 2: Pick a time on the selected date */}
+                  {selectedDate && (
+                    <div>
+                      <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "oklch(46% 0.06 56)", marginBottom: "0.6rem" }}>Step 2 — Choose a Time on {format(new Date(selectedDate + "T12:00:00"), "MMMM d, yyyy")}</p>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                        {slotsForSelectedDate.map((slot: any) => (
+                          <SlotTimeButton key={slot.id} slot={slot} selected={selectedSlot === slot.id} onSelect={() => setSelectedSlot(slot.id)} unitPrice={unitPrice} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
