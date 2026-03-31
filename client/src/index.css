@@ -459,11 +459,60 @@
 }
 
 .quick-tile:hover .quick-tile-overlay {
-  opacity: 0.65 !important;
+  opacity: 0.55 !important;
 }
 
 .quick-tile:hover .quick-tile-accent {
   transform: scaleX(1) !important;
+}
+
+/* Label scale-up on hover */
+.quick-tile .tile-label {
+  transition: transform 0.3s ease, font-size 0.3s ease;
+  display: inline-block;
+  transform-origin: left bottom;
+}
+.quick-tile:hover .tile-label {
+  transform: scale(1.08);
+}
+
+/* Sublabel slide-in from below on hover */
+.quick-tile .tile-sublabel {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease 0.05s, transform 0.35s ease 0.05s;
+  display: block;
+}
+.quick-tile:hover .tile-sublabel {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Icon pulse on hover */
+.quick-tile .tile-icon {
+  transition: transform 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+.quick-tile:hover .tile-icon {
+  transform: scale(1.2) translateY(-2px);
+}
+
+/* Gold accent border left edge on hover */
+.quick-tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, oklch(74.2% 0.118 90.2), transparent);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.4s ease;
+  z-index: 10;
+}
+.quick-tile:hover::before {
+  transform: scaleY(1);
 }
 
 /* Stack vertically on mobile */

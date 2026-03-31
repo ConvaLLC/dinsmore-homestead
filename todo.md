@@ -121,3 +121,8 @@
 
 ## Bug Fixes
 - [x] Fix text legibility on split hero grid tiles - add strong gradient behind text labels
+
+## Homepage Enhancements
+- [x] Add hover animation to split hero grid tiles (label scale + sublabel slide-in)
+- [x] Increase grid tile label font size to 0.9rem
+- [x] Add "What's On" upcoming events strip below split hero
