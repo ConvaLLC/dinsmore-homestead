@@ -118,3 +118,6 @@
 
 ## Homepage Split Hero
 - [x] Replace full-screen hero slider with split layout: image slider left, action grid right
+
+## Bug Fixes
+- [x] Fix text legibility on split hero grid tiles - add strong gradient behind text labels

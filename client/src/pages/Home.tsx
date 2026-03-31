@@ -307,6 +307,18 @@ export default function Home() {
                   pointerEvents: "none",
                 }}
               />
+              {/* Strong gradient scrim behind text for legibility */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: "65%",
+                  background: `linear-gradient(to top, ${C.midnight}f0 0%, ${C.midnight}b0 40%, ${C.midnight}55 70%, transparent 100%)`,
+                  pointerEvents: "none",
+                }}
+              />
               {/* Content */}
               <div
                 style={{
@@ -317,19 +329,28 @@ export default function Home() {
                   alignItems: "flex-start",
                   justifyContent: "flex-end",
                   padding: "1rem 1.1rem",
+                  zIndex: 2,
                 }}
               >
-                <span style={{ color: tile.accent, marginBottom: "0.35rem" }}>{tile.icon}</span>
+                <span
+                  style={{
+                    color: tile.accent,
+                    marginBottom: "0.3rem",
+                    filter: "drop-shadow(0 1px 3px oklch(0% 0 0 / 0.8))",
+                  }}
+                >
+                  {tile.icon}
+                </span>
                 <span
                   style={{
                     fontFamily: "'Cinzel', serif",
-                    fontSize: "0.7rem",
+                    fontSize: "0.72rem",
                     fontWeight: 700,
                     letterSpacing: "0.1em",
-                    color: C.parchment,
+                    color: "oklch(98% 0.01 90)",
                     lineHeight: 1.2,
                     textTransform: "uppercase",
-                    textShadow: "0 1px 6px oklch(0% 0 0 / 0.6)",
+                    textShadow: "0 1px 8px oklch(0% 0 0 / 0.9), 0 2px 16px oklch(0% 0 0 / 0.7)",
                   }}
                 >
                   {tile.label}
@@ -337,11 +358,11 @@ export default function Home() {
                 <span
                   style={{
                     fontFamily: "'EB Garamond', serif",
-                    fontSize: "0.78rem",
-                    color: C.cream,
-                    opacity: 0.85,
-                    marginTop: "0.15rem",
-                    textShadow: "0 1px 4px oklch(0% 0 0 / 0.5)",
+                    fontSize: "0.8rem",
+                    color: "oklch(90% 0.02 88)",
+                    marginTop: "0.2rem",
+                    textShadow: "0 1px 6px oklch(0% 0 0 / 0.9), 0 2px 12px oklch(0% 0 0 / 0.7)",
+                    lineHeight: 1.3,
                   }}
                 >
                   {tile.sublabel}
