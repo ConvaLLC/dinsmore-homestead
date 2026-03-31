@@ -31,9 +31,9 @@ export default function TicketConfirmPage() {
   if (status === "loading") {
     return (
       <div className="py-24 text-center">
-        <Loader2 size={48} style={{ color: "oklch(33.1% 0.064 144.7)", margin: "0 auto 1rem", animation: "spin 1s linear infinite" }} />
+        <Loader2 size={48} style={{ color: "oklch(34.6% 0.074 256.1)", margin: "0 auto 1rem", animation: "spin 1s linear infinite" }} />
         <h2>Confirming Your Order...</h2>
-        <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(44% 0.055 144)" }}>
+        <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(47.2% 0.088 247.4)" }}>
           Please wait while we confirm your payment with PayPal.
         </p>
       </div>
@@ -45,7 +45,7 @@ export default function TicketConfirmPage() {
       <div className="py-24 text-center container">
         <XCircle size={56} style={{ color: "oklch(50% 0.18 25)", margin: "0 auto 1rem" }} />
         <h2>Payment Could Not Be Confirmed</h2>
-        <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(44% 0.055 144)", maxWidth: "500px", margin: "0 auto 1.5rem" }}>
+        <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(47.2% 0.088 247.4)", maxWidth: "500px", margin: "0 auto 1.5rem" }}>
           We were unable to confirm your payment. If you were charged, please contact us at info@dinsmorefarm.org.
         </p>
         <Link href="/events" className="btn-vintage inline-block">Back to Events</Link>
@@ -54,20 +54,20 @@ export default function TicketConfirmPage() {
   }
 
   return (
-    <div className="py-16" style={{ background: "oklch(96% 0.014 110)" }}>
+    <div className="py-16" style={{ background: "oklch(97.8% 0.008 89.6)" }}>
       <div className="container" style={{ maxWidth: "600px" }}>
         <div className="card-vintage p-8 text-center">
-          <CheckCircle size={56} style={{ color: "oklch(42.3% 0.087 144.3)", margin: "0 auto 1rem" }} />
+          <CheckCircle size={56} style={{ color: "oklch(47.2% 0.088 247.4)", margin: "0 auto 1rem" }} />
           <h1 style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>Booking Confirmed!</h1>
-          <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(44% 0.055 144)", marginBottom: "1.5rem" }}>
+          <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(47.2% 0.088 247.4)", marginBottom: "1.5rem" }}>
             Thank you for your purchase. A confirmation will be sent to your email.
           </p>
 
           {order && (
             <div
               style={{
-                background: "oklch(93.6% 0.037 136.6)",
-                border: "1px solid oklch(86.6% 0.079 130.9)",
+                background: "oklch(94.7% 0.029 89.6)",
+                border: "1px solid oklch(87.6% 0.068 89.7)",
                 padding: "1.25rem",
                 textAlign: "left",
                 marginBottom: "1.5rem",
@@ -81,10 +81,10 @@ export default function TicketConfirmPage() {
                   { icon: <Ticket size={14} />, label: "Total Paid", value: `$${order.totalAmount}` },
                 ].map((item) => (
                   <div key={item.label}>
-                    <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "oklch(64.3% 0.161 143.4)", marginBottom: "0.2rem" }}>
+                    <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "oklch(74.2% 0.118 90.2)", marginBottom: "0.2rem" }}>
                       {item.label}
                     </div>
-                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: "oklch(20% 0.03 145)" }}>
+                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: "oklch(21.8% 0.036 251.3)" }}>
                       {item.value}
                     </div>
                   </div>

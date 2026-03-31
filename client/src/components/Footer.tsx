@@ -1,151 +1,156 @@
 import { Link } from "wouter";
 import { IMAGES } from "../../../shared/images";
-import { Facebook, Instagram, Mail, MapPin, Phone, Clock } from "lucide-react";
+import { Facebook, Youtube, Mail, MapPin, Phone, Clock, Heart } from "lucide-react";
+
+const C = {
+  midnight: "oklch(21.8% 0.036 251.3)",
+  deepNavy: "oklch(30.2% 0.056 255.4)",
+  richNavy: "oklch(34.6% 0.074 256.1)",
+  cobalt: "oklch(47.2% 0.088 247.4)",
+  gold: "oklch(74.2% 0.118 90.2)",
+  goldBright: "oklch(76.7% 0.139 91.1)",
+  cream: "oklch(87.6% 0.068 89.7)",
+  parchment: "oklch(94.7% 0.029 89.6)",
+};
 
 export default function Footer() {
   return (
-    <footer
-      style={{
-        background: "oklch(20% 0.03 145)",
-        color: "oklch(86.6% 0.079 130.9)",
-        borderTop: "3px solid oklch(64.3% 0.161 143.4)",
-      }}
-    >
-      {/* Ornamental top border */}
-      <div
-        style={{
-          height: "4px",
-          background: "linear-gradient(to right, oklch(20% 0.03 145), oklch(64.3% 0.161 143.4), oklch(64.3% 0.161 143.4), oklch(64.3% 0.161 143.4), oklch(20% 0.03 145))",
-        }}
-      />
+    <footer style={{ background: C.midnight, borderTop: `3px solid ${C.gold}` }}>
+      <div className="container py-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
-      <div className="container py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Brand */}
+          {/* Column 1 — Logo & About */}
           <div className="lg:col-span-1">
-            <img
-              src={IMAGES.logo}
-              alt="Dinsmore Homestead Museum"
-              className="h-16 w-auto mb-4"
-            />
-            <p
+            <Link href="/" className="inline-block mb-4">
+              <img
+                src={IMAGES.logo}
+                alt="Dinsmore Homestead Museum"
+                className="h-16 w-auto object-contain"
+                style={{ filter: "brightness(1.1)" }}
+              />
+            </Link>
+            <div
               style={{
-                fontFamily: "'EB Garamond', serif",
-                fontSize: "0.9rem",
-                color: "oklch(78% 0.055 135)",
-                lineHeight: 1.6,
+                fontFamily: "'Cinzel', serif",
+                color: C.gold,
+                fontSize: "0.6rem",
+                letterSpacing: "0.3em",
+                marginBottom: "0.75rem",
               }}
+              className="uppercase"
             >
-              Preserving the legacy of the Dinsmore family and the history of 19th-century Kentucky life since 1988.
+              ✦ Est. 1842 · Burlington, Kentucky ✦
+            </div>
+            <p style={{ color: C.cream, fontSize: "0.875rem", lineHeight: 1.7, fontFamily: "'EB Garamond', serif" }}>
+              A living window into 19th-century Kentucky life — preserving the stories of
+              the Dinsmore family, their farm, and all who lived and worked here.
             </p>
-            <div className="flex gap-3 mt-4">
+            <div className="flex items-center gap-3 mt-5">
               <a
                 href="https://www.facebook.com/DinsmoreHomestead"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "oklch(78% 0.055 135)" }}
-                className="hover:text-[oklch(68%_0.12_75)] transition-colors"
+                style={{
+                  color: C.parchment,
+                  border: `1px solid ${C.richNavy}`,
+                  padding: "0.4rem",
+                  transition: "all 0.2s ease",
+                  display: "inline-flex",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = C.gold;
+                  (e.currentTarget as HTMLElement).style.color = C.gold;
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = C.richNavy;
+                  (e.currentTarget as HTMLElement).style.color = C.parchment;
+                }}
                 aria-label="Facebook"
               >
-                <Facebook size={18} />
+                <Facebook size={16} />
               </a>
               <a
-                href="https://www.instagram.com/dinsmorehomestead"
+                href="https://www.youtube.com/@DinsmoreHomestead"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "oklch(78% 0.055 135)" }}
-                className="hover:text-[oklch(68%_0.12_75)] transition-colors"
-                aria-label="Instagram"
+                style={{
+                  color: C.parchment,
+                  border: `1px solid ${C.richNavy}`,
+                  padding: "0.4rem",
+                  transition: "all 0.2s ease",
+                  display: "inline-flex",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = C.gold;
+                  (e.currentTarget as HTMLElement).style.color = C.gold;
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = C.richNavy;
+                  (e.currentTarget as HTMLElement).style.color = C.parchment;
+                }}
+                aria-label="YouTube"
               >
-                <Instagram size={18} />
+                <Youtube size={16} />
               </a>
               <a
                 href="mailto:info@dinsmorefarm.org"
-                style={{ color: "oklch(78% 0.055 135)" }}
-                className="hover:text-[oklch(68%_0.12_75)] transition-colors"
+                style={{
+                  color: C.parchment,
+                  border: `1px solid ${C.richNavy}`,
+                  padding: "0.4rem",
+                  transition: "all 0.2s ease",
+                  display: "inline-flex",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = C.gold;
+                  (e.currentTarget as HTMLElement).style.color = C.gold;
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = C.richNavy;
+                  (e.currentTarget as HTMLElement).style.color = C.parchment;
+                }}
                 aria-label="Email"
               >
-                <Mail size={18} />
+                <Mail size={16} />
               </a>
             </div>
           </div>
 
-          {/* Visit */}
+          {/* Column 2 — Visit */}
           <div>
             <h4
               style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: "0.75rem",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "oklch(64.3% 0.161 143.4)",
-                marginBottom: "1rem",
+                fontFamily: "'Cinzel', serif",
+                color: C.gold,
+                fontSize: "0.68rem",
+                letterSpacing: "0.25em",
+                marginBottom: "1.25rem",
+                borderBottom: `1px solid ${C.richNavy}`,
+                paddingBottom: "0.75rem",
               }}
+              className="uppercase"
             >
-              Visit Us
+              Visit
             </h4>
-            <div className="space-y-2">
-              <div className="flex items-start gap-2">
-                <MapPin size={14} style={{ color: "oklch(64.3% 0.161 143.4)", marginTop: "0.2rem", flexShrink: 0 }} />
-                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(78% 0.055 135)", margin: 0 }}>
-                  5656 Burlington Pike<br />
-                  Burlington, KY 41005
-                </p>
-              </div>
-              <div className="flex items-start gap-2">
-                <Clock size={14} style={{ color: "oklch(64.3% 0.161 143.4)", marginTop: "0.2rem", flexShrink: 0 }} />
-                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(78% 0.055 135)" }}>
-                  <p style={{ margin: 0 }}>Wed–Sat: 11am–4pm</p>
-                  <p style={{ margin: 0 }}>Sunday: 1pm–4pm</p>
-                  <p style={{ margin: 0 }}>April–December</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone size={14} style={{ color: "oklch(64.3% 0.161 143.4)", flexShrink: 0 }} />
-                <a
-                  href="tel:+18593862631"
-                  style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(78% 0.055 135)" }}
-                >
-                  (859) 386-2631
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Explore */}
-          <div>
-            <h4
-              style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: "0.75rem",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "oklch(64.3% 0.161 143.4)",
-                marginBottom: "1rem",
-              }}
-            >
-              Explore
-            </h4>
-            <ul className="space-y-1.5">
+            <ul className="space-y-2.5">
               {[
                 { label: "Plan Your Visit", href: "/visit" },
-                { label: "Upcoming Events", href: "/events" },
-                { label: "The Dinsmore Family", href: "/history/family" },
-                { label: "The Farm & Grounds", href: "/the-farm" },
+                { label: "Events & Tickets", href: "/events" },
                 { label: "Weddings & Private Events", href: "/weddings" },
-                { label: "Volunteer", href: "/preservation/volunteers" },
+                { label: "Group Tours", href: "/visit#groups" },
+                { label: "Accessibility", href: "/visit#accessibility" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     style={{
+                      color: C.cream,
+                      fontSize: "0.875rem",
                       fontFamily: "'EB Garamond', serif",
-                      fontSize: "0.9rem",
-                      color: "oklch(78% 0.055 135)",
-                      transition: "color 0.2s",
+                      transition: "color 0.2s ease",
                     }}
-                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "oklch(64.3% 0.161 143.4)")}
-                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "oklch(78% 0.055 135)")}
+                    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = C.gold)}
+                    onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = C.cream)}
                   >
                     {link.label}
                   </Link>
@@ -154,74 +159,169 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Support */}
+          {/* Column 3 — Explore */}
           <div>
             <h4
               style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: "0.75rem",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "oklch(64.3% 0.161 143.4)",
-                marginBottom: "1rem",
+                fontFamily: "'Cinzel', serif",
+                color: C.gold,
+                fontSize: "0.68rem",
+                letterSpacing: "0.25em",
+                marginBottom: "1.25rem",
+                borderBottom: `1px solid ${C.richNavy}`,
+                paddingBottom: "0.75rem",
               }}
+              className="uppercase"
+            >
+              Explore
+            </h4>
+            <ul className="space-y-2.5">
+              {[
+                { label: "The Dinsmore Family", href: "/history/family" },
+                { label: "The Farm & Grounds", href: "/the-farm" },
+                { label: "The Enslaved Community", href: "/history/enslaved" },
+                { label: "Historical Timeline", href: "/history/timeline" },
+                { label: "Preservation", href: "/preservation" },
+                { label: "Education Portal", href: "/education" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    style={{
+                      color: C.cream,
+                      fontSize: "0.875rem",
+                      fontFamily: "'EB Garamond', serif",
+                      transition: "color 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = C.gold)}
+                    onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = C.cream)}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4 — Contact & Hours */}
+          <div>
+            <h4
+              style={{
+                fontFamily: "'Cinzel', serif",
+                color: C.gold,
+                fontSize: "0.68rem",
+                letterSpacing: "0.25em",
+                marginBottom: "1.25rem",
+                borderBottom: `1px solid ${C.richNavy}`,
+                paddingBottom: "0.75rem",
+              }}
+              className="uppercase"
+            >
+              Contact
+            </h4>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-2.5">
+                <MapPin size={14} style={{ color: C.gold, marginTop: "3px", flexShrink: 0 }} />
+                <span style={{ color: C.cream, fontSize: "0.875rem", lineHeight: 1.5, fontFamily: "'EB Garamond', serif" }}>
+                  5656 Burlington Pike<br />Burlington, KY 41005
+                </span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <Phone size={14} style={{ color: C.gold, flexShrink: 0 }} />
+                <a
+                  href="tel:+18593862631"
+                  style={{ color: C.cream, fontSize: "0.875rem", fontFamily: "'EB Garamond', serif", transition: "color 0.2s ease" }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = C.gold)}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = C.cream)}
+                >
+                  (859) 386-2631
+                </a>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <Mail size={14} style={{ color: C.gold, flexShrink: 0 }} />
+                <a
+                  href="mailto:info@dinsmorefarm.org"
+                  style={{ color: C.cream, fontSize: "0.875rem", fontFamily: "'EB Garamond', serif", transition: "color 0.2s ease" }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = C.gold)}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = C.cream)}
+                >
+                  info@dinsmorefarm.org
+                </a>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Clock size={14} style={{ color: C.gold, marginTop: "3px", flexShrink: 0 }} />
+                <div style={{ color: C.cream, fontSize: "0.875rem", lineHeight: 1.6, fontFamily: "'EB Garamond', serif" }}>
+                  <div>Wed–Sat: 11 AM – 4 PM</div>
+                  <div>Sunday: 1 PM – 4 PM</div>
+                  <div style={{ color: C.gold, fontSize: "0.78rem", marginTop: "0.25rem", fontFamily: "'Cinzel', serif", letterSpacing: "0.05em" }}>
+                    April – December
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Donate CTA strip */}
+        <div
+          style={{
+            marginTop: "3rem",
+            padding: "1.5rem 2rem",
+            background: C.deepNavy,
+            border: `1px solid ${C.richNavy}`,
+            borderLeft: `4px solid ${C.gold}`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "1rem",
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontFamily: "'Cinzel', serif",
+                color: C.gold,
+                fontSize: "0.68rem",
+                letterSpacing: "0.2em",
+                marginBottom: "0.25rem",
+              }}
+              className="uppercase"
             >
               Support Our Mission
-            </h4>
-            <p
-              style={{
-                fontFamily: "'EB Garamond', serif",
-                fontSize: "0.9rem",
-                color: "oklch(78% 0.055 135)",
-                marginBottom: "1rem",
-                fontStyle: "italic",
-              }}
-            >
+            </div>
+            <p style={{ color: C.cream, fontSize: "0.9rem", fontFamily: "'EB Garamond', serif", fontStyle: "italic" }}>
               "Preserving the Past, Educating the Future"
             </p>
-            <Link
-              href="/donate"
-              className="btn-vintage-filled text-xs block text-center mb-3"
-            >
-              Make a Donation
-            </Link>
-            <Link
-              href="/donate#membership"
-              style={{
-                display: "block",
-                textAlign: "center",
-                fontFamily: "'Playfair Display', serif",
-                fontSize: "0.75rem",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "oklch(64.3% 0.161 143.4)",
-                border: "1px solid oklch(64.3% 0.161 143.4)",
-                padding: "0.5rem 1rem",
-                transition: "all 0.2s",
-              }}
-            >
-              Become a Member
-            </Link>
-            <div className="mt-4">
-              <Link
-                href="/education/register"
-                style={{
-                  fontFamily: "'EB Garamond', serif",
-                  fontSize: "0.85rem",
-                  color: "oklch(64.3% 0.161 143.4)",
-                  transition: "color 0.2s",
-                }}
-              >
-                Educator Portal Access →
-              </Link>
-            </div>
           </div>
+          <Link
+            href="/donate"
+            style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.7rem",
+              letterSpacing: "0.15em",
+              background: `linear-gradient(135deg, ${C.goldBright}, ${C.gold})`,
+              color: C.midnight,
+              padding: "0.625rem 1.5rem",
+              fontWeight: 700,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              transition: "all 0.25s ease",
+              boxShadow: `0 2px 12px ${C.gold}44`,
+              flexShrink: 0,
+            }}
+            className="uppercase hover:opacity-90"
+          >
+            <Heart size={13} />
+            Donate Now
+          </Link>
         </div>
 
         {/* Bottom bar */}
         <div
           style={{
-            borderTop: "1px solid oklch(42.3% 0.087 144.3)",
+            borderTop: `1px solid ${C.richNavy}`,
             marginTop: "2.5rem",
             paddingTop: "1.5rem",
             display: "flex",
@@ -233,15 +333,16 @@ export default function Footer() {
         >
           <p
             style={{
-              fontFamily: "'EB Garamond', serif",
-              fontSize: "0.8rem",
-              color: "oklch(44% 0.055 144)",
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.7rem",
+              letterSpacing: "0.06em",
+              color: C.cobalt,
               margin: 0,
             }}
           >
             © {new Date().getFullYear()} Dinsmore Homestead Foundation, Inc. · A 501(c)(3) Non-Profit Organization
           </p>
-          <div className="flex gap-4 flex-wrap justify-center">
+          <div className="flex gap-5 flex-wrap justify-center mt-1">
             {[
               { label: "Privacy Policy", href: "/privacy" },
               { label: "Contact", href: "/connect" },
@@ -251,11 +352,15 @@ export default function Footer() {
                 key={link.href}
                 href={link.href}
                 style={{
-                  fontFamily: "'EB Garamond', serif",
-                  fontSize: "0.75rem",
-                  color: "oklch(44% 0.055 144)",
-                  transition: "color 0.2s",
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: "0.68rem",
+                  letterSpacing: "0.08em",
+                  color: C.cobalt,
+                  transition: "color 0.2s ease",
                 }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = C.gold)}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = C.cobalt)}
+                className="uppercase"
               >
                 {link.label}
               </Link>

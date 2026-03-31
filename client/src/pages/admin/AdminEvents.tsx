@@ -67,7 +67,7 @@ export default function AdminEvents() {
   if (!isAuthenticated || (user as any)?.role !== "admin") {
     return (
       <div className="py-24 text-center container">
-        <Lock size={48} style={{ color: "oklch(64.3% 0.161 143.4)", margin: "0 auto 1rem" }} />
+        <Lock size={48} style={{ color: "oklch(74.2% 0.118 90.2)", margin: "0 auto 1rem" }} />
         <h2>Admin Access Required</h2>
         <a href={getLoginUrl()} className="btn-vintage-filled">Sign In</a>
       </div>
@@ -142,11 +142,11 @@ export default function AdminEvents() {
   const inputStyle = {
     width: "100%",
     padding: "0.5rem 0.75rem",
-    border: "1px solid oklch(78% 0.055 135)",
-    background: "oklch(93.6% 0.037 136.6)",
+    border: "1px solid oklch(87.6% 0.068 89.7)",
+    background: "oklch(94.7% 0.029 89.6)",
     fontFamily: "'EB Garamond', serif",
     fontSize: "0.9rem",
-    color: "oklch(20% 0.03 145)",
+    color: "oklch(21.8% 0.036 251.3)",
     outline: "none",
   };
 
@@ -155,7 +155,7 @@ export default function AdminEvents() {
     fontSize: "0.65rem",
     letterSpacing: "0.1em",
     textTransform: "uppercase" as const,
-    color: "oklch(44% 0.055 144)",
+    color: "oklch(47.2% 0.088 247.4)",
     display: "block" as const,
     marginBottom: "0.25rem",
   };
@@ -163,7 +163,7 @@ export default function AdminEvents() {
   return (
     <div>
       <AdminNav />
-      <div className="py-8" style={{ background: "oklch(96% 0.014 110)", minHeight: "calc(100vh - 120px)" }}>
+      <div className="py-8" style={{ background: "oklch(97.8% 0.008 89.6)", minHeight: "calc(100vh - 120px)" }}>
         <div className="container">
           <div className="flex items-center justify-between mb-6">
             <div>
@@ -185,7 +185,7 @@ export default function AdminEvents() {
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", margin: 0 }}>
                   {editingId ? "Edit Event" : "Create New Event"}
                 </h3>
-                <button onClick={() => { setShowForm(false); setEditingId(null); setForm(emptyForm); }} style={{ background: "none", border: "none", cursor: "pointer", color: "oklch(64.3% 0.161 143.4)" }}>
+                <button onClick={() => { setShowForm(false); setEditingId(null); setForm(emptyForm); }} style={{ background: "none", border: "none", cursor: "pointer", color: "oklch(74.2% 0.118 90.2)" }}>
                   <X size={18} />
                 </button>
               </div>
@@ -238,8 +238,8 @@ export default function AdminEvents() {
                     { key: "featured", label: "Featured on homepage" },
                   ].map((toggle) => (
                     <label key={toggle.key} className="flex items-center gap-2 cursor-pointer">
-                      <input type="checkbox" checked={(form as any)[toggle.key]} onChange={(e) => setForm({ ...form, [toggle.key]: e.target.checked })} style={{ accentColor: "oklch(33.1% 0.064 144.7)" }} />
-                      <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(42.3% 0.087 144.3)" }}>{toggle.label}</span>
+                      <input type="checkbox" checked={(form as any)[toggle.key]} onChange={(e) => setForm({ ...form, [toggle.key]: e.target.checked })} style={{ accentColor: "oklch(34.6% 0.074 256.1)" }} />
+                      <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(47.2% 0.088 247.4)" }}>{toggle.label}</span>
                     </label>
                   ))}
                 </div>
@@ -257,7 +257,7 @@ export default function AdminEvents() {
 
           {/* Events list */}
           {isLoading ? (
-            <div className="text-center py-12" style={{ fontFamily: "'EB Garamond', serif", color: "oklch(64.3% 0.161 143.4)" }}>Loading events...</div>
+            <div className="text-center py-12" style={{ fontFamily: "'EB Garamond', serif", color: "oklch(74.2% 0.118 90.2)" }}>Loading events...</div>
           ) : events && events.length > 0 ? (
             <div className="space-y-3">
               {events.map((event: any) => (
@@ -272,13 +272,13 @@ export default function AdminEvents() {
                           width: "8px",
                           height: "8px",
                           borderRadius: "50%",
-                          background: event.active ? "oklch(42.3% 0.087 144.3)" : "oklch(64.3% 0.161 143.4)",
+                          background: event.active ? "oklch(47.2% 0.088 247.4)" : "oklch(74.2% 0.118 90.2)",
                           flexShrink: 0,
                         }}
                       />
                       <div>
                         <h4 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", margin: 0 }}>{event.title}</h4>
-                        <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: "oklch(64.3% 0.161 143.4)", margin: 0 }}>
+                        <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: "oklch(74.2% 0.118 90.2)", margin: 0 }}>
                           {event.eventType.replace("_", " ")} · {new Date(event.startDate).toLocaleDateString()} · ${event.price}
                         </p>
                       </div>
@@ -294,7 +294,7 @@ export default function AdminEvents() {
                       </Link>
                       <button
                         onClick={(e) => { e.stopPropagation(); handleEdit(event); }}
-                        style={{ background: "none", border: "none", cursor: "pointer", color: "oklch(64.3% 0.161 143.4)", padding: "0.25rem" }}
+                        style={{ background: "none", border: "none", cursor: "pointer", color: "oklch(74.2% 0.118 90.2)", padding: "0.25rem" }}
                       >
                         <Edit2 size={15} />
                       </button>
@@ -304,15 +304,15 @@ export default function AdminEvents() {
                       >
                         <Trash2 size={15} />
                       </button>
-                      {expandedEvent === event.id ? <ChevronUp size={16} style={{ color: "oklch(64.3% 0.161 143.4)" }} /> : <ChevronDown size={16} style={{ color: "oklch(64.3% 0.161 143.4)" }} />}
+                      {expandedEvent === event.id ? <ChevronUp size={16} style={{ color: "oklch(74.2% 0.118 90.2)" }} /> : <ChevronDown size={16} style={{ color: "oklch(74.2% 0.118 90.2)" }} />}
                     </div>
                   </div>
 
                   {/* Timeslots panel */}
                   {expandedEvent === event.id && (
-                    <div style={{ borderTop: "1px solid oklch(86.6% 0.079 130.9)", padding: "1rem 1.25rem", background: "oklch(93.6% 0.037 136.6)" }}>
+                    <div style={{ borderTop: "1px solid oklch(87.6% 0.068 89.7)", padding: "1rem 1.25rem", background: "oklch(94.7% 0.029 89.6)" }}>
                       <div className="flex items-center justify-between mb-3">
-                        <h5 style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.85rem", letterSpacing: "0.08em", textTransform: "uppercase", margin: 0, color: "oklch(44% 0.055 144)" }}>
+                        <h5 style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.85rem", letterSpacing: "0.08em", textTransform: "uppercase", margin: 0, color: "oklch(47.2% 0.088 247.4)" }}>
                           <Clock size={13} style={{ display: "inline", marginRight: "0.4rem" }} />
                           Time Slots
                         </h5>
@@ -325,7 +325,7 @@ export default function AdminEvents() {
                       </div>
 
                       {showTimeslotForm === event.id && (
-                        <form onSubmit={handleAddTimeslot} className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4 p-3" style={{ background: "oklch(96% 0.014 110)", border: "1px solid oklch(86.6% 0.079 130.9)" }}>
+                        <form onSubmit={handleAddTimeslot} className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4 p-3" style={{ background: "oklch(97.8% 0.008 89.6)", border: "1px solid oklch(87.6% 0.068 89.7)" }}>
                           {[
                             { label: "Date *", key: "slotDate", type: "date" },
                             { label: "Start Time *", key: "startTime", type: "time" },
@@ -353,15 +353,15 @@ export default function AdminEvents() {
                       {timeslots && timeslots.length > 0 ? (
                         <div className="space-y-2">
                           {timeslots.map((slot: any) => (
-                            <div key={slot.id} className="flex items-center justify-between p-2" style={{ background: "oklch(96% 0.014 110)", border: "1px solid oklch(86.6% 0.079 130.9)" }}>
+                            <div key={slot.id} className="flex items-center justify-between p-2" style={{ background: "oklch(97.8% 0.008 89.6)", border: "1px solid oklch(87.6% 0.068 89.7)" }}>
                               <div>
-                                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.8rem", color: "oklch(20% 0.03 145)" }}>
+                                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.8rem", color: "oklch(21.8% 0.036 251.3)" }}>
                                   {new Date(slot.startTime).toLocaleString()} – {new Date(slot.endTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                                 </span>
-                                {slot.label && <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.75rem", color: "oklch(64.3% 0.161 143.4)", marginLeft: "0.5rem" }}>({slot.label})</span>}
+                                {slot.label && <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.75rem", color: "oklch(74.2% 0.118 90.2)", marginLeft: "0.5rem" }}>({slot.label})</span>}
                               </div>
                               <div className="flex items-center gap-3">
-                                <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: "oklch(44% 0.055 144)" }}>
+                                <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: "oklch(47.2% 0.088 247.4)" }}>
                                   <Ticket size={12} style={{ display: "inline", marginRight: "0.25rem" }} />
                                   {slot.ticketsSold}/{slot.capacity}
                                 </span>
@@ -376,7 +376,7 @@ export default function AdminEvents() {
                           ))}
                         </div>
                       ) : (
-                        <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: "oklch(64.3% 0.161 143.4)", fontStyle: "italic" }}>
+                        <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: "oklch(74.2% 0.118 90.2)", fontStyle: "italic" }}>
                           No timeslots yet. Add a timeslot to enable ticket purchasing.
                         </p>
                       )}
@@ -387,9 +387,9 @@ export default function AdminEvents() {
             </div>
           ) : (
             <div className="text-center py-16">
-              <CalendarDays size={48} style={{ color: "oklch(78% 0.055 135)", margin: "0 auto 1rem" }} />
-              <h3 style={{ fontFamily: "'Playfair Display', serif", color: "oklch(44% 0.055 144)" }}>No events yet</h3>
-              <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(64.3% 0.161 143.4)", marginBottom: "1.5rem" }}>Create your first event to start selling tickets.</p>
+              <CalendarDays size={48} style={{ color: "oklch(87.6% 0.068 89.7)", margin: "0 auto 1rem" }} />
+              <h3 style={{ fontFamily: "'Playfair Display', serif", color: "oklch(47.2% 0.088 247.4)" }}>No events yet</h3>
+              <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(74.2% 0.118 90.2)", marginBottom: "1.5rem" }}>Create your first event to start selling tickets.</p>
               <button onClick={() => setShowForm(true)} className="btn-vintage-filled">Create First Event</button>
             </div>
           )}

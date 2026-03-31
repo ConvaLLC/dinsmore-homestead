@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -44,66 +44,73 @@
 }
 
 :root {
-  /* ── Dinsmore Heritage Palette ── */
-  /* Sampled directly from dinsmorefarm.org:
-     #1f3e20 dark forest green  -> oklch(33.1% 0.064 144.7)
-     #2d5a2e mid forest green   -> oklch(42.3% 0.087 144.3)
-     #46a546 heritage green     -> oklch(64.3% 0.161 143.4)
-     #67a671 sage green         -> oklch(66.8% 0.102 148.3)
-     #c1dea8 light sage         -> oklch(86.6% 0.079 130.9)
-     #dff0d8 pale sage          -> oklch(93.6% 0.037 136.6)
-  */
-  --radius: 0.25rem;
+  /* ══════════════════════════════════════════════════════
+     DINSMORE HOMESTEAD — Navy & Gold Heritage Palette
+     Inspired by classic 19th-century naval charts, leather-
+     bound volumes, and aged brass instruments.
 
-  /* Warm parchment + pale sage backgrounds */
-  --background: oklch(94% 0.018 100);       /* warm parchment */
-  --foreground: oklch(20% 0.03 145);        /* near-black with green undertone */
-  --card: oklch(96% 0.014 110);             /* slightly warm white */
-  --card-foreground: oklch(20% 0.03 145);
-  --popover: oklch(97% 0.012 110);
-  --popover-foreground: oklch(20% 0.03 145);
+     #0d1b2a  Midnight Navy   → oklch(21.8% 0.036 251.3)
+     #1a2f4a  Deep Navy       → oklch(30.2% 0.056 255.4)
+     #1e3a5f  Rich Navy       → oklch(34.6% 0.074 256.1)
+     #2e5f8a  Cobalt Blue     → oklch(47.2% 0.088 247.4)
+     #4a90c4  Sky Blue        → oklch(63.0% 0.106 243.1)
+     #c8a84b  Aged Gold       → oklch(74.2% 0.118 90.2)
+     #d4af37  Bright Gold     → oklch(76.7% 0.139 91.1)
+     #e8d5a3  Warm Cream      → oklch(87.6% 0.068 89.7)
+     #f5edd8  Parchment       → oklch(94.7% 0.029 89.6)
+     #faf6ec  Near-White      → oklch(97.4% 0.014 88.7)
+  ══════════════════════════════════════════════════════ */
+  --radius: 0.375rem;
 
-  /* Dinsmore dark forest green — primary */
-  --primary: oklch(33.1% 0.064 144.7);      /* #1f3e20 */
-  --primary-foreground: oklch(97% 0.012 110);
+  /* Parchment backgrounds — warm, aged paper feel */
+  --background: oklch(94.7% 0.029 89.6);      /* #f5edd8 parchment */
+  --foreground: oklch(21.8% 0.036 251.3);      /* midnight navy — rich dark text */
+  --card: oklch(97.4% 0.014 88.7);             /* near-white cream */
+  --card-foreground: oklch(21.8% 0.036 251.3);
+  --popover: oklch(97.4% 0.014 88.7);
+  --popover-foreground: oklch(21.8% 0.036 251.3);
 
-  /* Light sage — secondary / aged paper */
-  --secondary: oklch(86.6% 0.079 130.9);    /* #c1dea8 */
-  --secondary-foreground: oklch(28% 0.055 144);
+  /* Deep Navy — primary (buttons, headings, nav) */
+  --primary: oklch(30.2% 0.056 255.4);         /* #1a2f4a deep navy */
+  --primary-foreground: oklch(97.4% 0.014 88.7);
 
-  --muted: oklch(90% 0.045 130);            /* between pale sage and light sage */
-  --muted-foreground: oklch(44% 0.055 144);
+  /* Warm Cream — secondary */
+  --secondary: oklch(87.6% 0.068 89.7);        /* #e8d5a3 warm cream */
+  --secondary-foreground: oklch(30.2% 0.056 255.4);
 
-  /* Heritage green — accent */
-  --accent: oklch(64.3% 0.161 143.4);       /* #46a546 */
-  --accent-foreground: oklch(97% 0.012 110);
+  --muted: oklch(91% 0.022 88);                /* lighter parchment */
+  --muted-foreground: oklch(47.2% 0.088 247.4); /* cobalt blue for muted text */
 
-  --destructive: oklch(50% 0.18 25);
-  --destructive-foreground: oklch(97% 0.012 110);
+  /* Aged Gold — accent (highlights, decorative elements) */
+  --accent: oklch(74.2% 0.118 90.2);           /* #c8a84b aged gold */
+  --accent-foreground: oklch(21.8% 0.036 251.3);
 
-  --border: oklch(78% 0.055 135);           /* sage border */
-  --input: oklch(88% 0.048 132);
-  --ring: oklch(42.3% 0.087 144.3);         /* #2d5a2e */
+  --destructive: oklch(52% 0.20 25);
+  --destructive-foreground: oklch(97.4% 0.014 88.7);
 
-  /* Sidebar (admin) — deep forest green */
-  --sidebar: oklch(26% 0.055 144.7);        /* slightly lighter than #1f3e20 */
-  --sidebar-foreground: oklch(93.6% 0.037 136.6);
-  --sidebar-primary: oklch(64.3% 0.161 143.4);
-  --sidebar-primary-foreground: oklch(97% 0.012 110);
-  --sidebar-accent: oklch(33.1% 0.064 144.7);
-  --sidebar-accent-foreground: oklch(93.6% 0.037 136.6);
-  --sidebar-border: oklch(42.3% 0.087 144.3);
-  --sidebar-ring: oklch(64.3% 0.161 143.4);
+  --border: oklch(80% 0.045 88);               /* warm cream border */
+  --input: oklch(91% 0.022 88);
+  --ring: oklch(47.2% 0.088 247.4);            /* cobalt blue ring */
+
+  /* Sidebar (admin) — midnight navy */
+  --sidebar: oklch(21.8% 0.036 251.3);         /* #0d1b2a midnight navy */
+  --sidebar-foreground: oklch(94.7% 0.029 89.6);
+  --sidebar-primary: oklch(74.2% 0.118 90.2);  /* aged gold */
+  --sidebar-primary-foreground: oklch(21.8% 0.036 251.3);
+  --sidebar-accent: oklch(30.2% 0.056 255.4);  /* deep navy */
+  --sidebar-accent-foreground: oklch(94.7% 0.029 89.6);
+  --sidebar-border: oklch(34.6% 0.074 256.1);  /* rich navy */
+  --sidebar-ring: oklch(74.2% 0.118 90.2);     /* aged gold */
 
   /* Charts */
-  --chart-1: oklch(33.1% 0.064 144.7);     /* dark forest */
-  --chart-2: oklch(64.3% 0.161 143.4);     /* heritage green */
-  --chart-3: oklch(66.8% 0.102 148.3);     /* sage */
-  --chart-4: oklch(86.6% 0.079 130.9);     /* light sage */
-  --chart-5: oklch(55% 0.10 75);           /* warm gold accent */
+  --chart-1: oklch(30.2% 0.056 255.4);         /* deep navy */
+  --chart-2: oklch(74.2% 0.118 90.2);          /* aged gold */
+  --chart-3: oklch(47.2% 0.088 247.4);         /* cobalt blue */
+  --chart-4: oklch(63.0% 0.106 243.1);         /* sky blue */
+  --chart-5: oklch(76.7% 0.139 91.1);          /* bright gold */
 }
 
-/* No dark mode — vintage museum site uses warm light theme */
+/* No dark mode — vintage museum site uses warm parchment light theme */
 
 @layer base {
   * { @apply border-border outline-ring/50; }
@@ -113,19 +120,25 @@
     font-family: 'EB Garamond', 'Libre Baskerville', Georgia, serif;
     font-size: 1.05rem;
     line-height: 1.75;
+    /* Subtle parchment texture overlay */
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', Georgia, serif;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-    color: oklch(22% 0.04 50);
+    font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    color: oklch(21.8% 0.036 251.3);            /* midnight navy */
   }
-  h1 { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 700; }
-  h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 600; }
-  h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 600; }
+  h1 { font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 700; }
+  h2 { font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 600; }
+  h3 { font-size: clamp(1.25rem, 2.5vw, 1.875rem); font-weight: 600; }
   h4 { font-size: 1.25rem; font-weight: 500; }
-  a { color: oklch(33.1% 0.064 144.7); transition: color 0.2s ease; }  /* dark forest green */
-  a:hover { color: oklch(42.3% 0.087 144.3); }
+  a {
+    color: oklch(34.6% 0.074 256.1);            /* rich navy */
+    transition: color 0.2s ease;
+  }
+  a:hover { color: oklch(47.2% 0.088 247.4); }  /* cobalt blue */
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),
@@ -141,117 +154,272 @@
 
 /* ─── Vintage Utility Classes ─────────────────────────────────────────── */
 @layer utilities {
-  .font-display { font-family: 'Playfair Display', Georgia, serif; }
-  .font-body { font-family: 'EB Garamond', Georgia, serif; }
-  .text-shadow-vintage { text-shadow: 0 2px 20px oklch(0% 0 0 / 0.65), 0 1px 4px oklch(0% 0 0 / 0.4); }
+  /* Typography */
+  .font-display  { font-family: 'Cinzel', 'Playfair Display', Georgia, serif; }
+  .font-serif    { font-family: 'Playfair Display', Georgia, serif; }
+  .font-body     { font-family: 'EB Garamond', Georgia, serif; }
+
+  /* Hero text shadow for legibility over images */
+  .text-shadow-vintage {
+    text-shadow: 0 2px 24px oklch(0% 0 0 / 0.75), 0 1px 6px oklch(0% 0 0 / 0.5);
+  }
+
+  /* Gold shimmer on text */
+  .text-gold {
+    color: oklch(74.2% 0.118 90.2);
+  }
+  .text-gold-bright {
+    color: oklch(76.7% 0.139 91.1);
+  }
+  .text-navy {
+    color: oklch(21.8% 0.036 251.3);
+  }
+  .text-cobalt {
+    color: oklch(47.2% 0.088 247.4);
+  }
+
+  /* Section label — Cinzel caps with gold color */
   .section-label {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
+    font-family: 'Cinzel', 'Playfair Display', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: oklch(64.3% 0.161 143.4);   /* heritage green */
+    color: oklch(74.2% 0.118 90.2);             /* aged gold */
     display: block;
     margin-bottom: 0.5rem;
   }
-  .card-vintage {
-    background: oklch(96% 0.014 110);
-    border: 1px solid oklch(78% 0.055 135);
-    box-shadow: 0 2px 8px oklch(0% 0 0 / 0.07);
-    border-radius: 2px;
-  }
-  .btn-vintage {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.625rem 1.75rem;
-    border: 2px solid oklch(33.1% 0.064 144.7);  /* dark forest green */
-    color: oklch(33.1% 0.064 144.7);
-    background: transparent;
-    transition: all 0.2s ease;
-    display: inline-block;
-  }
-  .btn-vintage:hover {
-    background: oklch(33.1% 0.064 144.7);
-    color: oklch(97% 0.012 110);
-  }
-  .btn-vintage-filled {
-    background: oklch(33.1% 0.064 144.7);         /* dark forest green */
-    color: oklch(97% 0.012 110);
-    border: 2px solid oklch(33.1% 0.064 144.7);
-    font-family: 'Playfair Display', serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.625rem 1.75rem;
-    transition: all 0.2s ease;
-    display: inline-block;
-  }
-  .btn-vintage-filled:hover {
-    background: oklch(42.3% 0.087 144.3);          /* mid forest green */
-    border-color: oklch(42.3% 0.087 144.3);
-  }
+
+  /* Ornamental divider line */
   .section-divider {
     border: none;
     height: 1px;
-    background: linear-gradient(to right, transparent, oklch(78% 0.055 135), oklch(64.3% 0.161 143.4), oklch(78% 0.055 135), transparent);
+    background: linear-gradient(
+      to right,
+      transparent,
+      oklch(80% 0.045 88),
+      oklch(74.2% 0.118 90.2),                  /* gold center */
+      oklch(80% 0.045 88),
+      transparent
+    );
     margin: 2rem 0;
+    position: relative;
   }
+  .section-divider::before {
+    content: '✦';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: oklch(74.2% 0.118 90.2);
+    background: oklch(94.7% 0.029 89.6);
+    padding: 0 0.5rem;
+    font-size: 0.65rem;
+  }
+
+  /* Cards */
+  .card-vintage {
+    background: oklch(97.4% 0.014 88.7);
+    border: 1px solid oklch(80% 0.045 88);
+    box-shadow:
+      0 2px 8px oklch(21.8% 0.036 251.3 / 0.08),
+      0 0 0 1px oklch(80% 0.045 88 / 0.5);
+    border-radius: 4px;
+  }
+  .card-navy {
+    background: oklch(30.2% 0.056 255.4);
+    border: 1px solid oklch(34.6% 0.074 256.1);
+    color: oklch(94.7% 0.029 89.6);
+    box-shadow: 0 4px 16px oklch(21.8% 0.036 251.3 / 0.3);
+    border-radius: 4px;
+  }
+
+  /* Buttons */
+  .btn-vintage {
+    font-family: 'Cinzel', 'Playfair Display', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.625rem 1.75rem;
+    border: 2px solid oklch(74.2% 0.118 90.2);  /* gold border */
+    color: oklch(30.2% 0.056 255.4);             /* navy text */
+    background: transparent;
+    transition: all 0.25s ease;
+    display: inline-block;
+    position: relative;
+  }
+  .btn-vintage:hover {
+    background: oklch(74.2% 0.118 90.2);         /* gold fill */
+    color: oklch(21.8% 0.036 251.3);             /* navy text */
+    box-shadow: 0 4px 16px oklch(74.2% 0.118 90.2 / 0.35);
+  }
+  .btn-vintage-filled {
+    font-family: 'Cinzel', 'Playfair Display', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.625rem 1.75rem;
+    background: oklch(30.2% 0.056 255.4);        /* deep navy */
+    color: oklch(94.7% 0.029 89.6);
+    border: 2px solid oklch(74.2% 0.118 90.2);   /* gold border */
+    transition: all 0.25s ease;
+    display: inline-block;
+    box-shadow: 0 2px 8px oklch(21.8% 0.036 251.3 / 0.25);
+  }
+  .btn-vintage-filled:hover {
+    background: oklch(21.8% 0.036 251.3);        /* midnight navy */
+    border-color: oklch(76.7% 0.139 91.1);       /* bright gold */
+    box-shadow: 0 6px 20px oklch(21.8% 0.036 251.3 / 0.4);
+    transform: translateY(-1px);
+  }
+  .btn-gold {
+    font-family: 'Cinzel', 'Playfair Display', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, oklch(76.7% 0.139 91.1), oklch(74.2% 0.118 90.2));
+    color: oklch(21.8% 0.036 251.3);
+    border: none;
+    transition: all 0.25s ease;
+    display: inline-block;
+    box-shadow: 0 2px 12px oklch(74.2% 0.118 90.2 / 0.4);
+    border-radius: 2px;
+  }
+  .btn-gold:hover {
+    background: linear-gradient(135deg, oklch(80% 0.15 91), oklch(76.7% 0.139 91.1));
+    box-shadow: 0 6px 24px oklch(74.2% 0.118 90.2 / 0.55);
+    transform: translateY(-2px);
+  }
+
+  /* Pull quote */
   .pull-quote {
-    border-left: 4px solid oklch(64.3% 0.161 143.4);  /* heritage green */
+    border-left: 4px solid oklch(74.2% 0.118 90.2);  /* gold */
     padding: 1rem 1.5rem;
     font-style: italic;
     font-size: 1.15rem;
-    color: oklch(33.1% 0.064 144.7);
-    background: oklch(93.6% 0.037 136.6);              /* pale sage */
+    color: oklch(30.2% 0.056 255.4);                  /* deep navy */
+    background: oklch(91% 0.022 88);
     margin: 1.5rem 0;
+    position: relative;
   }
-  .img-vintage {
-    border: 3px solid oklch(78% 0.055 135);
-    box-shadow: 0 0 0 1px oklch(66.8% 0.102 148.3), 4px 4px 0 oklch(66.8% 0.102 148.3);
-    filter: sepia(8%) contrast(1.05);
-  }
-  .badge-vintage {
+  .pull-quote::before {
+    content: '\201C';
     font-family: 'Playfair Display', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
+    font-size: 4rem;
+    color: oklch(74.2% 0.118 90.2 / 0.25);
+    position: absolute;
+    top: -0.5rem;
+    left: 0.75rem;
+    line-height: 1;
+  }
+
+  /* Images */
+  .img-vintage {
+    border: 3px solid oklch(87.6% 0.068 89.7);
+    box-shadow:
+      0 0 0 1px oklch(74.2% 0.118 90.2 / 0.4),
+      4px 4px 0 oklch(74.2% 0.118 90.2 / 0.2),
+      0 8px 24px oklch(21.8% 0.036 251.3 / 0.15);
+    filter: sepia(10%) contrast(1.05) brightness(0.98);
+  }
+
+  /* Badge */
+  .badge-vintage {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     padding: 0.2rem 0.75rem;
     border: 1px solid currentColor;
     display: inline-block;
   }
-  .nav-link-vintage {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
+  .badge-gold {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: oklch(93.6% 0.037 136.6);    /* pale sage — readable on dark forest nav */
+    padding: 0.2rem 0.75rem;
+    border: 1px solid oklch(74.2% 0.118 90.2);
+    color: oklch(74.2% 0.118 90.2);
+    display: inline-block;
+    background: oklch(74.2% 0.118 90.2 / 0.08);
+  }
+  .badge-navy {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.75rem;
+    background: oklch(30.2% 0.056 255.4);
+    color: oklch(94.7% 0.029 89.6);
+    display: inline-block;
+  }
+
+  /* Navigation links */
+  .nav-link-vintage {
+    font-family: 'Cinzel', 'Playfair Display', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: oklch(94.7% 0.029 89.6);             /* parchment on navy bg */
     transition: color 0.2s ease;
   }
-  .nav-link-vintage:hover, .nav-link-vintage.active {
-    color: oklch(86.6% 0.079 130.9);    /* light sage — hover highlight */
+  .nav-link-vintage:hover,
+  .nav-link-vintage.active {
+    color: oklch(74.2% 0.118 90.2);             /* gold on hover */
+  }
+
+  /* Ornamental border for section headers */
+  .ornament-border {
+    position: relative;
+    padding-bottom: 1rem;
+  }
+  .ornament-border::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 4rem;
+    height: 3px;
+    background: linear-gradient(to right, oklch(74.2% 0.118 90.2), oklch(76.7% 0.139 91.1));
+    border-radius: 2px;
+  }
+  .ornament-border-center::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Navy section backgrounds */
+  .bg-navy-section {
+    background: oklch(30.2% 0.056 255.4);
+    color: oklch(94.7% 0.029 89.6);
+  }
+  .bg-midnight-section {
+    background: oklch(21.8% 0.036 251.3);
+    color: oklch(94.7% 0.029 89.6);
+  }
+  .bg-parchment-section {
+    background: oklch(94.7% 0.029 89.6);
+  }
+  .bg-cream-section {
+    background: oklch(91% 0.022 88);
+  }
+
+  /* Gold accent line */
+  .gold-accent-line {
+    width: 3rem;
+    height: 2px;
+    background: linear-gradient(to right, oklch(74.2% 0.118 90.2), oklch(76.7% 0.139 91.1));
+    display: block;
   }
 }
 
 @layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
   .container {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
+    padding-left: 1rem;
     padding-right: 1rem;
   }
 
@@ -262,16 +430,16 @@
 
   @media (min-width: 640px) {
     .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
+      padding-left: 1.5rem;
       padding-right: 1.5rem;
     }
   }
 
   @media (min-width: 1024px) {
     .container {
-      padding-left: 2rem; /* 32px - desktop padding */
+      padding-left: 2rem;
       padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
+      max-width: 1280px;
     }
   }
 }

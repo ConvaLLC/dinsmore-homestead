@@ -17,12 +17,12 @@ function PageHero({ title, subtitle, image }: { title: string; subtitle?: string
       />
       <div style={{ position: "absolute", inset: 0, background: "oklch(22% 0.04 50 / 0.65)" }} />
       <div className="container relative h-full flex flex-col justify-end pb-10">
-        <span className="section-label" style={{ color: "oklch(64.3% 0.161 143.4)" }}>
+        <span className="section-label" style={{ color: "oklch(74.2% 0.118 90.2)" }}>
           Dinsmore Homestead Museum
         </span>
-        <h1 style={{ color: "oklch(96% 0.014 110)", marginBottom: "0.5rem" }}>{title}</h1>
+        <h1 style={{ color: "oklch(97.8% 0.008 89.6)", marginBottom: "0.5rem" }}>{title}</h1>
         {subtitle && (
-          <p style={{ color: "oklch(86.6% 0.079 130.9)", fontFamily: "'EB Garamond', serif", fontSize: "1.1rem" }}>
+          <p style={{ color: "oklch(87.6% 0.068 89.7)", fontFamily: "'EB Garamond', serif", fontSize: "1.1rem" }}>
             {subtitle}
           </p>
         )}
@@ -41,7 +41,7 @@ export default function VisitPage() {
       />
 
       {/* Main content */}
-      <section className="py-12" style={{ background: "oklch(96% 0.014 110)" }}>
+      <section className="py-12" style={{ background: "oklch(97.8% 0.008 89.6)" }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left: main info */}
@@ -49,14 +49,14 @@ export default function VisitPage() {
               {/* Hours */}
               <div className="card-vintage p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <Clock size={20} style={{ color: "oklch(33.1% 0.064 144.7)" }} />
+                  <Clock size={20} style={{ color: "oklch(34.6% 0.074 256.1)" }} />
                   <h2 style={{ fontSize: "1.5rem", margin: 0 }}>Hours of Operation</h2>
                 </div>
                 <div
                   style={{
                     width: "40px",
                     height: "2px",
-                    background: "oklch(64.3% 0.161 143.4)",
+                    background: "oklch(74.2% 0.118 90.2)",
                     marginBottom: "1.25rem",
                   }}
                 />
@@ -65,7 +65,7 @@ export default function VisitPage() {
                     <h4 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", marginBottom: "0.5rem" }}>
                       Regular Season
                     </h4>
-                    <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(42.3% 0.087 144.3)", margin: 0 }}>
+                    <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(47.2% 0.088 247.4)", margin: 0 }}>
                       <strong>Wednesday – Saturday:</strong> 11:00 AM – 4:00 PM<br />
                       <strong>Sunday:</strong> 1:00 PM – 4:00 PM<br />
                       <strong>Season:</strong> April through December
@@ -75,7 +75,7 @@ export default function VisitPage() {
                     <h4 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", marginBottom: "0.5rem" }}>
                       Special Tours
                     </h4>
-                    <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(42.3% 0.087 144.3)", margin: 0 }}>
+                    <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(47.2% 0.088 247.4)", margin: 0 }}>
                       Group tours and private events available by appointment year-round. Contact us to schedule.
                     </p>
                   </div>
@@ -83,11 +83,11 @@ export default function VisitPage() {
                 <div
                   className="mt-4 p-3"
                   style={{
-                    background: "oklch(93.6% 0.037 136.6)",
-                    border: "1px solid oklch(86.6% 0.079 130.9)",
+                    background: "oklch(94.7% 0.029 89.6)",
+                    border: "1px solid oklch(87.6% 0.068 89.7)",
                     fontFamily: "'EB Garamond', serif",
                     fontSize: "0.9rem",
-                    color: "oklch(44% 0.055 144)",
+                    color: "oklch(47.2% 0.088 247.4)",
                     fontStyle: "italic",
                   }}
                 >
@@ -98,10 +98,10 @@ export default function VisitPage() {
               {/* Admission */}
               <div className="card-vintage p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <DollarSign size={20} style={{ color: "oklch(33.1% 0.064 144.7)" }} />
+                  <DollarSign size={20} style={{ color: "oklch(34.6% 0.074 256.1)" }} />
                   <h2 style={{ fontSize: "1.5rem", margin: 0 }}>Admission</h2>
                 </div>
-                <div style={{ width: "40px", height: "2px", background: "oklch(64.3% 0.161 143.4)", marginBottom: "1.25rem" }} />
+                <div style={{ width: "40px", height: "2px", background: "oklch(74.2% 0.118 90.2)", marginBottom: "1.25rem" }} />
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
                   {[
                     { label: "Adults", price: "$8" },
@@ -112,14 +112,14 @@ export default function VisitPage() {
                     <div
                       key={tier.label}
                       className="text-center p-3"
-                      style={{ background: "oklch(93.6% 0.037 136.6)", border: "1px solid oklch(86.6% 0.079 130.9)" }}
+                      style={{ background: "oklch(94.7% 0.029 89.6)", border: "1px solid oklch(87.6% 0.068 89.7)" }}
                     >
                       <div
                         style={{
                           fontFamily: "'Playfair Display', serif",
                           fontSize: "1.5rem",
                           fontWeight: 700,
-                          color: "oklch(33.1% 0.064 144.7)",
+                          color: "oklch(34.6% 0.074 256.1)",
                         }}
                       >
                         {tier.price}
@@ -128,7 +128,7 @@ export default function VisitPage() {
                         style={{
                           fontFamily: "'EB Garamond', serif",
                           fontSize: "0.85rem",
-                          color: "oklch(44% 0.055 144)",
+                          color: "oklch(47.2% 0.088 247.4)",
                         }}
                       >
                         {tier.label}
@@ -136,7 +136,7 @@ export default function VisitPage() {
                     </div>
                   ))}
                 </div>
-                <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(44% 0.055 144)", fontSize: "0.9rem" }}>
+                <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(47.2% 0.088 247.4)", fontSize: "0.9rem" }}>
                   Group rates available for parties of 10 or more. Educational groups and school field trips receive
                   special pricing — please contact us in advance.
                 </p>
@@ -149,7 +149,7 @@ export default function VisitPage() {
               {/* What to Expect */}
               <div className="card-vintage p-6">
                 <h2 style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>What to Expect</h2>
-                <div style={{ width: "40px", height: "2px", background: "oklch(64.3% 0.161 143.4)", marginBottom: "1.25rem" }} />
+                <div style={{ width: "40px", height: "2px", background: "oklch(74.2% 0.118 90.2)", marginBottom: "1.25rem" }} />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {[
                     {
@@ -174,13 +174,13 @@ export default function VisitPage() {
                         style={{
                           fontFamily: "'Playfair Display', serif",
                           fontSize: "1rem",
-                          color: "oklch(20% 0.03 145)",
+                          color: "oklch(21.8% 0.036 251.3)",
                           marginBottom: "0.4rem",
                         }}
                       >
                         {item.title}
                       </h4>
-                      <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(44% 0.055 144)", margin: 0 }}>
+                      <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(47.2% 0.088 247.4)", margin: 0 }}>
                         {item.desc}
                       </p>
                     </div>
@@ -191,17 +191,17 @@ export default function VisitPage() {
               {/* Accessibility */}
               <div id="accessibility" className="card-vintage p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <Accessibility size={20} style={{ color: "oklch(33.1% 0.064 144.7)" }} />
+                  <Accessibility size={20} style={{ color: "oklch(34.6% 0.074 256.1)" }} />
                   <h2 style={{ fontSize: "1.5rem", margin: 0 }}>Accessibility</h2>
                 </div>
-                <div style={{ width: "40px", height: "2px", background: "oklch(64.3% 0.161 143.4)", marginBottom: "1.25rem" }} />
-                <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(42.3% 0.087 144.3)" }}>
+                <div style={{ width: "40px", height: "2px", background: "oklch(74.2% 0.118 90.2)", marginBottom: "1.25rem" }} />
+                <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(47.2% 0.088 247.4)" }}>
                   The Dinsmore Homestead is committed to making our historic site as accessible as possible.
                   The grounds are accessible via gravel paths. The main house has limited accessibility due to
                   its historic nature. Please contact us in advance so we can make appropriate arrangements for
                   your visit.
                 </p>
-                <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(42.3% 0.087 144.3)" }}>
+                <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(47.2% 0.088 247.4)" }}>
                   Service animals are welcome. Parking is available close to the main entrance.
                 </p>
               </div>
@@ -215,15 +215,15 @@ export default function VisitPage() {
                 className="card-vintage p-5"
               >
                 <div className="flex items-center gap-2 mb-3">
-                  <MapPin size={18} style={{ color: "oklch(33.1% 0.064 144.7)" }} />
+                  <MapPin size={18} style={{ color: "oklch(34.6% 0.074 256.1)" }} />
                   <h3 style={{ fontSize: "1.1rem", margin: 0 }}>Location & Directions</h3>
                 </div>
-                <div style={{ width: "30px", height: "2px", background: "oklch(64.3% 0.161 143.4)", marginBottom: "1rem" }} />
+                <div style={{ width: "30px", height: "2px", background: "oklch(74.2% 0.118 90.2)", marginBottom: "1rem" }} />
                 <address
                   style={{
                     fontFamily: "'EB Garamond', serif",
                     fontStyle: "normal",
-                    color: "oklch(42.3% 0.087 144.3)",
+                    color: "oklch(47.2% 0.088 247.4)",
                     fontSize: "0.95rem",
                     marginBottom: "1rem",
                   }}
@@ -242,16 +242,16 @@ export default function VisitPage() {
                 </a>
                 <div
                   style={{
-                    background: "oklch(93.6% 0.037 136.6)",
+                    background: "oklch(94.7% 0.029 89.6)",
                     padding: "0.75rem",
-                    border: "1px solid oklch(86.6% 0.079 130.9)",
+                    border: "1px solid oklch(87.6% 0.068 89.7)",
                   }}
                 >
                   <p
                     style={{
                       fontFamily: "'EB Garamond', serif",
                       fontSize: "0.85rem",
-                      color: "oklch(44% 0.055 144)",
+                      color: "oklch(47.2% 0.088 247.4)",
                       margin: 0,
                       fontStyle: "italic",
                     }}
@@ -264,22 +264,22 @@ export default function VisitPage() {
               {/* Contact */}
               <div className="card-vintage p-5">
                 <h3 style={{ fontSize: "1.1rem", marginBottom: "0.75rem" }}>Contact Us</h3>
-                <div style={{ width: "30px", height: "2px", background: "oklch(64.3% 0.161 143.4)", marginBottom: "1rem" }} />
+                <div style={{ width: "30px", height: "2px", background: "oklch(74.2% 0.118 90.2)", marginBottom: "1rem" }} />
                 <div className="space-y-2">
                   <a
                     href="tel:+18593862631"
                     className="flex items-center gap-2"
-                    style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(42.3% 0.087 144.3)" }}
+                    style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(47.2% 0.088 247.4)" }}
                   >
-                    <Phone size={14} style={{ color: "oklch(64.3% 0.161 143.4)" }} />
+                    <Phone size={14} style={{ color: "oklch(74.2% 0.118 90.2)" }} />
                     (859) 386-2631
                   </a>
                   <a
                     href="mailto:info@dinsmorefarm.org"
                     className="flex items-center gap-2"
-                    style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(42.3% 0.087 144.3)" }}
+                    style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: "oklch(47.2% 0.088 247.4)" }}
                   >
-                    <Mail size={14} style={{ color: "oklch(64.3% 0.161 143.4)" }} />
+                    <Mail size={14} style={{ color: "oklch(74.2% 0.118 90.2)" }} />
                     info@dinsmorefarm.org
                   </a>
                 </div>
@@ -289,14 +289,14 @@ export default function VisitPage() {
               <div
                 className="p-5 text-center"
                 style={{
-                  background: "oklch(33.1% 0.064 144.7)",
-                  color: "oklch(96% 0.014 110)",
+                  background: "oklch(34.6% 0.074 256.1)",
+                  color: "oklch(97.8% 0.008 89.6)",
                 }}
               >
                 <h3
                   style={{
                     fontFamily: "'Playfair Display', serif",
-                    color: "oklch(96% 0.014 110)",
+                    color: "oklch(97.8% 0.008 89.6)",
                     fontSize: "1.1rem",
                     marginBottom: "0.75rem",
                   }}
@@ -307,7 +307,7 @@ export default function VisitPage() {
                   style={{
                     fontFamily: "'EB Garamond', serif",
                     fontSize: "0.9rem",
-                    color: "oklch(86.6% 0.079 130.9)",
+                    color: "oklch(87.6% 0.068 89.7)",
                     marginBottom: "1rem",
                   }}
                 >
@@ -317,8 +317,8 @@ export default function VisitPage() {
                   href="/events"
                   style={{
                     display: "block",
-                    background: "oklch(64.3% 0.161 143.4)",
-                    color: "oklch(20% 0.03 145)",
+                    background: "oklch(74.2% 0.118 90.2)",
+                    color: "oklch(21.8% 0.036 251.3)",
                     fontFamily: "'Playfair Display', serif",
                     fontSize: "0.75rem",
                     letterSpacing: "0.1em",

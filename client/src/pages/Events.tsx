@@ -28,11 +28,11 @@ function PageHero() {
       />
       <div style={{ position: "absolute", inset: 0, background: "oklch(22% 0.04 50 / 0.7)" }} />
       <div className="container relative h-full flex flex-col justify-end pb-10">
-        <span className="section-label" style={{ color: "oklch(64.3% 0.161 143.4)" }}>
+        <span className="section-label" style={{ color: "oklch(74.2% 0.118 90.2)" }}>
           Dinsmore Homestead Museum
         </span>
-        <h1 style={{ color: "oklch(96% 0.014 110)", marginBottom: "0.5rem" }}>Events & Programs</h1>
-        <p style={{ color: "oklch(86.6% 0.079 130.9)", fontFamily: "'EB Garamond', serif", fontSize: "1.05rem" }}>
+        <h1 style={{ color: "oklch(97.8% 0.008 89.6)", marginBottom: "0.5rem" }}>Events & Programs</h1>
+        <p style={{ color: "oklch(87.6% 0.068 89.7)", fontFamily: "'EB Garamond', serif", fontSize: "1.05rem" }}>
           Tours, seasonal celebrations, and special programs throughout the year
         </p>
       </div>
@@ -52,11 +52,11 @@ export default function EventsPage() {
     <div>
       <PageHero />
 
-      <section className="py-10" style={{ background: "oklch(96% 0.014 110)" }}>
+      <section className="py-10" style={{ background: "oklch(97.8% 0.008 89.6)" }}>
         <div className="container">
           {/* Filter bar */}
           <div className="flex items-center gap-3 mb-8 flex-wrap">
-            <Filter size={16} style={{ color: "oklch(64.3% 0.161 143.4)" }} />
+            <Filter size={16} style={{ color: "oklch(74.2% 0.118 90.2)" }} />
             {EVENT_TYPES.map((type) => (
               <button
                 key={type.value}
@@ -68,9 +68,9 @@ export default function EventsPage() {
                   textTransform: "uppercase",
                   padding: "0.4rem 1rem",
                   border: "1px solid",
-                  borderColor: filter === type.value ? "oklch(33.1% 0.064 144.7)" : "oklch(78% 0.055 135)",
-                  background: filter === type.value ? "oklch(33.1% 0.064 144.7)" : "transparent",
-                  color: filter === type.value ? "oklch(96% 0.014 110)" : "oklch(44% 0.055 144)",
+                  borderColor: filter === type.value ? "oklch(34.6% 0.074 256.1)" : "oklch(87.6% 0.068 89.7)",
+                  background: filter === type.value ? "oklch(34.6% 0.074 256.1)" : "transparent",
+                  color: filter === type.value ? "oklch(97.8% 0.008 89.6)" : "oklch(47.2% 0.088 247.4)",
                   cursor: "pointer",
                   transition: "all 0.2s",
                 }}
@@ -86,7 +86,7 @@ export default function EventsPage() {
                 <div
                   key={i}
                   className="card-vintage overflow-hidden"
-                  style={{ height: "320px", background: "oklch(86.6% 0.079 130.9)", animation: "pulse 2s infinite" }}
+                  style={{ height: "320px", background: "oklch(87.6% 0.068 89.7)", animation: "pulse 2s infinite" }}
                 />
               ))}
             </div>
@@ -108,9 +108,9 @@ export default function EventsPage() {
                         ) : (
                           <div
                             className="w-full h-full flex items-center justify-center"
-                            style={{ background: "oklch(86.6% 0.079 130.9)" }}
+                            style={{ background: "oklch(87.6% 0.068 89.7)" }}
                           >
-                            <Calendar size={40} style={{ color: "oklch(64.3% 0.161 143.4)" }} />
+                            <Calendar size={40} style={{ color: "oklch(74.2% 0.118 90.2)" }} />
                           </div>
                         )}
                         <div
@@ -118,8 +118,8 @@ export default function EventsPage() {
                             position: "absolute",
                             top: "0.75rem",
                             left: "0.75rem",
-                            background: "oklch(33.1% 0.064 144.7)",
-                            color: "oklch(96% 0.014 110)",
+                            background: "oklch(34.6% 0.074 256.1)",
+                            color: "oklch(97.8% 0.008 89.6)",
                             padding: "0.25rem 0.75rem",
                             fontFamily: "'Playfair Display', serif",
                             fontSize: "0.7rem",
@@ -139,7 +139,7 @@ export default function EventsPage() {
                             fontFamily: "'Playfair Display', serif",
                             fontSize: "1.1rem",
                             fontWeight: 600,
-                            color: "oklch(20% 0.03 145)",
+                            color: "oklch(21.8% 0.036 251.3)",
                             marginBottom: "0.5rem",
                           }}
                         >
@@ -150,7 +150,7 @@ export default function EventsPage() {
                             style={{
                               fontFamily: "'EB Garamond', serif",
                               fontSize: "0.9rem",
-                              color: "oklch(44% 0.055 144)",
+                              color: "oklch(47.2% 0.088 247.4)",
                               marginBottom: "0.75rem",
                               lineHeight: 1.5,
                               display: "-webkit-box",
@@ -167,7 +167,7 @@ export default function EventsPage() {
                             style={{
                               fontFamily: "'Playfair Display', serif",
                               fontSize: "0.9rem",
-                              color: "oklch(33.1% 0.064 144.7)",
+                              color: "oklch(34.6% 0.074 256.1)",
                               fontWeight: 600,
                             }}
                           >
@@ -179,7 +179,7 @@ export default function EventsPage() {
                               fontSize: "0.7rem",
                               letterSpacing: "0.1em",
                               textTransform: "uppercase",
-                              color: "oklch(33.1% 0.064 144.7)",
+                              color: "oklch(34.6% 0.074 256.1)",
                             }}
                           >
                             <Ticket size={12} style={{ display: "inline", marginRight: "0.25rem" }} />
@@ -194,11 +194,11 @@ export default function EventsPage() {
             </div>
           ) : (
             <div className="text-center py-16">
-              <Calendar size={56} style={{ color: "oklch(78% 0.055 135)", margin: "0 auto 1rem" }} />
-              <h3 style={{ fontFamily: "'Playfair Display', serif", color: "oklch(44% 0.055 144)" }}>
+              <Calendar size={56} style={{ color: "oklch(87.6% 0.068 89.7)", margin: "0 auto 1rem" }} />
+              <h3 style={{ fontFamily: "'Playfair Display', serif", color: "oklch(47.2% 0.088 247.4)" }}>
                 No events currently scheduled
               </h3>
-              <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(64.3% 0.161 143.4)" }}>
+              <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(74.2% 0.118 90.2)" }}>
                 Check back soon — new events are added regularly throughout the season.
               </p>
               <Link href="/connect" className="btn-vintage mt-4 inline-block">
@@ -212,13 +212,13 @@ export default function EventsPage() {
       {/* Group tours CTA */}
       <section
         className="py-12"
-        style={{ background: "oklch(27% 0.045 50)", borderTop: "3px solid oklch(64.3% 0.161 143.4)" }}
+        style={{ background: "oklch(21.8% 0.036 251.3)", borderTop: "3px solid oklch(74.2% 0.118 90.2)" }}
       >
         <div className="container text-center">
           <h3
             style={{
               fontFamily: "'Playfair Display', serif",
-              color: "oklch(96% 0.014 110)",
+              color: "oklch(97.8% 0.008 89.6)",
               marginBottom: "0.75rem",
             }}
           >
@@ -227,7 +227,7 @@ export default function EventsPage() {
           <p
             style={{
               fontFamily: "'EB Garamond', serif",
-              color: "oklch(78% 0.055 135)",
+              color: "oklch(87.6% 0.068 89.7)",
               fontSize: "1rem",
               maxWidth: "500px",
               margin: "0 auto 1.5rem",

@@ -4,9 +4,9 @@ import { XCircle } from "lucide-react";
 export default function TicketCancelPage() {
   return (
     <div className="py-24 text-center container">
-      <XCircle size={56} style={{ color: "oklch(64.3% 0.161 143.4)", margin: "0 auto 1rem" }} />
+      <XCircle size={56} style={{ color: "oklch(74.2% 0.118 90.2)", margin: "0 auto 1rem" }} />
       <h2>Order Cancelled</h2>
-      <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(44% 0.055 144)", maxWidth: "500px", margin: "0 auto 1.5rem" }}>
+      <p style={{ fontFamily: "'EB Garamond', serif", color: "oklch(47.2% 0.088 247.4)", maxWidth: "500px", margin: "0 auto 1.5rem" }}>
         Your order was cancelled and you have not been charged. You can try again at any time.
       </p>
       <Link href="/events" className="btn-vintage inline-block">Back to Events</Link>
