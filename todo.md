@@ -115,3 +115,6 @@
 - [x] Update HeroSlider and Home page for maximum visual impact
 - [x] Update all public pages with new palette
 - [x] Update admin panel with new palette
+
+## Homepage Split Hero
+- [x] Replace full-screen hero slider with split layout: image slider left, action grid right

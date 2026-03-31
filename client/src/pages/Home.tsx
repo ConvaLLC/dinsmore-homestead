@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import HeroSlider from "@/components/HeroSlider";
 import { IMAGES } from "../../../shared/images";
-import { Calendar, Clock, MapPin, Ticket, Heart, BookOpen, ChevronRight, Star, Users, Award } from "lucide-react";
+import { Calendar, Clock, MapPin, Ticket, Heart, BookOpen, ChevronRight, Star, Users, Award, GraduationCap, Camera } from "lucide-react";
 import { format } from "date-fns";
 
 const C = {
@@ -163,10 +163,194 @@ function EventCard({ event }: { event: any }) {
 export default function Home() {
   const { data: events } = trpc.events.featured.useQuery();
 
+  // Quick-access grid tiles for the right panel
+  const quickLinks = [
+    {
+      label: "Book a Tour",
+      sublabel: "Reserve your spot",
+      href: "/events",
+      image: IMAGES.frontHall,
+      icon: <Ticket size={20} />,
+      accent: C.gold,
+    },
+    {
+      label: "Upcoming Events",
+      sublabel: "See what's happening",
+      href: "/events",
+      image: IMAGES.derbyDay,
+      icon: <Calendar size={20} />,
+      accent: C.skyBlue,
+    },
+    {
+      label: "Donate",
+      sublabel: "Support preservation",
+      href: "/donate",
+      image: IMAGES.farmPhoto2,
+      icon: <Heart size={20} />,
+      accent: "oklch(65% 0.18 15)",
+    },
+    {
+      label: "Educator Access",
+      sublabel: "Lesson plans & resources",
+      href: "/education",
+      image: IMAGES.volunteers,
+      icon: <GraduationCap size={20} />,
+      accent: C.steelBlue,
+    },
+    {
+      label: "The Farm",
+      sublabel: "Explore the grounds",
+      href: "/the-farm",
+      image: IMAGES.outbuildings8,
+      icon: <Camera size={20} />,
+      accent: C.gold,
+    },
+    {
+      label: "Our History",
+      sublabel: "Five generations of stories",
+      href: "/history/family",
+      image: IMAGES.heritageFinal,
+      icon: <BookOpen size={20} />,
+      accent: C.skyBlue,
+    },
+  ];
+
   return (
     <div style={{ background: C.warmWhite }}>
-      {/* Hero Slider */}
-      <HeroSlider />
+      {/* ── SPLIT HERO ── */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          height: "clamp(480px, 75vh, 720px)",
+          background: C.midnight,
+        }}
+        className="split-hero"
+      >
+        {/* LEFT — Image Slider */}
+        <div style={{ flex: "0 0 58%", position: "relative", overflow: "hidden" }}>
+          <HeroSlider contained />
+          {/* Vertical gold divider line */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              width: "3px",
+              height: "100%",
+              background: `linear-gradient(to bottom, transparent, ${C.gold}, transparent)`,
+              zIndex: 20,
+            }}
+          />
+        </div>
+
+        {/* RIGHT — Quick-Access Grid */}
+        <div
+          style={{
+            flex: "0 0 42%",
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gridTemplateRows: "1fr 1fr 1fr",
+            overflow: "hidden",
+          }}
+        >
+          {quickLinks.map((tile, i) => (
+            <Link
+              key={tile.label}
+              href={tile.href}
+              style={{ position: "relative", overflow: "hidden", display: "block" }}
+              className="quick-tile"
+            >
+              {/* Background image */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  backgroundImage: `url(${tile.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  transition: "transform 0.5s ease",
+                }}
+                className="quick-tile-bg"
+              />
+              {/* Dark navy overlay */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: `linear-gradient(135deg, ${C.midnight}cc 0%, ${C.deepNavy}aa 100%)`,
+                  transition: "opacity 0.3s ease",
+                }}
+                className="quick-tile-overlay"
+              />
+              {/* Accent border on hover (bottom) */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: "2px",
+                  background: tile.accent,
+                  transform: "scaleX(0)",
+                  transformOrigin: "left",
+                  transition: "transform 0.3s ease",
+                }}
+                className="quick-tile-accent"
+              />
+              {/* Grid border lines */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  border: `1px solid ${C.richNavy}88`,
+                  pointerEvents: "none",
+                }}
+              />
+              {/* Content */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  justifyContent: "flex-end",
+                  padding: "1rem 1.1rem",
+                }}
+              >
+                <span style={{ color: tile.accent, marginBottom: "0.35rem" }}>{tile.icon}</span>
+                <span
+                  style={{
+                    fontFamily: "'Cinzel', serif",
+                    fontSize: "0.7rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
+                    color: C.parchment,
+                    lineHeight: 1.2,
+                    textTransform: "uppercase",
+                    textShadow: "0 1px 6px oklch(0% 0 0 / 0.6)",
+                  }}
+                >
+                  {tile.label}
+                </span>
+                <span
+                  style={{
+                    fontFamily: "'EB Garamond', serif",
+                    fontSize: "0.78rem",
+                    color: C.cream,
+                    opacity: 0.85,
+                    marginTop: "0.15rem",
+                    textShadow: "0 1px 4px oklch(0% 0 0 / 0.5)",
+                  }}
+                >
+                  {tile.sublabel}
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
 
       {/* Quick Info Bar */}
       <div style={{ background: C.midnight, borderBottom: `2px solid ${C.gold}44` }}>

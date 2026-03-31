@@ -443,3 +443,45 @@
     }
   }
 }
+
+/* ─── Split Hero ─────────────────────────────────────────────────────────── */
+.split-hero {
+  container-type: inline-size;
+}
+
+.quick-tile {
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
+.quick-tile:hover .quick-tile-bg {
+  transform: scale(1.08);
+}
+
+.quick-tile:hover .quick-tile-overlay {
+  opacity: 0.65 !important;
+}
+
+.quick-tile:hover .quick-tile-accent {
+  transform: scaleX(1) !important;
+}
+
+/* Stack vertically on mobile */
+@media (max-width: 767px) {
+  .split-hero {
+    flex-direction: column !important;
+    height: auto !important;
+  }
+  .split-hero > div:first-child {
+    flex: 0 0 auto !important;
+    height: 55vw;
+    min-height: 260px;
+    max-height: 420px;
+  }
+  .split-hero > div:last-child {
+    flex: 0 0 auto !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
+    height: 200px !important;
+  }
+}
