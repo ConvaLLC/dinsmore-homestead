@@ -140,3 +140,9 @@
 
 ## Mobile Icon Removal
 - [x] Hide tile icons on mobile, show only centered text labels
+
+## Mobile Tile Polish
+- [x] Increase mobile tile label font size to 0.9rem
+- [x] Hide sublabel text on mobile
+- [x] Add tap highlight (active state) on mobile tiles
+- [x] Fix vertical centering of text in mobile tiles

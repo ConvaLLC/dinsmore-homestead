@@ -518,8 +518,19 @@
   .hero-tile-strip .quick-tile .quick-tile-content {
     padding: 0.5rem 0.4rem !important;
     flex: 1;
+    justify-content: center !important;
+    align-items: center !important;
   }
   .hero-tile-strip .quick-tile .tile-icon {
     display: none;
+  }
+  .hero-tile-strip .quick-tile .tile-sublabel {
+    display: none;
+  }
+  .hero-tile-strip .quick-tile .tile-label {
+    font-size: 0.9rem !important;
+  }
+  .hero-tile-strip .quick-tile:active .quick-tile-bg {
+    filter: brightness(1.6) saturate(1.3);
   }
 }
