@@ -137,3 +137,6 @@
 ## Mobile Tile Alignment Fix
 - [x] Fix text/icon vertical alignment being too high in hero tile strip on mobile
 - [x] Rename "The Farm" tile to "The Homestead" and replace Camera icon with House icon
+
+## Mobile Icon Removal
+- [x] Hide tile icons on mobile, show only centered text labels

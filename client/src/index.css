@@ -519,4 +519,7 @@
     padding: 0.5rem 0.4rem !important;
     flex: 1;
   }
+  .hero-tile-strip .quick-tile .tile-icon {
+    display: none;
+  }
 }
