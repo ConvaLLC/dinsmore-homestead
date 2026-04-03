@@ -130,3 +130,6 @@
 ## Hero Layout Redesign
 - [x] Restore full-width hero slider (100vw, full viewport height)
 - [x] Move 6 quick-access tiles from right panel to horizontal strip at bottom of hero
+
+## Tile Strip Color Redesign
+- [x] Replace background images in hero tile strip with solid color squares using site palette

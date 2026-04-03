@@ -461,12 +461,11 @@
   min-width: 0;
 }
 
-.quick-tile:hover .quick-tile-bg {
-  transform: scale(1.1);
+.quick-tile .quick-tile-bg {
+  transition: filter 0.3s ease;
 }
-
-.quick-tile:hover .quick-tile-overlay {
-  opacity: 0.45 !important;
+.quick-tile:hover .quick-tile-bg {
+  filter: brightness(1.35) saturate(1.2);
 }
 
 .quick-tile:hover .quick-tile-accent {

@@ -163,13 +163,13 @@ function EventCard({ event }: { event: any }) {
 export default function Home() {
   const { data: events } = trpc.events.featured.useQuery();
 
-  // Quick-access grid tiles for the right panel
+  // Quick-access tile strip beneath the hero
   const quickLinks = [
     {
       label: "Book a Tour",
       sublabel: "Reserve your spot",
       href: "/events",
-      image: IMAGES.frontHall,
+      bg: `linear-gradient(135deg, ${C.deepNavy} 0%, oklch(26% 0.05 80) 100%)`,
       icon: <Ticket size={22} />,
       accent: C.gold,
     },
@@ -177,7 +177,7 @@ export default function Home() {
       label: "Upcoming Events",
       sublabel: "See what's happening",
       href: "/events",
-      image: IMAGES.derbyDay,
+      bg: `linear-gradient(135deg, oklch(28% 0.06 255) 0%, oklch(36% 0.09 250) 100%)`,
       icon: <Calendar size={22} />,
       accent: C.skyBlue,
     },
@@ -185,7 +185,7 @@ export default function Home() {
       label: "Donate",
       sublabel: "Support preservation",
       href: "/donate",
-      image: IMAGES.farmPhoto2,
+      bg: `linear-gradient(135deg, oklch(24% 0.04 20) 0%, oklch(32% 0.07 15) 100%)`,
       icon: <Heart size={22} />,
       accent: "oklch(65% 0.18 15)",
     },
@@ -193,7 +193,7 @@ export default function Home() {
       label: "Educator Access",
       sublabel: "Lesson plans & resources",
       href: "/education",
-      image: IMAGES.volunteers,
+      bg: `linear-gradient(135deg, oklch(26% 0.05 240) 0%, oklch(38% 0.08 235) 100%)`,
       icon: <GraduationCap size={22} />,
       accent: C.steelBlue,
     },
@@ -201,17 +201,17 @@ export default function Home() {
       label: "The Farm",
       sublabel: "Explore the grounds",
       href: "/the-farm",
-      image: IMAGES.outbuildings8,
+      bg: `linear-gradient(135deg, oklch(24% 0.04 140) 0%, oklch(32% 0.07 135) 100%)`,
       icon: <Camera size={22} />,
-      accent: C.gold,
+      accent: "oklch(65% 0.14 140)",
     },
     {
       label: "Our History",
       sublabel: "Five generations of stories",
       href: "/history/family",
-      image: IMAGES.heritageFinal,
+      bg: `linear-gradient(135deg, oklch(22% 0.035 60) 0%, oklch(30% 0.055 55) 100%)`,
       icon: <BookOpen size={22} />,
-      accent: C.skyBlue,
+      accent: C.goldBright,
     },
   ];
 
@@ -231,27 +231,15 @@ export default function Home() {
               style={{ position: "relative", overflow: "hidden", display: "block", flex: "1 1 0" }}
               className="quick-tile"
             >
-              {/* Background image */}
+              {/* Color background */}
               <div
                 style={{
                   position: "absolute",
                   inset: 0,
-                  backgroundImage: `url(${tile.image})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  transition: "transform 0.5s ease",
-                }}
-                className="quick-tile-bg"
-              />
-              {/* Dark navy overlay */}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: `linear-gradient(to top, ${C.midnight}ee 0%, ${C.deepNavy}cc 50%, ${C.midnight}99 100%)`,
+                  background: tile.bg,
                   transition: "opacity 0.3s ease",
                 }}
-                className="quick-tile-overlay"
+                className="quick-tile-bg"
               />
               {/* Accent border on hover (top) */}
               <div
