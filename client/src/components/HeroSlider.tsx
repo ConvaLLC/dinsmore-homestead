@@ -79,7 +79,7 @@ export default function HeroSlider({ contained = false }: HeroSliderProps) {
     return () => clearInterval(timer);
   }, [next]);
 
-  const height = contained ? "100%" : "clamp(400px, 70vh, 700px)";
+  const height = contained ? "100%" : "clamp(480px, 78vh, 820px)";
 
   return (
     <div
@@ -137,7 +137,7 @@ export default function HeroSlider({ contained = false }: HeroSliderProps) {
               inset: 0,
               display: "flex",
               alignItems: "flex-end",
-              padding: contained ? "2rem" : "clamp(2rem, 8vh, 5rem) 2rem",
+              padding: contained ? "2rem" : "clamp(2rem, 8vh, 5rem) clamp(1.5rem, 5vw, 5rem)",
             }}
           >
             <div style={{ maxWidth: "600px" }}>

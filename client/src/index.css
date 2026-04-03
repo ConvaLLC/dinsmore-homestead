@@ -444,22 +444,29 @@
   }
 }
 
-/* ─── Split Hero ─────────────────────────────────────────────────────────── */
-.split-hero {
-  container-type: inline-size;
+/* ─── Full-Width Hero with Bottom Tile Strip ─────────────────────────────── */
+
+/* The tile strip sits at the bottom of the hero wrapper */
+.hero-tile-strip {
+  display: flex;
+  flex-direction: row;
+  height: 180px;
+  background: oklch(21.8% 0.036 251.3);
+  border-top: 1px solid oklch(74.2% 0.118 90.2 / 0.25);
 }
 
 .quick-tile {
   cursor: pointer;
   text-decoration: none !important;
+  min-width: 0;
 }
 
 .quick-tile:hover .quick-tile-bg {
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
 
 .quick-tile:hover .quick-tile-overlay {
-  opacity: 0.55 !important;
+  opacity: 0.45 !important;
 }
 
 .quick-tile:hover .quick-tile-accent {
@@ -468,19 +475,19 @@
 
 /* Label scale-up on hover */
 .quick-tile .tile-label {
-  transition: transform 0.3s ease, font-size 0.3s ease;
-  display: inline-block;
-  transform-origin: left bottom;
+  transition: transform 0.3s ease;
+  display: block;
+  transform-origin: center bottom;
 }
 .quick-tile:hover .tile-label {
-  transform: scale(1.08);
+  transform: scale(1.06);
 }
 
-/* Sublabel slide-in from below on hover */
+/* Sublabel fade-in on hover */
 .quick-tile .tile-sublabel {
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.35s ease 0.05s, transform 0.35s ease 0.05s;
+  transform: translateY(5px);
+  transition: opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s;
   display: block;
 }
 .quick-tile:hover .tile-sublabel {
@@ -490,47 +497,21 @@
 
 /* Icon pulse on hover */
 .quick-tile .tile-icon {
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition: transform 0.3s ease;
   display: inline-block;
 }
 .quick-tile:hover .tile-icon {
-  transform: scale(1.2) translateY(-2px);
+  transform: scale(1.25) translateY(-2px);
 }
 
-/* Gold accent border left edge on hover */
-.quick-tile::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent, oklch(74.2% 0.118 90.2), transparent);
-  transform: scaleY(0);
-  transform-origin: center;
-  transition: transform 0.4s ease;
-  z-index: 10;
-}
-.quick-tile:hover::before {
-  transform: scaleY(1);
-}
-
-/* Stack vertically on mobile */
+/* Responsive: on mobile stack tiles in 2 rows of 3 */
 @media (max-width: 767px) {
-  .split-hero {
-    flex-direction: column !important;
-    height: auto !important;
+  .hero-tile-strip {
+    flex-wrap: wrap;
+    height: auto;
   }
-  .split-hero > div:first-child {
-    flex: 0 0 auto !important;
-    height: 55vw;
-    min-height: 260px;
-    max-height: 420px;
-  }
-  .split-hero > div:last-child {
-    flex: 0 0 auto !important;
-    grid-template-columns: 1fr 1fr 1fr !important;
-    grid-template-rows: 1fr 1fr !important;
-    height: 200px !important;
+  .hero-tile-strip .quick-tile {
+    flex: 0 0 33.333% !important;
+    height: 80px;
   }
 }

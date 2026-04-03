@@ -126,3 +126,7 @@
 - [x] Add hover animation to split hero grid tiles (label scale + sublabel slide-in)
 - [x] Increase grid tile label font size to 0.9rem
 - [x] Add "What's On" upcoming events strip below split hero
+
+## Hero Layout Redesign
+- [x] Restore full-width hero slider (100vw, full viewport height)
+- [x] Move 6 quick-access tiles from right panel to horizontal strip at bottom of hero

@@ -170,7 +170,7 @@ export default function Home() {
       sublabel: "Reserve your spot",
       href: "/events",
       image: IMAGES.frontHall,
-      icon: <Ticket size={20} />,
+      icon: <Ticket size={22} />,
       accent: C.gold,
     },
     {
@@ -178,7 +178,7 @@ export default function Home() {
       sublabel: "See what's happening",
       href: "/events",
       image: IMAGES.derbyDay,
-      icon: <Calendar size={20} />,
+      icon: <Calendar size={22} />,
       accent: C.skyBlue,
     },
     {
@@ -186,7 +186,7 @@ export default function Home() {
       sublabel: "Support preservation",
       href: "/donate",
       image: IMAGES.farmPhoto2,
-      icon: <Heart size={20} />,
+      icon: <Heart size={22} />,
       accent: "oklch(65% 0.18 15)",
     },
     {
@@ -194,7 +194,7 @@ export default function Home() {
       sublabel: "Lesson plans & resources",
       href: "/education",
       image: IMAGES.volunteers,
-      icon: <GraduationCap size={20} />,
+      icon: <GraduationCap size={22} />,
       accent: C.steelBlue,
     },
     {
@@ -202,7 +202,7 @@ export default function Home() {
       sublabel: "Explore the grounds",
       href: "/the-farm",
       image: IMAGES.outbuildings8,
-      icon: <Camera size={20} />,
+      icon: <Camera size={22} />,
       accent: C.gold,
     },
     {
@@ -210,55 +210,25 @@ export default function Home() {
       sublabel: "Five generations of stories",
       href: "/history/family",
       image: IMAGES.heritageFinal,
-      icon: <BookOpen size={20} />,
+      icon: <BookOpen size={22} />,
       accent: C.skyBlue,
     },
   ];
 
   return (
     <div style={{ background: C.warmWhite }}>
-      {/* ── SPLIT HERO ── */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          height: "clamp(480px, 75vh, 720px)",
-          background: C.midnight,
-        }}
-        className="split-hero"
-      >
-        {/* LEFT — Image Slider */}
-        <div style={{ flex: "0 0 58%", position: "relative", overflow: "hidden" }}>
-          <HeroSlider contained />
-          {/* Vertical gold divider line */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              width: "3px",
-              height: "100%",
-              background: `linear-gradient(to bottom, transparent, ${C.gold}, transparent)`,
-              zIndex: 20,
-            }}
-          />
-        </div>
+      {/* ── FULL-WIDTH HERO ── */}
+      <div className="hero-wrapper" style={{ position: "relative", background: C.midnight }}>
+        {/* Full-width image slider */}
+        <HeroSlider />
 
-        {/* RIGHT — Quick-Access Grid */}
-        <div
-          style={{
-            flex: "0 0 42%",
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gridTemplateRows: "1fr 1fr 1fr",
-            overflow: "hidden",
-          }}
-        >
-          {quickLinks.map((tile, i) => (
+        {/* ── Quick-Access Tile Strip ── */}
+        <div className="hero-tile-strip">
+          {quickLinks.map((tile) => (
             <Link
               key={tile.label}
               href={tile.href}
-              style={{ position: "relative", overflow: "hidden", display: "block" }}
+              style={{ position: "relative", overflow: "hidden", display: "block", flex: "1 1 0" }}
               className="quick-tile"
             >
               {/* Background image */}
@@ -278,19 +248,19 @@ export default function Home() {
                 style={{
                   position: "absolute",
                   inset: 0,
-                  background: `linear-gradient(135deg, ${C.midnight}cc 0%, ${C.deepNavy}aa 100%)`,
+                  background: `linear-gradient(to top, ${C.midnight}ee 0%, ${C.deepNavy}cc 50%, ${C.midnight}99 100%)`,
                   transition: "opacity 0.3s ease",
                 }}
                 className="quick-tile-overlay"
               />
-              {/* Accent border on hover (bottom) */}
+              {/* Accent border on hover (top) */}
               <div
                 style={{
                   position: "absolute",
-                  bottom: 0,
+                  top: 0,
                   left: 0,
                   right: 0,
-                  height: "2px",
+                  height: "3px",
                   background: tile.accent,
                   transform: "scaleX(0)",
                   transformOrigin: "left",
@@ -298,45 +268,37 @@ export default function Home() {
                 }}
                 className="quick-tile-accent"
               />
-              {/* Grid border lines */}
+              {/* Divider between tiles */}
               <div
                 style={{
                   position: "absolute",
-                  inset: 0,
-                  border: `1px solid ${C.richNavy}88`,
-                  pointerEvents: "none",
-                }}
-              />
-              {/* Strong gradient scrim behind text for legibility */}
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: 0,
+                  top: 0,
                   right: 0,
-                  height: "65%",
-                  background: `linear-gradient(to top, ${C.midnight}f0 0%, ${C.midnight}b0 40%, ${C.midnight}55 70%, transparent 100%)`,
+                  width: "1px",
+                  height: "100%",
+                  background: `linear-gradient(to bottom, transparent, ${C.gold}44, transparent)`,
                   pointerEvents: "none",
                 }}
               />
               {/* Content */}
               <div
                 style={{
-                  position: "absolute",
-                  inset: 0,
+                  position: "relative",
+                  height: "100%",
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "flex-start",
-                  justifyContent: "flex-end",
-                  padding: "1rem 1.1rem",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "1rem 0.75rem",
                   zIndex: 2,
+                  textAlign: "center",
+                  gap: "0.35rem",
                 }}
               >
                 <span
                   className="tile-icon"
                   style={{
                     color: tile.accent,
-                    marginBottom: "0.35rem",
                     filter: "drop-shadow(0 1px 3px oklch(0% 0 0 / 0.8))",
                   }}
                 >
@@ -346,13 +308,13 @@ export default function Home() {
                   className="tile-label"
                   style={{
                     fontFamily: "'Cinzel', serif",
-                    fontSize: "0.9rem",
+                    fontSize: "0.85rem",
                     fontWeight: 700,
-                    letterSpacing: "0.08em",
+                    letterSpacing: "0.07em",
                     color: "oklch(98% 0.01 90)",
                     lineHeight: 1.2,
                     textTransform: "uppercase",
-                    textShadow: "0 1px 8px oklch(0% 0 0 / 0.9), 0 2px 16px oklch(0% 0 0 / 0.7)",
+                    textShadow: "0 1px 6px oklch(0% 0 0 / 0.9)",
                   }}
                 >
                   {tile.label}
@@ -361,11 +323,10 @@ export default function Home() {
                   className="tile-sublabel"
                   style={{
                     fontFamily: "'EB Garamond', serif",
-                    fontSize: "0.9rem",
-                    color: "oklch(90% 0.02 88)",
-                    marginTop: "0.25rem",
-                    textShadow: "0 1px 6px oklch(0% 0 0 / 0.9), 0 2px 12px oklch(0% 0 0 / 0.7)",
-                    lineHeight: 1.3,
+                    fontSize: "0.88rem",
+                    color: "oklch(85% 0.025 88)",
+                    textShadow: "0 1px 4px oklch(0% 0 0 / 0.9)",
+                    lineHeight: 1.2,
                   }}
                 >
                   {tile.sublabel}
