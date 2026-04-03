@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import HeroSlider from "@/components/HeroSlider";
 import { IMAGES } from "../../../shared/images";
-import { Calendar, Clock, MapPin, Ticket, Heart, BookOpen, ChevronRight, Star, Users, Award, GraduationCap, Camera } from "lucide-react";
+import { Calendar, Clock, MapPin, Ticket, Heart, BookOpen, ChevronRight, Star, Users, Award, GraduationCap, House } from "lucide-react";
 import { format } from "date-fns";
 
 const C = {
@@ -198,11 +198,11 @@ export default function Home() {
       accent: C.steelBlue,
     },
     {
-      label: "The Farm",
+      label: "The Homestead",
       sublabel: "Explore the grounds",
       href: "/the-farm",
       bg: `linear-gradient(135deg, oklch(24% 0.04 140) 0%, oklch(32% 0.07 135) 100%)`,
-      icon: <Camera size={22} />,
+      icon: <House size={22} />,
       accent: "oklch(65% 0.14 140)",
     },
     {
@@ -270,6 +270,7 @@ export default function Home() {
               />
               {/* Content */}
               <div
+                className="quick-tile-content"
                 style={{
                   position: "relative",
                   height: "100%",

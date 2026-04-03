@@ -133,3 +133,7 @@
 
 ## Tile Strip Color Redesign
 - [x] Replace background images in hero tile strip with solid color squares using site palette
+
+## Mobile Tile Alignment Fix
+- [x] Fix text/icon vertical alignment being too high in hero tile strip on mobile
+- [x] Rename "The Farm" tile to "The Homestead" and replace Camera icon with House icon
