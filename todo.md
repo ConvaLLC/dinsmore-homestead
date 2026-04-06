@@ -196,3 +196,8 @@
 - [x] Add owner notification when new tour booking is created
 - [x] Placeholder for email confirmation (ready to wire when email service available)
 - [x] Clean up PayPal references from codebase
+
+## Homepage Fixes (Readability + Pricing + What's On Removal)
+- [x] Fix booking calendar dark mode — lighten background for readability against dark navy
+- [x] Add cost or FREE label to each ticket type in quantity selection step
+- [x] Remove "What's On at the Homestead" upcoming events strip section

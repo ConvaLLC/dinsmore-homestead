@@ -180,7 +180,7 @@ export default function TourBookingWidget() {
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
-    <div style={{ background: C.midnight, overflow: "hidden" }}>
+    <div style={{ background: C.parchment, overflow: "hidden" }}>
       {/* CTA Header — always visible */}
       <div
         style={{
@@ -196,7 +196,7 @@ export default function TourBookingWidget() {
             fontFamily: "'Cinzel', serif",
             fontSize: "0.6rem",
             letterSpacing: "0.35em",
-            color: C.gold,
+            color: C.cobalt,
             marginBottom: "0.75rem",
             textTransform: "uppercase",
           }}
@@ -207,21 +207,21 @@ export default function TourBookingWidget() {
           style={{
             fontFamily: "'Playfair Display', serif",
             fontSize: expanded ? "clamp(1.4rem, 2.5vw, 1.8rem)" : "clamp(1.8rem, 3vw, 2.6rem)",
-            color: C.warmWhite,
+            color: C.midnight,
             lineHeight: 1.2,
             marginBottom: "0.75rem",
             transition: "font-size 0.3s ease",
           }}
         >
           View Tour Openings &{" "}
-          <span style={{ color: C.gold }}>Book Yours Today</span>
+          <span style={{ color: C.cobalt }}>Book Yours Today</span>
         </h2>
         {!expanded && (
           <p
             style={{
               fontFamily: "'EB Garamond', serif",
               fontSize: "1.05rem",
-              color: C.cream,
+              color: C.cobalt,
               lineHeight: 1.6,
               maxWidth: "550px",
               margin: "0 auto 1.5rem",
@@ -239,16 +239,16 @@ export default function TourBookingWidget() {
               fontSize: "0.75rem",
               letterSpacing: "0.15em",
               textTransform: "uppercase",
-              background: C.gold,
-              color: C.midnight,
+              background: C.deepNavy,
+              color: C.gold,
               border: "none",
               padding: "0.85rem 2.5rem",
               cursor: "pointer",
               transition: "all 0.2s",
               fontWeight: 700,
             }}
-            onMouseEnter={e => { e.currentTarget.style.background = C.goldBright; e.currentTarget.style.transform = "translateY(-1px)"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = C.gold; e.currentTarget.style.transform = "none"; }}
+            onMouseEnter={e => { e.currentTarget.style.background = C.midnight; e.currentTarget.style.transform = "translateY(-1px)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = C.deepNavy; e.currentTarget.style.transform = "none"; }}
           >
             <Calendar size={14} style={{ display: "inline", verticalAlign: "-2px", marginRight: "0.5rem" }} />
             Book a Tour Now
@@ -293,8 +293,8 @@ export default function TourBookingWidget() {
                       fontSize: "0.7rem",
                       fontFamily: "'Cinzel', serif",
                       fontWeight: 700,
-                      background: isActive ? C.gold : isDone ? C.cobalt : `${C.cream}22`,
-                      color: isActive ? C.midnight : isDone ? C.warmWhite : `${C.cream}66`,
+                      background: isActive ? C.deepNavy : isDone ? C.cobalt : `${C.cobalt}22`,
+                      color: isActive ? C.gold : isDone ? C.warmWhite : `${C.cobalt}66`,
                       transition: "all 0.2s",
                     }}
                   >
@@ -306,13 +306,13 @@ export default function TourBookingWidget() {
                       fontSize: "0.55rem",
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
-                      color: isActive ? C.gold : isDone ? C.cream : `${C.cream}55`,
+                      color: isActive ? C.deepNavy : isDone ? C.cobalt : `${C.cobalt}55`,
                     }}
                   >
                     {labels[i]}
                   </span>
                   {i < 3 && (
-                    <div style={{ width: "20px", height: "1px", background: isDone ? C.cobalt : `${C.cream}22`, margin: "0 0.25rem" }} />
+                    <div style={{ width: "20px", height: "1px", background: isDone ? C.cobalt : `${C.cobalt}33`, margin: "0 0.25rem" }} />
                   )}
                 </div>
               );
@@ -328,7 +328,7 @@ export default function TourBookingWidget() {
               style={{
                 fontFamily: "'EB Garamond', serif",
                 fontSize: "0.85rem",
-                color: C.cream,
+                color: C.cobalt,
                 background: "none",
                 border: "none",
                 cursor: "pointer",
@@ -347,19 +347,19 @@ export default function TourBookingWidget() {
           {/* ── STEP 1: Calendar ── */}
           {step === "date" && (
             <div>
-              <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.cream, textAlign: "center", marginBottom: "1rem" }}>
+              <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.cobalt, textAlign: "center", marginBottom: "1rem" }}>
                 Select a date to see available tour times
               </p>
 
               {/* Month nav */}
               <div className="flex items-center justify-between mb-3">
-                <button onClick={prevMonth} style={{ background: "none", border: "none", color: C.gold, cursor: "pointer", padding: "0.4rem" }}>
+                <button onClick={prevMonth} style={{ background: "none", border: "none", color: C.cobalt, cursor: "pointer", padding: "0.4rem" }}>
                   <ChevronLeft size={18} />
                 </button>
-                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", color: C.warmWhite, fontWeight: 600 }}>
+                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", color: C.midnight, fontWeight: 600 }}>
                   {MONTH_NAMES[calMonth - 1]} {calYear}
                 </span>
-                <button onClick={nextMonth} style={{ background: "none", border: "none", color: C.gold, cursor: "pointer", padding: "0.4rem" }}>
+                <button onClick={nextMonth} style={{ background: "none", border: "none", color: C.cobalt, cursor: "pointer", padding: "0.4rem" }}>
                   <ChevronRight size={18} />
                 </button>
               </div>
@@ -367,7 +367,7 @@ export default function TourBookingWidget() {
               {/* Day headers */}
               <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: "2px", marginBottom: "4px" }}>
                 {DAY_LABELS.map((d, i) => (
-                  <div key={i} style={{ textAlign: "center", fontFamily: "'Cinzel', serif", fontSize: "0.6rem", color: `${C.cream}77`, letterSpacing: "0.05em", padding: "0.3rem 0" }}>
+                  <div key={i} style={{ textAlign: "center", fontFamily: "'Cinzel', serif", fontSize: "0.6rem", color: C.cobalt, letterSpacing: "0.05em", padding: "0.3rem 0" }}>
                     {d}
                   </div>
                 ))}
@@ -398,9 +398,9 @@ export default function TourBookingWidget() {
                         flexDirection: "column",
                         alignItems: "center",
                         justifyContent: "center",
-                        border: isSelected ? `2px solid ${C.gold}` : isToday ? `1px solid ${C.gold}55` : "1px solid transparent",
-                        background: isSelected ? `${C.gold}22` : isAvailable && !isPast ? `${C.available}15` : "transparent",
-                        color: isPast ? `${C.cream}33` : isAvailable ? C.warmWhite : `${C.cream}44`,
+                        border: isSelected ? `2px solid ${C.deepNavy}` : isToday ? `1px solid ${C.cobalt}55` : `1px solid ${C.cobalt}22`,
+                        background: isSelected ? `${C.deepNavy}22` : isAvailable && !isPast ? `${C.available}15` : "transparent",
+                        color: isPast ? `${C.cobalt}44` : isAvailable ? C.midnight : `${C.cobalt}55`,
                         cursor: isAvailable && !isPast ? "pointer" : "default",
                         fontFamily: "'Playfair Display', serif",
                         fontSize: "0.9rem",
@@ -422,7 +422,7 @@ export default function TourBookingWidget() {
               </div>
 
               {calLoading && (
-                <div style={{ textAlign: "center", padding: "1rem", color: C.gold, fontFamily: "'EB Garamond', serif", fontStyle: "italic" }}>
+                <div style={{ textAlign: "center", padding: "1rem", color: C.cobalt, fontFamily: "'EB Garamond', serif", fontStyle: "italic" }}>
                   Loading availability…
                 </div>
               )}
@@ -431,7 +431,7 @@ export default function TourBookingWidget() {
               <div className="flex items-center justify-center gap-4 mt-3">
                 <div className="flex items-center gap-1.5">
                   <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: C.available, display: "inline-block" }} />
-                  <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.78rem", color: C.cream }}>Tours Available</span>
+                  <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.78rem", color: C.cobalt }}>Tours Available</span>
                 </div>
               </div>
             </div>
@@ -440,10 +440,10 @@ export default function TourBookingWidget() {
           {/* ── STEP 2: Time Selection ── */}
           {step === "time" && selectedDate && selectedDayData && (
             <div>
-              <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", color: C.warmWhite, textAlign: "center", marginBottom: "0.5rem" }}>
+              <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", color: C.midnight, textAlign: "center", marginBottom: "0.5rem" }}>
                 {new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
               </p>
-              <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: C.cream, textAlign: "center", marginBottom: "1.25rem" }}>
+              <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: C.cobalt, textAlign: "center", marginBottom: "1.25rem" }}>
                 Choose your tour time
               </p>
 
@@ -460,18 +460,18 @@ export default function TourBookingWidget() {
                       disabled={isFull}
                       style={{
                         padding: "1rem",
-                        border: isSelected ? `2px solid ${C.gold}` : `1px solid ${isFull ? `${C.cream}22` : `${C.cream}33`}`,
-                        background: isSelected ? `${C.gold}18` : isFull ? `${C.soldOut}10` : `${C.warmWhite}08`,
+                        border: isSelected ? `2px solid ${C.deepNavy}` : `1px solid ${isFull ? `${C.cobalt}22` : `${C.cobalt}33`}`,
+                        background: isSelected ? `${C.deepNavy}15` : isFull ? `${C.soldOut}10` : `${C.cobalt}08`,
                         cursor: isFull ? "not-allowed" : "pointer",
                         textAlign: "center",
                         transition: "all 0.15s",
                       }}
                     >
-                      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", fontWeight: 600, color: isFull ? `${C.cream}44` : C.warmWhite }}>
+                      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", fontWeight: 600, color: isFull ? `${C.cobalt}44` : C.midnight }}>
                         {slot.startTime}
                       </div>
                       {slot.endTime && (
-                        <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: `${C.cream}77`, marginTop: "0.15rem" }}>
+                        <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: `${C.cobalt}88`, marginTop: "0.15rem" }}>
                           to {slot.endTime}
                         </div>
                       )}
@@ -494,10 +494,10 @@ export default function TourBookingWidget() {
           {/* ── STEP 3: Ticket Types ── */}
           {step === "tickets" && selectedSlot && (
             <div>
-              <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", color: C.warmWhite, textAlign: "center", marginBottom: "0.25rem" }}>
+              <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", color: C.midnight, textAlign: "center", marginBottom: "0.25rem" }}>
                 {new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric" })} at {selectedSlot.startTime}
               </p>
-              <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: C.cream, textAlign: "center", marginBottom: "1.25rem" }}>
+              <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: C.cobalt, textAlign: "center", marginBottom: "1.25rem" }}>
                 {slotsAvailable} spots available — select your tickets
               </p>
 
@@ -507,17 +507,17 @@ export default function TourBookingWidget() {
                     key={tt.key}
                     className="flex items-center justify-between"
                     style={{
-                      background: `${C.warmWhite}08`,
-                      border: `1px solid ${C.cream}22`,
+                      background: `${C.cobalt}08`,
+                      border: `1px solid ${C.cobalt}22`,
                       padding: "0.75rem 1rem",
                     }}
                   >
                     <div>
-                      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.95rem", color: C.warmWhite, fontWeight: 600 }}>
+                      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.95rem", color: C.midnight, fontWeight: 600 }}>
                         {tt.label}
                       </div>
-                      <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: `${C.cream}88` }}>
-                        {tt.price > 0 ? `$${tt.price.toFixed(2)}` : "Free"} · {tt.desc}
+                      <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cobalt }}>
+                        <span style={{ fontWeight: 700, color: tt.price > 0 ? C.deepNavy : '#2d7a3a' }}>{tt.price > 0 ? `$${tt.price.toFixed(2)}` : "FREE"}</span> · {tt.desc}
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
@@ -527,9 +527,9 @@ export default function TourBookingWidget() {
                         style={{
                           width: "28px", height: "28px",
                           display: "flex", alignItems: "center", justifyContent: "center",
-                          border: `1px solid ${C.cream}33`,
+                          border: `1px solid ${C.cobalt}33`,
                           background: "transparent",
-                          color: tickets[tt.key] <= 0 ? `${C.cream}33` : C.cream,
+                          color: tickets[tt.key] <= 0 ? `${C.cobalt}33` : C.cobalt,
                           cursor: tickets[tt.key] <= 0 ? "not-allowed" : "pointer",
                           borderRadius: "2px",
                         }}
@@ -540,7 +540,7 @@ export default function TourBookingWidget() {
                         fontFamily: "'Playfair Display', serif",
                         fontSize: "1.1rem",
                         fontWeight: 700,
-                        color: C.warmWhite,
+                        color: C.midnight,
                         minWidth: "24px",
                         textAlign: "center",
                       }}>
@@ -552,9 +552,9 @@ export default function TourBookingWidget() {
                         style={{
                           width: "28px", height: "28px",
                           display: "flex", alignItems: "center", justifyContent: "center",
-                          border: `1px solid ${C.cream}33`,
+                          border: `1px solid ${C.cobalt}33`,
                           background: "transparent",
-                          color: totalGuests >= slotsAvailable ? `${C.cream}33` : C.cream,
+                          color: totalGuests >= slotsAvailable ? `${C.cobalt}33` : C.cobalt,
                           cursor: totalGuests >= slotsAvailable ? "not-allowed" : "pointer",
                           borderRadius: "2px",
                         }}
@@ -568,11 +568,11 @@ export default function TourBookingWidget() {
 
               {/* Summary */}
               <div style={{ marginTop: "1.25rem", borderTop: `1px solid ${C.gold}44`, paddingTop: "1rem" }}>
-                <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: C.cream, marginBottom: "0.3rem" }}>
+                <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: C.cobalt, marginBottom: "0.3rem" }}>
                   <span>Total Guests</span>
                   <span style={{ fontWeight: 600 }}>{totalGuests}</span>
                 </div>
-                <div className="flex justify-between" style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.2rem", color: C.gold, fontWeight: 700 }}>
+                <div className="flex justify-between" style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.2rem", color: C.deepNavy, fontWeight: 700 }}>
                   <span>Total</span>
                   <span>{totalPrice > 0 ? `$${totalPrice.toFixed(2)}` : "Free"}</span>
                 </div>
@@ -588,8 +588,8 @@ export default function TourBookingWidget() {
                   fontSize: "0.7rem",
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
-                  background: totalGuests < 1 ? `${C.cream}33` : C.gold,
-                  color: totalGuests < 1 ? `${C.cream}66` : C.midnight,
+                  background: totalGuests < 1 ? `${C.cobalt}33` : C.deepNavy,
+                  color: totalGuests < 1 ? `${C.cobalt}66` : C.gold,
                   border: "none",
                   padding: "0.85rem",
                   cursor: totalGuests < 1 ? "not-allowed" : "pointer",
@@ -605,13 +605,13 @@ export default function TourBookingWidget() {
           {/* ── STEP 4: Contact Info ── */}
           {step === "info" && selectedSlot && (
             <div>
-              <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", color: C.warmWhite, textAlign: "center", marginBottom: "1rem" }}>
+              <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", color: C.midnight, textAlign: "center", marginBottom: "1rem" }}>
                 Almost there! Enter your details
               </p>
 
               <div className="space-y-3">
                 <div>
-                  <label style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.cream, display: "block", marginBottom: "0.35rem" }}>
+                  <label style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.cobalt, display: "block", marginBottom: "0.35rem" }}>
                     Full Name *
                   </label>
                   <input
@@ -624,15 +624,15 @@ export default function TourBookingWidget() {
                       padding: "0.7rem 0.85rem",
                       fontFamily: "'EB Garamond', serif",
                       fontSize: "1rem",
-                      background: `${C.warmWhite}0a`,
-                      border: `1px solid ${C.cream}33`,
-                      color: C.warmWhite,
+                      background: "white",
+                      border: `1px solid ${C.cobalt}33`,
+                      color: C.midnight,
                       outline: "none",
                     }}
                   />
                 </div>
                 <div>
-                  <label style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.cream, display: "block", marginBottom: "0.35rem" }}>
+                  <label style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.cobalt, display: "block", marginBottom: "0.35rem" }}>
                     Email Address *
                   </label>
                   <input
@@ -645,15 +645,15 @@ export default function TourBookingWidget() {
                       padding: "0.7rem 0.85rem",
                       fontFamily: "'EB Garamond', serif",
                       fontSize: "1rem",
-                      background: `${C.warmWhite}0a`,
-                      border: `1px solid ${C.cream}33`,
-                      color: C.warmWhite,
+                      background: "white",
+                      border: `1px solid ${C.cobalt}33`,
+                      color: C.midnight,
                       outline: "none",
                     }}
                   />
                 </div>
                 <div>
-                  <label style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.cream, display: "block", marginBottom: "0.35rem" }}>
+                  <label style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.cobalt, display: "block", marginBottom: "0.35rem" }}>
                     Phone (optional)
                   </label>
                   <input
@@ -666,9 +666,9 @@ export default function TourBookingWidget() {
                       padding: "0.7rem 0.85rem",
                       fontFamily: "'EB Garamond', serif",
                       fontSize: "1rem",
-                      background: `${C.warmWhite}0a`,
-                      border: `1px solid ${C.cream}33`,
-                      color: C.warmWhite,
+                      background: "white",
+                      border: `1px solid ${C.cobalt}33`,
+                      color: C.midnight,
                       outline: "none",
                     }}
                   />
@@ -676,11 +676,11 @@ export default function TourBookingWidget() {
               </div>
 
               {/* Order summary */}
-              <div style={{ marginTop: "1.5rem", background: `${C.warmWhite}08`, border: `1px solid ${C.gold}33`, padding: "1rem" }}>
-                <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.gold, marginBottom: "0.6rem" }}>
+              <div style={{ marginTop: "1.5rem", background: `${C.cobalt}08`, border: `1px solid ${C.cobalt}33`, padding: "1rem" }}>
+                <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.deepNavy, marginBottom: "0.6rem" }}>
                   Order Summary
                 </div>
-                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: C.cream, lineHeight: 1.8 }}>
+                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: C.cobalt, lineHeight: 1.8 }}>
                   <div>{new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</div>
                   <div>{selectedSlot.startTime}{selectedSlot.endTime ? ` – ${selectedSlot.endTime}` : ""}</div>
                   {tickets.adult > 0 && <div>Adult × {tickets.adult} — ${(tickets.adult * 10).toFixed(2)}</div>}
@@ -688,9 +688,9 @@ export default function TourBookingWidget() {
                   {tickets.under5 > 0 && <div>Under 5 × {tickets.under5} — Free</div>}
                   {tickets.member > 0 && <div>Member × {tickets.member} — Free</div>}
                 </div>
-                <div className="flex justify-between mt-2 pt-2" style={{ borderTop: `1px solid ${C.gold}33` }}>
-                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", color: C.gold, fontWeight: 700 }}>Total</span>
-                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", color: C.gold, fontWeight: 700 }}>
+                <div className="flex justify-between mt-2 pt-2" style={{ borderTop: `1px solid ${C.cobalt}33` }}>
+                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", color: C.deepNavy, fontWeight: 700 }}>Total</span>
+                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", color: C.deepNavy, fontWeight: 700 }}>
                     {totalPrice > 0 ? `$${totalPrice.toFixed(2)}` : "Free"}
                   </span>
                 </div>
@@ -706,8 +706,8 @@ export default function TourBookingWidget() {
                   fontSize: "0.7rem",
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
-                  background: isSubmitting ? `${C.cream}33` : C.gold,
-                  color: isSubmitting ? `${C.cream}66` : C.midnight,
+                  background: isSubmitting ? `${C.cobalt}33` : C.deepNavy,
+                  color: isSubmitting ? `${C.cobalt}66` : C.gold,
                   border: "none",
                   padding: "0.85rem",
                   cursor: isSubmitting ? "not-allowed" : "pointer",
@@ -747,22 +747,22 @@ export default function TourBookingWidget() {
                 >
                   ✓
                 </div>
-                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5rem", color: C.gold, marginBottom: "0.5rem" }}>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5rem", color: C.deepNavy, marginBottom: "0.5rem" }}>
                   You're Booked!
                 </h3>
-                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.cream, lineHeight: 1.5 }}>
-                  A confirmation email has been sent to <strong style={{ color: C.warmWhite }}>{buyerEmail}</strong>
+                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.cobalt, lineHeight: 1.5 }}>
+                  A confirmation email has been sent to <strong style={{ color: C.midnight }}>{buyerEmail}</strong>
                 </p>
               </div>
 
               {/* Confirmation card */}
-              <div style={{ background: `${C.warmWhite}08`, border: `1px solid ${C.gold}44`, padding: "1.25rem" }}>
+              <div style={{ background: "white", border: `1px solid ${C.cobalt}33`, padding: "1.25rem" }}>
                 {/* Confirmation number */}
                 <div style={{ textAlign: "center", marginBottom: "1rem", paddingBottom: "1rem", borderBottom: `1px dashed ${C.gold}33` }}>
-                  <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: `${C.cream}88`, marginBottom: "0.3rem" }}>
+                  <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: C.cobalt, marginBottom: "0.3rem" }}>
                     Confirmation Number
                   </div>
-                  <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.4rem", fontWeight: 700, color: C.gold, letterSpacing: "0.05em" }}>
+                  <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.4rem", fontWeight: 700, color: C.deepNavy, letterSpacing: "0.05em" }}>
                     {confirmationId}
                   </div>
                 </div>
@@ -770,52 +770,52 @@ export default function TourBookingWidget() {
                 {/* Tour details */}
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", marginBottom: "1rem" }}>
                   <div>
-                    <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: `${C.cream}77`, marginBottom: "0.2rem" }}>Date</div>
-                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.warmWhite }}>
+                    <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.cobalt, marginBottom: "0.2rem" }}>Date</div>
+                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.midnight }}>
                       {selectedDate ? new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" }) : ""}
                     </div>
                   </div>
                   <div>
-                    <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: `${C.cream}77`, marginBottom: "0.2rem" }}>Time</div>
-                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.warmWhite }}>
+                    <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.cobalt, marginBottom: "0.2rem" }}>Time</div>
+                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.midnight }}>
                       {selectedSlot?.startTime}{selectedSlot?.endTime ? ` – ${selectedSlot.endTime}` : ""}
                     </div>
                   </div>
                   <div>
-                    <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: `${C.cream}77`, marginBottom: "0.2rem" }}>Guest</div>
-                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.warmWhite }}>{buyerName}</div>
+                    <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.cobalt, marginBottom: "0.2rem" }}>Guest</div>
+                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.midnight }}>{buyerName}</div>
                   </div>
                   <div>
-                    <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: `${C.cream}77`, marginBottom: "0.2rem" }}>Guests</div>
-                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.warmWhite }}>{totalGuests}</div>
+                    <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.cobalt, marginBottom: "0.2rem" }}>Guests</div>
+                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.midnight }}>{totalGuests}</div>
                   </div>
                 </div>
 
                 {/* Ticket breakdown */}
-                <div style={{ borderTop: `1px solid ${C.gold}22`, paddingTop: "0.75rem", marginBottom: "0.75rem" }}>
+                <div style={{ borderTop: `1px solid ${C.cobalt}22`, paddingTop: "0.75rem", marginBottom: "0.75rem" }}>
                   {tickets.adult > 0 && (
-                    <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cream, marginBottom: "0.25rem" }}>
+                    <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cobalt, marginBottom: "0.25rem" }}>
                       <span>Adult × {tickets.adult}</span><span>${(tickets.adult * 10).toFixed(2)}</span>
                     </div>
                   )}
                   {tickets.child > 0 && (
-                    <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cream, marginBottom: "0.25rem" }}>
+                    <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cobalt, marginBottom: "0.25rem" }}>
                       <span>Child (5–15) × {tickets.child}</span><span>${(tickets.child * 3).toFixed(2)}</span>
                     </div>
                   )}
                   {tickets.under5 > 0 && (
-                    <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cream, marginBottom: "0.25rem" }}>
+                    <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cobalt, marginBottom: "0.25rem" }}>
                       <span>Under 5 × {tickets.under5}</span><span>Free</span>
                     </div>
                   )}
                   {tickets.member > 0 && (
-                    <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cream, marginBottom: "0.25rem" }}>
+                    <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cobalt, marginBottom: "0.25rem" }}>
                       <span>Member × {tickets.member}</span><span>Free</span>
                     </div>
                   )}
-                  <div className="flex justify-between" style={{ borderTop: `1px solid ${C.gold}33`, paddingTop: "0.5rem", marginTop: "0.5rem" }}>
-                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem", color: C.gold, fontWeight: 700 }}>Total Paid</span>
-                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem", color: C.gold, fontWeight: 700 }}>
+                  <div className="flex justify-between" style={{ borderTop: `1px solid ${C.cobalt}33`, paddingTop: "0.5rem", marginTop: "0.5rem" }}>
+                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem", color: C.deepNavy, fontWeight: 700 }}>Total Paid</span>
+                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem", color: C.deepNavy, fontWeight: 700 }}>
                       {totalPrice > 0 ? `$${totalPrice.toFixed(2)}` : "Free"}
                     </span>
                   </div>
@@ -823,11 +823,11 @@ export default function TourBookingWidget() {
               </div>
 
               {/* Practical info */}
-              <div style={{ marginTop: "1.25rem", background: `${C.warmWhite}06`, border: `1px solid ${C.cream}15`, padding: "1rem" }}>
-                <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: C.gold, marginBottom: "0.75rem" }}>
+              <div style={{ marginTop: "1.25rem", background: `${C.cobalt}08`, border: `1px solid ${C.cobalt}22`, padding: "1rem" }}>
+                <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: C.deepNavy, marginBottom: "0.75rem" }}>
                   Before You Visit
                 </div>
-                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cream, lineHeight: 1.7 }}>
+                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cobalt, lineHeight: 1.7 }}>
                   <div style={{ marginBottom: "0.4rem" }}>📍 5656 Burlington Pike, Burlington, KY 41005</div>
                   <div style={{ marginBottom: "0.4rem" }}>👟 Wear comfortable walking shoes — the tour includes gravel paths</div>
                   <div style={{ marginBottom: "0.4rem" }}>📷 Photography is welcome inside the homestead</div>
@@ -846,8 +846,8 @@ export default function TourBookingWidget() {
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
                     background: "transparent",
-                    color: C.cream,
-                    border: `1px solid ${C.cream}44`,
+                    color: C.cobalt,
+                    border: `1px solid ${C.cobalt}44`,
                     padding: "0.65rem",
                     cursor: "pointer",
                   }}
