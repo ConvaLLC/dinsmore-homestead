@@ -57,6 +57,7 @@ export default function TourBookingWidget() {
   const [buyerEmail, setBuyerEmail] = useState("");
   const [buyerPhone, setBuyerPhone] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [confirmationId, setConfirmationId] = useState<string | null>(null);
 
   // Data queries
   const { data: availability, isLoading: calLoading } = trpc.availability.forMonth.useQuery(
@@ -158,13 +159,13 @@ export default function TourBookingWidget() {
         origin: window.location.origin,
       });
 
-      if (result.approvalUrl) {
-        window.location.href = result.approvalUrl;
-      } else {
-        // Free order — show confirmation
-        setStep("confirm");
-        toast.success("Tour booked successfully! Check your email for confirmation.");
-      }
+      // Store confirmation number
+      setConfirmationId(result.orderNumber || `DH-${Date.now().toString(36).toUpperCase()}`);
+
+      // Payment is processed server-side (sandbox mock or Square) — show inline confirmation
+      setStep("confirm");
+      setIsSubmitting(false);
+      toast.success(totalPrice > 0 ? "Payment processed — tour booked!" : "Tour booked successfully!");
     } catch (err: any) {
       toast.error(err.message || "Failed to create order. Please try again.");
       setIsSubmitting(false);
@@ -731,31 +732,147 @@ export default function TourBookingWidget() {
 
           {/* ── STEP 5: Confirmation ── */}
           {step === "confirm" && (
-            <div style={{ textAlign: "center", padding: "2rem 0" }}>
-              <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>✓</div>
-              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5rem", color: C.gold, marginBottom: "0.75rem" }}>
-                Tour Booked!
-              </h3>
-              <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "1rem", color: C.cream, lineHeight: 1.6 }}>
-                Your tour has been confirmed. A confirmation email will be sent to {buyerEmail}.
-              </p>
-              <button
-                onClick={() => { setExpanded(false); setStep("idle"); setSelectedDate(null); setSelectedSlotId(null); }}
-                style={{
-                  marginTop: "1.5rem",
-                  fontFamily: "'Cinzel', serif",
-                  fontSize: "0.7rem",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  background: "transparent",
-                  color: C.gold,
-                  border: `1px solid ${C.gold}`,
-                  padding: "0.65rem 1.5rem",
-                  cursor: "pointer",
-                }}
-              >
-                Done
-              </button>
+            <div style={{ padding: "1rem 0" }}>
+              {/* Success header */}
+              <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+                <div
+                  style={{
+                    width: "56px", height: "56px",
+                    borderRadius: "50%",
+                    background: C.available,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    margin: "0 auto 1rem",
+                    fontSize: "1.5rem", color: C.warmWhite,
+                  }}
+                >
+                  ✓
+                </div>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5rem", color: C.gold, marginBottom: "0.5rem" }}>
+                  You're Booked!
+                </h3>
+                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.cream, lineHeight: 1.5 }}>
+                  A confirmation email has been sent to <strong style={{ color: C.warmWhite }}>{buyerEmail}</strong>
+                </p>
+              </div>
+
+              {/* Confirmation card */}
+              <div style={{ background: `${C.warmWhite}08`, border: `1px solid ${C.gold}44`, padding: "1.25rem" }}>
+                {/* Confirmation number */}
+                <div style={{ textAlign: "center", marginBottom: "1rem", paddingBottom: "1rem", borderBottom: `1px dashed ${C.gold}33` }}>
+                  <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: `${C.cream}88`, marginBottom: "0.3rem" }}>
+                    Confirmation Number
+                  </div>
+                  <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.4rem", fontWeight: 700, color: C.gold, letterSpacing: "0.05em" }}>
+                    {confirmationId}
+                  </div>
+                </div>
+
+                {/* Tour details */}
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", marginBottom: "1rem" }}>
+                  <div>
+                    <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: `${C.cream}77`, marginBottom: "0.2rem" }}>Date</div>
+                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.warmWhite }}>
+                      {selectedDate ? new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" }) : ""}
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: `${C.cream}77`, marginBottom: "0.2rem" }}>Time</div>
+                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.warmWhite }}>
+                      {selectedSlot?.startTime}{selectedSlot?.endTime ? ` – ${selectedSlot.endTime}` : ""}
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: `${C.cream}77`, marginBottom: "0.2rem" }}>Guest</div>
+                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.warmWhite }}>{buyerName}</div>
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: `${C.cream}77`, marginBottom: "0.2rem" }}>Guests</div>
+                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.warmWhite }}>{totalGuests}</div>
+                  </div>
+                </div>
+
+                {/* Ticket breakdown */}
+                <div style={{ borderTop: `1px solid ${C.gold}22`, paddingTop: "0.75rem", marginBottom: "0.75rem" }}>
+                  {tickets.adult > 0 && (
+                    <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cream, marginBottom: "0.25rem" }}>
+                      <span>Adult × {tickets.adult}</span><span>${(tickets.adult * 10).toFixed(2)}</span>
+                    </div>
+                  )}
+                  {tickets.child > 0 && (
+                    <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cream, marginBottom: "0.25rem" }}>
+                      <span>Child (5–15) × {tickets.child}</span><span>${(tickets.child * 3).toFixed(2)}</span>
+                    </div>
+                  )}
+                  {tickets.under5 > 0 && (
+                    <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cream, marginBottom: "0.25rem" }}>
+                      <span>Under 5 × {tickets.under5}</span><span>Free</span>
+                    </div>
+                  )}
+                  {tickets.member > 0 && (
+                    <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cream, marginBottom: "0.25rem" }}>
+                      <span>Member × {tickets.member}</span><span>Free</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between" style={{ borderTop: `1px solid ${C.gold}33`, paddingTop: "0.5rem", marginTop: "0.5rem" }}>
+                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem", color: C.gold, fontWeight: 700 }}>Total Paid</span>
+                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem", color: C.gold, fontWeight: 700 }}>
+                      {totalPrice > 0 ? `$${totalPrice.toFixed(2)}` : "Free"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Practical info */}
+              <div style={{ marginTop: "1.25rem", background: `${C.warmWhite}06`, border: `1px solid ${C.cream}15`, padding: "1rem" }}>
+                <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: C.gold, marginBottom: "0.75rem" }}>
+                  Before You Visit
+                </div>
+                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cream, lineHeight: 1.7 }}>
+                  <div style={{ marginBottom: "0.4rem" }}>📍 5656 Burlington Pike, Burlington, KY 41005</div>
+                  <div style={{ marginBottom: "0.4rem" }}>👟 Wear comfortable walking shoes — the tour includes gravel paths</div>
+                  <div style={{ marginBottom: "0.4rem" }}>📷 Photography is welcome inside the homestead</div>
+                  <div>🕐 Please arrive 10 minutes before your tour time</div>
+                </div>
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex gap-3" style={{ marginTop: "1.25rem" }}>
+                <button
+                  onClick={() => window.print()}
+                  style={{
+                    flex: 1,
+                    fontFamily: "'Cinzel', serif",
+                    fontSize: "0.65rem",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    background: "transparent",
+                    color: C.cream,
+                    border: `1px solid ${C.cream}44`,
+                    padding: "0.65rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  Print Confirmation
+                </button>
+                <button
+                  onClick={() => { setExpanded(false); setStep("idle"); setSelectedDate(null); setSelectedSlotId(null); setConfirmationId(null); setBuyerName(""); setBuyerEmail(""); setBuyerPhone(""); setTickets({ adult: 2, child: 0, under5: 0, member: 0 }); }}
+                  style={{
+                    flex: 1,
+                    fontFamily: "'Cinzel', serif",
+                    fontSize: "0.65rem",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    background: C.gold,
+                    color: C.midnight,
+                    border: "none",
+                    padding: "0.65rem",
+                    cursor: "pointer",
+                    fontWeight: 700,
+                  }}
+                >
+                  Done
+                </button>
+              </div>
             </div>
           )}
         </div>

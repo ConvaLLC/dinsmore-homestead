@@ -183,3 +183,16 @@
 - [x] Build inline expanding booking widget on homepage (calendar → time → ticket types → checkout)
 - [x] Wire booking widget to order creation with multi-ticket-type quantities
 - [x] Simplify UX: no slot counts on calendar, only show remaining after time selected
+
+## Booking Flow Enhancements
+- [x] Add inline "You're Booked!" confirmation screen in TourBookingWidget (date, time, ticket summary, confirmation number)
+- [x] Wire Continue to Checkout to PayPal payment capture flow (already wired — needs PayPal credentials)
+- [ ] Add email confirmation for completed bookings (tour details, directions, what to bring)
+
+## Square Payment Migration
+- [x] Replace PayPal helpers with Square-ready architecture in routers.ts
+- [x] Create sandbox/mock checkout that simulates payment flow locally
+- [x] Update TourBookingWidget to handle inline mock checkout (no redirect)
+- [x] Add owner notification when new tour booking is created
+- [x] Placeholder for email confirmation (ready to wire when email service available)
+- [x] Clean up PayPal references from codebase

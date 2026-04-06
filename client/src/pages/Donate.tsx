@@ -52,9 +52,9 @@ export default function DonatePage() {
         anonymous: isAnonymous,
         origin: window.location.origin,
       });
-      if (result.approvalUrl) {
-        window.location.href = result.approvalUrl;
-      }
+      // Payment processed server-side — show confirmation
+      toast.success("Thank you for your generous donation!");
+      window.location.href = `/donate/confirm?paymentId=${result.paymentId}`;
     } catch (err: any) {
       toast.error(err.message || "Failed to process donation. Please try again.");
       setIsSubmitting(false);
@@ -313,7 +313,7 @@ export default function DonatePage() {
                   className="btn-vintage-filled w-full text-center"
                   style={{ opacity: isSubmitting ? 0.7 : 1, fontSize: "0.85rem" }}
                 >
-                  {isSubmitting ? "Processing..." : `Donate $${(finalAmount || 0).toFixed(2)} via PayPal`}
+                  {isSubmitting ? "Processing..." : `Donate $${(finalAmount || 0).toFixed(2)}`}
                 </button>
                 <p
                   style={{
@@ -325,7 +325,7 @@ export default function DonatePage() {
                     fontStyle: "italic",
                   }}
                 >
-                  Secure payment via PayPal. The Dinsmore Homestead Foundation is a 501(c)(3) non-profit — your donation may be tax-deductible.
+                  Secure payment processing. The Dinsmore Homestead Foundation is a 501(c)(3) non-profit — your donation may be tax-deductible.
                 </p>
               </div>
             </div>

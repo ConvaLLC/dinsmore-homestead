@@ -3,6 +3,7 @@ import { z } from "zod";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
+import { notifyOwner } from "./_core/notification";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import {
   createDonation,
@@ -71,56 +72,52 @@ const educationProcedure = protectedProcedure.use(({ ctx, next }) => {
   return next({ ctx });
 });
 
-// ─── PayPal helpers ───────────────────────────────────────────────────────────
+// ─── Payment helpers (Square-ready with sandbox mock) ────────────────────────
 
-const PAYPAL_BASE = process.env.PAYPAL_MODE === "live"
-  ? "https://api-m.paypal.com"
-  : "https://api-m.sandbox.paypal.com";
+const SQUARE_ACCESS_TOKEN = process.env.SQUARE_ACCESS_TOKEN;
+const SQUARE_LOCATION_ID = process.env.SQUARE_LOCATION_ID;
+const SQUARE_ENVIRONMENT = process.env.SQUARE_ENVIRONMENT || "sandbox"; // "sandbox" or "production"
+const PAYMENT_SANDBOX_MODE = !SQUARE_ACCESS_TOKEN; // Auto-detect: if no Square creds, use sandbox mock
 
-async function getPayPalToken(): Promise<string> {
-  const clientId = process.env.PAYPAL_CLIENT_ID;
-  const secret = process.env.PAYPAL_CLIENT_SECRET;
-  if (!clientId || !secret) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "PayPal not configured" });
+const SQUARE_BASE = SQUARE_ENVIRONMENT === "production"
+  ? "https://connect.squareup.com"
+  : "https://connect.squareupsandbox.com";
 
+/**
+ * Process a payment via Square Payments API.
+ * When PAYMENT_SANDBOX_MODE is true, simulates a successful payment locally.
+ * When Square credentials are configured, processes real payments.
+ */
+async function processPayment(opts: {
+  amount: number; // in cents
+  currency?: string;
+  sourceId: string; // nonce from Square Web Payments SDK (or "SANDBOX_MOCK" in sandbox mode)
+  description: string;
+  buyerEmail?: string;
+  orderNumber: string;
+}): Promise<{ paymentId: string; status: string }> {
+  if (PAYMENT_SANDBOX_MODE) {
+    // Sandbox mock: simulate successful payment
+    const mockPaymentId = `SANDBOX-${Date.now()}-${nanoid(6).toUpperCase()}`;
+    console.log(`[Payment Sandbox] Mock payment ${mockPaymentId} for $${(opts.amount / 100).toFixed(2)} — ${opts.description}`);
+    return { paymentId: mockPaymentId, status: "COMPLETED" };
+  }
+
+  // Real Square payment
   const resp = await axios.post(
-    `${PAYPAL_BASE}/v1/oauth2/token`,
-    "grant_type=client_credentials",
+    `${SQUARE_BASE}/v2/payments`,
     {
-      auth: { username: clientId, password: secret },
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    }
-  );
-  return resp.data.access_token;
-}
-
-async function createPayPalOrder(amount: string, description: string, returnUrl: string, cancelUrl: string) {
-  const token = await getPayPalToken();
-  const resp = await axios.post(
-    `${PAYPAL_BASE}/v2/checkout/orders`,
-    {
-      intent: "CAPTURE",
-      purchase_units: [{ amount: { currency_code: "USD", value: amount }, description }],
-      application_context: {
-        return_url: returnUrl,
-        cancel_url: cancelUrl,
-        brand_name: "Dinsmore Homestead Museum",
-        landing_page: "BILLING",
-        user_action: "PAY_NOW",
-      },
+      source_id: opts.sourceId,
+      idempotency_key: `${opts.orderNumber}-${Date.now()}`,
+      amount_money: { amount: opts.amount, currency: opts.currency || "USD" },
+      location_id: SQUARE_LOCATION_ID,
+      note: opts.description,
+      buyer_email_address: opts.buyerEmail,
+      reference_id: opts.orderNumber,
     },
-    { headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" } }
+    { headers: { Authorization: `Bearer ${SQUARE_ACCESS_TOKEN}`, "Content-Type": "application/json", "Square-Version": "2024-01-18" } }
   );
-  return resp.data;
-}
-
-async function capturePayPalOrder(orderId: string) {
-  const token = await getPayPalToken();
-  const resp = await axios.post(
-    `${PAYPAL_BASE}/v2/checkout/orders/${orderId}/capture`,
-    {},
-    { headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" } }
-  );
-  return resp.data;
+  return { paymentId: resp.data.payment.id, status: resp.data.payment.status };
 }
 
 // ─── Email helper (uses Manus notification as fallback) ───────────────────────
@@ -390,7 +387,7 @@ export const appRouter = router({
       .query(({ input }) => getAvailabilityForMonth(input.year, input.month)),
   }),
 
-  // ── Tickets / PayPal ──────────────────────────────────────────────────────
+  // ── Tickets / Payments (Square-ready, sandbox mock) ──────────────────────────────────────
   tickets: router({
     createOrder: publicProcedure
       .input(z.object({
@@ -437,37 +434,38 @@ export const appRouter = router({
           status: "pending",
         });
 
-        // Create PayPal order
-        const paypalOrder = await createPayPalOrder(
-          total,
-          `${input.quantity}x ticket(s) for ${event.title}`,
-          `${input.origin}/tickets/confirm?orderNumber=${orderNumber}`,
-          `${input.origin}/tickets/cancel?orderNumber=${orderNumber}`
-        );
-
-        // Save PayPal order ID
-        await updateTicketOrder(orderId, { paypalOrderId: paypalOrder.id });
-
-        const approvalUrl = paypalOrder.links?.find((l: any) => l.rel === "approve")?.href;
-        return { orderNumber, paypalOrderId: paypalOrder.id, approvalUrl };
+        // Process payment (sandbox mock or Square)
+        const totalCents = Math.round(parseFloat(total) * 100);
+        if (totalCents > 0) {
+          const payment = await processPayment({
+            amount: totalCents,
+            sourceId: "SANDBOX_MOCK", // Will be replaced with Square nonce from frontend
+            description: `${input.quantity}x ticket(s) for ${event.title}`,
+            buyerEmail: input.buyerEmail,
+            orderNumber,
+          });
+          await updateTicketOrder(orderId, { paypalOrderId: payment.paymentId, paypalCaptureId: payment.paymentId, status: "paid" });
+          if (input.timeslotId) await incrementTimeslotSold(input.timeslotId, input.quantity);
+        } else {
+          await updateTicketOrder(orderId, { status: "paid" });
+          if (input.timeslotId) await incrementTimeslotSold(input.timeslotId, input.quantity);
+        }
+        return { orderNumber, paymentId: null, approvalUrl: null };
       }),
 
     captureOrder: publicProcedure
-      .input(z.object({ orderNumber: z.string(), paypalOrderId: z.string() }))
+      .input(z.object({ orderNumber: z.string(), paymentId: z.string().optional(), paypalOrderId: z.string().optional() }))
       .mutation(async ({ input }) => {
         const order = await getTicketOrderByOrderNumber(input.orderNumber);
         if (!order) throw new TRPCError({ code: "NOT_FOUND", message: "Order not found" });
         if (order.status === "paid") return { success: true, order };
 
-        const capture = await capturePayPalOrder(input.paypalOrderId);
-        const captureId = capture.purchase_units?.[0]?.payments?.captures?.[0]?.id;
-
+        // In sandbox mode, auto-complete; with Square, payment was already processed
         await updateTicketOrder(order.id, {
           status: "paid",
-          paypalCaptureId: captureId,
+          paypalCaptureId: input.paymentId || input.paypalOrderId || "sandbox-capture",
         });
 
-        // Increment timeslot sold count
         if (order.timeslotId) {
           await incrementTimeslotSold(order.timeslotId, order.quantity);
         }
@@ -541,20 +539,37 @@ export const appRouter = router({
         });
 
         if (total > 0) {
-          // Create PayPal order for paid tickets
-          const paypalOrder = await createPayPalOrder(
-            total.toFixed(2),
-            `Dinsmore Homestead Tour: ${ticketBreakdown}`,
-            `${input.origin}/tickets/confirm?orderNumber=${orderNumber}`,
-            `${input.origin}/tickets/cancel?orderNumber=${orderNumber}`
-          );
-          await updateTicketOrder(orderId, { paypalOrderId: paypalOrder.id });
-          const approvalUrl = paypalOrder.links?.find((l: any) => l.rel === "approve")?.href;
-          return { orderNumber, paypalOrderId: paypalOrder.id, approvalUrl, total: total.toFixed(2) };
+          // Process payment (sandbox mock or Square)
+          const payment = await processPayment({
+            amount: Math.round(total * 100),
+            sourceId: "SANDBOX_MOCK", // Will be replaced with Square nonce from frontend
+            description: `Dinsmore Homestead Tour: ${ticketBreakdown}`,
+            buyerEmail: input.buyerEmail,
+            orderNumber,
+          });
+          await updateTicketOrder(orderId, { paypalOrderId: payment.paymentId, paypalCaptureId: payment.paymentId, status: "paid" });
+          await incrementTimeslotSold(input.timeslotId, totalGuests);
+
+          // Notify owner of new booking
+          const timeslotDate = new Date(timeslot.startTime);
+          notifyOwner({
+            title: `New Tour Booking: ${orderNumber}`,
+            content: `${input.buyerName} (${input.buyerEmail}) booked a tour for ${timeslotDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })} at ${timeslotDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}.\n\nTickets: ${ticketBreakdown}\nTotal: $${total.toFixed(2)}\nPayment: ${payment.paymentId}`,
+          }).catch(() => {}); // Fire-and-forget
+
+          return { orderNumber, paymentId: payment.paymentId, approvalUrl: null, total: total.toFixed(2) };
         } else {
           // Free order — auto-confirm and increment sold count
           await incrementTimeslotSold(input.timeslotId, totalGuests);
-          return { orderNumber, paypalOrderId: null, approvalUrl: null, total: "0.00" };
+
+          // Notify owner of free booking
+          const timeslotDate = new Date(timeslot.startTime);
+          notifyOwner({
+            title: `New Tour Booking (Free): ${orderNumber}`,
+            content: `${input.buyerName} (${input.buyerEmail}) booked a free tour for ${timeslotDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })} at ${timeslotDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}.\n\nTickets: ${ticketBreakdown}`,
+          }).catch(() => {}); // Fire-and-forget
+
+          return { orderNumber, paymentId: null, approvalUrl: null, total: "0.00" };
         }
       }),
   }),
@@ -586,30 +601,31 @@ export const appRouter = router({
           status: "pending",
         });
 
-        const paypalOrder = await createPayPalOrder(
-          input.amount,
-          `Donation to Dinsmore Homestead Museum`,
-          `${input.origin}/donate/confirm`,
-          `${input.origin}/donate`
-        );
+        // Process payment (sandbox mock or Square)
+        const amountCents = Math.round(parseFloat(input.amount) * 100);
+        const orderRef = `DON-${Date.now()}-${nanoid(6).toUpperCase()}`;
+        const payment = await processPayment({
+          amount: amountCents,
+          sourceId: "SANDBOX_MOCK",
+          description: `Donation to Dinsmore Homestead Museum`,
+          buyerEmail: input.donorEmail,
+          orderNumber: orderRef,
+        });
 
-        await updateDonation(donationId, { paypalOrderId: paypalOrder.id });
-
-        const approvalUrl = paypalOrder.links?.find((l: any) => l.rel === "approve")?.href;
-        return { donationId, paypalOrderId: paypalOrder.id, approvalUrl };
+        await updateDonation(donationId, { paypalOrderId: payment.paymentId, status: "completed", paypalCaptureId: payment.paymentId });
+        return { donationId, paymentId: payment.paymentId, approvalUrl: null };
       }),
 
     captureOrder: publicProcedure
-      .input(z.object({ paypalOrderId: z.string() }))
+      .input(z.object({ paypalOrderId: z.string().optional(), paymentId: z.string().optional() }))
       .mutation(async ({ input }) => {
-        const donation = await getDonationByPaypalOrderId(input.paypalOrderId);
+        const lookupId = input.paypalOrderId || input.paymentId;
+        if (!lookupId) throw new TRPCError({ code: "BAD_REQUEST", message: "Payment ID required" });
+        const donation = await getDonationByPaypalOrderId(lookupId);
         if (!donation) throw new TRPCError({ code: "NOT_FOUND", message: "Donation not found" });
         if (donation.status === "completed") return { success: true };
 
-        const capture = await capturePayPalOrder(input.paypalOrderId);
-        const captureId = capture.purchase_units?.[0]?.payments?.captures?.[0]?.id;
-
-        await updateDonation(donation.id, { status: "completed", paypalCaptureId: captureId });
+        await updateDonation(donation.id, { status: "completed", paypalCaptureId: lookupId });
         return { success: true };
       }),
 

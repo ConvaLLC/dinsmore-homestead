@@ -118,9 +118,9 @@ export default function EventDetailPage() {
         origin: window.location.origin,
       });
 
-      if (result.approvalUrl) {
-        window.location.href = result.approvalUrl;
-      }
+      // Payment processed server-side — show confirmation
+      toast.success("Booking confirmed!");
+      window.location.href = `/tickets/confirm?orderNumber=${result.orderNumber}`;
     } catch (err: any) {
       toast.error(err.message || "Failed to create order. Please try again.");
       setIsSubmitting(false);
@@ -459,7 +459,7 @@ export default function EventDetailPage() {
                       fontStyle: "italic",
                     }}
                   >
-                    Secure payment via PayPal
+                    Secure payment processing
                   </div>
                 </div>
 
@@ -469,7 +469,7 @@ export default function EventDetailPage() {
                   className="btn-vintage-filled w-full text-center"
                   style={{ opacity: isSubmitting ? 0.7 : 1 }}
                 >
-                  {isSubmitting ? "Processing..." : total === 0 ? "Reserve Free Tickets" : `Pay $${total.toFixed(2)} via PayPal`}
+                  {isSubmitting ? "Processing..." : total === 0 ? "Reserve Free Tickets" : `Pay $${total.toFixed(2)}`}
                 </button>
 
                 <p
@@ -482,7 +482,7 @@ export default function EventDetailPage() {
                     fontStyle: "italic",
                   }}
                 >
-                  You will be redirected to PayPal to complete your purchase securely.
+                  Your payment will be processed securely.
                 </p>
               </div>
             </div>
