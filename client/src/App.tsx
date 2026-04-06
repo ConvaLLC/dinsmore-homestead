@@ -31,6 +31,7 @@ import AdminHeroSlides from "./pages/admin/AdminHeroSlides";
 import AdminOrders from "./pages/admin/AdminOrders";
 import AdminDonations from "./pages/admin/AdminDonations";
 import AdminEducation from "./pages/admin/AdminEducation";
+import AdminMemberships from "./pages/admin/AdminMemberships";
 
 function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -84,6 +85,7 @@ function Router() {
       <Route path="/admin/hero-slides" component={() => <AdminLayout><AdminHeroSlides /></AdminLayout>} />
       <Route path="/admin/orders" component={() => <AdminLayout><AdminOrders /></AdminLayout>} />
       <Route path="/admin/donations" component={() => <AdminLayout><AdminDonations /></AdminLayout>} />
+      <Route path="/admin/memberships" component={() => <AdminLayout><AdminMemberships /></AdminLayout>} />
       <Route path="/admin/education" component={() => <AdminLayout><AdminEducation /></AdminLayout>} />
 
       <Route path="/404" component={() => <PublicLayout><NotFound /></PublicLayout>} />

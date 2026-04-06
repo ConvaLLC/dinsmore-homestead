@@ -201,3 +201,30 @@
 - [x] Fix booking calendar dark mode — lighten background for readability against dark navy
 - [x] Add cost or FREE label to each ticket type in quantity selection step
 - [x] Remove "What's On at the Homestead" upcoming events strip section
+
+## Book a Tour Tile Scroll
+- [x] Wire "Book a Tour" hero tile to smooth-scroll to booking widget section
+
+## Admin Bookings Dashboard
+- [x] Add admin bookings page with upcoming tours grouped by date/time
+- [x] Show guest counts, contact info, ticket breakdown per booking
+- [ ] Add ability to cancel/refund orders from admin
+
+## Membership Upsell in Booking Flow
+- [x] Add memberships table to schema (senior $20, individual $35, family $60, friends $100)
+- [x] Add membership step after ticket selection in TourBookingWidget
+- [x] Show membership tiers with perks: free admission, 10% gift shop discount, newsletter, 2 guest passes
+- [x] Include membership cost in order total
+- [x] Store membership purchase with ticket order
+
+## Optional Donation in Booking Flow
+- [x] Add optional donation step in booking flow (any amount)
+- [x] Include donation amount in order total
+- [x] Store donation with ticket order
+
+## Square Payment Integration
+- [ ] Placeholder for Square credentials (ready to wire when provided)
+
+## Bug Fixes (Admin Pages)
+- [x] Fix AdminOrders hooks ordering error (React "Rendered more hooks than during the previous render")
+- [x] Fix AdminMemberships hooks ordering error (same issue — hooks after early return)

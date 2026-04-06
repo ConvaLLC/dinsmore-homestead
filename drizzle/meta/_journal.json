@@ -15,6 +15,13 @@
       "when": 1774448790635,
       "tag": "0001_naive_nocturne",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1775515134123,
+      "tag": "0002_silly_scourge",
+      "breakpoints": true
     }
   ]
 }

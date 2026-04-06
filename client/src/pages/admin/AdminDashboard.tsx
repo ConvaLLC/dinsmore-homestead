@@ -25,6 +25,7 @@ function AdminNav() {
     { href: "/admin/hero-slides", label: "Hero Slider", icon: <Image size={16} /> },
     { href: "/admin/orders", label: "Ticket Orders", icon: <Ticket size={16} /> },
     { href: "/admin/donations", label: "Donations", icon: <Heart size={16} /> },
+    { href: "/admin/memberships", label: "Memberships", icon: <Users size={16} /> },
     { href: "/admin/education", label: "Education", icon: <BookOpen size={16} /> },
   ];
 

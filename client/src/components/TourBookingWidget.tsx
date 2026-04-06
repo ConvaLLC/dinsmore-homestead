@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from "react";
 import { trpc } from "@/lib/trpc";
-import { Calendar, Clock, ChevronLeft, ChevronRight, Minus, Plus, Ticket, User, Users, Loader2 } from "lucide-react";
+import { Calendar, Clock, ChevronLeft, ChevronRight, Minus, Plus, Ticket, User, Users, Loader2, Heart, Award } from "lucide-react";
 import { toast } from "sonner";
 
 // ── Palette ──────────────────────────────────────────────────────────────────
@@ -35,8 +35,28 @@ const TICKET_TYPES = [
 
 type TicketKey = typeof TICKET_TYPES[number]["key"];
 
+// ── Membership tiers ─────────────────────────────────────────────────────────
+const MEMBERSHIP_TIERS = [
+  { key: "senior",     label: "Senior",     price: 20,  desc: "65 and older" },
+  { key: "individual", label: "Individual", price: 35,  desc: "Single membership" },
+  { key: "family",     label: "Family",     price: 60,  desc: "Household membership" },
+  { key: "friends",    label: "Friends",    price: 100, desc: "Premium supporter" },
+] as const;
+
+type MembershipKey = typeof MEMBERSHIP_TIERS[number]["key"] | null;
+
+const MEMBERSHIP_PERKS = [
+  "Free admission for tours of the historic Dinsmore Home",
+  "10% discount on all gift shop items (excl. consignments)",
+  "Subscription to the Dinsmore Dispatch newsletter",
+  "2 Guest passes per year",
+];
+
+// ── Quick donation presets ───────────────────────────────────────────────────
+const DONATION_PRESETS = [5, 10, 25, 50];
+
 // ── Steps ────────────────────────────────────────────────────────────────────
-type Step = "idle" | "date" | "time" | "tickets" | "info" | "confirm";
+type Step = "idle" | "date" | "time" | "tickets" | "extras" | "info" | "confirm";
 
 export default function TourBookingWidget() {
   const [step, setStep] = useState<Step>("idle");
@@ -53,6 +73,13 @@ export default function TourBookingWidget() {
   const [tickets, setTickets] = useState<Record<TicketKey, number>>({
     adult: 2, child: 0, under5: 0, member: 0,
   });
+
+  // Extras state
+  const [selectedMembership, setSelectedMembership] = useState<MembershipKey>(null);
+  const [donationAmount, setDonationAmount] = useState(0);
+  const [customDonation, setCustomDonation] = useState("");
+
+  // Contact info
   const [buyerName, setBuyerName] = useState("");
   const [buyerEmail, setBuyerEmail] = useState("");
   const [buyerPhone, setBuyerPhone] = useState("");
@@ -77,7 +104,11 @@ export default function TourBookingWidget() {
   }, [selectedDayData, selectedSlotId]);
 
   const totalGuests = tickets.adult + tickets.child + tickets.under5 + tickets.member;
-  const totalPrice = (tickets.adult * 10) + (tickets.child * 3);
+  const ticketTotal = (tickets.adult * 10) + (tickets.child * 3);
+  const membershipTotal = selectedMembership
+    ? (MEMBERSHIP_TIERS.find(t => t.key === selectedMembership)?.price ?? 0)
+    : 0;
+  const grandTotal = ticketTotal + membershipTotal + donationAmount;
   const slotsAvailable = selectedSlot ? selectedSlot.capacity - selectedSlot.ticketsSold : 0;
 
   const createTourOrder = trpc.tickets.createTourOrder.useMutation();
@@ -112,12 +143,29 @@ export default function TourBookingWidget() {
       const newVal = Math.max(0, Math.min(10, prev[key] + delta));
       const newTickets = { ...prev, [key]: newVal };
       const newTotal = newTickets.adult + newTickets.child + newTickets.under5 + newTickets.member;
-      if (newTotal > slotsAvailable) return prev; // Don't exceed capacity
+      if (newTotal > slotsAvailable) return prev;
       return newTickets;
     });
   };
 
-  // ── Start booking ──────────────────────────────────────────────────────────
+  // ── Donation helpers ───────────────────────────────────────────────────────
+  const handleDonationPreset = (amount: number) => {
+    if (donationAmount === amount) {
+      setDonationAmount(0);
+      setCustomDonation("");
+    } else {
+      setDonationAmount(amount);
+      setCustomDonation("");
+    }
+  };
+
+  const handleCustomDonation = (val: string) => {
+    setCustomDonation(val);
+    const num = parseFloat(val);
+    setDonationAmount(isNaN(num) || num < 0 ? 0 : Math.round(num * 100) / 100);
+  };
+
+  // ── Navigation ─────────────────────────────────────────────────────────────
   const handleStart = () => {
     setExpanded(true);
     setStep("date");
@@ -140,6 +188,10 @@ export default function TourBookingWidget() {
       toast.error("Please select at least one ticket");
       return;
     }
+    setStep("extras");
+  };
+
+  const handleExtrasConfirm = () => {
     setStep("info");
   };
 
@@ -156,16 +208,17 @@ export default function TourBookingWidget() {
         buyerEmail: buyerEmail.trim(),
         buyerPhone: buyerPhone.trim() || undefined,
         tickets,
+        membership: selectedMembership
+          ? { tier: selectedMembership, price: MEMBERSHIP_TIERS.find(t => t.key === selectedMembership)!.price }
+          : undefined,
+        donation: donationAmount > 0 ? donationAmount : 0,
         origin: window.location.origin,
       });
 
-      // Store confirmation number
       setConfirmationId(result.orderNumber || `DH-${Date.now().toString(36).toUpperCase()}`);
-
-      // Payment is processed server-side (sandbox mock or Square) — show inline confirmation
       setStep("confirm");
       setIsSubmitting(false);
-      toast.success(totalPrice > 0 ? "Payment processed — tour booked!" : "Tour booked successfully!");
+      toast.success(grandTotal > 0 ? "Payment processed — tour booked!" : "Tour booked successfully!");
     } catch (err: any) {
       toast.error(err.message || "Failed to create order. Please try again.");
       setIsSubmitting(false);
@@ -175,7 +228,42 @@ export default function TourBookingWidget() {
   const handleBack = () => {
     if (step === "time") { setStep("date"); setSelectedSlotId(null); }
     else if (step === "tickets") setStep("time");
-    else if (step === "info") setStep("tickets");
+    else if (step === "extras") setStep("tickets");
+    else if (step === "info") setStep("extras");
+  };
+
+  const resetAll = () => {
+    setExpanded(false);
+    setStep("idle");
+    setSelectedDate(null);
+    setSelectedSlotId(null);
+    setConfirmationId(null);
+    setBuyerName("");
+    setBuyerEmail("");
+    setBuyerPhone("");
+    setTickets({ adult: 2, child: 0, under5: 0, member: 0 });
+    setSelectedMembership(null);
+    setDonationAmount(0);
+    setCustomDonation("");
+  };
+
+  // ── Shared styles ──────────────────────────────────────────────────────────
+  const cinzelLabel: React.CSSProperties = {
+    fontFamily: "'Cinzel', serif",
+    fontSize: "0.6rem",
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+    color: C.cobalt,
+    display: "block",
+    marginBottom: "0.35rem",
+  };
+
+  const sectionTitle: React.CSSProperties = {
+    fontFamily: "'Playfair Display', serif",
+    fontSize: "1rem",
+    color: C.midnight,
+    textAlign: "center",
+    marginBottom: "1rem",
   };
 
   // ── Render ─────────────────────────────────────────────────────────────────
@@ -259,7 +347,7 @@ export default function TourBookingWidget() {
       {/* Expanding booking area */}
       <div
         style={{
-          maxHeight: expanded ? "1200px" : "0",
+          maxHeight: expanded ? "2000px" : "0",
           overflow: "hidden",
           transition: "max-height 0.5s ease",
         }}
@@ -274,45 +362,38 @@ export default function TourBookingWidget() {
               padding: "0 1.5rem 1rem",
             }}
           >
-            {(["date", "time", "tickets", "info"] as Step[]).map((s, i) => {
-              const labels = ["Date", "Time", "Tickets", "Info"];
-              const stepOrder = ["date", "time", "tickets", "info"];
+            {(["date", "time", "tickets", "extras", "info"] as Step[]).map((s, i) => {
+              const labels = ["Date", "Time", "Tickets", "Extras", "Info"];
+              const stepOrder = ["date", "time", "tickets", "extras", "info"];
               const currentIdx = stepOrder.indexOf(step);
-              const isActive = step === s;
-              const isDone = stepOrder.indexOf(s) < currentIdx;
+              const isCompleted = i < currentIdx;
+              const isCurrent = s === step;
               return (
-                <div key={s} className="flex items-center gap-1.5">
+                <div key={s} className="flex items-center gap-1">
                   <div
                     style={{
-                      width: "24px",
-                      height: "24px",
-                      borderRadius: "50%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: "0.7rem",
-                      fontFamily: "'Cinzel', serif",
-                      fontWeight: 700,
-                      background: isActive ? C.deepNavy : isDone ? C.cobalt : `${C.cobalt}22`,
-                      color: isActive ? C.gold : isDone ? C.warmWhite : `${C.cobalt}66`,
+                      width: "20px", height: "20px", borderRadius: "50%",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: "0.55rem", fontWeight: 700,
+                      background: isCompleted ? C.available : isCurrent ? C.deepNavy : `${C.cobalt}22`,
+                      color: isCompleted || isCurrent ? C.warmWhite : C.cobalt,
                       transition: "all 0.2s",
                     }}
                   >
-                    {isDone ? "✓" : i + 1}
+                    {isCompleted ? "✓" : i + 1}
                   </div>
-                  <span
-                    style={{
-                      fontFamily: "'Cinzel', serif",
-                      fontSize: "0.55rem",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: isActive ? C.deepNavy : isDone ? C.cobalt : `${C.cobalt}55`,
-                    }}
-                  >
+                  <span style={{
+                    fontFamily: "'Cinzel', serif",
+                    fontSize: "0.5rem",
+                    letterSpacing: "0.05em",
+                    textTransform: "uppercase",
+                    color: isCurrent ? C.deepNavy : C.cobalt,
+                    fontWeight: isCurrent ? 700 : 400,
+                  }}>
                     {labels[i]}
                   </span>
-                  {i < 3 && (
-                    <div style={{ width: "20px", height: "1px", background: isDone ? C.cobalt : `${C.cobalt}33`, margin: "0 0.25rem" }} />
+                  {i < stepOrder.length - 1 && (
+                    <div style={{ width: "16px", height: "1px", background: `${C.cobalt}33` }} />
                   )}
                 </div>
               );
@@ -321,45 +402,46 @@ export default function TourBookingWidget() {
         )}
 
         {/* Back button */}
-        {expanded && step !== "date" && step !== "idle" && step !== "confirm" && (
+        {expanded && step !== "idle" && step !== "date" && step !== "confirm" && (
           <div style={{ padding: "0 1.5rem 0.5rem" }}>
             <button
               onClick={handleBack}
               style={{
-                fontFamily: "'EB Garamond', serif",
-                fontSize: "0.85rem",
-                color: C.cobalt,
-                background: "none",
+                fontFamily: "'Cinzel', serif",
+                fontSize: "0.55rem",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                background: "transparent",
                 border: "none",
+                color: C.cobalt,
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
-                gap: "0.3rem",
-                padding: "0.25rem 0",
+                gap: "0.25rem",
+                padding: 0,
               }}
             >
-              <ChevronLeft size={14} /> Back
+              <ChevronLeft size={12} /> Back
             </button>
           </div>
         )}
 
-        <div style={{ padding: "0 1.5rem 2rem", maxWidth: "600px", margin: "0 auto" }}>
+        <div style={{ padding: "0 1.5rem 2rem", maxWidth: "480px", margin: "0 auto" }}>
+
           {/* ── STEP 1: Calendar ── */}
           {step === "date" && (
             <div>
-              <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.cobalt, textAlign: "center", marginBottom: "1rem" }}>
-                Select a date to see available tour times
-              </p>
+              <p style={sectionTitle}>Choose a Tour Date</p>
 
               {/* Month nav */}
-              <div className="flex items-center justify-between mb-3">
-                <button onClick={prevMonth} style={{ background: "none", border: "none", color: C.cobalt, cursor: "pointer", padding: "0.4rem" }}>
+              <div className="flex items-center justify-between" style={{ marginBottom: "0.75rem" }}>
+                <button onClick={prevMonth} style={{ background: "transparent", border: "none", cursor: "pointer", color: C.cobalt, padding: "0.25rem" }}>
                   <ChevronLeft size={18} />
                 </button>
-                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", color: C.midnight, fontWeight: 600 }}>
+                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", color: C.midnight, fontWeight: 600 }}>
                   {MONTH_NAMES[calMonth - 1]} {calYear}
                 </span>
-                <button onClick={nextMonth} style={{ background: "none", border: "none", color: C.cobalt, cursor: "pointer", padding: "0.4rem" }}>
+                <button onClick={nextMonth} style={{ background: "transparent", border: "none", cursor: "pointer", color: C.cobalt, padding: "0.25rem" }}>
                   <ChevronRight size={18} />
                 </button>
               </div>
@@ -367,7 +449,7 @@ export default function TourBookingWidget() {
               {/* Day headers */}
               <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: "2px", marginBottom: "4px" }}>
                 {DAY_LABELS.map((d, i) => (
-                  <div key={i} style={{ textAlign: "center", fontFamily: "'Cinzel', serif", fontSize: "0.6rem", color: C.cobalt, letterSpacing: "0.05em", padding: "0.3rem 0" }}>
+                  <div key={i} style={{ textAlign: "center", fontFamily: "'Cinzel', serif", fontSize: "0.5rem", color: C.cobalt, letterSpacing: "0.05em", padding: "0.35rem 0" }}>
                     {d}
                   </div>
                 ))}
@@ -375,45 +457,44 @@ export default function TourBookingWidget() {
 
               {/* Calendar grid */}
               <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: "2px" }}>
-                {/* Empty cells for offset */}
                 {Array.from({ length: firstDayOfWeek }).map((_, i) => (
                   <div key={`empty-${i}`} />
                 ))}
                 {Array.from({ length: daysInMonth }).map((_, i) => {
                   const day = i + 1;
                   const dateStr = `${calYear}-${String(calMonth).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-                  const isAvailable = availableDates.has(dateStr);
-                  const isToday = dateStr === `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
-                  const isPast = new Date(dateStr) < new Date(today.getFullYear(), today.getMonth(), today.getDate());
-                  const isSelected = selectedDate === dateStr;
+                  const hasSlots = availableDates.has(dateStr);
+                  const isSelected = dateStr === selectedDate;
+                  const isPast = new Date(dateStr + "T23:59:59") < today;
 
                   return (
                     <button
                       key={day}
-                      onClick={isAvailable && !isPast ? () => handleDateSelect(dateStr) : undefined}
-                      disabled={!isAvailable || isPast}
+                      disabled={!hasSlots || isPast}
+                      onClick={() => hasSlots && !isPast && handleDateSelect(dateStr)}
                       style={{
                         aspectRatio: "1",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
                         justifyContent: "center",
-                        border: isSelected ? `2px solid ${C.deepNavy}` : isToday ? `1px solid ${C.cobalt}55` : `1px solid ${C.cobalt}22`,
-                        background: isSelected ? `${C.deepNavy}22` : isAvailable && !isPast ? `${C.available}15` : "transparent",
-                        color: isPast ? `${C.cobalt}44` : isAvailable ? C.midnight : `${C.cobalt}55`,
-                        cursor: isAvailable && !isPast ? "pointer" : "default",
-                        fontFamily: "'Playfair Display', serif",
-                        fontSize: "0.9rem",
-                        fontWeight: isAvailable ? 600 : 400,
+                        background: isSelected ? C.deepNavy : hasSlots && !isPast ? "white" : "transparent",
+                        color: isSelected ? C.warmWhite : hasSlots && !isPast ? C.midnight : `${C.cobalt}44`,
+                        border: hasSlots && !isPast ? `1px solid ${C.cobalt}33` : "1px solid transparent",
+                        cursor: hasSlots && !isPast ? "pointer" : "default",
+                        fontFamily: "'EB Garamond', serif",
+                        fontSize: "0.85rem",
+                        fontWeight: isSelected ? 700 : 400,
                         transition: "all 0.15s",
                         position: "relative",
                       }}
                     >
                       {day}
-                      {isAvailable && !isPast && (
-                        <span style={{
+                      {hasSlots && !isPast && (
+                        <div style={{
                           width: "4px", height: "4px", borderRadius: "50%",
-                          background: C.available, marginTop: "2px",
+                          background: isSelected ? C.gold : C.available,
+                          marginTop: "2px",
                         }} />
                       )}
                     </button>
@@ -422,68 +503,62 @@ export default function TourBookingWidget() {
               </div>
 
               {calLoading && (
-                <div style={{ textAlign: "center", padding: "1rem", color: C.cobalt, fontFamily: "'EB Garamond', serif", fontStyle: "italic" }}>
-                  Loading availability…
+                <div style={{ textAlign: "center", padding: "1rem", color: C.cobalt }}>
+                  <Loader2 size={16} className="animate-spin" style={{ display: "inline" }} /> Loading availability…
                 </div>
               )}
 
               {/* Legend */}
-              <div className="flex items-center justify-center gap-4 mt-3">
-                <div className="flex items-center gap-1.5">
-                  <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: C.available, display: "inline-block" }} />
-                  <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.78rem", color: C.cobalt }}>Tours Available</span>
+              <div className="flex items-center justify-center gap-4" style={{ marginTop: "0.75rem" }}>
+                <div className="flex items-center gap-1">
+                  <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: C.available }} />
+                  <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.75rem", color: C.cobalt }}>Tours Available</span>
                 </div>
               </div>
             </div>
           )}
 
           {/* ── STEP 2: Time Selection ── */}
-          {step === "time" && selectedDate && selectedDayData && (
+          {step === "time" && selectedDayData && (
             <div>
-              <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", color: C.midnight, textAlign: "center", marginBottom: "0.5rem" }}>
+              <p style={sectionTitle}>
                 {new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
               </p>
-              <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: C.cobalt, textAlign: "center", marginBottom: "1.25rem" }}>
-                Choose your tour time
-              </p>
-
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "0.5rem" }}>
+              <div className="space-y-2">
                 {selectedDayData.events.map(slot => {
-                  const avail = slot.capacity - slot.ticketsSold;
-                  const isFull = avail <= 0;
-                  const isSelected = selectedSlotId === slot.slotId;
-
+                  const remaining = slot.capacity - slot.ticketsSold;
+                  const isFull = remaining <= 0;
                   return (
                     <button
                       key={slot.slotId}
-                      onClick={!isFull ? () => handleSlotSelect(slot.slotId) : undefined}
                       disabled={isFull}
+                      onClick={() => !isFull && handleSlotSelect(slot.slotId)}
+                      className="flex items-center justify-between w-full"
                       style={{
-                        padding: "1rem",
-                        border: isSelected ? `2px solid ${C.deepNavy}` : `1px solid ${isFull ? `${C.cobalt}22` : `${C.cobalt}33`}`,
-                        background: isSelected ? `${C.deepNavy}15` : isFull ? `${C.soldOut}10` : `${C.cobalt}08`,
+                        padding: "0.85rem 1rem",
+                        background: isFull ? `${C.cobalt}08` : "white",
+                        border: `1px solid ${isFull ? `${C.cobalt}22` : `${C.cobalt}33`}`,
                         cursor: isFull ? "not-allowed" : "pointer",
-                        textAlign: "center",
                         transition: "all 0.15s",
+                        opacity: isFull ? 0.5 : 1,
                       }}
                     >
-                      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", fontWeight: 600, color: isFull ? `${C.cobalt}44` : C.midnight }}>
-                        {slot.startTime}
+                      <div className="flex items-center gap-2">
+                        <Clock size={14} style={{ color: isFull ? C.cobalt : C.deepNavy }} />
+                        <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "1rem", color: isFull ? C.cobalt : C.midnight }}>
+                          {slot.startTime}{slot.endTime ? ` – ${slot.endTime}` : ""}
+                        </span>
                       </div>
-                      {slot.endTime && (
-                        <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: `${C.cobalt}88`, marginTop: "0.15rem" }}>
-                          to {slot.endTime}
-                        </div>
-                      )}
-                      <div style={{
-                        fontFamily: "'EB Garamond', serif",
-                        fontSize: "0.78rem",
-                        marginTop: "0.4rem",
-                        color: isFull ? C.soldOut : avail <= 3 ? C.limited : C.available,
-                        fontWeight: isFull ? 600 : 400,
+                      <span style={{
+                        fontFamily: "'Cinzel', serif",
+                        fontSize: "0.55rem",
+                        letterSpacing: "0.05em",
+                        textTransform: "uppercase",
+                        color: isFull ? C.soldOut : remaining <= 3 ? C.limited : C.available,
+                        fontWeight: 600,
                       }}>
-                        {isFull ? "Sold Out" : `${avail} spots available`}
-                      </div>
+                        {isFull ? "Sold Out" : `${remaining} spots`}
+                      </span>
                     </button>
                   );
                 })}
@@ -491,91 +566,67 @@ export default function TourBookingWidget() {
             </div>
           )}
 
-          {/* ── STEP 3: Ticket Types ── */}
+          {/* ── STEP 3: Ticket Quantities ── */}
           {step === "tickets" && selectedSlot && (
             <div>
-              <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", color: C.midnight, textAlign: "center", marginBottom: "0.25rem" }}>
+              <p style={sectionTitle}>
                 {new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric" })} at {selectedSlot.startTime}
               </p>
-              <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: C.cobalt, textAlign: "center", marginBottom: "1.25rem" }}>
-                {slotsAvailable} spots available — select your tickets
+              <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cobalt, textAlign: "center", marginBottom: "1rem" }}>
+                {slotsAvailable} spots available · Select your tickets
               </p>
 
               <div className="space-y-3">
                 {TICKET_TYPES.map(tt => (
-                  <div
-                    key={tt.key}
-                    className="flex items-center justify-between"
-                    style={{
-                      background: `${C.cobalt}08`,
-                      border: `1px solid ${C.cobalt}22`,
-                      padding: "0.75rem 1rem",
-                    }}
-                  >
+                  <div key={tt.key} className="flex items-center justify-between" style={{ padding: "0.75rem 0", borderBottom: `1px solid ${C.cobalt}15` }}>
                     <div>
-                      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.95rem", color: C.midnight, fontWeight: 600 }}>
-                        {tt.label}
-                      </div>
-                      <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cobalt }}>
-                        <span style={{ fontWeight: 700, color: tt.price > 0 ? C.deepNavy : '#2d7a3a' }}>{tt.price > 0 ? `$${tt.price.toFixed(2)}` : "FREE"}</span> · {tt.desc}
+                      <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "1rem", color: C.midnight }}>{tt.label}</div>
+                      <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: tt.price > 0 ? C.cobalt : C.available, fontWeight: tt.price > 0 ? 400 : 600 }}>
+                        {tt.price > 0 ? `$${tt.price.toFixed(2)} · ${tt.desc}` : `FREE · ${tt.desc}`}
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => updateTicket(tt.key, -1)}
-                        disabled={tickets[tt.key] <= 0}
+                        disabled={tickets[tt.key] === 0}
                         style={{
-                          width: "28px", height: "28px",
+                          width: "28px", height: "28px", borderRadius: "50%",
                           display: "flex", alignItems: "center", justifyContent: "center",
-                          border: `1px solid ${C.cobalt}33`,
-                          background: "transparent",
-                          color: tickets[tt.key] <= 0 ? `${C.cobalt}33` : C.cobalt,
-                          cursor: tickets[tt.key] <= 0 ? "not-allowed" : "pointer",
-                          borderRadius: "2px",
+                          background: tickets[tt.key] === 0 ? `${C.cobalt}11` : `${C.cobalt}22`,
+                          border: "none", cursor: tickets[tt.key] === 0 ? "default" : "pointer",
+                          color: tickets[tt.key] === 0 ? `${C.cobalt}44` : C.midnight,
                         }}
                       >
-                        <Minus size={14} />
+                        <Minus size={12} />
                       </button>
-                      <span style={{
-                        fontFamily: "'Playfair Display', serif",
-                        fontSize: "1.1rem",
-                        fontWeight: 700,
-                        color: C.midnight,
-                        minWidth: "24px",
-                        textAlign: "center",
-                      }}>
+                      <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "1.1rem", color: C.midnight, minWidth: "24px", textAlign: "center", fontWeight: 600 }}>
                         {tickets[tt.key]}
                       </span>
                       <button
                         onClick={() => updateTicket(tt.key, 1)}
-                        disabled={totalGuests >= slotsAvailable}
                         style={{
-                          width: "28px", height: "28px",
+                          width: "28px", height: "28px", borderRadius: "50%",
                           display: "flex", alignItems: "center", justifyContent: "center",
-                          border: `1px solid ${C.cobalt}33`,
-                          background: "transparent",
-                          color: totalGuests >= slotsAvailable ? `${C.cobalt}33` : C.cobalt,
-                          cursor: totalGuests >= slotsAvailable ? "not-allowed" : "pointer",
-                          borderRadius: "2px",
+                          background: `${C.cobalt}22`,
+                          border: "none", cursor: "pointer",
+                          color: C.midnight,
                         }}
                       >
-                        <Plus size={14} />
+                        <Plus size={12} />
                       </button>
                     </div>
                   </div>
                 ))}
               </div>
 
-              {/* Summary */}
-              <div style={{ marginTop: "1.25rem", borderTop: `1px solid ${C.gold}44`, paddingTop: "1rem" }}>
-                <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: C.cobalt, marginBottom: "0.3rem" }}>
-                  <span>Total Guests</span>
-                  <span style={{ fontWeight: 600 }}>{totalGuests}</span>
-                </div>
-                <div className="flex justify-between" style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.2rem", color: C.deepNavy, fontWeight: 700 }}>
-                  <span>Total</span>
-                  <span>{totalPrice > 0 ? `$${totalPrice.toFixed(2)}` : "Free"}</span>
-                </div>
+              {/* Ticket subtotal */}
+              <div className="flex justify-between items-center" style={{ marginTop: "1rem", paddingTop: "0.75rem", borderTop: `1px solid ${C.cobalt}33` }}>
+                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", color: C.deepNavy, fontWeight: 600 }}>
+                  {totalGuests} {totalGuests === 1 ? "Guest" : "Guests"}
+                </span>
+                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", color: C.deepNavy, fontWeight: 700 }}>
+                  {ticketTotal > 0 ? `$${ticketTotal.toFixed(2)}` : "Free"}
+                </span>
               </div>
 
               <button
@@ -583,7 +634,7 @@ export default function TourBookingWidget() {
                 disabled={totalGuests < 1}
                 style={{
                   width: "100%",
-                  marginTop: "1.25rem",
+                  marginTop: "1rem",
                   fontFamily: "'Cinzel', serif",
                   fontSize: "0.7rem",
                   letterSpacing: "0.12em",
@@ -597,23 +648,218 @@ export default function TourBookingWidget() {
                   transition: "all 0.2s",
                 }}
               >
-                Continue to Checkout
+                Continue
               </button>
             </div>
           )}
 
-          {/* ── STEP 4: Contact Info ── */}
+          {/* ── STEP 4: Extras (Membership + Donation) ── */}
+          {step === "extras" && (
+            <div>
+              <p style={sectionTitle}>Enhance Your Visit</p>
+              <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.9rem", color: C.cobalt, textAlign: "center", marginBottom: "1.5rem", lineHeight: 1.5 }}>
+                These are optional — skip ahead anytime
+              </p>
+
+              {/* ── Membership Upsell ── */}
+              <div style={{ marginBottom: "1.5rem" }}>
+                <div className="flex items-center gap-2" style={{ marginBottom: "0.75rem" }}>
+                  <Award size={16} style={{ color: C.gold }} />
+                  <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.deepNavy, fontWeight: 700 }}>
+                    Join Dinsmore's Extended Family &amp; Friends Circle
+                  </span>
+                </div>
+
+                {/* Perks */}
+                <div style={{ background: `${C.gold}11`, border: `1px solid ${C.gold}33`, padding: "0.75rem", marginBottom: "0.75rem" }}>
+                  <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.cobalt, marginBottom: "0.5rem" }}>
+                    Member Benefits
+                  </div>
+                  {MEMBERSHIP_PERKS.map((perk, i) => (
+                    <div key={i} style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: C.midnight, lineHeight: 1.6, paddingLeft: "0.75rem", position: "relative" }}>
+                      <span style={{ position: "absolute", left: 0, color: C.gold }}>✦</span>
+                      {perk}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Tier selection */}
+                <div className="space-y-2">
+                  {MEMBERSHIP_TIERS.map(tier => {
+                    const isSelected = selectedMembership === tier.key;
+                    return (
+                      <button
+                        key={tier.key}
+                        onClick={() => setSelectedMembership(isSelected ? null : tier.key)}
+                        className="flex items-center justify-between w-full"
+                        style={{
+                          padding: "0.7rem 0.85rem",
+                          background: isSelected ? `${C.gold}22` : "white",
+                          border: `2px solid ${isSelected ? C.gold : `${C.cobalt}22`}`,
+                          cursor: "pointer",
+                          transition: "all 0.15s",
+                        }}
+                      >
+                        <div style={{ textAlign: "left" }}>
+                          <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.midnight, fontWeight: isSelected ? 600 : 400 }}>
+                            {tier.label}
+                          </div>
+                          <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.75rem", color: C.cobalt }}>
+                            {tier.desc}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", color: C.deepNavy, fontWeight: 700 }}>
+                            ${tier.price}
+                          </span>
+                          <div style={{
+                            width: "18px", height: "18px", borderRadius: "50%",
+                            border: `2px solid ${isSelected ? C.gold : `${C.cobalt}44`}`,
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            background: isSelected ? C.gold : "transparent",
+                          }}>
+                            {isSelected && <span style={{ color: C.midnight, fontSize: "0.6rem", fontWeight: 700 }}>✓</span>}
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {selectedMembership && (
+                  <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.8rem", color: C.available, textAlign: "center", marginTop: "0.5rem" }}>
+                    ✦ Membership perks available at your next visit
+                  </p>
+                )}
+              </div>
+
+              {/* ── Donation ── */}
+              <div style={{ borderTop: `1px solid ${C.cobalt}22`, paddingTop: "1.25rem" }}>
+                <div className="flex items-center gap-2" style={{ marginBottom: "0.75rem" }}>
+                  <Heart size={16} style={{ color: "oklch(52% 0.18 22)" }} />
+                  <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.deepNavy, fontWeight: 700 }}>
+                    Add a Donation
+                  </span>
+                </div>
+                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cobalt, marginBottom: "0.75rem", lineHeight: 1.5 }}>
+                  Help preserve this 1842 homestead for future generations.
+                </p>
+
+                {/* Preset amounts */}
+                <div className="flex gap-2" style={{ marginBottom: "0.5rem" }}>
+                  {DONATION_PRESETS.map(amt => {
+                    const isActive = donationAmount === amt && customDonation === "";
+                    return (
+                      <button
+                        key={amt}
+                        onClick={() => handleDonationPreset(amt)}
+                        style={{
+                          flex: 1,
+                          padding: "0.6rem 0",
+                          fontFamily: "'EB Garamond', serif",
+                          fontSize: "0.95rem",
+                          fontWeight: isActive ? 700 : 400,
+                          background: isActive ? `${C.gold}22` : "white",
+                          border: `2px solid ${isActive ? C.gold : `${C.cobalt}22`}`,
+                          color: C.midnight,
+                          cursor: "pointer",
+                          transition: "all 0.15s",
+                        }}
+                      >
+                        ${amt}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Custom amount */}
+                <div style={{ position: "relative" }}>
+                  <span style={{
+                    position: "absolute", left: "0.75rem", top: "50%", transform: "translateY(-50%)",
+                    fontFamily: "'EB Garamond', serif", fontSize: "1rem", color: C.cobalt,
+                  }}>$</span>
+                  <input
+                    type="number"
+                    min="0"
+                    step="1"
+                    value={customDonation}
+                    onChange={e => handleCustomDonation(e.target.value)}
+                    placeholder="Other amount"
+                    style={{
+                      width: "100%",
+                      padding: "0.6rem 0.75rem 0.6rem 1.5rem",
+                      fontFamily: "'EB Garamond', serif",
+                      fontSize: "0.95rem",
+                      background: "white",
+                      border: `1px solid ${C.cobalt}33`,
+                      color: C.midnight,
+                      outline: "none",
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Running total */}
+              {(membershipTotal > 0 || donationAmount > 0) && (
+                <div style={{ marginTop: "1rem", background: `${C.cobalt}08`, border: `1px solid ${C.cobalt}22`, padding: "0.75rem" }}>
+                  <div style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cobalt, lineHeight: 1.8 }}>
+                    <div className="flex justify-between">
+                      <span>Tour tickets</span>
+                      <span>{ticketTotal > 0 ? `$${ticketTotal.toFixed(2)}` : "Free"}</span>
+                    </div>
+                    {membershipTotal > 0 && (
+                      <div className="flex justify-between">
+                        <span>{MEMBERSHIP_TIERS.find(t => t.key === selectedMembership)?.label} Membership</span>
+                        <span>${membershipTotal.toFixed(2)}</span>
+                      </div>
+                    )}
+                    {donationAmount > 0 && (
+                      <div className="flex justify-between">
+                        <span>Donation</span>
+                        <span>${donationAmount.toFixed(2)}</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex justify-between" style={{ borderTop: `1px solid ${C.cobalt}33`, paddingTop: "0.5rem", marginTop: "0.5rem" }}>
+                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem", color: C.deepNavy, fontWeight: 700 }}>Total</span>
+                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem", color: C.deepNavy, fontWeight: 700 }}>
+                      ${grandTotal.toFixed(2)}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              <button
+                onClick={handleExtrasConfirm}
+                style={{
+                  width: "100%",
+                  marginTop: "1rem",
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: "0.7rem",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  background: C.deepNavy,
+                  color: C.gold,
+                  border: "none",
+                  padding: "0.85rem",
+                  cursor: "pointer",
+                  fontWeight: 700,
+                  transition: "all 0.2s",
+                }}
+              >
+                {membershipTotal > 0 || donationAmount > 0 ? "Continue" : "Skip — Continue to Checkout"}
+              </button>
+            </div>
+          )}
+
+          {/* ── STEP 5: Contact Info ── */}
           {step === "info" && selectedSlot && (
             <div>
-              <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", color: C.midnight, textAlign: "center", marginBottom: "1rem" }}>
-                Almost there! Enter your details
-              </p>
+              <p style={sectionTitle}>Almost there! Enter your details</p>
 
               <div className="space-y-3">
                 <div>
-                  <label style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.cobalt, display: "block", marginBottom: "0.35rem" }}>
-                    Full Name *
-                  </label>
+                  <label style={cinzelLabel}>Full Name *</label>
                   <input
                     type="text"
                     value={buyerName}
@@ -632,9 +878,7 @@ export default function TourBookingWidget() {
                   />
                 </div>
                 <div>
-                  <label style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.cobalt, display: "block", marginBottom: "0.35rem" }}>
-                    Email Address *
-                  </label>
+                  <label style={cinzelLabel}>Email Address *</label>
                   <input
                     type="email"
                     value={buyerEmail}
@@ -653,9 +897,7 @@ export default function TourBookingWidget() {
                   />
                 </div>
                 <div>
-                  <label style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: C.cobalt, display: "block", marginBottom: "0.35rem" }}>
-                    Phone (optional)
-                  </label>
+                  <label style={cinzelLabel}>Phone (optional)</label>
                   <input
                     type="tel"
                     value={buyerPhone}
@@ -687,11 +929,21 @@ export default function TourBookingWidget() {
                   {tickets.child > 0 && <div>Child (5–15) × {tickets.child} — ${(tickets.child * 3).toFixed(2)}</div>}
                   {tickets.under5 > 0 && <div>Under 5 × {tickets.under5} — Free</div>}
                   {tickets.member > 0 && <div>Member × {tickets.member} — Free</div>}
+                  {selectedMembership && (
+                    <div style={{ color: C.gold }}>
+                      ✦ {MEMBERSHIP_TIERS.find(t => t.key === selectedMembership)?.label} Membership — ${membershipTotal.toFixed(2)}
+                    </div>
+                  )}
+                  {donationAmount > 0 && (
+                    <div style={{ color: "oklch(52% 0.18 22)" }}>
+                      ♥ Donation — ${donationAmount.toFixed(2)}
+                    </div>
+                  )}
                 </div>
                 <div className="flex justify-between mt-2 pt-2" style={{ borderTop: `1px solid ${C.cobalt}33` }}>
                   <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", color: C.deepNavy, fontWeight: 700 }}>Total</span>
                   <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", color: C.deepNavy, fontWeight: 700 }}>
-                    {totalPrice > 0 ? `$${totalPrice.toFixed(2)}` : "Free"}
+                    {grandTotal > 0 ? `$${grandTotal.toFixed(2)}` : "Free"}
                   </span>
                 </div>
               </div>
@@ -721,8 +973,8 @@ export default function TourBookingWidget() {
               >
                 {isSubmitting ? (
                   <><Loader2 size={14} className="animate-spin" /> Processing…</>
-                ) : totalPrice > 0 ? (
-                  <><Ticket size={14} /> Complete Purchase — ${totalPrice.toFixed(2)}</>
+                ) : grandTotal > 0 ? (
+                  <><Ticket size={14} /> Complete Purchase — ${grandTotal.toFixed(2)}</>
                 ) : (
                   <><Ticket size={14} /> Confirm Free Booking</>
                 )}
@@ -730,7 +982,7 @@ export default function TourBookingWidget() {
             </div>
           )}
 
-          {/* ── STEP 5: Confirmation ── */}
+          {/* ── STEP 6: Confirmation ── */}
           {step === "confirm" && (
             <div style={{ padding: "1rem 0" }}>
               {/* Success header */}
@@ -751,7 +1003,7 @@ export default function TourBookingWidget() {
                   You're Booked!
                 </h3>
                 <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.cobalt, lineHeight: 1.5 }}>
-                  A confirmation email has been sent to <strong style={{ color: C.midnight }}>{buyerEmail}</strong>
+                  A confirmation has been sent to <strong style={{ color: C.midnight }}>{buyerEmail}</strong>
                 </p>
               </div>
 
@@ -813,17 +1065,42 @@ export default function TourBookingWidget() {
                       <span>Member × {tickets.member}</span><span>Free</span>
                     </div>
                   )}
+                  {selectedMembership && (
+                    <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.gold, marginBottom: "0.25rem" }}>
+                      <span>✦ {MEMBERSHIP_TIERS.find(t => t.key === selectedMembership)?.label} Membership</span>
+                      <span>${membershipTotal.toFixed(2)}</span>
+                    </div>
+                  )}
+                  {donationAmount > 0 && (
+                    <div className="flex justify-between" style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: "oklch(52% 0.18 22)", marginBottom: "0.25rem" }}>
+                      <span>♥ Donation</span>
+                      <span>${donationAmount.toFixed(2)}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between" style={{ borderTop: `1px solid ${C.cobalt}33`, paddingTop: "0.5rem", marginTop: "0.5rem" }}>
                     <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem", color: C.deepNavy, fontWeight: 700 }}>Total Paid</span>
                     <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem", color: C.deepNavy, fontWeight: 700 }}>
-                      {totalPrice > 0 ? `$${totalPrice.toFixed(2)}` : "Free"}
+                      {grandTotal > 0 ? `$${grandTotal.toFixed(2)}` : "Free"}
                     </span>
                   </div>
                 </div>
               </div>
 
+              {/* Membership confirmation */}
+              {selectedMembership && (
+                <div style={{ marginTop: "1rem", background: `${C.gold}11`, border: `1px solid ${C.gold}33`, padding: "0.85rem" }}>
+                  <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: C.deepNavy, marginBottom: "0.5rem" }}>
+                    ✦ Membership Enrolled
+                  </div>
+                  <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.85rem", color: C.cobalt, lineHeight: 1.5 }}>
+                    Welcome to the {MEMBERSHIP_TIERS.find(t => t.key === selectedMembership)?.label} tier of Dinsmore's Extended Family &amp; Friends Circle!
+                    Your member perks will be available starting at your next visit.
+                  </p>
+                </div>
+              )}
+
               {/* Practical info */}
-              <div style={{ marginTop: "1.25rem", background: `${C.cobalt}08`, border: `1px solid ${C.cobalt}22`, padding: "1rem" }}>
+              <div style={{ marginTop: "1rem", background: `${C.cobalt}08`, border: `1px solid ${C.cobalt}22`, padding: "1rem" }}>
                 <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", color: C.deepNavy, marginBottom: "0.75rem" }}>
                   Before You Visit
                 </div>
@@ -855,7 +1132,7 @@ export default function TourBookingWidget() {
                   Print Confirmation
                 </button>
                 <button
-                  onClick={() => { setExpanded(false); setStep("idle"); setSelectedDate(null); setSelectedSlotId(null); setConfirmationId(null); setBuyerName(""); setBuyerEmail(""); setBuyerPhone(""); setTickets({ adult: 2, child: 0, under5: 0, member: 0 }); }}
+                  onClick={resetAll}
                   style={{
                     flex: 1,
                     fontFamily: "'Cinzel', serif",

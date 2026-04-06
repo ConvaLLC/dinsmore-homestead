@@ -12,6 +12,7 @@ import {
   createEmailVerification,
   createEvent,
   createHeroSlide,
+  createMembership,
   createTicketOrder,
   createTimeslot,
   deleteEducationContent,
@@ -496,6 +497,11 @@ export const appRouter = router({
           under5: z.number().min(0).max(10).default(0),
           member: z.number().min(0).max(10).default(0),
         }),
+        membership: z.object({
+          tier: z.enum(["senior", "individual", "family", "friends"]),
+          price: z.number(),
+        }).optional(),
+        donation: z.number().min(0).default(0),
         origin: z.string(),
       }))
       .mutation(async ({ input }) => {
@@ -517,11 +523,22 @@ export const appRouter = router({
         // Calculate pricing
         const adultPrice = 10.00;
         const childPrice = 3.00;
-        const total = (tickets.adult * adultPrice) + (tickets.child * childPrice);
-        // under5 and member are free
+        const ticketTotal = (tickets.adult * adultPrice) + (tickets.child * childPrice);
+        const membershipAmount = input.membership?.price ?? 0;
+        const donationAmount = input.donation ?? 0;
+        const total = ticketTotal + membershipAmount + donationAmount;
 
         const orderNumber = `DHM-${Date.now()}-${nanoid(6).toUpperCase()}`;
         const ticketBreakdown = `Adult x${tickets.adult} ($${(tickets.adult * adultPrice).toFixed(2)}), Child x${tickets.child} ($${(tickets.child * childPrice).toFixed(2)}), Under 5 x${tickets.under5} (Free), Member x${tickets.member} (Free)`;
+
+        // Build notes with full breakdown
+        let notes = ticketBreakdown;
+        if (input.membership) {
+          notes += ` | Membership: ${input.membership.tier} ($${input.membership.price.toFixed(2)})`;
+        }
+        if (donationAmount > 0) {
+          notes += ` | Donation: $${donationAmount.toFixed(2)}`;
+        }
 
         // Create pending order in DB
         const orderId = await createTicketOrder({
@@ -532,44 +549,67 @@ export const appRouter = router({
           buyerEmail: input.buyerEmail,
           buyerPhone: input.buyerPhone,
           quantity: totalGuests,
-          unitPrice: total > 0 ? (total / totalGuests).toFixed(2) : "0.00",
+          unitPrice: ticketTotal > 0 ? (ticketTotal / totalGuests).toFixed(2) : "0.00",
           totalAmount: total.toFixed(2),
-          status: total > 0 ? "pending" : "paid", // Free orders auto-complete
-          notes: ticketBreakdown,
+          status: total > 0 ? "pending" : "paid",
+          notes,
         });
 
+        // Create membership record if selected
+        if (input.membership) {
+          const oneYearFromNow = new Date();
+          oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+          await createMembership({
+            orderId: orderId,
+            memberName: input.buyerName,
+            memberEmail: input.buyerEmail,
+            tier: input.membership.tier,
+            amount: input.membership.price.toFixed(2),
+            status: "active",
+            expiresAt: oneYearFromNow,
+          });
+        }
+
+        // Create donation record if included
+        if (donationAmount > 0) {
+          await createDonation({
+            donorName: input.buyerName,
+            donorEmail: input.buyerEmail,
+            amount: donationAmount.toFixed(2),
+            donationType: "one_time",
+            status: "completed",
+            message: `Added to tour booking ${orderNumber}`,
+          });
+        }
+
         if (total > 0) {
-          // Process payment (sandbox mock or Square)
           const payment = await processPayment({
             amount: Math.round(total * 100),
-            sourceId: "SANDBOX_MOCK", // Will be replaced with Square nonce from frontend
-            description: `Dinsmore Homestead Tour: ${ticketBreakdown}`,
+            sourceId: "SANDBOX_MOCK",
+            description: `Dinsmore Homestead Tour: ${notes}`,
             buyerEmail: input.buyerEmail,
             orderNumber,
           });
           await updateTicketOrder(orderId, { paypalOrderId: payment.paymentId, paypalCaptureId: payment.paymentId, status: "paid" });
           await incrementTimeslotSold(input.timeslotId, totalGuests);
 
-          // Notify owner of new booking
           const timeslotDate = new Date(timeslot.startTime);
           notifyOwner({
             title: `New Tour Booking: ${orderNumber}`,
-            content: `${input.buyerName} (${input.buyerEmail}) booked a tour for ${timeslotDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })} at ${timeslotDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}.\n\nTickets: ${ticketBreakdown}\nTotal: $${total.toFixed(2)}\nPayment: ${payment.paymentId}`,
-          }).catch(() => {}); // Fire-and-forget
+            content: `${input.buyerName} (${input.buyerEmail}) booked a tour for ${timeslotDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })} at ${timeslotDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}.\n\nTickets: ${ticketBreakdown}\nTotal: $${total.toFixed(2)}${input.membership ? `\nMembership: ${input.membership.tier} ($${input.membership.price.toFixed(2)})` : ""}${donationAmount > 0 ? `\nDonation: $${donationAmount.toFixed(2)}` : ""}\nPayment: ${payment.paymentId}`,
+          }).catch(() => {});
 
-          return { orderNumber, paymentId: payment.paymentId, approvalUrl: null, total: total.toFixed(2) };
+          return { orderNumber, paymentId: payment.paymentId, approvalUrl: null, total: total.toFixed(2), ticketTotal: ticketTotal.toFixed(2), membershipAmount: membershipAmount.toFixed(2), donationAmount: donationAmount.toFixed(2) };
         } else {
-          // Free order — auto-confirm and increment sold count
           await incrementTimeslotSold(input.timeslotId, totalGuests);
 
-          // Notify owner of free booking
           const timeslotDate = new Date(timeslot.startTime);
           notifyOwner({
             title: `New Tour Booking (Free): ${orderNumber}`,
             content: `${input.buyerName} (${input.buyerEmail}) booked a free tour for ${timeslotDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })} at ${timeslotDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}.\n\nTickets: ${ticketBreakdown}`,
-          }).catch(() => {}); // Fire-and-forget
+          }).catch(() => {});
 
-          return { orderNumber, paymentId: null, approvalUrl: null, total: "0.00" };
+          return { orderNumber, paymentId: null, approvalUrl: null, total: "0.00", ticketTotal: "0.00", membershipAmount: "0.00", donationAmount: "0.00" };
         }
       }),
   }),
@@ -750,6 +790,20 @@ export const appRouter = router({
       .mutation(async ({ input }) => {
         await updateEducationAccessRequest(input.id, { approved: true, verified: true });
         return { success: true };
+      }),
+  }),
+
+  // ── Memberships ─────────────────────────────────────────────────────────────
+  memberships: router({
+    adminList: adminProcedure.query(async () => {
+      const { getAllMemberships } = await import("./db");
+      return getAllMemberships();
+    }),
+    byEmail: publicProcedure
+      .input(z.object({ email: z.string().email() }))
+      .query(async ({ input }) => {
+        const { getMembershipsByEmail } = await import("./db");
+        return getMembershipsByEmail(input.email);
       }),
   }),
 

@@ -19,6 +19,8 @@ import {
   InsertUser,
   TicketOrder,
   User,
+  Membership,
+  InsertMembership,
   donations,
   educationAccessRequests,
   educationContent,
@@ -26,6 +28,7 @@ import {
   eventTimeslots,
   events,
   heroSlides,
+  memberships,
   ticketOrders,
   users,
 } from "../drizzle/schema";
@@ -521,4 +524,25 @@ export async function getAvailabilityForMonth(year: number, month: number): Prom
   }
 
   return days.sort((a, b) => a.date.localeCompare(b.date));
+}
+
+// ─── Memberships ─────────────────────────────────────────────────────────────
+
+export async function createMembership(data: InsertMembership): Promise<number> {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const result = await db.insert(memberships).values(data);
+  return Number(result[0].insertId);
+}
+
+export async function getAllMemberships(): Promise<Membership[]> {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(memberships).orderBy(desc(memberships.createdAt));
+}
+
+export async function getMembershipsByEmail(email: string): Promise<Membership[]> {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(memberships).where(eq(memberships.memberEmail, email)).orderBy(desc(memberships.createdAt));
 }

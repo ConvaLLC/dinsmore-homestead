@@ -169,7 +169,7 @@ export default function Home() {
     {
       label: "Book a Tour",
       sublabel: "Reserve your spot",
-      href: "/events",
+      href: "#book-a-tour",
       bg: `linear-gradient(135deg, ${C.deepNavy} 0%, oklch(26% 0.05 80) 100%)`,
       icon: <Ticket size={22} />,
       accent: C.gold,
@@ -225,10 +225,16 @@ export default function Home() {
 
         {/* ── Quick-Access Tile Strip ── */}
         <div className="hero-tile-strip">
-          {quickLinks.map((tile) => (
-            <Link
+          {quickLinks.map((tile) => {
+            const isAnchor = tile.href.startsWith("#");
+            const Wrapper = isAnchor ? "a" : Link;
+            const wrapperProps = isAnchor
+              ? { href: tile.href, onClick: (e: React.MouseEvent) => { e.preventDefault(); document.querySelector(tile.href)?.scrollIntoView({ behavior: "smooth" }); } }
+              : { href: tile.href };
+            return (
+            <Wrapper
               key={tile.label}
-              href={tile.href}
+              {...(wrapperProps as any)}
               style={{ position: "relative", overflow: "hidden", display: "block", flex: "1 1 0" }}
               className="quick-tile"
             >
@@ -322,8 +328,9 @@ export default function Home() {
                   {tile.sublabel}
                 </span>
               </div>
-            </Link>
-          ))}
+            </Wrapper>
+          );
+          })}
         </div>
       </div>
 
@@ -362,7 +369,7 @@ export default function Home() {
       {/* REMOVED: What's On events strip — will be redesigned later */}
 
       {/* Tour Booking Widget */}
-      <section style={{ borderTop: `3px solid ${C.gold}` }}>
+      <section id="book-a-tour" style={{ borderTop: `3px solid ${C.gold}` }}>
         <TourBookingWidget />
       </section>
 

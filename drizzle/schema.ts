@@ -156,6 +156,24 @@ export const donations = mysqlTable("donations", {
 export type Donation = typeof donations.$inferSelect;
 export type InsertDonation = typeof donations.$inferInsert;
 
+// ─── Memberships ─────────────────────────────────────────────────────────────
+
+export const memberships = mysqlTable("memberships", {
+  id: int("id").autoincrement().primaryKey(),
+  orderId: int("orderId").references(() => ticketOrders.id),
+  memberName: varchar("memberName", { length: 255 }).notNull(),
+  memberEmail: varchar("memberEmail", { length: 320 }).notNull(),
+  tier: mysqlEnum("tier", ["senior", "individual", "family", "friends"]).notNull(),
+  amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
+  status: mysqlEnum("status", ["active", "expired", "cancelled"]).default("active").notNull(),
+  startsAt: timestamp("startsAt").defaultNow().notNull(),
+  expiresAt: timestamp("expiresAt").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type Membership = typeof memberships.$inferSelect;
+export type InsertMembership = typeof memberships.$inferInsert;
+
 // ─── Education Content ────────────────────────────────────────────────────────
 
 export const educationContent = mysqlTable("education_content", {
