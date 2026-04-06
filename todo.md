@@ -175,3 +175,11 @@
 - [x] Seed demo tour event with bulk time slots
 - [x] Add compact availability calendar to homepage below What's On strip
 - [x] Wire slot Book button to deep-link to ticket checkout with slot pre-selected
+
+## Homepage Booking Flow Overhaul
+- [x] Update schema: add ticket_types table (Adult $10, Child 5-15 $3, Under 5 Free, Member Free)
+- [x] Reseed tour slots: Fri-Sun only, 1PM-4PM hourly (last tour 4PM), closed Dec 15-Apr 1, max 10 per slot
+- [x] Update tRPC availability API: show dates with openings (no counts), show availability per slot only after date selected
+- [x] Build inline expanding booking widget on homepage (calendar → time → ticket types → checkout)
+- [x] Wire booking widget to order creation with multi-ticket-type quantities
+- [x] Simplify UX: no slot counts on calendar, only show remaining after time selected

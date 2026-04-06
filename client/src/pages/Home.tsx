@@ -4,7 +4,7 @@ import HeroSlider from "@/components/HeroSlider";
 import { IMAGES } from "../../../shared/images";
 import { Calendar, Clock, MapPin, Ticket, Heart, BookOpen, ChevronRight, Star, Users, Award, GraduationCap, House } from "lucide-react";
 import { format } from "date-fns";
-import AvailabilityCalendar from "@/components/AvailabilityCalendar";
+import TourBookingWidget from "@/components/TourBookingWidget";
 
 const C = {
   midnight: "oklch(21.8% 0.036 251.3)",
@@ -597,100 +597,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Availability Calendar Section */}
-      <section
-        className="py-16"
-        style={{ background: C.deepNavy, borderTop: `3px solid ${C.gold}` }}
-      >
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Left: heading + copy */}
-            <div style={{ paddingTop: "0.5rem" }}>
-              <div
-                style={{
-                  fontFamily: "'Cinzel', serif",
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.3em",
-                  color: C.gold,
-                  marginBottom: "1rem",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.75rem",
-                }}
-                className="uppercase"
-              >
-                <div style={{ width: "30px", height: "1px", background: C.gold }} />
-                Book Your Visit
-                <div style={{ width: "30px", height: "1px", background: C.gold }} />
-              </div>
-              <h2
-                style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
-                  color: C.warmWhite,
-                  lineHeight: 1.2,
-                  marginBottom: "1.25rem",
-                }}
-              >
-                Check Real-Time
-                <br />
-                <span style={{ color: C.gold }}>Availability</span>
-              </h2>
-              <p
-                style={{
-                  fontFamily: "'EB Garamond', serif",
-                  fontSize: "1.1rem",
-                  color: C.cream,
-                  lineHeight: 1.7,
-                  marginBottom: "1.5rem",
-                  maxWidth: "420px",
-                }}
-              >
-                Select any highlighted date to see available tour times and book your tickets
-                directly — no phone calls required. Tours run Wednesday through Sunday,
-                10&nbsp;AM to 4&nbsp;PM.
-              </p>
-              <div className="flex flex-col gap-3">
-                {[
-                  { icon: <Calendar size={15} style={{ color: C.gold }} />, text: "Wed – Sun, 10 AM – 4 PM" },
-                  { icon: <Users size={15} style={{ color: C.gold }} />, text: "Small groups, max 12 per tour" },
-                  { icon: <Ticket size={15} style={{ color: C.gold }} />, text: "$10 per person · Free for children under 6" },
-                ].map(({ icon, text }) => (
-                  <div key={text} className="flex items-center gap-3">
-                    {icon}
-                    <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "0.95rem", color: C.cream }}>
-                      {text}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <Link
-                href="/events"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.4rem",
-                  marginTop: "2rem",
-                  fontFamily: "'Cinzel', serif",
-                  fontSize: "0.7rem",
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: C.gold,
-                  textDecoration: "none",
-                  borderBottom: `1px solid ${C.gold}55`,
-                  paddingBottom: "2px",
-                }}
-              >
-                View Full Events Calendar <ChevronRight size={13} />
-              </Link>
-            </div>
-
-            {/* Right: compact calendar */}
-            <div style={{ border: `1px solid ${C.gold}33`, overflow: "hidden" }}>
-              <AvailabilityCalendar />
-            </div>
-          </div>
-        </div>
+      {/* Tour Booking Widget */}
+      <section style={{ borderTop: `3px solid ${C.gold}` }}>
+        <TourBookingWidget />
       </section>
 
       {/* Welcome Section */}

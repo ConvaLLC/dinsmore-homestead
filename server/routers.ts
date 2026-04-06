@@ -481,6 +481,82 @@ export const appRouter = router({
       .query(({ input }) => getTicketOrderByOrderNumber(input.orderNumber)),
 
     adminList: adminProcedure.query(() => getAllTicketOrders()),
+
+    /**
+     * Tour-specific order with multi-ticket-type pricing.
+     * Ticket types: adult ($10), child_5_15 ($3), under_5 (free), member (free)
+     */
+    createTourOrder: publicProcedure
+      .input(z.object({
+        timeslotId: z.number(),
+        buyerName: z.string().min(1),
+        buyerEmail: z.string().email(),
+        buyerPhone: z.string().optional(),
+        tickets: z.object({
+          adult: z.number().min(0).max(10).default(0),
+          child: z.number().min(0).max(10).default(0),
+          under5: z.number().min(0).max(10).default(0),
+          member: z.number().min(0).max(10).default(0),
+        }),
+        origin: z.string(),
+      }))
+      .mutation(async ({ input }) => {
+        const { tickets } = input;
+        const totalGuests = tickets.adult + tickets.child + tickets.under5 + tickets.member;
+        if (totalGuests < 1) throw new TRPCError({ code: "BAD_REQUEST", message: "Please select at least one ticket" });
+
+        const timeslot = await getTimeslotById(input.timeslotId);
+        if (!timeslot) throw new TRPCError({ code: "NOT_FOUND", message: "Time slot not found" });
+
+        const available = timeslot.capacity - timeslot.ticketsSold;
+        if (available < totalGuests) {
+          throw new TRPCError({ code: "BAD_REQUEST", message: `Only ${available} spots remaining for this time slot` });
+        }
+
+        const event = await getEventById(timeslot.eventId);
+        if (!event) throw new TRPCError({ code: "NOT_FOUND", message: "Event not found" });
+
+        // Calculate pricing
+        const adultPrice = 10.00;
+        const childPrice = 3.00;
+        const total = (tickets.adult * adultPrice) + (tickets.child * childPrice);
+        // under5 and member are free
+
+        const orderNumber = `DHM-${Date.now()}-${nanoid(6).toUpperCase()}`;
+        const ticketBreakdown = `Adult x${tickets.adult} ($${(tickets.adult * adultPrice).toFixed(2)}), Child x${tickets.child} ($${(tickets.child * childPrice).toFixed(2)}), Under 5 x${tickets.under5} (Free), Member x${tickets.member} (Free)`;
+
+        // Create pending order in DB
+        const orderId = await createTicketOrder({
+          orderNumber,
+          eventId: timeslot.eventId,
+          timeslotId: input.timeslotId,
+          buyerName: input.buyerName,
+          buyerEmail: input.buyerEmail,
+          buyerPhone: input.buyerPhone,
+          quantity: totalGuests,
+          unitPrice: total > 0 ? (total / totalGuests).toFixed(2) : "0.00",
+          totalAmount: total.toFixed(2),
+          status: total > 0 ? "pending" : "paid", // Free orders auto-complete
+          notes: ticketBreakdown,
+        });
+
+        if (total > 0) {
+          // Create PayPal order for paid tickets
+          const paypalOrder = await createPayPalOrder(
+            total.toFixed(2),
+            `Dinsmore Homestead Tour: ${ticketBreakdown}`,
+            `${input.origin}/tickets/confirm?orderNumber=${orderNumber}`,
+            `${input.origin}/tickets/cancel?orderNumber=${orderNumber}`
+          );
+          await updateTicketOrder(orderId, { paypalOrderId: paypalOrder.id });
+          const approvalUrl = paypalOrder.links?.find((l: any) => l.rel === "approve")?.href;
+          return { orderNumber, paypalOrderId: paypalOrder.id, approvalUrl, total: total.toFixed(2) };
+        } else {
+          // Free order — auto-confirm and increment sold count
+          await incrementTimeslotSold(input.timeslotId, totalGuests);
+          return { orderNumber, paypalOrderId: null, approvalUrl: null, total: "0.00" };
+        }
+      }),
   }),
 
   // ── Donations ─────────────────────────────────────────────────────────────
