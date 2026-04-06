@@ -4,9 +4,9 @@ import { IMAGES } from "../../../shared/images";
 import { Clock, MapPin, DollarSign, Car, Ticket, Phone, Mail, Accessibility, ParkingCircle, Navigation, ChevronRight } from "lucide-react";
 import { MapView } from "@/components/Map";
 
-// Dinsmore Homestead coordinates
-const HOMESTEAD_LAT = 38.9087;
-const HOMESTEAD_LNG = -84.7293;
+// Dinsmore Homestead coordinates (verified: 5656 Burlington Pike, Burlington, KY 41005)
+const HOMESTEAD_LAT = 39.000614;
+const HOMESTEAD_LNG = -84.813219;
 
 const C = {
   midnight: "oklch(21.8% 0.036 251.3)",
