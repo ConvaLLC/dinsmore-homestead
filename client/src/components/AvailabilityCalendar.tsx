@@ -28,6 +28,7 @@ const DAY_LABELS = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 interface SlotInfo {
   eventId: number;
   eventTitle: string;
+  eventSlug: string;
   slotId: number;
   startTime: string;
   endTime: string | null;
@@ -397,7 +398,7 @@ export default function AvailabilityCalendar({ eventId, onBook }: AvailabilityCa
                       </button>
                     ) : (
                       <Link
-                        href={`/events`}
+                        href={`/events/${slot.eventSlug}?slot=${slot.slotId}&date=${selectedDate}`}
                         style={{
                           fontFamily: "'Cinzel', serif",
                           fontSize: "0.65rem",

@@ -448,7 +448,7 @@ export interface DayAvailability {
   totalSlots: number;
   availableSlots: number;
   soldOut: boolean;
-  events: { eventId: number; eventTitle: string; slotId: number; startTime: string; endTime: string | null; capacity: number; ticketsSold: number; price: string | null }[];
+  events: { eventId: number; eventTitle: string; eventSlug: string; slotId: number; startTime: string; endTime: string | null; capacity: number; ticketsSold: number; price: string | null }[];
 }
 
 /**
@@ -473,6 +473,7 @@ export async function getAvailabilityForMonth(year: number, month: number): Prom
       price:        eventTimeslots.price,
       eventId:      events.id,
       eventTitle:   events.title,
+      eventSlug:    events.slug,
     })
     .from(eventTimeslots)
     .innerJoin(events, eq(eventTimeslots.eventId, events.id))
@@ -503,6 +504,7 @@ export async function getAvailabilityForMonth(year: number, month: number): Prom
     day.events.push({
       eventId:     row.eventId,
       eventTitle:  row.eventTitle,
+      eventSlug:   row.eventSlug,
       slotId:      row.slotId,
       startTime:   row.startTime,
       endTime:     row.endTime ?? null,

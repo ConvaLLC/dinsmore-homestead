@@ -170,3 +170,8 @@
 
 ## Smart Directions Button
 - [x] Add device-aware directions button to Visit page (opens Apple Maps on iOS, Google Maps on Android/desktop)
+
+## Follow-up Features (Three Suggested)
+- [x] Seed demo tour event with bulk time slots
+- [x] Add compact availability calendar to homepage below What's On strip
+- [x] Wire slot Book button to deep-link to ticket checkout with slot pre-selected

@@ -53,7 +53,13 @@ function SlotTimeButton({
 
 export default function EventDetailPage() {
   const params = useParams<{ slug: string }>();
-  const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
+
+  // Support deep-link from availability calendar: ?slot=<slotId>&date=<YYYY-MM-DD>
+  const searchParams = new URLSearchParams(window.location.search);
+  const preselectedSlotId = searchParams.get("slot") ? parseInt(searchParams.get("slot")!, 10) : null;
+  const preselectedDate = searchParams.get("date") ?? null;
+
+  const [selectedSlot, setSelectedSlot] = useState<number | null>(preselectedSlotId);
   const [quantity, setQuantity] = useState(1);
   const [buyerName, setBuyerName] = useState("");
   const [buyerEmail, setBuyerEmail] = useState("");
@@ -65,7 +71,7 @@ export default function EventDetailPage() {
     { eventId: event?.id || 0 },
     { enabled: !!event?.id }
   );
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string | null>(preselectedDate);
   const createOrder = trpc.tickets.createOrder.useMutation();
 
   const selectedTimeslot = timeslots?.find((s) => s.id === selectedSlot);
