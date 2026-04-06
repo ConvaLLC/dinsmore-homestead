@@ -154,3 +154,19 @@
 
 ## Map Fix
 - [x] Fix map coordinates to correctly show Dinsmore Homestead at 5656 Burlington Pike, Burlington, KY
+
+## Dynamic Availability Calendar
+- [x] Add tRPC availability endpoint (slot counts per day for a month)
+- [x] Build AvailabilityCalendar component (monthly grid + slot panel)
+- [x] Integrate calendar into Events page
+
+## Smart Directions Button
+- [x] Add device-aware directions button to Visit page (opens Apple Maps on iOS, Google Maps on Android/desktop)
+
+## Dynamic Availability Calendar
+- [x] Add tRPC availability endpoint (slot counts per day for a month)
+- [x] Build AvailabilityCalendar component (monthly grid + slot panel)
+- [x] Integrate calendar into Events page
+
+## Smart Directions Button
+- [x] Add device-aware directions button to Visit page (opens Apple Maps on iOS, Google Maps on Android/desktop)

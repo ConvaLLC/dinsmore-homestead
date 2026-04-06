@@ -7,6 +7,34 @@ import { MapView } from "@/components/Map";
 // Dinsmore Homestead coordinates (verified: 5656 Burlington Pike, Burlington, KY 41005)
 const HOMESTEAD_LAT = 39.000614;
 const HOMESTEAD_LNG = -84.813219;
+const HOMESTEAD_ADDRESS = "5656 Burlington Pike, Burlington, KY 41005";
+
+/**
+ * Opens the native mapping app on the user's device:
+ * - iOS / macOS Safari  → Apple Maps
+ * - Android             → Google Maps app intent
+ * - Everything else     → Google Maps web
+ */
+function openDirections() {
+  const ua = navigator.userAgent;
+  const isIOS = /iPad|iPhone|iPod/.test(ua) && !(window as any).MSStream;
+  const isMacOS = /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
+  const isAndroid = /Android/.test(ua);
+
+  const encodedAddress = encodeURIComponent(HOMESTEAD_ADDRESS);
+  const coords = `${HOMESTEAD_LAT},${HOMESTEAD_LNG}`;
+
+  if (isIOS || isMacOS) {
+    // Apple Maps deep-link
+    window.open(`https://maps.apple.com/?daddr=${encodedAddress}&ll=${coords}&dirflg=d`, "_blank");
+  } else if (isAndroid) {
+    // Google Maps intent (opens app if installed, falls back to web)
+    window.open(`https://maps.google.com/?daddr=${coords}&directionsmode=driving`, "_blank");
+  } else {
+    // Desktop: Google Maps web
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}&destination_place_id=ChIJ_XZ2zqhb4IgRFNQWaFyJEYg`, "_blank");
+  }
+}
 
 const C = {
   midnight: "oklch(21.8% 0.036 251.3)",
@@ -312,15 +340,14 @@ export default function VisitPage() {
                   ))}
                 </div>
 
-                <a
-                  href="https://maps.google.com/?q=5656+Burlington+Pike,+Burlington,+KY+41005"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={openDirections}
                   className="btn-vintage mt-5 inline-flex items-center gap-2"
+                  style={{ cursor: "pointer" }}
                 >
-                  <Car size={14} />
-                  Open in Google Maps
-                </a>
+                  <Navigation size={14} />
+                  Get Directions
+                </button>
               </div>
 
               {/* Parking */}
@@ -555,26 +582,14 @@ export default function VisitPage() {
             />
           </div>
           <div className="flex flex-wrap gap-4 mt-4 justify-end">
-            <a
-              href="https://maps.google.com/?q=5656+Burlington+Pike,+Burlington,+KY+41005"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={openDirections}
               className="btn-vintage inline-flex items-center gap-2"
-              style={{ borderColor: `${C.gold}66`, color: C.cream }}
-            >
-              <Car size={14} />
-              Google Maps
-            </a>
-            <a
-              href="https://maps.apple.com/?address=5656+Burlington+Pike,Burlington,KY+41005"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-vintage inline-flex items-center gap-2"
-              style={{ borderColor: `${C.gold}66`, color: C.cream }}
+              style={{ borderColor: `${C.gold}66`, color: C.cream, cursor: "pointer" }}
             >
               <Navigation size={14} />
-              Apple Maps
-            </a>
+              Get Directions
+            </button>
           </div>
         </div>
       </section>

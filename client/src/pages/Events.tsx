@@ -4,6 +4,7 @@ import { trpc } from "@/lib/trpc";
 import { IMAGES } from "../../../shared/images";
 import { Calendar, Clock, Ticket, Filter } from "lucide-react";
 import { format } from "date-fns";
+import AvailabilityCalendar from "@/components/AvailabilityCalendar";
 
 const EVENT_TYPES = [
   { value: "all", label: "All Events" },
@@ -54,6 +55,10 @@ export default function EventsPage() {
 
       <section className="py-10" style={{ background: "oklch(97.8% 0.008 89.6)" }}>
         <div className="container">
+          {/* Layout: events list + calendar sidebar */}
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+          {/* Left: filter + event cards (spans 2 cols on xl) */}
+          <div className="xl:col-span-2">
           {/* Filter bar */}
           <div className="flex items-center gap-3 mb-8 flex-wrap">
             <Filter size={16} style={{ color: "oklch(74.2% 0.118 90.2)" }} />
@@ -206,6 +211,44 @@ export default function EventsPage() {
               </Link>
             </div>
           )}
+          </div>{/* end events list col */}
+
+          {/* Right: availability calendar */}
+          <div className="xl:col-span-1">
+            <div style={{ position: "sticky", top: "100px" }}>
+              <div
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: "0.65rem",
+                  letterSpacing: "0.2em",
+                  color: "oklch(47.2% 0.088 247.4)",
+                  textTransform: "uppercase",
+                  marginBottom: "0.75rem",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                }}
+              >
+                <Calendar size={13} style={{ color: "oklch(74.2% 0.118 90.2)" }} />
+                Availability Calendar
+              </div>
+              <div style={{ border: "1px solid oklch(87.6% 0.068 89.7)", overflow: "hidden" }}>
+                <AvailabilityCalendar />
+              </div>
+              <p
+                style={{
+                  fontFamily: "'EB Garamond', serif",
+                  fontSize: "0.82rem",
+                  color: "oklch(47.2% 0.088 247.4)",
+                  fontStyle: "italic",
+                  marginTop: "0.5rem",
+                }}
+              >
+                Click any highlighted date to see available time slots and book directly.
+              </p>
+            </div>
+          </div>
+          </div>{/* end grid */}
         </div>
       </section>
 

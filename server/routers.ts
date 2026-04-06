@@ -48,6 +48,7 @@ import {
   updateTimeslot,
   updateUserEducationAccess,
   verifyEmailCode,
+  getAvailabilityForMonth,
 } from "./db";
 import { nanoid } from "nanoid";
 import axios from "axios";
@@ -376,6 +377,17 @@ export const appRouter = router({
         const to   = new Date(input.endDate   + 'T23:59:59');
         return deleteTimeslotsInRange(input.eventId, from, to);
       }),
+  }),
+
+  // ── Availability Calendar ─────────────────────────────────────────────────
+  availability: router({
+    /**
+     * Returns per-day slot availability for a given calendar month.
+     * Used by the AvailabilityCalendar component on the Events page.
+     */
+    forMonth: publicProcedure
+      .input(z.object({ year: z.number().int().min(2020).max(2100), month: z.number().int().min(1).max(12) }))
+      .query(({ input }) => getAvailabilityForMonth(input.year, input.month)),
   }),
 
   // ── Tickets / PayPal ──────────────────────────────────────────────────────

@@ -440,3 +440,83 @@ export async function deleteEducationContent(id: number): Promise<void> {
   if (!db) return;
   await db.delete(educationContent).where(eq(educationContent.id, id));
 }
+
+// ─── Availability Calendar ────────────────────────────────────────────────────
+
+export interface DayAvailability {
+  date: string;          // "YYYY-MM-DD"
+  totalSlots: number;
+  availableSlots: number;
+  soldOut: boolean;
+  events: { eventId: number; eventTitle: string; slotId: number; startTime: string; endTime: string | null; capacity: number; ticketsSold: number; price: string | null }[];
+}
+
+/**
+ * Returns per-day availability for all active events within a calendar month.
+ * `year` and `month` are 1-based (e.g. month=4 for April).
+ */
+export async function getAvailabilityForMonth(year: number, month: number): Promise<DayAvailability[]> {
+  const db = await getDb();
+  if (!db) return [];
+
+  const firstDay = new Date(year, month - 1, 1, 0, 0, 0);
+  const lastDay  = new Date(year, month, 0, 23, 59, 59);
+
+  const rows = await db
+    .select({
+      slotId:       eventTimeslots.id,
+      slotDate:     eventTimeslots.slotDate,
+      startTime:    eventTimeslots.startTime,
+      endTime:      eventTimeslots.endTime,
+      capacity:     eventTimeslots.capacity,
+      ticketsSold:  eventTimeslots.ticketsSold,
+      price:        eventTimeslots.price,
+      eventId:      events.id,
+      eventTitle:   events.title,
+    })
+    .from(eventTimeslots)
+    .innerJoin(events, eq(eventTimeslots.eventId, events.id))
+    .where(
+      and(
+        eq(eventTimeslots.active, true),
+        eq(events.active, true),
+        gte(eventTimeslots.slotDate, firstDay),
+        lte(eventTimeslots.slotDate, lastDay)
+      )
+    )
+    .orderBy(eventTimeslots.slotDate);
+
+  // Group by date string
+  const byDate = new Map<string, DayAvailability>();
+
+  for (const row of rows) {
+    const d = row.slotDate instanceof Date ? row.slotDate : new Date(row.slotDate);
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
+    if (!byDate.has(key)) {
+      byDate.set(key, { date: key, totalSlots: 0, availableSlots: 0, soldOut: false, events: [] });
+    }
+    const day = byDate.get(key)!;
+    const avail = row.capacity - row.ticketsSold;
+    day.totalSlots += 1;
+    if (avail > 0) day.availableSlots += 1;
+    day.events.push({
+      eventId:     row.eventId,
+      eventTitle:  row.eventTitle,
+      slotId:      row.slotId,
+      startTime:   row.startTime,
+      endTime:     row.endTime ?? null,
+      capacity:    row.capacity,
+      ticketsSold: row.ticketsSold,
+      price:       row.price ?? null,
+    });
+  }
+
+  // Mark sold-out days
+  const days = Array.from(byDate.values());
+  for (const day of days) {
+    day.soldOut = day.totalSlots > 0 && day.availableSlots === 0;
+  }
+
+  return days.sort((a, b) => a.date.localeCompare(b.date));
+}
