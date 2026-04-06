@@ -146,3 +146,8 @@
 - [x] Hide sublabel text on mobile
 - [x] Add tap highlight (active state) on mobile tiles
 - [x] Fix vertical centering of text in mobile tiles
+
+## Plan Your Visit Page
+- [x] Create PlanYourVisit.tsx with hours, directions, parking, and map sections
+- [x] Register /plan-your-visit route in App.tsx
+- [x] Wire nav links from tile strip and nav menu to the new page
