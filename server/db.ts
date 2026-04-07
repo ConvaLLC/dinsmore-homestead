@@ -316,7 +316,24 @@ export async function incrementTimeslotSold(timeslotId: number, qty: number): Pr
     .where(eq(eventTimeslots.id, timeslotId));
 }
 
+// ─── Timeslot capacity restore ───────────────────────────────────────────────
+
+export async function decrementTimeslotSold(timeslotId: number, qty: number): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+  await db.update(eventTimeslots)
+    .set({ ticketsSold: sql`GREATEST(${eventTimeslots.ticketsSold} - ${qty}, 0)` })
+    .where(eq(eventTimeslots.id, timeslotId));
+}
+
 // ─── Ticket Orders ────────────────────────────────────────────────────────────
+
+export async function getTicketOrderById(id: number): Promise<TicketOrder | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(ticketOrders).where(eq(ticketOrders.id, id)).limit(1);
+  return result[0];
+}
 
 export async function createTicketOrder(data: InsertTicketOrder): Promise<number> {
   const db = await getDb();
@@ -545,4 +562,19 @@ export async function getMembershipsByEmail(email: string): Promise<Membership[]
   const db = await getDb();
   if (!db) return [];
   return db.select().from(memberships).where(eq(memberships.memberEmail, email)).orderBy(desc(memberships.createdAt));
+}
+
+export async function cancelMembershipByOrderId(orderId: number): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+  await db.update(memberships)
+    .set({ status: "cancelled" })
+    .where(eq(memberships.orderId, orderId));
+}
+
+export async function getMembershipByOrderId(orderId: number): Promise<Membership | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(memberships).where(eq(memberships.orderId, orderId)).limit(1);
+  return result[0];
 }

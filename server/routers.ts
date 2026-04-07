@@ -34,6 +34,7 @@ import {
   getEventById,
   getEventBySlug,
   getFeaturedEvents,
+  getTicketOrderById,
   getTicketOrderByOrderNumber,
   getAllTimeslotsForEvent,
   bulkCreateTimeslots,
@@ -41,6 +42,9 @@ import {
   getTimeslotById,
   getTimeslotsForEvent,
   incrementTimeslotSold,
+  decrementTimeslotSold,
+  cancelMembershipByOrderId,
+  getMembershipByOrderId,
   updateDonation,
   updateEducationAccessRequest,
   updateEducationContent,
@@ -480,6 +484,60 @@ export const appRouter = router({
       .query(({ input }) => getTicketOrderByOrderNumber(input.orderNumber)),
 
     adminList: adminProcedure.query(() => getAllTicketOrders()),
+
+    /**
+     * Admin: Cancel an order, restore timeslot capacity, cancel associated membership.
+     */
+    adminCancel: adminProcedure
+      .input(z.object({
+        orderId: z.number(),
+        reason: z.string().min(1, "Please provide a cancellation reason"),
+        issueRefund: z.boolean().default(true),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const order = await getTicketOrderById(input.orderId);
+        if (!order) throw new TRPCError({ code: "NOT_FOUND", message: "Order not found" });
+        if (order.status === "cancelled" || order.status === "refunded") {
+          throw new TRPCError({ code: "BAD_REQUEST", message: "Order is already cancelled or refunded" });
+        }
+
+        const newStatus = input.issueRefund ? "refunded" : "cancelled";
+        const refundAmount = input.issueRefund ? order.totalAmount : null;
+
+        // 1. Update order status
+        await updateTicketOrder(order.id, {
+          status: newStatus,
+          cancelledAt: new Date(),
+          cancelledBy: ctx.user.name || ctx.user.openId,
+          cancelReason: input.reason,
+          refundAmount: refundAmount,
+        } as any);
+
+        // 2. Restore timeslot capacity
+        if (order.timeslotId) {
+          await decrementTimeslotSold(order.timeslotId, order.quantity);
+        }
+
+        // 3. Cancel associated membership if any
+        const membership = await getMembershipByOrderId(order.id);
+        if (membership) {
+          await cancelMembershipByOrderId(order.id);
+        }
+
+        // 4. Notify owner
+        notifyOwner({
+          title: `Order ${newStatus.toUpperCase()}: ${order.orderNumber}`,
+          content: `Order ${order.orderNumber} for ${order.buyerName} (${order.buyerEmail}) has been ${newStatus} by ${ctx.user.name || "admin"}.\n\nReason: ${input.reason}\nOriginal Total: $${order.totalAmount}${input.issueRefund ? `\nRefund Amount: $${order.totalAmount}` : ""}${membership ? "\nAssociated membership has been cancelled." : ""}`,
+        }).catch(() => {});
+
+        return {
+          success: true,
+          orderNumber: order.orderNumber,
+          newStatus,
+          refundAmount: refundAmount ? parseFloat(refundAmount) : 0,
+          membershipCancelled: !!membership,
+        };
+      }),
 
     /**
      * Tour-specific order with multi-ticket-type pricing.

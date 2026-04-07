@@ -126,6 +126,11 @@ export const ticketOrders = mysqlTable("ticket_orders", {
   paypalCaptureId: varchar("paypalCaptureId", { length: 100 }),
   status: mysqlEnum("status", ["pending", "paid", "cancelled", "refunded"]).default("pending").notNull(),
   notes: text("notes"),
+  // Cancellation / refund tracking
+  cancelledAt: timestamp("cancelledAt"),
+  cancelledBy: varchar("cancelledBy", { length: 255 }),
+  cancelReason: text("cancelReason"),
+  refundAmount: decimal("refundAmount", { precision: 10, scale: 2 }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });

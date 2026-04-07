@@ -228,3 +228,13 @@
 ## Bug Fixes (Admin Pages)
 - [x] Fix AdminOrders hooks ordering error (React "Rendered more hooks than during the previous render")
 - [x] Fix AdminMemberships hooks ordering error (same issue — hooks after early return)
+
+## Admin Cancel/Refund Orders
+- [x] Add cancel order backend procedure (update status, restore timeslot capacity)
+- [x] Add refund tracking fields to schema (cancelledAt, cancelledBy, cancelReason, refundAmount)
+- [x] Add cancel/refund UI in AdminOrders (expandable row detail with action buttons)
+- [x] Show cancel confirmation dialog with reason field
+- [x] Update order status badges to reflect cancelled/refunded states
+- [x] Restore timeslot capacity when order is cancelled
+- [x] Cancel associated membership if order included membership purchase
+- [x] Write vitest tests for cancel/refund procedures (6 tests passing)
