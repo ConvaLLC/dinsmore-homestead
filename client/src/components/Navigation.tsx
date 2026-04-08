@@ -19,6 +19,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: "Directions", href: "/visit#directions" },
       { label: "What to See", href: "/the-farm" },
       { label: "Weddings & Private Events", href: "/weddings" },
+      { label: "FAQ", href: "/faq" },
     ],
   },
   { label: "Events", href: "/events" },

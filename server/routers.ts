@@ -876,29 +876,18 @@ export const appRouter = router({
         tierPrice: z.number().min(1),
         donationAmount: z.number().min(0).default(0),
         origin: z.string(),
-        // Gift membership fields
-        isGift: z.boolean().default(false),
-        giftFromName: z.string().optional(),
-        giftFromEmail: z.string().email().optional(),
-        giftMessage: z.string().max(500).optional(),
       }))
       .mutation(async ({ input }) => {
         const total = input.tierPrice + input.donationAmount;
         const amountCents = Math.round(total * 100);
         const orderRef = `MEM-${Date.now()}-${nanoid(6).toUpperCase()}`;
 
-        // The purchaser email (for payment/receipt) is the gifter's email if gift, else member's
-        const payerEmail = input.isGift && input.giftFromEmail ? input.giftFromEmail : input.memberEmail;
-        const payerName  = input.isGift && input.giftFromName  ? input.giftFromName  : input.memberName;
-
         // Process payment
         const payment = await processPayment({
           amount: amountCents,
           sourceId: "SANDBOX_MOCK",
-          description: input.isGift
-            ? `Gift Membership (${input.tier}) for ${input.memberName}`
-            : `Dinsmore Membership (${input.tier})`,
-          buyerEmail: payerEmail,
+          description: `Dinsmore Membership (${input.tier}) + Donation`,
+          buyerEmail: input.memberEmail,
           orderNumber: orderRef,
         });
 
@@ -915,17 +904,13 @@ export const appRouter = router({
           status: "active",
           startsAt: now,
           expiresAt,
-          isGift: input.isGift,
-          giftFromName: input.giftFromName,
-          giftFromEmail: input.giftFromEmail,
-          giftMessage: input.giftMessage,
         });
 
         // Create donation record if included
         if (input.donationAmount > 0) {
           await createDonation({
-            donorName: payerName,
-            donorEmail: payerEmail,
+            donorName: input.memberName,
+            donorEmail: input.memberEmail,
             amount: input.donationAmount.toFixed(2),
             donationType: "one_time",
             status: "completed",
@@ -934,13 +919,9 @@ export const appRouter = router({
           });
         }
 
-        const notifyContent = input.isGift
-          ? `${payerName} (${payerEmail}) gifted a ${input.tier} membership ($${input.tierPrice.toFixed(2)}) to ${input.memberName} (${input.memberEmail}).${input.giftMessage ? `\nMessage: "${input.giftMessage}"` : ""}${input.donationAmount > 0 ? `\nDonation: $${input.donationAmount.toFixed(2)}` : ""}\nTotal: $${total.toFixed(2)}\nPayment: ${payment.paymentId}`
-          : `${input.memberName} (${input.memberEmail}) purchased a ${input.tier} membership ($${input.tierPrice.toFixed(2)}).${input.donationAmount > 0 ? `\nDonation: $${input.donationAmount.toFixed(2)}` : ""}\nTotal: $${total.toFixed(2)}\nPayment: ${payment.paymentId}`;
-
         await notifyOwner({
-          title: input.isGift ? "New Gift Membership" : "New Membership Purchase",
-          content: notifyContent,
+          title: "New Membership Purchase",
+          content: `${input.memberName} (${input.memberEmail}) purchased a ${input.tier} membership ($${input.tierPrice.toFixed(2)}).${input.donationAmount > 0 ? `\nDonation: $${input.donationAmount.toFixed(2)}` : ""}\nTotal: $${total.toFixed(2)}\nPayment: ${payment.paymentId}`,
         });
 
         return {
@@ -951,9 +932,6 @@ export const appRouter = router({
           total: total.toFixed(2),
           membershipAmount: input.tierPrice.toFixed(2),
           donationAmount: input.donationAmount.toFixed(2),
-          isGift: input.isGift,
-          recipientName: input.memberName,
-          recipientEmail: input.memberEmail,
         };
       }),
   }),

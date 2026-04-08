@@ -208,7 +208,7 @@
 ## Admin Bookings Dashboard
 - [x] Add admin bookings page with upcoming tours grouped by date/time
 - [x] Show guest counts, contact info, ticket breakdown per booking
-- [x] Add ability to cancel/refund orders from admin
+- [ ] Add ability to cancel/refund orders from admin
 
 ## Membership Upsell in Booking Flow
 - [x] Add memberships table to schema (senior $20, individual $35, family $60, friends $100)
@@ -271,12 +271,13 @@
 - [x] Make responsive (expandable cards on mobile, full table on desktop)
 - [x] Integrate into /membership page between benefits and purchase widget
 
-## Gift a Membership
-- [x] Add isGift, giftFromName, giftFromEmail, giftMessage fields to memberships schema
-- [x] Update purchaseStandalone backend procedure to handle gift memberships
-- [x] Add gift toggle UI in MembershipWidget (toggle between "For Myself" / "Give as a Gift")
-- [x] Show recipient name, email, and optional personal message fields when gift mode is active
-- [x] Show gifter's contact fields separately (purchaser name/email)
-- [x] Update confirmation screen to show gift-specific messaging
-- [x] Update AdminMemberships page to display gift icon and gifter info column
-- [x] Write vitest tests for gift membership purchase (9 new tests, 47 total passing)
+## FAQ Page (Dinsmore Homestead & Family)
+- [x] Research Dinsmore Homestead history, family, and unique features (dinsmorefarm.org, Wikipedia, NKY Tribune)
+- [x] Write compelling, conversion-focused FAQ content (18 questions across 6 categories)
+- [x] Build FAQ page at /faq with accordion UI, category filter, and booking CTAs
+- [x] Include heritage center opening mid-2026 information with capital campaign stats
+- [x] Mention large group tours, school field trips, weddings/events, scout programs
+- [x] Add FAQ link to Plan Your Visit navigation dropdown
+- [x] Wire Book a Tour CTAs throughout the FAQ (hero, mid-page, final section)
+- [x] Add visitor reviews section with 5-star ratings
+- [x] Add Heritage Center teaser with $1.5M campaign stats

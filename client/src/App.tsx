@@ -22,6 +22,7 @@ import TheFarmPage from "./pages/TheFarm";
 import WeddingsPage from "./pages/Weddings";
 import PreservationPage from "./pages/Preservation";
 import ConnectPage from "./pages/Connect";
+import FAQPage from "./pages/FAQ";
 import EducationRegisterPage from "./pages/EducationRegister";
 import EducationPortalPage from "./pages/EducationPortal";
 import EducationContentPage from "./pages/EducationContent";
@@ -73,6 +74,7 @@ function Router() {
       <Route path="/weddings" component={() => <PublicLayout><WeddingsPage /></PublicLayout>} />
       <Route path="/preservation" component={() => <PublicLayout><PreservationPage /></PublicLayout>} />
       <Route path="/connect" component={() => <PublicLayout><ConnectPage /></PublicLayout>} />
+      <Route path="/faq" component={() => <PublicLayout><FAQPage /></PublicLayout>} />
 
       {/* Education portal */}
       <Route path="/education/register" component={() => <PublicLayout><EducationRegisterPage /></PublicLayout>} />
