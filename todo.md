@@ -288,3 +288,8 @@
 - [x] Add "Explore All FAQs — Discover the Full Story" link to full /faq page
 - [x] Place section between Education Portal section and Support Banner on homepage
 - [x] Match vintage parchment styling consistent with homepage (Cinzel/Playfair/EB Garamond fonts, navy/gold/cream palette)
+
+## Tour Timeslot Capacity Update
+- [x] Update default capacity from 10 to 20 in AdminTimeslots UI (bulk and single form defaults)
+- [x] Update reseed-tours.ts seed script to use capacity 20
+- [x] Update all 876 existing timeslots in the database from capacity 10 to 20

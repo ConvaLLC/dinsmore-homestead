@@ -104,9 +104,9 @@ export default function AdminTimeslots() {
   const [location] = useLocation();
   const eventId = useMemo(() => { const p = new URLSearchParams(window.location.search); const id = p.get("eventId"); return id ? parseInt(id) : null; }, [location]);
   const [showBulkForm, setShowBulkForm] = useState(false);
-  const [bulk, setBulk] = useState({ startDate:"",endDate:"",startTime:"10:00",endTime:"16:00",intervalMinutes:60,slotDurationMinutes:0,capacity:15,price:"",skipDays:[] as number[],replaceExisting:false });
+  const [bulk, setBulk] = useState({ startDate:"",endDate:"",startTime:"10:00",endTime:"16:00",intervalMinutes:60,slotDurationMinutes:0,capacity:20,price:"",skipDays:[] as number[],replaceExisting:false });
   const [showSingleForm, setShowSingleForm] = useState(false);
-  const [singleForm, setSingleForm] = useState({ slotDate:"",startTime:"10:00 AM",endTime:"11:00 AM",capacity:"15",price:"" });
+  const [singleForm, setSingleForm] = useState({ slotDate:"",startTime:"10:00 AM",endTime:"11:00 AM",capacity:"20",price:"" });
   const [editingSlot, setEditingSlot] = useState<Slot|null>(null);
   const [filterDate, setFilterDate] = useState("");
   const [showInactive, setShowInactive] = useState(false);

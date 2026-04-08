@@ -16,7 +16,7 @@ async function main() {
   if (tourEvent) {
     await db.update(events).set({
       basePrice: "10.00",
-      defaultCapacity: 10,
+      defaultCapacity: 20,
       description: `<p>Step inside the 1842 Dinsmore Homestead for a guided tour of one of Kentucky's most authentic 19th-century historic sites. Tours last approximately one hour and cover the main house, grounds, and outbuildings.</p>
 <p><strong>Tour Schedule:</strong> Friday, Saturday &amp; Sunday, 1:00 PM – 5:00 PM (last tour at 4:00 PM). Tours begin on the hour.</p>
 <p><strong>Admission:</strong></p>
@@ -41,7 +41,7 @@ async function main() {
       startDate: new Date("2025-04-01"),
       endDate: new Date("2026-12-14"),
       usesTimeslots: true,
-      defaultCapacity: 10,
+      defaultCapacity: 20,
       active: true,
       featured: true,
     });
@@ -80,7 +80,7 @@ async function main() {
             slotDate: new Date(d),
             startTime: t.start,
             endTime: t.end,
-            capacity: 10,
+            capacity: 20,
             ticketsSold: 0,
             price: "10.00",
             active: true,
