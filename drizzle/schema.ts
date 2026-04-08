@@ -173,6 +173,11 @@ export const memberships = mysqlTable("memberships", {
   status: mysqlEnum("status", ["active", "expired", "cancelled"]).default("active").notNull(),
   startsAt: timestamp("startsAt").defaultNow().notNull(),
   expiresAt: timestamp("expiresAt").notNull(),
+  // Gift membership fields
+  isGift: boolean("isGift").default(false).notNull(),
+  giftFromName: varchar("giftFromName", { length: 255 }),
+  giftFromEmail: varchar("giftFromEmail", { length: 320 }),
+  giftMessage: text("giftMessage"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 

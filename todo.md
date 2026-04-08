@@ -208,7 +208,7 @@
 ## Admin Bookings Dashboard
 - [x] Add admin bookings page with upcoming tours grouped by date/time
 - [x] Show guest counts, contact info, ticket breakdown per booking
-- [ ] Add ability to cancel/refund orders from admin
+- [x] Add ability to cancel/refund orders from admin
 
 ## Membership Upsell in Booking Flow
 - [x] Add memberships table to schema (senior $20, individual $35, family $60, friends $100)
@@ -270,3 +270,13 @@
 - [x] Style with vintage parchment theme matching the membership page
 - [x] Make responsive (expandable cards on mobile, full table on desktop)
 - [x] Integrate into /membership page between benefits and purchase widget
+
+## Gift a Membership
+- [x] Add isGift, giftFromName, giftFromEmail, giftMessage fields to memberships schema
+- [x] Update purchaseStandalone backend procedure to handle gift memberships
+- [x] Add gift toggle UI in MembershipWidget (toggle between "For Myself" / "Give as a Gift")
+- [x] Show recipient name, email, and optional personal message fields when gift mode is active
+- [x] Show gifter's contact fields separately (purchaser name/email)
+- [x] Update confirmation screen to show gift-specific messaging
+- [x] Update AdminMemberships page to display gift icon and gifter info column
+- [x] Write vitest tests for gift membership purchase (9 new tests, 47 total passing)

@@ -1,9 +1,9 @@
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { AdminNav } from "./AdminDashboard";
-import { Lock, Users, Crown } from "lucide-react";
+import { Lock, Users, Crown, Gift } from "lucide-react";
 import { getLoginUrl } from "@/const";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 const C = {
   midnight: "oklch(21.8% 0.036 251.3)",
@@ -77,7 +77,7 @@ export default function AdminMemberships() {
               <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'EB Garamond', serif", fontSize: "0.85rem" }}>
                 <thead>
                   <tr style={{ background: C.midnight, color: C.gold }}>
-                    {["Member", "Email", "Tier", "Amount", "Status", "Starts", "Expires"].map(h => (
+                    {["Member", "Email", "Tier", "Amount", "Status", "Starts", "Expires", "Gift Info"].map(h => (
                       <th key={h} style={{ padding: "0.6rem 0.75rem", textAlign: "left", fontFamily: "'Playfair Display', serif", fontSize: "0.65rem", letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 600 }}>{h}</th>
                     ))}
                   </tr>
@@ -89,7 +89,16 @@ export default function AdminMemberships() {
                     const isExpired = new Date(m.expiresAt) < new Date();
                     return (
                       <tr key={m.id} style={{ background: i % 2 === 0 ? "white" : C.parchment, borderBottom: `1px solid ${C.goldLight}` }}>
-                        <td style={{ padding: "0.5rem 0.75rem", fontWeight: 600 }}>{m.memberName}</td>
+                        <td style={{ padding: "0.5rem 0.75rem", fontWeight: 600 }}>
+                          <div className="flex items-center gap-1.5">
+                            {m.isGift && (
+                              <span title="Gift membership" style={{ display: "inline-flex", flexShrink: 0 }}>
+                                <Gift size={13} style={{ color: "oklch(68% 0.12 15)" }} />
+                              </span>
+                            )}
+                            {m.memberName}
+                          </div>
+                        </td>
                         <td style={{ padding: "0.5rem 0.75rem", color: C.gold }}>{m.memberEmail}</td>
                         <td style={{ padding: "0.5rem 0.75rem" }}>
                           <span style={{
@@ -126,6 +135,33 @@ export default function AdminMemberships() {
                         </td>
                         <td style={{ padding: "0.5rem 0.75rem", color: C.steel, fontSize: "0.8rem" }}>{new Date(m.startsAt).toLocaleDateString()}</td>
                         <td style={{ padding: "0.5rem 0.75rem", color: C.steel, fontSize: "0.8rem" }}>{new Date(m.expiresAt).toLocaleDateString()}</td>
+                        <td style={{ padding: "0.5rem 0.75rem" }}>
+                          {m.isGift ? (
+                            <div style={{ fontSize: "0.8rem" }}>
+                              <div style={{ color: C.navy, fontWeight: 600 }}>From: {m.giftFromName || "—"}</div>
+                              <div style={{ color: C.steel, fontSize: "0.75rem" }}>{m.giftFromEmail || ""}</div>
+                              {m.giftMessage && (
+                                <div
+                                  title={m.giftMessage}
+                                  style={{
+                                    color: C.steel,
+                                    fontStyle: "italic",
+                                    fontSize: "0.75rem",
+                                    maxWidth: "160px",
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis",
+                                    whiteSpace: "nowrap",
+                                    cursor: "help",
+                                  }}
+                                >
+                                  "{m.giftMessage}"
+                                </div>
+                              )}
+                            </div>
+                          ) : (
+                            <span style={{ color: C.goldLight, fontSize: "0.75rem" }}>—</span>
+                          )}
+                        </td>
                       </tr>
                     );
                   })}
