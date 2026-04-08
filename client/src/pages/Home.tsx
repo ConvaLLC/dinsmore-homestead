@@ -2,7 +2,8 @@ import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import HeroSlider from "@/components/HeroSlider";
 import { IMAGES } from "../../../shared/images";
-import { Calendar, Clock, MapPin, Ticket, Heart, BookOpen, ChevronRight, Star, Users, Award, GraduationCap, House } from "lucide-react";
+import { Calendar, Clock, MapPin, Ticket, Heart, BookOpen, ChevronRight, ChevronDown, Star, Users, Award, GraduationCap, House, HelpCircle } from "lucide-react";
+import { useState } from "react";
 import { format } from "date-fns";
 import TourBookingWidget from "@/components/TourBookingWidget";
 import MembershipWidget from "@/components/MembershipWidget";
@@ -22,6 +23,212 @@ const C = {
   parchment: "oklch(94.7% 0.029 89.6)",
   warmWhite: "oklch(97.8% 0.008 89.6)",
 };
+
+// ── FAQ Preview data: 5 most enticing questions ──
+const FAQ_PREVIEW = [
+  {
+    q: "What does 'frozen in time' really mean when people describe this place?",
+    a: "It means exactly what it sounds like. When the last Dinsmore family member donated the property in 1988, she asked that everything be left exactly as it was. Every piece of furniture, every book on the shelf, every heirloom quilt and antique bedstead is the original — nothing is a reproduction. You're not walking through a recreation. You're walking through 180 years of real life, untouched.",
+  },
+  {
+    q: "I heard there are presidential connections — is that true?",
+    a: "Absolutely. The Dinsmore family's social circle reached all the way to the White House. Family letters and diaries in the archives reference correspondence with multiple U.S. presidents. James Dinsmore, who built the homestead, was a man of considerable standing in Kentucky society — and the family maintained those connections for generations. Come on a tour and hear the full story.",
+  },
+  {
+    q: "Why is the Dinsmore Homestead a must-see for my family?",
+    a: "Because it's genuinely unlike anything else. No velvet ropes. No actors in period costume. No reproductions. Just a real 1842 farmhouse where a real family lived for six generations — and where every single object they owned is still exactly where they left it. Kids are captivated. Adults are moved. It's the kind of place that stays with you.",
+  },
+  {
+    q: "What is the Heritage Center, and when does it open?",
+    a: "The Dinsmore Heritage Center is a brand-new 6,000-square-foot facility opening mid-2026. It will feature a grand pavilion perfect for weddings and large events, expanded educational classrooms for school groups, and research facilities for historians. It's the next chapter of the Dinsmore story — and you can be part of making it happen by supporting the $1.5M capital campaign.",
+  },
+  {
+    q: "Can you accommodate school field trips and large groups?",
+    a: "Yes — and we love them. The Dinsmore Homestead hosts thousands of students every year and offers curriculum-aligned programs for K-12 groups. With the Heritage Center opening in mid-2026, our capacity for school outings, scout programs, and large group tours will more than double. Contact us to book a group experience your students won't forget.",
+  },
+];
+
+function HomeFAQPreview() {
+  const [openIdx, setOpenIdx] = useState<number | null>(0);
+
+  return (
+    <section
+      className="py-20"
+      style={{ background: `linear-gradient(180deg, oklch(97.8% 0.008 89.6) 0%, oklch(94.7% 0.029 89.6) 100%)` }}
+    >
+      <div className="container" style={{ maxWidth: "860px", margin: "0 auto" }}>
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div
+            style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.6rem",
+              letterSpacing: "0.35em",
+              color: "oklch(74.2% 0.118 90.2)",
+              marginBottom: "0.75rem",
+            }}
+            className="uppercase"
+          >
+            ✦ &nbsp; Questions &amp; Answers &nbsp; ✦
+          </div>
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
+              fontWeight: 700,
+              color: "oklch(21.8% 0.036 251.3)",
+              marginBottom: "0.75rem",
+              lineHeight: 1.25,
+            }}
+          >
+            What Makes Dinsmore So Special?
+          </h2>
+          <p
+            style={{
+              fontFamily: "'EB Garamond', serif",
+              fontSize: "1.05rem",
+              color: "oklch(47.2% 0.088 247.4)",
+              maxWidth: "560px",
+              margin: "0 auto",
+              lineHeight: 1.6,
+            }}
+          >
+            A few of the questions visitors ask most — answered honestly, because the truth is more fascinating than any brochure.
+          </p>
+        </div>
+
+        {/* Accordion */}
+        <div
+          style={{
+            border: "1px solid oklch(87.6% 0.068 89.7)",
+            borderRadius: "2px",
+            overflow: "hidden",
+            boxShadow: "0 4px 24px oklch(21.8% 0.036 251.3 / 0.08)",
+          }}
+        >
+          {FAQ_PREVIEW.map((item, idx) => (
+            <div
+              key={idx}
+              style={{
+                borderBottom: idx < FAQ_PREVIEW.length - 1 ? "1px solid oklch(87.6% 0.068 89.7)" : "none",
+              }}
+            >
+              <button
+                onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
+                className="w-full text-left"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: "1rem",
+                  padding: "1.25rem 1.5rem",
+                  background: openIdx === idx
+                    ? "oklch(30.2% 0.056 255.4)"
+                    : "white",
+                  transition: "background 0.2s ease",
+                  cursor: "pointer",
+                  border: "none",
+                  width: "100%",
+                }}
+              >
+                <div className="flex items-start gap-3">
+                  <HelpCircle
+                    size={16}
+                    style={{
+                      color: openIdx === idx ? "oklch(74.2% 0.118 90.2)" : "oklch(47.2% 0.088 247.4)",
+                      flexShrink: 0,
+                      marginTop: "2px",
+                      transition: "color 0.2s ease",
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: "1rem",
+                      fontWeight: 600,
+                      color: openIdx === idx ? "oklch(94.7% 0.029 89.6)" : "oklch(21.8% 0.036 251.3)",
+                      lineHeight: 1.4,
+                      transition: "color 0.2s ease",
+                      textAlign: "left",
+                    }}
+                  >
+                    {item.q}
+                  </span>
+                </div>
+                <ChevronDown
+                  size={18}
+                  style={{
+                    color: openIdx === idx ? "oklch(74.2% 0.118 90.2)" : "oklch(47.2% 0.088 247.4)",
+                    flexShrink: 0,
+                    transform: openIdx === idx ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.25s ease, color 0.2s ease",
+                  }}
+                />
+              </button>
+              {openIdx === idx && (
+                <div
+                  style={{
+                    padding: "0 1.5rem 1.5rem 3.5rem",
+                    background: "oklch(97.8% 0.008 89.6)",
+                    borderTop: "1px solid oklch(87.6% 0.068 89.7)",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontFamily: "'EB Garamond', serif",
+                      fontSize: "1rem",
+                      color: "oklch(34.6% 0.074 256.1)",
+                      lineHeight: 1.75,
+                      paddingTop: "1rem",
+                    }}
+                  >
+                    {item.a}
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Link to full FAQ */}
+        <div className="text-center mt-10">
+          <p
+            style={{
+              fontFamily: "'EB Garamond', serif",
+              fontSize: "1rem",
+              color: "oklch(47.2% 0.088 247.4)",
+              marginBottom: "1.25rem",
+            }}
+          >
+            These are just a few of the stories waiting for you at the Dinsmore Homestead.
+          </p>
+          <Link
+            href="/faq"
+            style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.72rem",
+              letterSpacing: "0.15em",
+              background: "oklch(21.8% 0.036 251.3)",
+              color: "oklch(74.2% 0.118 90.2)",
+              padding: "0.875rem 2.5rem",
+              border: "2px solid oklch(74.2% 0.118 90.2 / 0.4)",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.6rem",
+              transition: "all 0.25s ease",
+              fontWeight: 600,
+            }}
+            className="uppercase hover:opacity-90"
+          >
+            <HelpCircle size={15} />
+            Explore All FAQs — Discover the Full Story
+            <ChevronRight size={15} />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function OrnamentalDivider({ label }: { label?: string }) {
   return (
@@ -1189,6 +1396,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── FAQ PREVIEW SECTION ── */}
+      <HomeFAQPreview />
 
       {/* Support Banner */}
       <section

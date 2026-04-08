@@ -281,3 +281,10 @@
 - [x] Wire Book a Tour CTAs throughout the FAQ (hero, mid-page, final section)
 - [x] Add visitor reviews section with 5-star ratings
 - [x] Add Heritage Center teaser with $1.5M campaign stats
+
+## Homepage FAQ Preview Section
+- [x] Select 5 best enticing FAQ questions for homepage preview
+- [x] Build FAQ preview section with accordion-style expandable answers
+- [x] Add "Explore All FAQs — Discover the Full Story" link to full /faq page
+- [x] Place section between Education Portal section and Support Banner on homepage
+- [x] Match vintage parchment styling consistent with homepage (Cinzel/Playfair/EB Garamond fonts, navy/gold/cream palette)
