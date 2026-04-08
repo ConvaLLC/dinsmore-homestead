@@ -446,26 +446,32 @@
 
 /* ─── Full-Width Hero with Bottom Tile Strip ─────────────────────────────── */
 
-/* The tile strip sits at the bottom of the hero wrapper */
+/* The tile strip sits at the bottom of the hero wrapper — 4 parchment tiles */
 .hero-tile-strip {
-  display: flex;
-  flex-direction: row;
-  height: 180px;
-  background: oklch(21.8% 0.036 251.3);
-  border-top: 1px solid oklch(74.2% 0.118 90.2 / 0.25);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: oklch(94.7% 0.029 89.6);
+  border-top: 3px solid oklch(74.2% 0.118 90.2);
 }
 
 .quick-tile {
   cursor: pointer;
   text-decoration: none !important;
   min-width: 0;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.quick-tile:hover {
+  background: oklch(97.8% 0.008 89.6);
 }
 
 .quick-tile .quick-tile-bg {
-  transition: filter 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 .quick-tile:hover .quick-tile-bg {
-  filter: brightness(1.35) saturate(1.2);
+  opacity: 0.08;
 }
 
 .quick-tile:hover .quick-tile-accent {
@@ -474,12 +480,12 @@
 
 /* Label scale-up on hover */
 .quick-tile .tile-label {
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease;
   display: block;
   transform-origin: center bottom;
 }
 .quick-tile:hover .tile-label {
-  transform: scale(1.06);
+  transform: scale(1.04);
 }
 
 /* Sublabel fade-in on hover */
@@ -500,37 +506,28 @@
   display: inline-block;
 }
 .quick-tile:hover .tile-icon {
-  transform: scale(1.25) translateY(-2px);
+  transform: scale(1.2) translateY(-2px);
 }
 
-/* Responsive: on mobile stack tiles in 2 rows of 3 */
+/* Responsive: on mobile stack tiles in 2x2 grid */
 @media (max-width: 767px) {
   .hero-tile-strip {
-    flex-wrap: wrap;
-    height: auto;
-  }
-  .hero-tile-strip .quick-tile {
-    flex: 0 0 33.333% !important;
-    height: 90px;
-    display: flex !important;
-    flex-direction: column;
+    grid-template-columns: repeat(2, 1fr);
   }
   .hero-tile-strip .quick-tile .quick-tile-content {
-    padding: 0.5rem 0.4rem !important;
-    flex: 1;
-    justify-content: center !important;
-    align-items: center !important;
-  }
-  .hero-tile-strip .quick-tile .tile-icon {
-    display: none;
+    padding: 0.75rem 0.5rem !important;
   }
   .hero-tile-strip .quick-tile .tile-sublabel {
     display: none;
   }
   .hero-tile-strip .quick-tile .tile-label {
-    font-size: 0.9rem !important;
+    font-size: 0.75rem !important;
   }
-  .hero-tile-strip .quick-tile:active .quick-tile-bg {
-    filter: brightness(1.6) saturate(1.3);
+  .hero-tile-strip .quick-tile .tile-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+  .hero-tile-strip .quick-tile:active {
+    background: oklch(90% 0.04 89.6);
   }
 }

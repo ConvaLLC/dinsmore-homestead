@@ -13,6 +13,7 @@ import EventDetailPage from "./pages/EventDetail";
 import TicketConfirmPage from "./pages/TicketConfirm";
 import TicketCancelPage from "./pages/TicketCancel";
 import DonatePage from "./pages/Donate";
+import MembershipPage from "./pages/Membership";
 import DonateConfirmPage from "./pages/DonateConfirm";
 import HistoryFamilyPage from "./pages/HistoryFamily";
 import HistoryEnslavedPage from "./pages/HistoryEnslaved";
@@ -63,6 +64,7 @@ function Router() {
       <Route path="/tickets/confirm" component={() => <PublicLayout><TicketConfirmPage /></PublicLayout>} />
       <Route path="/tickets/cancel" component={() => <PublicLayout><TicketCancelPage /></PublicLayout>} />
       <Route path="/donate" component={() => <PublicLayout><DonatePage /></PublicLayout>} />
+      <Route path="/membership" component={() => <PublicLayout><MembershipPage /></PublicLayout>} />
       <Route path="/donate/confirm" component={() => <PublicLayout><DonateConfirmPage /></PublicLayout>} />
       <Route path="/history/family" component={() => <PublicLayout><HistoryFamilyPage /></PublicLayout>} />
       <Route path="/history/enslaved" component={() => <PublicLayout><HistoryEnslavedPage /></PublicLayout>} />

@@ -37,7 +37,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: "The Foundation", href: "/preservation" },
       { label: "Volunteers", href: "/preservation/volunteers" },
       { label: "Donate", href: "/donate" },
-      { label: "Membership", href: "/donate#membership" },
+      { label: "Membership", href: "/membership" },
     ],
   },
   { label: "Connect", href: "/connect" },

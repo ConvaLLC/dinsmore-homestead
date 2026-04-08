@@ -1,10 +1,20 @@
-import { useState } from "react";
-import { trpc } from "@/lib/trpc";
+import { Link } from "wouter";
 import { IMAGES } from "../../../shared/images";
-import { Heart, Shield, Users, BookOpen, Hammer } from "lucide-react";
-import { toast } from "sonner";
+import { Heart, Shield, Users, BookOpen, Hammer, Award, Ticket, ChevronRight } from "lucide-react";
+import DonateWidget from "@/components/DonateWidget";
 
-const PRESET_AMOUNTS = [25, 50, 100, 250, 500];
+const C = {
+  midnight:  "oklch(21.8% 0.036 251.3)",
+  deepNavy:  "oklch(30.2% 0.056 255.4)",
+  richNavy:  "oklch(34.6% 0.074 256.1)",
+  cobalt:    "oklch(47.2% 0.088 247.4)",
+  gold:      "oklch(74.2% 0.118 90.2)",
+  goldBright:"oklch(76.7% 0.139 91.1)",
+  goldPale:  "oklch(85.6% 0.068 89.7)",
+  cream:     "oklch(87.6% 0.068 89.7)",
+  parchment: "oklch(94.7% 0.029 89.6)",
+  warmWhite: "oklch(97.8% 0.008 89.6)",
+};
 
 const IMPACT = [
   { icon: <Hammer size={20} />, amount: "$25", desc: "Helps maintain and repair historic outbuildings" },
@@ -13,60 +23,17 @@ const IMPACT = [
   { icon: <Users size={20} />, amount: "$250", desc: "Sponsors a major preservation project or restoration effort" },
 ];
 
-const MEMBERSHIP_LEVELS = [
-  { name: "Friend", price: "$35/year", perks: ["Free admission for 1 adult", "10% off in gift shop", "Newsletter subscription"] },
-  { name: "Family", price: "$65/year", perks: ["Free admission for family (2 adults + children)", "10% off in gift shop", "Invitations to member events"] },
-  { name: "Patron", price: "$150/year", perks: ["All Family benefits", "Recognition in annual report", "Behind-the-scenes tour"] },
-  { name: "Benefactor", price: "$500/year", perks: ["All Patron benefits", "Named recognition on donor wall", "Private event access"] },
-];
-
 export default function DonatePage() {
-  const [amount, setAmount] = useState<number | null>(50);
-  const [customAmount, setCustomAmount] = useState("");
-  const [donorName, setDonorName] = useState("");
-  const [donorEmail, setDonorEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [isAnonymous, setIsAnonymous] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const createDonation = trpc.donations.createOrder.useMutation();
-
-  const finalAmount = customAmount ? parseFloat(customAmount) : amount;
-
-  const handleDonate = async () => {
-    if (!donorName || !donorEmail) {
-      toast.error("Please enter your name and email address");
-      return;
-    }
-    if (!finalAmount || finalAmount < 1) {
-      toast.error("Please enter a valid donation amount");
-      return;
-    }
-    setIsSubmitting(true);
-    try {
-      const result = await createDonation.mutateAsync({
-        amount: String(finalAmount),
-        donorName: isAnonymous ? "Anonymous" : donorName,
-        donorEmail,
-        message,
-        anonymous: isAnonymous,
-        origin: window.location.origin,
-      });
-      // Payment processed server-side — show confirmation
-      toast.success("Thank you for your generous donation!");
-      window.location.href = `/donate/confirm?paymentId=${result.paymentId}`;
-    } catch (err: any) {
-      toast.error(err.message || "Failed to process donation. Please try again.");
-      setIsSubmitting(false);
-    }
-  };
-
   return (
-    <div>
-      {/* Hero */}
-      <div
+    <div style={{ background: C.warmWhite }}>
+      {/* Hero Banner */}
+      <section
         className="relative overflow-hidden"
-        style={{ height: "300px" }}
+        style={{
+          background: `linear-gradient(135deg, ${C.midnight} 0%, ${C.deepNavy} 100%)`,
+          paddingTop: "5rem",
+          paddingBottom: "4rem",
+        }}
       >
         <div
           style={{
@@ -75,276 +42,105 @@ export default function DonatePage() {
             backgroundImage: `url(${IMAGES.heritageFinal})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            filter: "sepia(20%) contrast(1.05)",
+            opacity: 0.1,
           }}
         />
-        <div style={{ position: "absolute", inset: 0, background: "oklch(22% 0.04 50 / 0.7)" }} />
-        <div className="container relative h-full flex flex-col justify-end pb-10">
-          <span className="section-label" style={{ color: "oklch(74.2% 0.118 90.2)" }}>
-            Support Preservation
-          </span>
-          <h1 style={{ color: "oklch(97.8% 0.008 89.6)", marginBottom: "0.5rem" }}>
-            Help Preserve Kentucky History
-          </h1>
-          <p
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "3px",
+            background: `linear-gradient(to right, transparent, ${C.gold}, transparent)`,
+          }}
+        />
+        <div className="container relative text-center">
+          <div
             style={{
-              color: "oklch(87.6% 0.068 89.7)",
-              fontFamily: "'EB Garamond', serif",
-              fontSize: "1.05rem",
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.65rem",
+              letterSpacing: "0.3em",
+              color: C.gold,
+              marginBottom: "0.75rem",
+            }}
+            className="uppercase"
+          >
+            ✦ Support Preservation ✦
+          </div>
+          <h1
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontWeight: 700,
+              color: C.parchment,
+              marginBottom: "0.75rem",
             }}
           >
-            Your generosity keeps this irreplaceable historic treasure alive for future generations
+            Help Preserve Kentucky History
+          </h1>
+          <div style={{ width: "50px", height: "2px", background: C.gold, margin: "0 auto 1.5rem" }} />
+          <p
+            style={{
+              fontFamily: "'EB Garamond', serif",
+              fontSize: "1.15rem",
+              color: C.cream,
+              maxWidth: "600px",
+              margin: "0 auto",
+              lineHeight: 1.75,
+            }}
+          >
+            Your generosity keeps this irreplaceable historic treasure alive for future generations.
+            The Dinsmore Homestead Foundation is a 501(c)(3) non-profit.
           </p>
         </div>
-      </div>
+      </section>
 
-      {/* Donation form */}
-      <section className="py-12" style={{ background: "oklch(97.8% 0.008 89.6)" }}>
+      {/* Donation Widget + Impact Sidebar */}
+      <section className="py-16" style={{ background: C.warmWhite }}>
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            {/* Form */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-5xl mx-auto">
+            {/* Widget */}
             <div className="lg:col-span-2">
-              <div className="card-vintage p-6 mb-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <Heart size={20} style={{ color: "oklch(34.6% 0.074 256.1)" }} />
-                  <h2 style={{ fontSize: "1.5rem", margin: 0 }}>Make a Donation</h2>
-                </div>
-                <div
-                  style={{
-                    width: "40px",
-                    height: "2px",
-                    background: "oklch(74.2% 0.118 90.2)",
-                    marginBottom: "1.5rem",
-                  }}
-                />
-
-                {/* Amount selection */}
-                <div className="mb-5">
-                  <label
-                    style={{
-                      fontFamily: "'Playfair Display', serif",
-                      fontSize: "0.75rem",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "oklch(47.2% 0.088 247.4)",
-                      display: "block",
-                      marginBottom: "0.75rem",
-                    }}
-                  >
-                    Select Amount
-                  </label>
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {PRESET_AMOUNTS.map((preset) => (
-                      <button
-                        key={preset}
-                        onClick={() => { setAmount(preset); setCustomAmount(""); }}
-                        style={{
-                          padding: "0.5rem 1.25rem",
-                          border: "2px solid",
-                          borderColor: amount === preset && !customAmount ? "oklch(34.6% 0.074 256.1)" : "oklch(87.6% 0.068 89.7)",
-                          background: amount === preset && !customAmount ? "oklch(34.6% 0.074 256.1)" : "transparent",
-                          color: amount === preset && !customAmount ? "oklch(97.8% 0.008 89.6)" : "oklch(47.2% 0.088 247.4)",
-                          fontFamily: "'Playfair Display', serif",
-                          fontSize: "0.9rem",
-                          fontWeight: 600,
-                          cursor: "pointer",
-                          transition: "all 0.2s",
-                        }}
-                      >
-                        ${preset}
-                      </button>
-                    ))}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span
-                      style={{
-                        fontFamily: "'Playfair Display', serif",
-                        fontSize: "1rem",
-                        color: "oklch(47.2% 0.088 247.4)",
-                      }}
-                    >
-                      $
-                    </span>
-                    <input
-                      type="number"
-                      placeholder="Other amount"
-                      value={customAmount}
-                      onChange={(e) => { setCustomAmount(e.target.value); setAmount(0); }}
-                      min="1"
-                      style={{
-                        padding: "0.5rem 0.75rem",
-                        border: "1px solid oklch(87.6% 0.068 89.7)",
-                        background: "oklch(94.7% 0.029 89.6)",
-                        fontFamily: "'EB Garamond', serif",
-                        fontSize: "0.95rem",
-                        color: "oklch(21.8% 0.036 251.3)",
-                        outline: "none",
-                        width: "150px",
-                      }}
-                    />
-                  </div>
-                </div>
-
-                {/* Donor info */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                  {[
-                    { label: "Full Name *", value: donorName, setter: setDonorName, type: "text" },
-                    { label: "Email Address *", value: donorEmail, setter: setDonorEmail, type: "email" },
-                  ].map((field) => (
-                    <div key={field.label}>
-                      <label
-                        style={{
-                          fontFamily: "'Playfair Display', serif",
-                          fontSize: "0.7rem",
-                          letterSpacing: "0.1em",
-                          textTransform: "uppercase",
-                          color: "oklch(47.2% 0.088 247.4)",
-                          display: "block",
-                          marginBottom: "0.3rem",
-                        }}
-                      >
-                        {field.label}
-                      </label>
-                      <input
-                        type={field.type}
-                        value={field.value}
-                        onChange={(e) => field.setter(e.target.value)}
-                        style={{
-                          width: "100%",
-                          padding: "0.5rem 0.75rem",
-                          border: "1px solid oklch(87.6% 0.068 89.7)",
-                          background: "oklch(94.7% 0.029 89.6)",
-                          fontFamily: "'EB Garamond', serif",
-                          fontSize: "0.95rem",
-                          color: "oklch(21.8% 0.036 251.3)",
-                          outline: "none",
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mb-4">
-                  <label
-                    style={{
-                      fontFamily: "'Playfair Display', serif",
-                      fontSize: "0.7rem",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "oklch(47.2% 0.088 247.4)",
-                      display: "block",
-                      marginBottom: "0.3rem",
-                    }}
-                  >
-                    Message (optional)
-                  </label>
-                  <textarea
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    rows={3}
-                    placeholder="Leave a message with your donation..."
-                    style={{
-                      width: "100%",
-                      padding: "0.5rem 0.75rem",
-                      border: "1px solid oklch(87.6% 0.068 89.7)",
-                      background: "oklch(94.7% 0.029 89.6)",
-                      fontFamily: "'EB Garamond', serif",
-                      fontSize: "0.95rem",
-                      color: "oklch(21.8% 0.036 251.3)",
-                      outline: "none",
-                      resize: "vertical",
-                    }}
-                  />
-                </div>
-
-                <label className="flex items-center gap-2 mb-5 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={isAnonymous}
-                    onChange={(e) => setIsAnonymous(e.target.checked)}
-                    style={{ accentColor: "oklch(34.6% 0.074 256.1)" }}
-                  />
-                  <span
-                    style={{
-                      fontFamily: "'EB Garamond', serif",
-                      fontSize: "0.9rem",
-                      color: "oklch(47.2% 0.088 247.4)",
-                    }}
-                  >
-                    Make this donation anonymous
-                  </span>
-                </label>
-
-                <div
-                  style={{
-                    background: "oklch(94.7% 0.029 89.6)",
-                    border: "1px solid oklch(87.6% 0.068 89.7)",
-                    padding: "0.75rem 1rem",
-                    marginBottom: "1rem",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "'EB Garamond', serif",
-                      fontSize: "0.9rem",
-                      color: "oklch(47.2% 0.088 247.4)",
-                    }}
-                  >
-                    Donation Total
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "'Playfair Display', serif",
-                      fontSize: "1.25rem",
-                      fontWeight: 700,
-                      color: "oklch(34.6% 0.074 256.1)",
-                    }}
-                  >
-                    ${(finalAmount || 0).toFixed(2)}
-                  </span>
-                </div>
-
-                <button
-                  onClick={handleDonate}
-                  disabled={isSubmitting}
-                  className="btn-vintage-filled w-full text-center"
-                  style={{ opacity: isSubmitting ? 0.7 : 1, fontSize: "0.85rem" }}
-                >
-                  {isSubmitting ? "Processing..." : `Donate $${(finalAmount || 0).toFixed(2)}`}
-                </button>
-                <p
-                  style={{
-                    fontFamily: "'EB Garamond', serif",
-                    fontSize: "0.75rem",
-                    color: "oklch(74.2% 0.118 90.2)",
-                    textAlign: "center",
-                    marginTop: "0.75rem",
-                    fontStyle: "italic",
-                  }}
-                >
-                  Secure payment processing. The Dinsmore Homestead Foundation is a 501(c)(3) non-profit — your donation may be tax-deductible.
-                </p>
+              <div
+                style={{
+                  background: C.parchment,
+                  border: `1px solid ${C.goldPale}`,
+                  boxShadow: `0 8px 30px ${C.midnight}11`,
+                }}
+              >
+                <DonateWidget />
               </div>
             </div>
 
-            {/* Sidebar */}
+            {/* Sidebar: Impact + Photo */}
             <div className="space-y-6">
-              {/* Impact */}
-              <div className="card-vintage p-5">
-                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", marginBottom: "1rem" }}>
+              <div
+                style={{
+                  background: C.parchment,
+                  border: `1px solid ${C.goldPale}`,
+                  padding: "1.5rem",
+                }}
+              >
+                <h3
+                  style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: "1.1rem",
+                    fontWeight: 700,
+                    color: C.midnight,
+                    marginBottom: "0.5rem",
+                  }}
+                >
                   Your Impact
                 </h3>
-                <div style={{ width: "30px", height: "2px", background: "oklch(74.2% 0.118 90.2)", marginBottom: "1rem" }} />
+                <div style={{ width: "30px", height: "2px", background: C.gold, marginBottom: "1rem" }} />
                 <div className="space-y-3">
                   {IMPACT.map((item) => (
                     <div key={item.amount} className="flex items-start gap-3">
                       <span
                         style={{
-                          color: "oklch(34.6% 0.074 256.1)",
-                          background: "oklch(87.6% 0.068 89.7)",
+                          color: C.deepNavy,
+                          background: C.cream,
                           padding: "0.4rem",
                           borderRadius: "4px",
                           flexShrink: 0,
@@ -358,7 +154,7 @@ export default function DonatePage() {
                             fontFamily: "'Playfair Display', serif",
                             fontSize: "0.85rem",
                             fontWeight: 700,
-                            color: "oklch(34.6% 0.074 256.1)",
+                            color: C.deepNavy,
                           }}
                         >
                           {item.amount}
@@ -367,8 +163,9 @@ export default function DonatePage() {
                           style={{
                             fontFamily: "'EB Garamond', serif",
                             fontSize: "0.85rem",
-                            color: "oklch(47.2% 0.088 247.4)",
+                            color: C.cobalt,
                             margin: 0,
+                            lineHeight: 1.5,
                           }}
                         >
                           {item.desc}
@@ -379,84 +176,142 @@ export default function DonatePage() {
                 </div>
               </div>
 
-              {/* Photo */}
               <img
                 src={IMAGES.homestead}
                 alt="Dinsmore Homestead"
-                className="img-vintage w-full"
-                style={{ height: "180px", objectFit: "cover" }}
+                style={{
+                  width: "100%",
+                  height: "180px",
+                  objectFit: "cover",
+                  border: `1px solid ${C.goldPale}`,
+                }}
               />
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Membership section */}
-          <div id="membership" className="mt-16">
-            <div className="text-center mb-8">
-              <span className="section-label">Annual Giving</span>
-              <h2>Become a Member</h2>
+      {/* Cross-sell: Membership + Tour */}
+      <section
+        className="py-12"
+        style={{
+          background: `linear-gradient(135deg, ${C.midnight} 0%, ${C.deepNavy} 100%)`,
+          borderTop: `3px solid ${C.gold}`,
+        }}
+      >
+        <div className="container">
+          <div className="text-center mb-8">
+            <h2
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "clamp(1.4rem, 2.5vw, 1.8rem)",
+                fontWeight: 700,
+                color: C.parchment,
+                marginBottom: "0.5rem",
+              }}
+            >
+              More Ways to Support
+            </h2>
+            <div style={{ width: "40px", height: "2px", background: C.gold, margin: "0 auto" }} />
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            <div
+              style={{
+                background: C.richNavy,
+                border: `1px solid ${C.cobalt}44`,
+                padding: "1.5rem",
+              }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <Award size={18} style={{ color: C.gold }} />
+                <span
+                  style={{
+                    fontFamily: "'Cinzel', serif",
+                    fontSize: "0.65rem",
+                    letterSpacing: "0.12em",
+                    color: C.gold,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Become a Member
+                </span>
+              </div>
               <p
                 style={{
                   fontFamily: "'EB Garamond', serif",
-                  fontSize: "1rem",
-                  color: "oklch(47.2% 0.088 247.4)",
-                  maxWidth: "500px",
-                  margin: "0.5rem auto 0",
+                  fontSize: "0.95rem",
+                  color: C.cream,
+                  lineHeight: 1.6,
+                  marginBottom: "1rem",
                 }}
               >
-                Annual membership supports the Foundation's mission and gives you exclusive benefits throughout the year.
+                Enjoy free tours, gift shop discounts, our newsletter, and guest passes — starting at just $20/year.
               </p>
+              <Link
+                href="/membership"
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: "0.65rem",
+                  letterSpacing: "0.1em",
+                  color: C.gold,
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.3rem",
+                }}
+              >
+                Join Now <ChevronRight size={14} />
+              </Link>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {MEMBERSHIP_LEVELS.map((level) => (
-                <div
-                  key={level.name}
-                  className="card-vintage p-5 flex flex-col"
+            <div
+              style={{
+                background: C.richNavy,
+                border: `1px solid ${C.cobalt}44`,
+                padding: "1.5rem",
+              }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <Ticket size={18} style={{ color: C.gold }} />
+                <span
+                  style={{
+                    fontFamily: "'Cinzel', serif",
+                    fontSize: "0.65rem",
+                    letterSpacing: "0.12em",
+                    color: C.gold,
+                    textTransform: "uppercase",
+                  }}
                 >
-                  <h3
-                    style={{
-                      fontFamily: "'Playfair Display', serif",
-                      fontSize: "1.1rem",
-                      color: "oklch(21.8% 0.036 251.3)",
-                      marginBottom: "0.25rem",
-                    }}
-                  >
-                    {level.name}
-                  </h3>
-                  <p
-                    style={{
-                      fontFamily: "'Playfair Display', serif",
-                      fontSize: "1rem",
-                      fontWeight: 700,
-                      color: "oklch(34.6% 0.074 256.1)",
-                      marginBottom: "0.75rem",
-                    }}
-                  >
-                    {level.price}
-                  </p>
-                  <ul
-                    style={{
-                      fontFamily: "'EB Garamond', serif",
-                      fontSize: "0.85rem",
-                      color: "oklch(47.2% 0.088 247.4)",
-                      paddingLeft: "1.1rem",
-                      flex: 1,
-                      margin: "0 0 1rem",
-                    }}
-                  >
-                    {level.perks.map((perk) => (
-                      <li key={perk} style={{ marginBottom: "0.25rem" }}>
-                        {perk}
-                      </li>
-                    ))}
-                  </ul>
-                  <a
-                    href="mailto:info@dinsmorefarm.org?subject=Membership Inquiry"
-                    className="btn-vintage text-xs text-center block"
-                  >
-                    Join Now
-                  </a>
-                </div>
-              ))}
+                  Book a Tour
+                </span>
+              </div>
+              <p
+                style={{
+                  fontFamily: "'EB Garamond', serif",
+                  fontSize: "0.95rem",
+                  color: C.cream,
+                  lineHeight: 1.6,
+                  marginBottom: "1rem",
+                }}
+              >
+                Experience the authentic 1842 homestead with an expert-guided tour. Adults $10, children $3.
+              </p>
+              <Link
+                href="/#book-a-tour"
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: "0.65rem",
+                  letterSpacing: "0.1em",
+                  color: C.gold,
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.3rem",
+                }}
+              >
+                Book Now <ChevronRight size={14} />
+              </Link>
             </div>
           </div>
         </div>

@@ -5,6 +5,8 @@ import { IMAGES } from "../../../shared/images";
 import { Calendar, Clock, MapPin, Ticket, Heart, BookOpen, ChevronRight, Star, Users, Award, GraduationCap, House } from "lucide-react";
 import { format } from "date-fns";
 import TourBookingWidget from "@/components/TourBookingWidget";
+import MembershipWidget from "@/components/MembershipWidget";
+import DonateWidget from "@/components/DonateWidget";
 
 const C = {
   midnight: "oklch(21.8% 0.036 251.3)",
@@ -164,55 +166,35 @@ function EventCard({ event }: { event: any }) {
 export default function Home() {
   const { data: events } = trpc.events.featured.useQuery();
 
-  // Quick-access tile strip beneath the hero
+  // 4 focused hero tiles — parchment style, smooth-scroll to sections
   const quickLinks = [
     {
       label: "Book a Tour",
-      sublabel: "Reserve your spot",
+      sublabel: "Reserve your guided tour",
       href: "#book-a-tour",
-      bg: `linear-gradient(135deg, ${C.deepNavy} 0%, oklch(26% 0.05 80) 100%)`,
-      icon: <Ticket size={22} />,
-      accent: C.gold,
+      icon: <Ticket size={24} />,
+      accent: C.deepNavy,
     },
     {
-      label: "Upcoming Events",
+      label: "Become a Member",
+      sublabel: "Join the Dinsmore family",
+      href: "#membership",
+      icon: <Award size={24} />,
+      accent: C.cobalt,
+    },
+    {
+      label: "Events",
       sublabel: "See what's happening",
       href: "/events",
-      bg: `linear-gradient(135deg, oklch(28% 0.06 255) 0%, oklch(36% 0.09 250) 100%)`,
-      icon: <Calendar size={22} />,
-      accent: C.skyBlue,
+      icon: <Calendar size={24} />,
+      accent: C.richNavy,
     },
     {
       label: "Donate",
       sublabel: "Support preservation",
-      href: "/donate",
-      bg: `linear-gradient(135deg, oklch(24% 0.04 20) 0%, oklch(32% 0.07 15) 100%)`,
-      icon: <Heart size={22} />,
-      accent: "oklch(65% 0.18 15)",
-    },
-    {
-      label: "Educator Access",
-      sublabel: "Lesson plans & resources",
-      href: "/education",
-      bg: `linear-gradient(135deg, oklch(26% 0.05 240) 0%, oklch(38% 0.08 235) 100%)`,
-      icon: <GraduationCap size={22} />,
-      accent: C.steelBlue,
-    },
-    {
-      label: "The Homestead",
-      sublabel: "Explore the grounds",
-      href: "/the-farm",
-      bg: `linear-gradient(135deg, oklch(24% 0.04 140) 0%, oklch(32% 0.07 135) 100%)`,
-      icon: <House size={22} />,
-      accent: "oklch(65% 0.14 140)",
-    },
-    {
-      label: "Our History",
-      sublabel: "Five generations of stories",
-      href: "/history/family",
-      bg: `linear-gradient(135deg, oklch(22% 0.035 60) 0%, oklch(30% 0.055 55) 100%)`,
-      icon: <BookOpen size={22} />,
-      accent: C.goldBright,
+      href: "#donate",
+      icon: <Heart size={24} />,
+      accent: C.cobalt,
     },
   ];
 
@@ -223,7 +205,7 @@ export default function Home() {
         {/* Full-width image slider */}
         <HeroSlider />
 
-        {/* ── Quick-Access Tile Strip ── */}
+        {/* ── Quick-Access Tile Strip (4 parchment tiles) ── */}
         <div className="hero-tile-strip">
           {quickLinks.map((tile) => {
             const isAnchor = tile.href.startsWith("#");
@@ -235,30 +217,20 @@ export default function Home() {
             <Wrapper
               key={tile.label}
               {...(wrapperProps as any)}
-              style={{ position: "relative", overflow: "hidden", display: "block", flex: "1 1 0" }}
+              style={{ position: "relative", overflow: "hidden", display: "block" }}
               className="quick-tile"
             >
-              {/* Color background */}
+              {/* Bottom accent on hover */}
               <div
                 style={{
                   position: "absolute",
-                  inset: 0,
-                  background: tile.bg,
-                  transition: "opacity 0.3s ease",
-                }}
-                className="quick-tile-bg"
-              />
-              {/* Accent border on hover (top) */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
+                  bottom: 0,
                   left: 0,
                   right: 0,
                   height: "3px",
-                  background: tile.accent,
+                  background: `linear-gradient(to right, ${C.gold}, ${C.goldBright})`,
                   transform: "scaleX(0)",
-                  transformOrigin: "left",
+                  transformOrigin: "center",
                   transition: "transform 0.3s ease",
                 }}
                 className="quick-tile-accent"
@@ -267,11 +239,11 @@ export default function Home() {
               <div
                 style={{
                   position: "absolute",
-                  top: 0,
+                  top: "15%",
                   right: 0,
                   width: "1px",
-                  height: "100%",
-                  background: `linear-gradient(to bottom, transparent, ${C.gold}44, transparent)`,
+                  height: "70%",
+                  background: `linear-gradient(to bottom, transparent, ${C.cream}, transparent)`,
                   pointerEvents: "none",
                 }}
               />
@@ -280,13 +252,11 @@ export default function Home() {
                 className="quick-tile-content"
                 style={{
                   position: "relative",
-                  height: "100%",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
-                  padding: "1rem 0.75rem",
-                  zIndex: 2,
+                  padding: "1.25rem 0.75rem",
                   textAlign: "center",
                   gap: "0.35rem",
                 }}
@@ -295,7 +265,6 @@ export default function Home() {
                   className="tile-icon"
                   style={{
                     color: tile.accent,
-                    filter: "drop-shadow(0 1px 3px oklch(0% 0 0 / 0.8))",
                   }}
                 >
                   {tile.icon}
@@ -304,13 +273,12 @@ export default function Home() {
                   className="tile-label"
                   style={{
                     fontFamily: "'Cinzel', serif",
-                    fontSize: "0.85rem",
+                    fontSize: "0.8rem",
                     fontWeight: 700,
-                    letterSpacing: "0.07em",
-                    color: "oklch(98% 0.01 90)",
+                    letterSpacing: "0.08em",
+                    color: C.midnight,
                     lineHeight: 1.2,
                     textTransform: "uppercase",
-                    textShadow: "0 1px 6px oklch(0% 0 0 / 0.9)",
                   }}
                 >
                   {tile.label}
@@ -319,9 +287,8 @@ export default function Home() {
                   className="tile-sublabel"
                   style={{
                     fontFamily: "'EB Garamond', serif",
-                    fontSize: "0.88rem",
-                    color: "oklch(85% 0.025 88)",
-                    textShadow: "0 1px 4px oklch(0% 0 0 / 0.9)",
+                    fontSize: "0.85rem",
+                    color: C.cobalt,
                     lineHeight: 1.2,
                   }}
                 >
@@ -373,7 +340,221 @@ export default function Home() {
         <TourBookingWidget />
       </section>
 
+      {/* ── Membership Section ── */}
+      <section
+        id="membership"
+        className="py-16"
+        style={{
+          background: C.warmWhite,
+          borderTop: `1px solid ${C.goldPale}`,
+        }}
+      >
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            {/* Left: Intro text */}
+            <div style={{ paddingTop: "1rem" }}>
+              <div
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: "0.65rem",
+                  letterSpacing: "0.3em",
+                  color: C.cobalt,
+                  marginBottom: "0.75rem",
+                }}
+                className="uppercase"
+              >
+                <div className="flex items-center gap-3">
+                  <div style={{ width: "30px", height: "1px", background: C.cobalt }} />
+                  Extended Family & Friends Circle
+                </div>
+              </div>
+              <h2
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
+                  fontWeight: 700,
+                  color: C.midnight,
+                  lineHeight: 1.2,
+                  marginBottom: "0.75rem",
+                }}
+              >
+                Become a{" "}
+                <span style={{ color: C.cobalt }}>Member</span>
+              </h2>
+              <div
+                style={{
+                  width: "50px",
+                  height: "3px",
+                  background: `linear-gradient(to right, ${C.gold}, ${C.goldBright})`,
+                  marginBottom: "1.25rem",
+                }}
+              />
+              <p
+                style={{
+                  fontFamily: "'EB Garamond', serif",
+                  fontSize: "1.1rem",
+                  color: C.richNavy,
+                  lineHeight: 1.75,
+                  marginBottom: "1rem",
+                }}
+              >
+                Join the Dinsmore Homestead's Extended Family & Friends Circle and enjoy
+                year-round benefits including free tours, gift shop discounts, our Dinsmore
+                Dispatch newsletter, and guest passes.
+              </p>
+              <p
+                style={{
+                  fontFamily: "'EB Garamond', serif",
+                  fontSize: "1rem",
+                  color: C.cobalt,
+                  fontStyle: "italic",
+                  lineHeight: 1.7,
+                  marginBottom: "1.5rem",
+                }}
+              >
+                Your membership directly supports the preservation and education mission
+                of the Dinsmore Homestead Foundation.
+              </p>
+              <Link
+                href="/membership"
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: "0.68rem",
+                  letterSpacing: "0.12em",
+                  color: C.deepNavy,
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  borderBottom: `2px solid ${C.deepNavy}`,
+                  paddingBottom: "2px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                }}
+              >
+                View Full Membership Details <ChevronRight size={14} />
+              </Link>
+            </div>
+            {/* Right: Membership widget */}
+            <div
+              style={{
+                background: C.parchment,
+                border: `1px solid ${C.goldPale}`,
+                boxShadow: `0 8px 30px ${C.midnight}11`,
+              }}
+            >
+              <MembershipWidget compact />
+            </div>
+          </div>
+        </div>
+      </section>
 
+      {/* ── Donate Section ── */}
+      <section
+        id="donate"
+        className="py-16"
+        style={{
+          background: C.parchment,
+          borderTop: `1px solid ${C.goldPale}`,
+        }}
+      >
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            {/* Left: Donate widget */}
+            <div
+              style={{
+                background: C.warmWhite,
+                border: `1px solid ${C.goldPale}`,
+                boxShadow: `0 8px 30px ${C.midnight}11`,
+              }}
+            >
+              <DonateWidget compact />
+            </div>
+            {/* Right: Intro text */}
+            <div style={{ paddingTop: "1rem" }}>
+              <div
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: "0.65rem",
+                  letterSpacing: "0.3em",
+                  color: C.cobalt,
+                  marginBottom: "0.75rem",
+                }}
+                className="uppercase"
+              >
+                <div className="flex items-center gap-3">
+                  <div style={{ width: "30px", height: "1px", background: C.cobalt }} />
+                  Preserving the Past
+                </div>
+              </div>
+              <h2
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
+                  fontWeight: 700,
+                  color: C.midnight,
+                  lineHeight: 1.2,
+                  marginBottom: "0.75rem",
+                }}
+              >
+                Help Us Keep{" "}
+                <span style={{ color: C.cobalt }}>History Alive</span>
+              </h2>
+              <div
+                style={{
+                  width: "50px",
+                  height: "3px",
+                  background: `linear-gradient(to right, ${C.gold}, ${C.goldBright})`,
+                  marginBottom: "1.25rem",
+                }}
+              />
+              <p
+                style={{
+                  fontFamily: "'EB Garamond', serif",
+                  fontSize: "1.1rem",
+                  color: C.richNavy,
+                  lineHeight: 1.75,
+                  marginBottom: "1rem",
+                }}
+              >
+                The Dinsmore Homestead Foundation relies on the generosity of visitors,
+                members, and donors to maintain and preserve this irreplaceable historic
+                treasure for future generations.
+              </p>
+              <p
+                style={{
+                  fontFamily: "'EB Garamond', serif",
+                  fontSize: "1rem",
+                  color: C.cobalt,
+                  fontStyle: "italic",
+                  lineHeight: 1.7,
+                  marginBottom: "1.5rem",
+                }}
+              >
+                Every dollar goes directly toward preservation, education programs,
+                and keeping the doors open for thousands of visitors each year.
+              </p>
+              <Link
+                href="/donate"
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: "0.68rem",
+                  letterSpacing: "0.12em",
+                  color: C.deepNavy,
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  borderBottom: `2px solid ${C.deepNavy}`,
+                  paddingBottom: "2px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                }}
+              >
+                View Donation Page <ChevronRight size={14} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Welcome Section */}
       <section className="py-20" style={{ background: C.parchment }}>
@@ -1009,9 +1190,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Donate Banner */}
+      {/* Support Banner */}
       <section
-        className="py-20 text-center relative overflow-hidden"
+        className="py-16 text-center relative overflow-hidden"
         style={{ background: `linear-gradient(135deg, ${C.midnight} 0%, ${C.deepNavy} 100%)` }}
       >
         <div
@@ -1050,69 +1231,61 @@ export default function Home() {
           <h2
             style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)",
+              fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
               fontWeight: 700,
               color: C.parchment,
               marginBottom: "1rem",
             }}
           >
-            Help Us Keep History Alive
+            Support the Dinsmore Homestead
           </h2>
           <div style={{ width: "50px", height: "2px", background: C.gold, margin: "0 auto 1.5rem" }} />
-          <p
-            style={{
-              fontFamily: "'EB Garamond', serif",
-              fontSize: "1.15rem",
-              color: C.cream,
-              maxWidth: "600px",
-              margin: "0 auto 2.5rem",
-              lineHeight: 1.75,
-            }}
-          >
-            The Dinsmore Homestead Foundation relies on the generosity of visitors, members, and donors
-            to maintain and preserve this irreplaceable historic treasure for future generations.
-          </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <Link
-              href="/donate"
+            <a
+              href="#membership"
+              onClick={(e) => { e.preventDefault(); document.querySelector("#membership")?.scrollIntoView({ behavior: "smooth" }); }}
               style={{
                 fontFamily: "'Cinzel', serif",
                 fontSize: "0.72rem",
                 letterSpacing: "0.15em",
                 background: `linear-gradient(135deg, ${C.goldBright}, ${C.gold})`,
                 color: C.midnight,
-                padding: "0.875rem 2.25rem",
+                padding: "0.75rem 2rem",
                 fontWeight: 700,
                 transition: "all 0.25s ease",
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.5rem",
                 boxShadow: `0 4px 20px ${C.gold}44`,
+                cursor: "pointer",
               }}
               className="uppercase hover:opacity-90"
             >
-              <Heart size={15} />
-              Donate Now
-            </Link>
-            <Link
-              href="/donate#membership"
+              <Award size={15} />
+              Become a Member
+            </a>
+            <a
+              href="#donate"
+              onClick={(e) => { e.preventDefault(); document.querySelector("#donate")?.scrollIntoView({ behavior: "smooth" }); }}
               style={{
                 fontFamily: "'Cinzel', serif",
                 fontSize: "0.72rem",
                 letterSpacing: "0.15em",
                 background: "transparent",
                 color: C.parchment,
-                padding: "0.875rem 2.25rem",
+                padding: "0.75rem 2rem",
                 border: `2px solid ${C.parchment}66`,
                 transition: "all 0.25s ease",
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.5rem",
+                cursor: "pointer",
               }}
               className="uppercase hover:border-amber-400 hover:text-amber-400"
             >
-              Become a Member
-            </Link>
+              <Heart size={15} />
+              Donate Now
+            </a>
           </div>
         </div>
       </section>

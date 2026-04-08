@@ -238,3 +238,28 @@
 - [x] Restore timeslot capacity when order is cancelled
 - [x] Cancel associated membership if order included membership purchase
 - [x] Write vitest tests for cancel/refund procedures (6 tests passing)
+
+## Hero Tiles + Homepage Purchase Sections (Hybrid Approach)
+- [x] Add 4 hero tiles at base of hero: Book a Tour, Become a Member, Upcoming Events, Donate
+- [x] Style tiles with light parchment background and vintage typography matching existing book tour section
+- [x] Make tiles responsive (2x2 grid on mobile)
+- [x] Tiles smooth-scroll to corresponding homepage sections
+- [x] Add Tour Booking section on homepage (reuse existing TourBookingWidget)
+- [x] Add Membership purchase section on homepage with tier cards and donate cross-sell
+- [x] Add Donate section on homepage with amount picker and tour/membership cross-sell
+- [x] Events tile links to existing Events page
+
+## Dedicated Pages
+- [x] Create dedicated /membership page with full membership purchase widget
+- [x] Update dedicated /donate page with full donation widget and cross-sells
+- [x] Ensure /book-a-tour dedicated page still works (already exists via booking widget)
+
+## Cross-Sell Strategy
+- [x] Tour Booking → membership upsell + donation (already built in EXTRAS step)
+- [x] Membership widget → suggest booking a tour + optional donation
+- [x] Donate widget → suggest becoming a member + booking a tour
+
+## Navigation Updates
+- [x] Update App.tsx routes for new dedicated pages
+- [x] Update nav menu links for Membership and Donate pages
+- [x] Write vitest tests for standalone membership purchase (10 tests passing)

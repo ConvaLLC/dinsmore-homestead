@@ -863,6 +863,77 @@ export const appRouter = router({
         const { getMembershipsByEmail } = await import("./db");
         return getMembershipsByEmail(input.email);
       }),
+
+    /**
+     * Standalone membership purchase (without a tour booking).
+     * Optionally includes a donation.
+     */
+    purchaseStandalone: publicProcedure
+      .input(z.object({
+        memberName: z.string().min(1),
+        memberEmail: z.string().email(),
+        tier: z.enum(["senior", "individual", "family", "friends"]),
+        tierPrice: z.number().min(1),
+        donationAmount: z.number().min(0).default(0),
+        origin: z.string(),
+      }))
+      .mutation(async ({ input }) => {
+        const total = input.tierPrice + input.donationAmount;
+        const amountCents = Math.round(total * 100);
+        const orderRef = `MEM-${Date.now()}-${nanoid(6).toUpperCase()}`;
+
+        // Process payment
+        const payment = await processPayment({
+          amount: amountCents,
+          sourceId: "SANDBOX_MOCK",
+          description: `Dinsmore Membership (${input.tier}) + Donation`,
+          buyerEmail: input.memberEmail,
+          orderNumber: orderRef,
+        });
+
+        // Create membership record
+        const now = new Date();
+        const expiresAt = new Date(now);
+        expiresAt.setFullYear(expiresAt.getFullYear() + 1);
+
+        const membershipId = await createMembership({
+          memberName: input.memberName,
+          memberEmail: input.memberEmail,
+          tier: input.tier,
+          amount: input.tierPrice.toFixed(2),
+          status: "active",
+          startsAt: now,
+          expiresAt,
+        });
+
+        // Create donation record if included
+        if (input.donationAmount > 0) {
+          await createDonation({
+            donorName: input.memberName,
+            donorEmail: input.memberEmail,
+            amount: input.donationAmount.toFixed(2),
+            donationType: "one_time",
+            status: "completed",
+            paypalOrderId: payment.paymentId,
+            paypalCaptureId: payment.paymentId,
+          });
+        }
+
+        await notifyOwner({
+          title: "New Membership Purchase",
+          content: `${input.memberName} (${input.memberEmail}) purchased a ${input.tier} membership ($${input.tierPrice.toFixed(2)}).${input.donationAmount > 0 ? `\nDonation: $${input.donationAmount.toFixed(2)}` : ""}\nTotal: $${total.toFixed(2)}\nPayment: ${payment.paymentId}`,
+        });
+
+        return {
+          membershipId,
+          orderRef,
+          paymentId: payment.paymentId,
+          tier: input.tier,
+          total: total.toFixed(2),
+          membershipAmount: input.tierPrice.toFixed(2),
+          donationAmount: input.donationAmount.toFixed(2),
+        };
+      }),
   }),
 
   // ── File Upload ───────────────────────────────────────────────────────────
