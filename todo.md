@@ -263,3 +263,10 @@
 - [x] Update App.tsx routes for new dedicated pages
 - [x] Update nav menu links for Membership and Donate pages
 - [x] Write vitest tests for standalone membership purchase (10 tests passing)
+
+## Membership Tier Comparison Table
+- [x] Build side-by-side comparison component showing all 4 tiers with benefits
+- [x] Include checkmarks/indicators for which benefits each tier includes
+- [x] Style with vintage parchment theme matching the membership page
+- [x] Make responsive (expandable cards on mobile, full table on desktop)
+- [x] Integrate into /membership page between benefits and purchase widget

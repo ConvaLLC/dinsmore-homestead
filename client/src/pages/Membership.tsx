@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { IMAGES } from "../../../shared/images";
 import { Award, Check, Ticket, Heart, ChevronRight } from "lucide-react";
 import MembershipWidget from "@/components/MembershipWidget";
+import TierComparison from "@/components/TierComparison";
 
 const C = {
   midnight:  "oklch(21.8% 0.036 251.3)",
@@ -179,7 +180,11 @@ export default function Membership() {
         </div>
       </section>
 
+      {/* Tier Comparison Table */}
+      <TierComparison />
+
       {/* Purchase Widget Section */}
+      <div id="purchase-membership" />
       <section className="py-16" style={{ background: C.warmWhite }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start max-w-5xl mx-auto">
