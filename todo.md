@@ -293,3 +293,14 @@
 - [x] Update default capacity from 10 to 20 in AdminTimeslots UI (bulk and single form defaults)
 - [x] Update reseed-tours.ts seed script to use capacity 20
 - [x] Update all 876 existing timeslots in the database from capacity 10 to 20
+
+## Tour Schedule Fix
+- [ ] Fix day-of-week bug (was Sat/Sun/Mon, should be Fri/Sat/Sun)
+- [ ] Clear all existing future timeslots and regenerate correctly
+- [ ] Verify correct days appear in the booking widget
+
+## Tour Schedule Fix
+- [x] Fix day-of-week bug (was Sat/Sun/Mon, now correctly Fri/Sat/Sun)
+- [x] Clear all test orders, memberships, and donations from database
+- [x] Regenerate 432 timeslots: Fri/Sat/Sun, 1–4 PM hourly, Apr 8 – Dec 14 2026, 20 capacity each
+- [x] Update tour capacity from 10 to 20 per slot
