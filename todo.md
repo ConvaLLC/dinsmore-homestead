@@ -304,3 +304,21 @@
 - [x] Clear all test orders, memberships, and donations from database
 - [x] Regenerate 432 timeslots: Fri/Sat/Sun, 1–4 PM hourly, Apr 8 – Dec 14 2026, 20 capacity each
 - [x] Update tour capacity from 10 to 20 per slot
+
+## School & Group Reservations
+- [ ] Scrape dinsmorefarm.org school/group reservations page and all linked program pages
+- [ ] Build main /group-tours landing page with program overview and inquiry form
+- [ ] Build backend procedure for group inquiry form submission with owner notification
+- [ ] Build individual program sub-pages for each linked program
+- [ ] Wire routing, navigation links, and cross-links between pages
+- [ ] Add Group Tours link to navigation menu
+
+## School & Group Reservations (Complete)
+- [x] Scraped dinsmorefarm.org school/group reservations page and all linked program pages
+- [x] Built main /group-tours landing page with program overview, 12 curriculum topics, and inquiry form
+- [x] Built /school-programs page with all 3 programs (Grades 1–3, 4–6, Middle/High School)
+- [x] Built /summer-programs page for Pioneer-to-the-Past Daycamp ($130/child, 2 sessions)
+- [x] Built /scout-programs page for Boy Scout and Girl Scout activities (merit badges + Eagle Scout)
+- [x] Added group inquiry backend procedure (groupInquiries router) with admin notification
+- [x] Added Education dropdown to navigation with links to all program pages
+- [x] Wired cross-sell links between all program pages

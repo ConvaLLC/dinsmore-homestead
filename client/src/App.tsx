@@ -23,6 +23,10 @@ import WeddingsPage from "./pages/Weddings";
 import PreservationPage from "./pages/Preservation";
 import ConnectPage from "./pages/Connect";
 import FAQPage from "./pages/FAQ";
+import GroupToursPage from "./pages/GroupTours";
+import SchoolProgramsPage from "./pages/SchoolPrograms";
+import SummerProgramsPage from "./pages/SummerPrograms";
+import ScoutProgramsPage from "./pages/ScoutPrograms";
 import EducationRegisterPage from "./pages/EducationRegister";
 import EducationPortalPage from "./pages/EducationPortal";
 import EducationContentPage from "./pages/EducationContent";
@@ -75,6 +79,10 @@ function Router() {
       <Route path="/preservation" component={() => <PublicLayout><PreservationPage /></PublicLayout>} />
       <Route path="/connect" component={() => <PublicLayout><ConnectPage /></PublicLayout>} />
       <Route path="/faq" component={() => <PublicLayout><FAQPage /></PublicLayout>} />
+      <Route path="/group-tours" component={() => <PublicLayout><GroupToursPage /></PublicLayout>} />
+      <Route path="/school-programs" component={() => <PublicLayout><SchoolProgramsPage /></PublicLayout>} />
+      <Route path="/summer-programs" component={() => <PublicLayout><SummerProgramsPage /></PublicLayout>} />
+      <Route path="/scout-programs" component={() => <PublicLayout><ScoutProgramsPage /></PublicLayout>} />
 
       {/* Education portal */}
       <Route path="/education/register" component={() => <PublicLayout><EducationRegisterPage /></PublicLayout>} />

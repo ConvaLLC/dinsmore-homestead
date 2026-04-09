@@ -41,6 +41,16 @@ const NAV_ITEMS: NavItem[] = [
       { label: "Membership", href: "/membership" },
     ],
   },
+  {
+    label: "Education",
+    children: [
+      { label: "School & Group Reservations", href: "/group-tours" },
+      { label: "School Programs (Grades 1–12)", href: "/school-programs" },
+      { label: "Summer Daycamp", href: "/summer-programs" },
+      { label: "Scout Programs", href: "/scout-programs" },
+      { label: "Education Portal", href: "/education" },
+    ],
+  },
   { label: "Connect", href: "/connect" },
 ];
 

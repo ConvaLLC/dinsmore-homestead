@@ -936,6 +936,40 @@ export const appRouter = router({
       }),
   }),
 
+  // ── Group / School Inquiries ──────────────────────────────────────────────
+  groups: router({
+    submitInquiry: publicProcedure
+      .input(
+        z.object({
+          orgName: z.string().min(1),
+          desiredDate: z.string().min(1),
+          guestCount: z.string().min(1),
+          contactName: z.string().min(1),
+          contactEmail: z.string().email(),
+          groupLeader: z.string().optional(),
+          phone: z.string().optional(),
+          programInterest: z.string().optional(),
+          accommodations: z.string().optional(),
+        })
+      )
+      .mutation(async ({ input }) => {
+        await notifyOwner({
+          title: `New Group Inquiry: ${input.orgName}`,
+          content: [
+            `Organization: ${input.orgName}`,
+            `Contact: ${input.contactName} (${input.contactEmail})`,
+            `Phone: ${input.phone || "Not provided"}`,
+            `Desired Date: ${input.desiredDate}`,
+            `Guest Count: ${input.guestCount}`,
+            `Group Leader: ${input.groupLeader || "Same as contact"}`,
+            `Program Interest: ${input.programInterest || "Not specified"}`,
+            `Accommodations: ${input.accommodations || "None"}`,
+          ].join("\n"),
+        });
+        return { success: true };
+      }),
+  }),
+
   // ── File Upload ───────────────────────────────────────────────────────────
   upload: router({
     getUploadUrl: adminProcedure
