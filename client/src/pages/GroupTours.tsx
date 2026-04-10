@@ -215,15 +215,15 @@ export default function GroupTours() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
             {PROGRAMS.map((prog) => {
               const Icon = prog.icon;
               return (
-                <Link key={prog.id} href={prog.href}>
+                <Link key={prog.id} href={prog.href} className="h-full">
                   <div
-                    className={`${prog.color} rounded-xl p-8 cursor-pointer group transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl`}
+                    className={`${prog.color} rounded-xl p-8 cursor-pointer group transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl h-full flex flex-col`}
                   >
-                    <div className="flex items-start gap-4">
+                    <div className="flex items-start gap-4 flex-1">
                       <div
                         className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
                         style={{ backgroundColor: "rgba(201,168,76,0.2)" }}

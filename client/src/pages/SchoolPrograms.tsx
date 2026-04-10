@@ -240,11 +240,11 @@ export default function SchoolPrograms() {
                       >
                         Choose a Focus Area
                       </h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
                         {prog.subprograms.map((sub) => (
                           <div
                             key={sub.title}
-                            className="rounded-lg p-4 border border-[#c9a84c]/30 bg-[#f5f0e8]"
+                            className="flex flex-col rounded-lg p-4 border border-[#c9a84c]/30 bg-[#f5f0e8] h-full"
                           >
                             <h4
                               className="font-semibold text-[#1a2f4e] mb-2"
@@ -253,7 +253,7 @@ export default function SchoolPrograms() {
                               {sub.title}
                             </h4>
                             <p
-                              className="text-[#4a3728] text-sm leading-relaxed"
+                              className="text-[#4a3728] text-sm leading-relaxed flex-1"
                               style={{ fontFamily: "'EB Garamond', serif" }}
                             >
                               {sub.desc}

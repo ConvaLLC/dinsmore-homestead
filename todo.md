@@ -322,3 +322,7 @@
 - [x] Added group inquiry backend procedure (groupInquiries router) with admin notification
 - [x] Added Education dropdown to navigation with links to all program pages
 - [x] Wired cross-sell links between all program pages
+
+## UI Fixes (Team Session)
+- [x] Make "Choose Your Experience" tiles on School Programs page all the same size
+- [x] Make "Choose Your Experience" tiles on Group Tours page all the same size
