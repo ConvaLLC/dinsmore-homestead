@@ -331,3 +331,10 @@
 ## Interactive Family Tree
 - [x] Scrape dinsmorefarm.org/the-family/the-tree/ and build interactive family tree with circular portraits and hover highlights
 - [x] Add /family-tree route to App.tsx
+
+## Family Tree Fixes
+- [x] Fix Rebecca Blair relationship — she was Charles Flandrau's 2nd wife, not Julia's companion
+- [x] Verify all other family connections against original tree
+- [x] Scrape all missing portrait images from individual bio pages
+- [x] Extract full biographies from each member's page
+- [x] Add dedicated bio section with overview modals linking to full bios
