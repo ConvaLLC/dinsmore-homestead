@@ -347,3 +347,6 @@
 - [x] Fix Rebecca Blair visual position — she should be next to Charles Flandrau, not next to Julia
 - [x] Remove misleading center vertical line that cuts through images
 - [x] Make connection lines heavier and more visible
+
+## Family Tree Portrait Fix
+- [x] Fix Janet Macomb portrait crop — cleaned circular crop from master image, uploaded to CDN
