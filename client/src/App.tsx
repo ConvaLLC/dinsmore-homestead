@@ -30,6 +30,7 @@ import ScoutProgramsPage from "./pages/ScoutPrograms";
 import EducationRegisterPage from "./pages/EducationRegister";
 import EducationPortalPage from "./pages/EducationPortal";
 import EducationContentPage from "./pages/EducationContent";
+import FamilyTreePage from "./pages/FamilyTree";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminEvents from "./pages/admin/AdminEvents";
 import AdminTimeslots from "./pages/admin/AdminTimeslots";
@@ -83,6 +84,7 @@ function Router() {
       <Route path="/school-programs" component={() => <PublicLayout><SchoolProgramsPage /></PublicLayout>} />
       <Route path="/summer-programs" component={() => <PublicLayout><SummerProgramsPage /></PublicLayout>} />
       <Route path="/scout-programs" component={() => <PublicLayout><ScoutProgramsPage /></PublicLayout>} />
+      <Route path="/family-tree" component={() => <PublicLayout><FamilyTreePage /></PublicLayout>} />
 
       {/* Education portal */}
       <Route path="/education/register" component={() => <PublicLayout><EducationRegisterPage /></PublicLayout>} />

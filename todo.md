@@ -326,3 +326,8 @@
 ## UI Fixes (Team Session)
 - [x] Make "Choose Your Experience" tiles on School Programs page all the same size
 - [x] Make "Choose Your Experience" tiles on Group Tours page all the same size
+- [ ] Scrape dinsmorefarm.org/the-family/the-tree/ and build interactive family tree with circular portraits and hover highlights
+
+## Interactive Family Tree
+- [x] Scrape dinsmorefarm.org/the-family/the-tree/ and build interactive family tree with circular portraits and hover highlights
+- [x] Add /family-tree route to App.tsx
