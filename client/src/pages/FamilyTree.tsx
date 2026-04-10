@@ -12,7 +12,7 @@ const CDN: Record<string, string> = {
   isabella: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/zmcOqESmOkWpEIaY.jpg",
   charles: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/IUoKhswtpjzMUspy.jpg",
   rebecca: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/pJbOJpMuUkxEPlsT.jpg",
-  julia: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/YfbDHSWEPvyFsbau.jpg",
+  julia: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/ECdMwxeSytptPCoF.jpg",
   susan: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/mCIaNOBovwoMGXio.jpg",
   martha_flandrau: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/SEMUIkdNLYjFUYJm.jpg",
   tilden: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/iQyKkOmpzwwNvTuu.jpg",
