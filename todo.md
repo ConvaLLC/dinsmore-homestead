@@ -338,3 +338,12 @@
 - [x] Scrape all missing portrait images from individual bio pages
 - [x] Extract full biographies from each member's page
 - [x] Add dedicated bio section with overview modals linking to full bios
+
+## Family Tree Visual Fixes (Round 2)
+- [x] Make images and text truly responsive — scale up on large screens
+- [x] Add missing portrait for Janet Macomb
+- [x] Add missing portrait for Frank Cutcheon
+- [x] Add missing portrait for John Greenway
+- [x] Fix Rebecca Blair visual position — she should be next to Charles Flandrau, not next to Julia
+- [x] Remove misleading center vertical line that cuts through images
+- [x] Make connection lines heavier and more visible

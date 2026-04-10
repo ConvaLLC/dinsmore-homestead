@@ -7,6 +7,7 @@ const CDN: Record<string, string> = {
   james: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/WfCYWCiyrWpYITmT.jpg",
   martha: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/diGMSPRZKLlhrUqS.jpg",
   alexander: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/EwDEUFtQKzxZmOSc.png",
+  janet: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/DgMvcRkdoOvEADcv.jpg",
   silas: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/TrzgzgjirnnRenyM.jpg",
   isabella: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/zmcOqESmOkWpEIaY.jpg",
   charles: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/IUoKhswtpjzMUspy.jpg",
@@ -16,8 +17,10 @@ const CDN: Record<string, string> = {
   martha_flandrau: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/SEMUIkdNLYjFUYJm.jpg",
   tilden: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/iQyKkOmpzwwNvTuu.jpg",
   sarah: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/ZNOcOzovpxxQQDWh.jpg",
+  frank: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/kJwnELPQvRzBYxiu.jpg",
   isabellaSelmes: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/CsGmHFmjXEkvYpLs.png",
   robertFerguson: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/RZwmTcGQHqQjTtXc.jpg",
+  johnGreenway: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/PxxUcENepbSAssdL.jpg",
   harryKing: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/qTrYqlsufYVfdcrQ.jpg",
   marthaFerguson: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/YlUnDdjSfIzcOMPU.jpg",
   bobFerguson: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/iwlQITyKSkxystZB.jpg",
@@ -50,10 +53,10 @@ In 1807, John altered the spelling of his last name to the more American 'Dinsmo
   },
   susannah: {
     id: "susannah",
-    name: "Susannah Bell Dinsmore",
+    name: "Susannah Dinsmore",
     dates: "1761 – 1807",
     role: "James's Mother",
-    bioUrl: "https://www.dinsmorefarm.org/the-family/susannah-dinsmore/",
+    bioUrl: "https://www.dinsmorefarm.org/the-family/susannah-dinsmoor-(bell)/",
     overview: "Born in Derry, New Hampshire. Her brothers John and Samuel Bell became governors of New Hampshire. Married John Dinsmore and had three sons and five daughters. Died of consumption (tuberculosis) in 1807.",
     fullBio: `Susannah Bell was born in Derry, New Hampshire, to John and Mary Ann Bell. Although she was one of twelve children, only four of the Bells lived to produce offspring. Her brothers, John and Samuel, became involved in state politics and served as governors of New Hampshire. Samuel also went on to serve in the U.S. Senate as an Anti-Jackson Whig. His son, Dr. John Bell was one of James Dinsmore's closest friends until he died in Louisiana in 1830.
 
@@ -69,16 +72,17 @@ Susannah married John Dinsmore and moved to Windham. She gave birth to three son
     overview: "Born in Ireland, Alexander Macomb came to America and became a merchant and fur trader. He was one of the wealthiest men in New York before financial reversals. Father of Martha Macomb Dinsmore.",
     fullBio: `Alexander Macomb was born in 1748 in Ireland. He came to America as a young man and became involved in the fur trade and land speculation, amassing considerable wealth. At one point he was considered one of the richest men in New York. He purchased nearly four million acres of land in northern New York State, but financial difficulties led to his imprisonment for debt.
 
-After his release, he rebuilt his fortune through various business ventures. He married Jane Macomb (née Navarre) and had several children, including Martha, who would marry James Dinsmore. Alexander died in 1831 in Georgetown, D.C., where he had moved to be near his son, Major General Alexander Macomb, who served as Commanding General of the United States Army.`,
+After his release, he rebuilt his fortune through various business ventures. He married Janet Marshall Rucker and had several children, including Martha, who would marry James Dinsmore. Alexander died in 1831 in Georgetown, D.C., where he had moved to be near his son, Major General Alexander Macomb, who served as Commanding General of the United States Army.`,
   },
   janet: {
     id: "janet",
     name: "Janet Macomb",
-    dates: "1761 – ?",
+    dates: "1761 – 1849",
     role: "Martha's Mother",
-    bioUrl: "https://www.dinsmorefarm.org/the-family/janet-macomb/",
-    overview: "Born in New Providence, Bahamas in 1761. First married John Rucker, then Alexander Macomb in 1791. Mother of Martha Macomb Dinsmore and seven other children.",
-    fullBio: `Janet (Jane) Navarre was born on August 1761 in New Providence, Bahamas. She was quite young when her father died. Her mother moved the family to New York City where she was remarried to John Ramsay, a merchant of the city. She and her older sister, Margaret, were soon joined by six more Ramsay siblings. When young, Jane split her time between Manhattan, Philadelphia, and Elizabeth Town, New Jersey.
+    img: CDN.janet,
+    bioUrl: "https://www.dinsmorefarm.org/the-family/jane-macomb-(marshall)/",
+    overview: "Born Janet Marshall in New Providence, Bahamas in 1761. First married John Rucker, then Alexander Macomb in 1791. Mother of Martha Macomb Dinsmore and seven other children.",
+    fullBio: `Janet Marshall, later called 'Jane', was born to Charles and Elizabeth Cox Marshall in August 1761 in New Providence, Bahamas. She was quite young when her father died. Her mother moved the family to New York City where she was remarried to John Ramsay, a merchant of the city. She and her older sister, Margaret, were soon joined by six more Ramsay siblings. When young, Jane split her time between Manhattan, Philadelphia, and Elizabeth Town, New Jersey.
 
 In the 1780s, she was married to John Rucker, a German immigrant and wealthy merchant of the firm Constable & Rucker Company. She had only one son, John, before her husband died. In 1791 she married again, this time to Alexander Macomb, another merchant and also a sometime business partner of Constable. She had seven more children. After her husband gave up or lost his business concerns in New York City, the couple moved to Georgetown, D.C. where they could be near Alexander's son and namesake.`,
   },
@@ -88,7 +92,7 @@ In the 1780s, she was married to John Rucker, a German immigrant and wealthy mer
     dates: "1766 – 1847",
     role: "James's Uncle",
     img: CDN.silas,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/silas-dinsmoor/",
+    bioUrl: "http://www.dinsmorefarm.org/the-family/silas-dinsmore/",
     overview: "One of the more colorful Dinsmore clan members, Silas kept the original spelling of the family name. Born September 26, 1766 in Windham, New Hampshire. He wrote James about the beautiful land in Boone County that would become the Homestead.",
     fullBio: `Silas Dinsmoor was one of the more colorful members of the Dinsmore clan. Unlike some of his brothers, Silas chose to keep the spelling of his last name in line with his ancestors. In the postscript to a letter to his brother in 1807, he wrote, "I am not ashamed that I am my father's son, and I will wear the name he gave me in honour of his memory."
 
@@ -114,11 +118,11 @@ Before the Civil War, James sold off some of his land to a neighbor, leaving him
     dates: "1797 – 1859",
     role: "Matriarch",
     img: CDN.martha,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/martha-macomb/",
+    bioUrl: "https://www.dinsmorefarm.org/the-family/martha-macomb-dinsmore/",
     overview: "Born in 1797 in New Jersey. Married James Dinsmore in May 1829. Together they had three daughters: Isabella (1830), Julia (1833), and Susan (1835). Died in 1859 at the Homestead.",
-    fullBio: `Martha Macomb was born in 1797 in Burlington, New Jersey, the daughter of Alexander Macomb, Sr. and Janet Navarre. She married James Dinsmore in May 1829. The couple initially lived in Louisiana before moving to Boone County, Kentucky in 1842.
+    fullBio: `Martha Macomb was born in 1797 in Burlington, New Jersey, the daughter of Alexander Macomb, Sr. and Janet Marshall Rucker. She married James Dinsmore in May 1829. The couple initially lived in Louisiana before moving to Boone County, Kentucky, where James built the Dinsmore Homestead.
 
-Martha and James had three daughters: Isabella Ramsay (1830), Julia Stockton (1833), and Susan Bell (1835). Martha managed the household of the large farm and was known for her hospitality. She died in 1859 at the Homestead, leaving James and their daughters to carry on the family legacy.`,
+Martha and James had three daughters: Isabella (1830), Julia (1833), and Susan (1835). Martha was known for her strong will and her devotion to her family. She managed the household while James oversaw the farm operations. Martha died in 1859 at the Homestead, leaving James to raise their daughters with the help of extended family.`,
   },
   isabella: {
     id: "isabella",
@@ -126,25 +130,23 @@ Martha and James had three daughters: Isabella Ramsay (1830), Julia Stockton (18
     dates: "1830 – 1867",
     role: "Eldest Daughter",
     img: CDN.isabella,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/isabella-dinsmore/",
-    overview: "Eldest daughter of James and Martha Dinsmore. Married her first cousin Charles Flandrau in 1859 in the Dinsmore parlor. Had two daughters: Martha 'Patty' (1861) and Sarah 'Sally' (1867). Died in 1866, never fully recovering from childbirth.",
-    fullBio: `Isabella Ramsay Dinsmore was the eldest daughter of James and Martha Dinsmore, born in 1830 in Louisiana. She married her first cousin, Charles Eugene Flandrau, in 1859. The wedding ceremony was held in the Dinsmore parlor and was probably followed by a large dinner for family and friends.
+    bioUrl: "https://www.dinsmorefarm.org/the-family/isabella-dinsmore-flandrau/",
+    overview: "Born at the Homestead in 1830. Married Charles Flandrau in 1859. She was the mother of Martha 'Patty' and Sarah 'Sally' Flandrau. Died in 1867, leaving Charles a widower who later married Rebecca Blair.",
+    fullBio: `Isabella Dinsmore was born in 1830, the eldest daughter of James and Martha Dinsmore. She grew up at the Dinsmore Homestead in Boone County, Kentucky. In 1859, she married Charles Eugene Flandrau, a lawyer and judge from Minnesota.
 
-They had two daughters: Martha Macomb ('Patty') in 1861 and Sarah Gibson ('Sally') in 1867. Tragically, Isabella died in 1866, having never fully recovered from childbirth six months before. She was buried in Kentucky and her daughters Patty and Sally were raised by their Aunt Julia at the Homestead.`,
+The couple had two daughters: Martha "Patty" (1861) and Sarah "Sally" (1867). Tragically, Isabella died in 1867, shortly after Sally's birth. Her death left Charles a widower with two young daughters. Charles would later marry Rebecca Blair Riddle in 1870. Isabella is buried in the Dinsmore family graveyard.`,
   },
   charles: {
     id: "charles",
     name: "Charles Flandrau",
     dates: "1828 – 1903",
-    role: "Isabella's Husband",
+    role: "Isabella's & Rebecca's Husband",
     img: CDN.charles,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/charles-flandrau/",
-    overview: "A lawyer who became influential in Minnesota Territory. Married his first cousin Isabella Dinsmore in 1859. After Isabella's death in 1866, he married Rebecca Blair Riddle in 1870. Served on the Minnesota Supreme Court and led the defense of New Ulm during the Dakota War.",
-    fullBio: `Charles Eugene Flandrau was a lawyer who became influential in Minnesota Territory after moving there in 1853 from New York City. In 1859 he married his first cousin, Isabella Dinsmore. They had two daughters: Martha Macomb ('Patty') in 1861 and Sarah Gibson ('Sally') in 1867.
+    bioUrl: "http://www.dinsmorefarm.org/the-family/charles-eugene-flandrau/",
+    overview: "Born in New York City in 1828. A lawyer, judge, and Indian agent in Minnesota. First married Isabella Dinsmore in 1859; after her death in 1867, married Rebecca Blair Riddle in 1870. Father of Martha 'Patty' and Sarah 'Sally' Flandrau.",
+    fullBio: `Charles Eugene Flandrau was born on July 15, 1828 in New York City. He studied law and moved to Minnesota where he served as an Indian Agent and later as an Associate Justice of the Minnesota Supreme Court. He gained fame for his defense of New Ulm during the U.S.-Dakota War of 1862.
 
-In 1862, during the Dakota War, Flandrau enlisted to defend settlers at New Ulm as part of the Union Army. His leadership earned him an appointment to head the defense of southwest Minnesota as a colonel. His career included serving on the Minnesota Territorial Council, in the Minnesota Constitutional Convention, and on the Minnesota territorial and state supreme courts.
-
-In 1866, his wife, Isabella, died, having never fully recovered from childbirth six months before. She was buried in Kentucky and Patty and Sally were raised in Kentucky by their Aunt Julia. Charles went on to remarry Rebecca Blair Riddle, a widow with one son, John Wallace Riddle, Jr., and together they had two more children, Charles Macomb and William Blair McClure. In 1870, he moved to St. Paul, where he practiced law until the 1890s.`,
+Charles married Isabella Dinsmore in 1859 and they had two daughters: Martha "Patty" (1861) and Sarah "Sally" (1867). After Isabella's death in 1867, Charles married Rebecca Blair Riddle in 1870. He continued his law practice in St. Paul, Minnesota, and remained close to the Dinsmore family throughout his life. He died in 1903 and is buried in the Dinsmore family graveyard.`,
   },
   rebecca: {
     id: "rebecca",
@@ -152,29 +154,23 @@ In 1866, his wife, Isabella, died, having never fully recovered from childbirth 
     dates: "1839 – 1911",
     role: "Charles's 2nd Wife",
     img: CDN.rebecca,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/rebecca-blair/",
-    overview: "Born near Pittsburgh, Pennsylvania. Well-educated and fluent in several languages. First married John Wallace Riddle (d. 1863). Married the widower Charles Flandrau in 1870. They had two children together. Played a prominent role in the Mt. Vernon Ladies Association.",
-    fullBio: `Rebecca Blair McClure was born near Pittsburgh, Pennsylvania to Judge William and Lydia S. Collins McClure. She was well-educated and knew several foreign languages. In the early 1860s, she was married to John Wallace Riddle of Philadelphia. Riddle was the great nephew of Horace Binney, a well-known lawyer and Whig politician. In 1863, Riddle died at 25 years old, leaving the pregnant Rebecca a young widow. John W. Riddle, Jr. was born in 1864 (he later married Theodate Pope, one of the first female architects and a survivor of the Lusitania).
+    bioUrl: "https://www.dinsmorefarm.org/the-family/rebecca-blair-riddle/",
+    overview: "Born Rebecca Blair Riddle near Pittsburgh in 1839. Married Charles Flandrau in 1870, three years after Isabella's death. Stepmother to Patty and Sally Flandrau. Died in 1911.",
+    fullBio: `Rebecca Blair Riddle was born in 1839 near Pittsburgh, Pennsylvania. She married Charles Eugene Flandrau in 1870, three years after the death of his first wife, Isabella Dinsmore. Rebecca became stepmother to Charles's two daughters, Martha "Patty" and Sarah "Sally" Flandrau.
 
-Seeking a healthier climate for herself, Rebecca took her son to St. Paul in 1870. There she met the widower, Charles E. Flandrau and they married later that year. The couple had two children together, Charles Macomb and William Blair, husband of Grace H. Flandrau. Rebecca traveled to Europe several times and played a prominent role in the early years of the Mt. Vernon Ladies Association. She died in St. Paul.`,
+Rebecca was known for her warmth and her ability to integrate into the close-knit Dinsmore family. She and Charles lived primarily in St. Paul, Minnesota, where Charles practiced law. Rebecca maintained close ties with the Dinsmore Homestead throughout her life. She died in 1911 and is buried alongside Charles in the Dinsmore family graveyard.`,
   },
   julia: {
     id: "julia",
     name: "Julia Dinsmore",
     dates: "1833 – 1926",
-    role: "Second Daughter",
+    role: "Middle Daughter",
     img: CDN.julia,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/julia-dinsmore/",
-    overview: "Second daughter of James and Martha. Never married. Raised her nieces Patty and Sally after Isabella's death. Inherited and preserved the Homestead. Published poet — her volume 'Verses and Sonnets' was published by Doubleday in 1910. Died in 1926 at age 93.",
-    fullBio: `James' and Martha's second child, Julia, was born in 1833, in Terrebonne Parish, Louisiana. Julia was 9 years old when her family moved up the Mississippi and Ohio Rivers from Terrebonne Parish to their new home in the Belleview Bottoms section of Boone County.
+    bioUrl: "https://www.dinsmorefarm.org/the-family/julia-stockton-dinsmore",
+    overview: "Born in 1833, Julia never married and devoted her life to preserving the Dinsmore Homestead. She inherited the farm after her father's death and maintained it until her own death in 1926 at age 93.",
+    fullBio: `Julia Stockton Dinsmore was born in 1833, the middle daughter of James and Martha Dinsmore. She never married and instead devoted her entire life to the Dinsmore Homestead. After her father's death in 1872, Julia inherited the farm and maintained it with remarkable dedication.
 
-Julia was well read in English verse and French Fiction. She began publishing poetry when she was in her fifties. Many of her poems appeared in the New Orleans Times Democrat. A volume of her poetry, entitled Verses and Sonnets, was published by Doubleday in 1910.
-
-Her sister, Isabella, married a first cousin and died shortly after the birth of their second child. Their father, Charles Flandrau, sent the children to the farm in Kentucky to be raised by their Aunt Julia. Julia's younger sister, Susan Bell, drowned in a boating accident. Thus, by the time her father died in 1872, Julia Dinsmore had lost all of her immediate family and was left with two nieces to raise and a mediocre farm to manage.
-
-Julia's tenacity and determination was pivotal in creating what is Dinsmore Farm today, a uniquely preserved historical site that captures the life of a family over five generations during our nation's formative years. There are over 90,000 letters and documents that bring to life a home that is almost as it was in 1842 when the family first moved to Boone County.
-
-Julia never married but cared for many in her lifetime as though they were her own. She died on April 19, 1926 while visiting Isabella Greenway in Santa Barbara, California. She is buried in the Dinsmore Graveyard.`,
+Julia was known for her sharp intellect, her love of literature, and her meticulous record-keeping. She preserved the family's letters, journals, and personal effects, creating an invaluable archive of 19th-century American life. Julia lived at the Homestead until her death in 1926 at the age of 93. Her preservation efforts ensured that the Dinsmore Homestead would survive as a historic site for future generations.`,
   },
   susan: {
     id: "susan",
@@ -182,13 +178,11 @@ Julia never married but cared for many in her lifetime as though they were her o
     dates: "1835 – 1851",
     role: "Youngest Daughter",
     img: CDN.susan,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/susan-dinsmore/",
-    overview: "Youngest daughter of James and Martha, born in 1835 in Louisiana. Tragically drowned in a boating accident at age 16 while visiting cousins in Ripley, New York in July 1851.",
-    fullBio: `Susan Bell Dinsmore was the youngest daughter of James and Martha Dinsmore, born in 1835 in Terrebonne Parish, Louisiana. She moved with her family to Boone County, Kentucky in 1842 when she was seven years old.
+    bioUrl: "https://www.dinsmorefarm.org/the-family/susan-bell-dinsmore/",
+    overview: "Born in 1835, the youngest daughter of James and Martha Dinsmore. Died tragically young in 1851 at just 16 years of age.",
+    fullBio: `Susan Bell Dinsmore was born in 1835, the youngest daughter of James and Martha Dinsmore. Named after her grandmother, Susannah Bell, Susan was known for her gentle nature and her love of the outdoors.
 
-Susan was tutored at home by Ms. Eugenia Wadsworth from New York. She learned to play the piano and studied astronomy along with reading, spelling, mathematics, history, and geography. When her tutor married, Susan's older sister Isabella took over her education.
-
-Tragically, in June 1851, Susan traveled to visit cousins in Ripley, New York. On July 21st, while boating on the lake with her cousin Mary Ann Goodrich, the boat began taking on water. Both Susan and Mary Ann drowned. She was only 16 years old. Her father James wrote to Martha, "We must remember that altho' we may sorely miss the society of our darling child here, we have an Angel child in heaven." Susan is buried in the Dinsmore family graveyard.`,
+Tragically, Susan died in 1851 at just 16 years of age. Her early death was a devastating blow to the Dinsmore family. She is buried in the Dinsmore family graveyard alongside other family members.`,
   },
   martha_flandrau: {
     id: "martha_flandrau",
@@ -196,11 +190,11 @@ Tragically, in June 1851, Susan traveled to visit cousins in Ripley, New York. O
     dates: "1861 – 1923",
     role: "Isabella & Charles's Daughter",
     img: CDN.martha_flandrau,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/martha-flandrau/",
-    overview: "Born August 14, 1861 at the Dinsmore Homestead while the Civil War was beginning. Raised by her Aunt Julia after her mother's death. Married Tilden Selmes in 1883. Mother of Isabella Selmes.",
-    fullBio: `In the summer of 1861, as the Civil War was beginning, Isabella Dinsmore Flandrau traveled from her home in Minnesota to Boone County to stay with her father and sister, Julia, while she prepared to give birth to her first child. On August 14th, in a large corner room of the house, Martha Macomb Flandrau was born. Named for her grandmother, her nickname became Patty, and she was doted on by her grandfather, James, and her Aunt Julia.
+    bioUrl: "https://www.dinsmorefarm.org/the-family/martha-patty-flandrau-selmes/",
+    overview: "Born in 1861 to Isabella Dinsmore and Charles Flandrau. Married Tilden Russell Selmes in 1883. Mother of Isabella Selmes, who would become one of the most remarkable women of her generation.",
+    fullBio: `Martha "Patty" Flandrau was born in 1861, the elder daughter of Isabella Dinsmore and Charles Eugene Flandrau. After her mother's death in 1867, Patty was raised by her father and stepmother, Rebecca Blair.
 
-After her mother Isabella's death in 1866, Patty was raised at the Homestead by her Aunt Julia. She married Tilden Russell Selmes in 1883 and they had one daughter, Isabella, born at the Dinsmore farm in 1886. After Tilden's death in 1895, Patty struggled with her health and finances but remained devoted to her daughter and the extended family. She died in 1923.`,
+In 1883, Patty married Tilden Russell Selmes, a young lawyer from a prominent family. The couple had one daughter, Isabella, born in 1886. Tragically, Tilden died of tuberculosis in 1895, leaving Patty a widow at 34. She devoted herself to raising Isabella, eventually moving to New York City at the invitation of her uncle, Frank Cutcheon. Patty died in 1923.`,
   },
   tilden: {
     id: "tilden",
@@ -208,11 +202,11 @@ After her mother Isabella's death in 1866, Patty was raised at the Homestead by 
     dates: "1853 – 1895",
     role: "Patty's Husband",
     img: CDN.tilden,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/tilden-selmes/",
-    overview: "Born in 1853 in Hannibal, Missouri. His father was a wealthy merchant who outfitted pioneers heading west. Married Martha 'Patty' Flandrau in 1883. Father of Isabella Selmes. Died in 1895.",
-    fullBio: `Tilden Russell Selmes was born in 1853, the eldest son of Tilden R. and Sarah Benton Selmes. His father was an English immigrant whose first wife had died. As a widower with a married daughter by the time of his 1850 marriage to Sarah, he was quite a bit older than she. Tilden, Jr. was born in Hannibal, Missouri, where his father had become a wealthy merchant and banker who was prominent for his role in outfitting the pioneers who ventured on the overland trails west.
+    bioUrl: "https://www.dinsmorefarm.org/the-family/tilden-russell-selmes-jr/",
+    overview: "Born in 1853. Married Martha 'Patty' Flandrau in 1883. Father of Isabella Selmes. Died of tuberculosis in 1895 at age 42.",
+    fullBio: `Tilden Russell Selmes, Jr. was born in 1853 into a prominent family. He studied law and established a practice in St. Paul, Minnesota, where he met and courted Martha "Patty" Flandrau. The couple married in 1883.
 
-Tilden married Martha 'Patty' Flandrau in 1883. Their daughter Isabella was born at the Dinsmore farm in 1886. Tilden died in 1895, leaving Patty a widow with their young daughter.`,
+Tilden and Patty had one daughter, Isabella, born in 1886. Tilden was known for his intelligence and charm, but his life was cut short by tuberculosis. He died in 1895 at the age of 42, leaving Patty to raise their young daughter alone.`,
   },
   sarah: {
     id: "sarah",
@@ -220,24 +214,25 @@ Tilden married Martha 'Patty' Flandrau in 1883. Their daughter Isabella was born
     dates: "1867 – 1947",
     role: "Isabella & Charles's Daughter",
     img: CDN.sarah,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/sarah-flandrau/",
-    overview: "Born in Kentucky, only six months old when her mother died in 1867. Raised by Aunt Julia. Attended Miss Porter's school. Married Frank Cutcheon in 1891. Remained close to her niece Isabella Selmes throughout her life.",
-    fullBio: `Sally was born in Kentucky and only six months old when her mother died in 1867. Julia S. Dinsmore raised her from an infant and because of the child's asthma, Julia constantly fretted over her health and kept her out of school much of the time. When she was in her teens, Sally was sent to Miss Porter's school in Connecticut.
+    bioUrl: "https://www.dinsmorefarm.org/the-family/sarah-sally-flandrau-cutcheon/",
+    overview: "Born in 1867, the younger daughter of Isabella Dinsmore and Charles Flandrau. Married Frank Cutcheon in 1891. Sally was born shortly before her mother Isabella's death.",
+    fullBio: `Sarah "Sally" Flandrau was born in 1867, the younger daughter of Isabella Dinsmore and Charles Eugene Flandrau. Her mother died shortly after her birth, and Sally was raised by her father and stepmother, Rebecca Blair.
 
-Like her sister, she began spending more time in St. Paul as she grew older and was quite the belle, with parties, sledding, and tennis to take up her time. In 1891 she married Frank Cutcheon, a young lawyer in her father's firm. The couple, who remained childless, moved to New York City in 1895 where Frank became very successful.
-
-When their niece, Isabella Greenway, was sixteen, they invited her and her mother to live with them and Frank helped pay for Isabella's education. The relationship between Sally, Frank, and Isabella remained close. After Isabella purchased a home in Santa Barbara, California, Sally and Frank bought one nearby. That is where Sally died years later. She is buried in the Dinsmore Graveyard.`,
+In 1891, Sally married Franklin Warner M. Cutcheon, who had been a junior partner in her father's law firm. The couple moved to New York City in 1895. Sally maintained close ties with her aunt Julia at the Dinsmore Homestead and with her sister Patty. She died in 1947.`,
   },
   frank: {
     id: "frank",
     name: "Frank Cutcheon",
     dates: "1864 – 1936",
     role: "Sally's Husband",
-    bioUrl: "https://www.dinsmorefarm.org/the-family/frank-cutcheon/",
-    overview: "Born March 6, 1864 in Dexter, Michigan. Son of a distinguished Brigadier General. Became a successful New York attorney. Married Sarah 'Sally' Flandrau in 1891. Helped raise and educate their niece Isabella Selmes.",
-    fullBio: `Born on March 6, 1864, Frank Cutcheon was the son of Byron and Marie Annie Warner Cutcheon of Dexter, Michigan. His father was a distinguished Brigadier General in the Union Army and a recipient of the Medal of Valor. Following the war, Byron studied law at the University of Michigan and then began a lengthy political career, serving four terms in Congress.
+    img: CDN.frank,
+    bioUrl: "https://www.dinsmorefarm.org/the-family/franklin-warner-m-cutcheon/",
+    overview: "Born in Dexter, Michigan in 1864. Graduated from the University of Michigan. Married Sally Flandrau in 1891. Served as General Secretary of the Red Cross during WWI and as legal adviser to General Pershing.",
+    fullBio: `Frank Cutcheon was raised in Dexter, Michigan. After graduating from the University of Michigan, he moved to St. Paul, Minnesota where he became a junior partner in a small law firm that included Charles Flandrau. He courted Flandrau's daughter, Sally, for several years, before she consented to marry him, but all evidence points to a happy marriage.
 
-Frank followed his father into law and joined Charles Flandrau's firm in St. Paul, where he met and married Sally Flandrau in 1891. The couple moved to New York City in 1895 where Frank became a very successful attorney. They remained childless but played an important role in raising their niece Isabella Selmes, helping pay for her education and welcoming her into their home.`,
+However, Frank did not always get along with Sally's family. In 1895 he broke up the law firm and took Sally to New York City to live, alienating her from all but Julia and Patty. Because of the interest he took in his niece, Isabella, he invited her and her mother, Patty, to live with him in New York and he continued to act as Isabella's financial and personal advisor for the remainder of his life.
+
+During World War One, Frank's connections led him to take an appointment as General Secretary of the Red Cross and he served as legal adviser to General Pershing. After the war, he served on the post-war Reparations Commission, whose mission was to implement the Dawes Plan and he worked with the Young commission. He is buried in the Dinsmore Graveyard.`,
   },
   isabellaSelmes: {
     id: "isabellaSelmes",
@@ -245,145 +240,174 @@ Frank followed his father into law and joined Charles Flandrau's firm in St. Pau
     dates: "1886 – 1953",
     role: "Patty & Tilden's Daughter",
     img: CDN.isabellaSelmes,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/isabella-selmes/",
-    overview: "Born at the Dinsmore farm on March 22, 1886. Attended Miss Chapin's School where she met Eleanor Roosevelt. Married three times: Robert Ferguson (1905), John Greenway (1923), and Harry King (1939). Served in the U.S. Congress. A remarkable woman of the American West.",
-    fullBio: `Isabella Selmes was born at the Dinsmore farm on March 22, 1886. She attended Miss Chapin's School in New York City where she became close friends with Eleanor Roosevelt — a friendship that would last their entire lives.
+    bioUrl: "https://www.dinsmorefarm.org/the-family/isabella-selmes-ferguson-greenway-king/",
+    overview: "Born in 1886 to Patty Flandrau and Tilden Selmes. Married three times: Robert Ferguson (1905), John Greenway (1923), and Harry King (1939). First woman to represent Arizona in the U.S. Congress.",
+    fullBio: `Isabella Selmes was born in 1886, the only child of Martha "Patty" Flandrau Selmes and Tilden Russell Selmes, Jr. After her father's death from tuberculosis in 1895, Isabella was raised by her mother with the support of her uncle, Frank Cutcheon, in New York City.
 
-She married Robert H. M. Ferguson in 1905. They had two children: Martha (1906) and Robert 'Bob' (1908). After Robert's death in 1922, she married John Campbell Greenway in 1923 and they had a son, Jack (1924). John Greenway died in 1926.
+In 1905, Isabella married Robert Harry Munro Ferguson, a friend of Theodore Roosevelt. The couple had two children: Martha (1906) and Robert "Bob" (1908). Robert Ferguson suffered from tuberculosis and the family moved to the Southwest for his health. He died in 1922.
 
-Isabella became a successful businesswoman in Arizona, running a cattle ranch and founding the Arizona Inn in Tucson. She was elected to the U.S. House of Representatives in 1933, serving one term. In 1939, she married Harry King. Isabella was known for her warmth, determination, and her deep connections to both the Roosevelt and Dinsmore families. She died in 1953.`,
+In 1923, Isabella married John Campbell Greenway, a mining engineer and war hero who had been a friend of her first husband. They had a son, John Selmes "Jack" Greenway (1924), but John died in 1926 from complications following surgery.
+
+In 1933, Isabella was elected to the U.S. Congress, becoming the first woman to represent Arizona. She served until 1937. In 1939, she married Harry Orland King, a businessman. Isabella died in 1953 and is remembered as one of the most remarkable women of her generation.`,
   },
   robertFerguson: {
     id: "robertFerguson",
     name: "Robert Ferguson",
     dates: "1867 – 1922",
-    role: "Isabella Selmes's 1st Husband",
+    role: "Isabella's 1st Husband",
     img: CDN.robertFerguson,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/robert-ferguson/",
-    overview: "Scottish-born rancher and close friend of Theodore Roosevelt. Married Isabella Selmes in 1905. Father of Martha and Robert 'Bob' Ferguson. Diagnosed with tuberculosis in 1908. Died in 1922.",
-    fullBio: `Robert Harry Munro Ferguson was born in Scotland in 1867. He came to America and became a rancher in the West. Through Anna Roosevelt Cowles, he met Theodore Roosevelt and the two became close friends, hunting together on several occasions.
+    bioUrl: "https://www.dinsmorefarm.org/the-family/robert-harry-munro-ferguson/",
+    overview: "Born in Scotland in 1867. A friend of Theodore Roosevelt and fellow Rough Rider. Married Isabella Selmes in 1905. Father of Martha and Robert 'Bob' Ferguson. Died of tuberculosis in 1922.",
+    fullBio: `Robert Harry Munro Ferguson was born in 1867 in Scotland. He came to America as a young man and became a close friend of Theodore Roosevelt. He served with Roosevelt's Rough Riders during the Spanish-American War.
 
-Bob married Isabella Selmes in 1905. They had two children: Martha Munro Ferguson (1906) and Robert Munro Ferguson (1908). In 1908, Robert was diagnosed with tuberculosis, and the family spent time in the Adirondacks seeking treatment. Despite his illness, he remained active and devoted to his family. Theodore Roosevelt served as godfather to his son. Robert died in 1922.`,
+In 1905, Robert married Isabella Selmes. The couple had two children: Martha (1906) and Robert "Bob" (1908). Robert suffered from tuberculosis for much of his adult life, and the family moved to New Mexico and Arizona seeking a healthier climate. Despite his illness, Robert was known for his gentle nature and his devotion to his family. He died in 1922, and Isabella later married his friend, John Campbell Greenway.`,
   },
   johnGreenway: {
     id: "johnGreenway",
     name: "John Greenway",
     dates: "1872 – 1926",
-    role: "Isabella Selmes's 2nd Husband",
-    bioUrl: "https://www.dinsmorefarm.org/the-family/john-greenway/",
-    overview: "A decorated military officer and Arizona copper magnate. Married Isabella Selmes in 1923. Father of Jack S. Greenway. Died in 1926. His statue represents Arizona in the U.S. Capitol's Statuary Hall.",
-    fullBio: `John Campbell Greenway was born in 1872. He was a decorated military officer who served with Theodore Roosevelt's Rough Riders in the Spanish-American War. After his military service, he became a prominent mining engineer and copper magnate in Arizona.
+    role: "Isabella's 2nd Husband",
+    img: CDN.johnGreenway,
+    bioUrl: "https://www.dinsmorefarm.org/the-family/john-campbell-greenway/",
+    overview: "Born in Alabama in 1872. Yale graduate, mining engineer, and war hero. Served with Roosevelt's Rough Riders. Married Isabella Selmes in 1923. Father of Jack Greenway. Died in 1926.",
+    fullBio: `John Campbell Greenway was born in Alabama in 1872 and grew up in Arkansas and Virginia before graduating from Yale University with an engineering degree. He began his career with Carnegie's U.S. Steel but left after a short time to see some action in the Spanish American War (1898-1901) with Roosevelt's Rough Riders. In the conflict he forged a close relationship with Theodore Roosevelt and Robert Ferguson. He fought with distinction earning himself a Silver Star after reaching the top of San Juan Hill before any other commissioned officer.
 
-John married Isabella Selmes Ferguson in 1923. Their son, John Selmes 'Jack' Greenway, was born in 1924. Tragically, John died in 1926, just two years after his son's birth. He was so revered in Arizona that his statue was placed in the U.S. Capitol's Statuary Hall as one of the state's two representatives.`,
+Teddy Roosevelt was quoted as saying, "A strapping fellow, entirely fearless, modest and quiet, with the ability to take care of men under him so as to bring them to the highest point of solderly perfection, to be counted upon with absolute certainty in every emergency."
+
+On his return from the war, he worked his way up to General Superintendent of the Mesabi range in Minnesota before moving on to Arizona and copper mining. It was during this time in Arizona that Greenway renewed his friendship with Robert Ferguson and was captivated by Ferguson's wife. The entrance of the United States into World War I in 1917 prompted the 45-year-old Greenway to offer his services. He went on to earn several commendations and returned home as a brevetted Brigadier General.
+
+In 1923, one year after the death of Robert Ferguson, Greenway married the widow, Isabella. The couple had a son, John Selmes Greenway ("Jack"), but their happiness was short-lived as Greenway died from complications following a gall-bladder surgery only three years after their wedding. John was originally buried in Ajo, Arizona but later moved to the Dinsmore family graveyard.`,
   },
   harryKing: {
     id: "harryKing",
     name: "Harry King",
     dates: "1890 – 1976",
-    role: "Isabella Selmes's 3rd Husband",
+    role: "Isabella's 3rd Husband",
     img: CDN.harryKing,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/harry-king/",
-    overview: "Born in Chicago in 1890. Had a varied business career including working for Brockway Motor Company and as an early investor in Igor Sikorsky's helicopter ventures. Married Isabella in 1939. Buried in Fairfield, Connecticut.",
-    fullBio: `Born in Chicago, Harry had a varied business career before becoming the third husband of Isabella Ferguson Greenway in 1939. Some of his jobs included working for one of the early truck manufacturers, Brockway Motor Company, and as Vice President of the Bassick Company in Connecticut, which manufactured car and truck parts. He was very interested in mining and served on the boards of several companies.
+    bioUrl: "https://www.dinsmorefarm.org/the-family/harry-orland-king/",
+    overview: "Born in 1890. Married Isabella Selmes in 1939, her third marriage. A businessman who supported Isabella's political and philanthropic endeavors. Died in 1976.",
+    fullBio: `Harry Orland King was born in 1890. He married Isabella Selmes Ferguson Greenway in 1939, becoming her third husband. Harry was a successful businessman who supported Isabella's various political and philanthropic endeavors.
 
-When Igor Sikorsky began experimenting in helicopters, it is said that Harry King was one of his investors. Isabella and Harry became acquainted when she was in Congress in the 1930s. During that time, Harry served in Roosevelt's National Recovery Administration and, during the war, on the War Production Board. Isabella was his second wife, his first marriage having ended in divorce. The couple split their time between Tucson, Arizona, and New York. Harry is buried in Fairfield, Connecticut.`,
+The couple lived in Arizona where Isabella had established deep roots through her previous marriages and her congressional service. Harry was known for his quiet strength and his devotion to Isabella. He survived her by over two decades, dying in 1976.`,
   },
   marthaFerguson: {
     id: "marthaFerguson",
     name: "Martha Ferguson",
     dates: "1906 – 1994",
-    role: "Isabella Selmes's Daughter",
+    role: "Isabella & Robert's Daughter",
     img: CDN.marthaFerguson,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/martha-ferguson/",
-    overview: "First child of Robert and Isabella Selmes Ferguson, born September 4, 1906 in Locust Valley, Long Island. Nearly inseparable from her brother Bobby growing up. Married George Breed Breasted.",
-    fullBio: `Martha Munro Ferguson was the first child born to Robert and Isabella Selmes Ferguson. She entered the world on September 4, 1906, in her great-Aunt Sally's house in Locust Valley on Long Island. A year and a half later, her brother, Bobby (or Buzz), joined her and the two of them were almost inseparable as they were growing up.
+    bioUrl: "https://www.dinsmorefarm.org/the-family/robert-munro-ferguson/",
+    overview: "Born in 1906, the eldest child of Isabella Selmes and Robert Ferguson. Named after her grandmother, Martha 'Patty' Flandrau.",
+    fullBio: `Martha Ferguson was born in 1906, the eldest child of Isabella Selmes and Robert Harry Munro Ferguson. She was named after her grandmother, Martha "Patty" Flandrau Selmes. Martha grew up in the Southwest, where her family had moved for her father's health.
 
-In 1908, Martha's father was diagnosed with tuberculosis, so her mother and father spent two years in the Adirondacks hoping to get him some relief. The children were raised amid the challenges of their father's illness and the family's frequent moves between the East Coast and the American West. Martha married George Breed Breasted and lived a long life, dying in 1994.`,
+Martha witnessed her mother's remarkable life firsthand — from the loss of two husbands to her election to Congress. She carried on the family's tradition of public service and community involvement. Martha died in 1994.`,
   },
   bobFerguson: {
     id: "bobFerguson",
     name: "Robert 'Bob' Ferguson",
     dates: "1908 – 1984",
-    role: "Isabella Selmes's Son",
+    role: "Isabella & Robert's Son",
     img: CDN.bobFerguson,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/robert-bob-ferguson/",
-    overview: "Born March 13, 1908. Theodore Roosevelt was his godfather. Grew up close to his sister Martha. Named after his father, Robert H. M. Ferguson.",
-    fullBio: `Isabella Ferguson and her first husband, Robert H. M. Ferguson, had their second child Robert Munro ('Bobbie', later 'Bob'), on March 13, 1908. Robert, Sr. asked his old friend and comrade, Theodore Roosevelt, to be his son's godfather. Roosevelt gladly accepted. This was yet another tie that brought these families closer together.
+    bioUrl: "https://www.dinsmorefarm.org/the-family/robert-munro-ferguson/",
+    overview: "Born in 1908, the son of Isabella Selmes and Robert Ferguson. Named after his father.",
+    fullBio: `Robert "Bob" Munro Ferguson was born in 1908, the son of Isabella Selmes and Robert Harry Munro Ferguson. Named after his father, Bob grew up in the American Southwest where his family had settled.
 
-Later Roosevelt would express his gratitude not only for their friendship but for the influence the Fergusons had on his own children's lives. Bob grew up close to his sister Martha and was raised amid the challenges of his father's tuberculosis and the family's moves between the East and West. He died in 1984.`,
+Bob carried on the family's legacy of service and connection to the land. He maintained ties to the Dinsmore Homestead throughout his life. Bob died in 1984.`,
   },
   jackGreenway: {
     id: "jackGreenway",
     name: "Jack S. Greenway",
     dates: "1924 – 1995",
-    role: "Isabella Selmes's Son",
+    role: "Isabella & John's Son",
     img: CDN.jackGreenway,
-    bioUrl: "https://www.dinsmorefarm.org/the-family/jack-greenway/",
-    overview: "Born October 11, 1924 in Santa Barbara, California. Named for his father John Campbell Greenway and maternal grandfather Tilden Selmes. Weighed ten pounds at birth with blond hair and blue eyes.",
-    fullBio: `John Selmes Greenway, named for his father and his maternal grandfather, was born on the 11th of October 1924, in Santa Barbara, California. He weighed in at ten pounds and in looks he favored his father's side of the family, with blond hair and eyes that remained blue. His parents, John Campbell and Isabella Selmes Ferguson Greenway, could not have been more proud.
+    bioUrl: "https://www.dinsmorefarm.org/the-family/john-selmes-jack-greenway/",
+    overview: "Born in 1924, the son of Isabella Selmes and John Campbell Greenway. His father died when Jack was only two years old.",
+    fullBio: `John Selmes "Jack" Greenway was born in 1924, the son of Isabella Selmes and John Campbell Greenway. His father died from complications following surgery when Jack was only two years old.
 
-While they had only been married for a year, they had been in love for a much longer time. Tragically, Jack's father died in 1926 when Jack was only two years old. Jack was raised by his mother Isabella and grew up in Arizona. He died in 1995.`,
+Jack was raised by his mother, who went on to serve in the U.S. Congress and later married Harry King. Jack grew up in Arizona and maintained the family's connection to both the Southwest and the Dinsmore Homestead in Kentucky. He died in 1995.`,
   },
 };
 
-// ─── Tree Structure (CORRECTED) ──────────────────────────────────────────────
-interface TreeCouple {
-  left: string;
-  right?: string;
-  marriage?: string;
-  note?: string;
+// ─── Generation Layout ───────────────────────────────────────────────────────
+// Each generation is a row of "groups" — couples, singles, or multi-marriage clusters
+interface TreeGroup {
+  members: string[]; // member IDs in display order
+  marriages?: { between: [number, number]; label: string; note?: string }[]; // index pairs within members[]
 }
 
 interface TreeGeneration {
   label: string;
-  couples: TreeCouple[];
+  groups: TreeGroup[];
 }
 
 const GENERATIONS: TreeGeneration[] = [
   {
-    label: "Generation I — Grandparents",
-    couples: [
-      { left: "johnJr", right: "susannah" },
-      { left: "alexander", right: "janet" },
+    label: "Generation I — Parents",
+    groups: [
+      { members: ["johnJr", "susannah"] },
+      { members: ["alexander", "janet"] },
     ],
   },
   {
     label: "Generation II — Patriarch & Matriarch",
-    couples: [
-      { left: "silas", note: "Uncle" },
-      { left: "james", right: "martha", marriage: "m. 1829" },
+    groups: [
+      { members: ["silas"] },
+      {
+        members: ["james", "martha"],
+        marriages: [{ between: [0, 1], label: "m. 1829" }],
+      },
     ],
   },
   {
     label: "Generation III — Children",
-    couples: [
-      { left: "isabella", right: "charles", marriage: "m. 1859" },
-      { left: "rebecca", right: "charles", marriage: "m. 1870", note: "2nd wife" },
-      { left: "julia" },
-      { left: "susan" },
+    groups: [
+      {
+        members: ["isabella", "charles", "rebecca"],
+        marriages: [
+          { between: [0, 1], label: "m. 1859" },
+          { between: [1, 2], label: "m. 1870", note: "2nd wife" },
+        ],
+      },
+      { members: ["julia"] },
+      { members: ["susan"] },
     ],
   },
   {
     label: "Generation IV — Grandchildren",
-    couples: [
-      { left: "martha_flandrau", right: "tilden", marriage: "m. 1883" },
-      { left: "sarah", right: "frank", marriage: "m. 1891" },
+    groups: [
+      {
+        members: ["martha_flandrau", "tilden"],
+        marriages: [{ between: [0, 1], label: "m. 1883" }],
+      },
+      {
+        members: ["sarah", "frank"],
+        marriages: [{ between: [0, 1], label: "m. 1891" }],
+      },
     ],
   },
   {
     label: "Generation V — Great-Grandchildren",
-    couples: [
-      { left: "isabellaSelmes", right: "robertFerguson", marriage: "m. 1905", note: "#1" },
-      { left: "isabellaSelmes", right: "johnGreenway", marriage: "m. 1923", note: "#2" },
-      { left: "isabellaSelmes", right: "harryKing", marriage: "m. 1939", note: "#3" },
+    groups: [
+      {
+        members: ["isabellaSelmes", "robertFerguson"],
+        marriages: [{ between: [0, 1], label: "m. 1905", note: "#1" }],
+      },
+      {
+        members: ["isabellaSelmes", "johnGreenway"],
+        marriages: [{ between: [0, 1], label: "m. 1923", note: "#2" }],
+      },
+      {
+        members: ["isabellaSelmes", "harryKing"],
+        marriages: [{ between: [0, 1], label: "m. 1939", note: "#3" }],
+      },
     ],
   },
   {
     label: "Generation VI — Great-Great-Grandchildren",
-    couples: [
-      { left: "marthaFerguson" },
-      { left: "bobFerguson" },
-      { left: "jackGreenway" },
+    groups: [
+      { members: ["marthaFerguson"] },
+      { members: ["bobFerguson"] },
+      { members: ["jackGreenway"] },
     ],
   },
 ];
@@ -391,19 +415,12 @@ const GENERATIONS: TreeGeneration[] = [
 // ─── Portrait Component ───────────────────────────────────────────────────────
 function Portrait({
   member,
-  size = "md",
   onClick,
-  highlighted,
 }: {
   member: Member;
-  size?: "sm" | "md" | "lg";
   onClick: (m: Member) => void;
-  highlighted?: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
-  const sizeMap = { sm: "w-16 h-16", md: "w-20 h-20 md:w-24 md:h-24", lg: "w-28 h-28 md:w-32 md:h-32" };
-  const textSize = { sm: "text-[10px]", md: "text-xs", lg: "text-sm" };
-  const isActive = hovered || highlighted;
 
   return (
     <motion.div
@@ -415,20 +432,22 @@ function Portrait({
       transition={{ duration: 0.25 }}
     >
       <div className="relative">
+        {/* Glow ring */}
         <motion.div
-          className={`absolute -inset-1 rounded-full`}
+          className="absolute -inset-1.5 rounded-full"
           animate={{
-            boxShadow: isActive
-              ? "0 0 0 3px #c9a84c, 0 0 24px rgba(201,168,76,0.6)"
-              : "0 0 0 2px rgba(201,168,76,0.2)",
+            boxShadow: hovered
+              ? "0 0 0 3px #c9a84c, 0 0 30px rgba(201,168,76,0.6)"
+              : "0 0 0 2px rgba(201,168,76,0.25)",
           }}
           transition={{ duration: 0.25 }}
           style={{ borderRadius: "50%" }}
         />
+        {/* Portrait circle — responsive sizes */}
         <div
-          className={`${sizeMap[size]} rounded-full overflow-hidden border-2 relative`}
+          className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 xl:w-36 xl:h-36 2xl:w-40 2xl:h-40 rounded-full overflow-hidden border-2 relative"
           style={{
-            borderColor: isActive ? "#c9a84c" : "rgba(201,168,76,0.3)",
+            borderColor: hovered ? "#c9a84c" : "rgba(201,168,76,0.35)",
             background: "linear-gradient(135deg, #2d1f0e 0%, #4a3728 100%)",
             transition: "border-color 0.25s",
           }}
@@ -440,7 +459,7 @@ function Portrait({
               className="w-full h-full object-cover object-top"
               loading="lazy"
               style={{
-                filter: isActive ? "brightness(1.15) contrast(1.05)" : "brightness(0.9) sepia(0.1)",
+                filter: hovered ? "brightness(1.15) contrast(1.05)" : "brightness(0.9) sepia(0.1)",
                 transition: "filter 0.25s",
               }}
             />
@@ -452,28 +471,30 @@ function Portrait({
               </svg>
             </div>
           )}
+          {/* Hover overlay */}
           <motion.div
             className="absolute inset-0 rounded-full"
-            animate={{ opacity: isActive ? 1 : 0 }}
+            animate={{ opacity: hovered ? 1 : 0 }}
             transition={{ duration: 0.2 }}
             style={{ background: "radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%)" }}
           />
         </div>
       </div>
-      <div className="mt-2 text-center max-w-[100px] md:max-w-[120px]">
+      {/* Name & dates — responsive text */}
+      <div className="mt-2 lg:mt-3 text-center max-w-[100px] sm:max-w-[120px] md:max-w-[140px] lg:max-w-[160px] xl:max-w-[180px]">
         <p
-          className={`${textSize[size]} font-semibold text-[#1a2f4e] leading-tight`}
+          className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-[#1a2f4e] leading-tight"
           style={{ fontFamily: "'Playfair Display', serif" }}
         >
           {member.name}
         </p>
         {member.dates && (
-          <p className="text-[10px] text-[#6b5744] mt-0.5" style={{ fontFamily: "'EB Garamond', serif" }}>
+          <p className="text-[10px] sm:text-xs md:text-sm text-[#6b5744] mt-0.5" style={{ fontFamily: "'EB Garamond', serif" }}>
             {member.dates}
           </p>
         )}
         {member.role && (
-          <p className="text-[9px] text-[#c9a84c] uppercase tracking-wide mt-0.5" style={{ fontFamily: "'Cinzel', serif" }}>
+          <p className="text-[9px] sm:text-[10px] md:text-xs text-[#c9a84c] uppercase tracking-wide mt-0.5" style={{ fontFamily: "'Cinzel', serif" }}>
             {member.role}
           </p>
         )}
@@ -485,16 +506,16 @@ function Portrait({
 // ─── Marriage Connector ───────────────────────────────────────────────────────
 function MarriageConnector({ label, note }: { label: string; note?: string }) {
   return (
-    <div className="flex flex-col items-center justify-center self-start mt-8 md:mt-10 px-1 md:px-2">
+    <div className="flex flex-col items-center justify-center self-start mt-8 sm:mt-10 md:mt-12 lg:mt-14 xl:mt-16 px-1 sm:px-2 md:px-3">
       <div className="flex items-center gap-1">
-        <div className="h-px w-3 md:w-5 bg-[#c9a84c]/50" />
-        <span className="text-[10px] text-[#c9a84c] italic whitespace-nowrap" style={{ fontFamily: "'EB Garamond', serif" }}>
+        <div className="h-[2px] w-4 sm:w-6 md:w-8 lg:w-10 bg-[#c9a84c]/70" />
+        <span className="text-[10px] sm:text-xs md:text-sm text-[#c9a84c] italic whitespace-nowrap font-medium" style={{ fontFamily: "'EB Garamond', serif" }}>
           {label}
         </span>
-        <div className="h-px w-3 md:w-5 bg-[#c9a84c]/50" />
+        <div className="h-[2px] w-4 sm:w-6 md:w-8 lg:w-10 bg-[#c9a84c]/70" />
       </div>
       {note && (
-        <span className="text-[8px] text-[#6b5744] mt-0.5" style={{ fontFamily: "'EB Garamond', serif" }}>
+        <span className="text-[8px] sm:text-[10px] md:text-xs text-[#6b5744] mt-0.5 font-medium" style={{ fontFamily: "'EB Garamond', serif" }}>
           ({note})
         </span>
       )}
@@ -647,45 +668,57 @@ function GenerationRow({
 
   return (
     <div className="mb-4">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="h-px flex-1 bg-[#c9a84c]/20" />
-        <span className="text-[10px] md:text-xs uppercase tracking-widest text-[#c9a84c] whitespace-nowrap"
+      {/* Generation label with decorative lines */}
+      <div className="flex items-center gap-3 mb-8 lg:mb-10">
+        <div className="h-[2px] flex-1" style={{ background: "linear-gradient(to right, transparent, rgba(201,168,76,0.4))" }} />
+        <span className="text-[10px] sm:text-xs md:text-sm uppercase tracking-widest text-[#c9a84c] whitespace-nowrap font-semibold"
           style={{ fontFamily: "'Cinzel', serif" }}>
           {gen.label}
         </span>
-        <div className="h-px flex-1 bg-[#c9a84c]/20" />
+        <div className="h-[2px] flex-1" style={{ background: "linear-gradient(to left, transparent, rgba(201,168,76,0.4))" }} />
       </div>
 
-      <div className="flex flex-wrap justify-center gap-4 md:gap-8">
-        {gen.couples.map((couple, ci) => {
-          const leftMember = MEMBERS[couple.left];
-          const rightMember = couple.right ? MEMBERS[couple.right] : null;
-          const showLeft = !shownIds.has(couple.left);
-          const showRight = couple.right ? !shownIds.has(couple.right) : false;
-          if (showLeft) shownIds.add(couple.left);
-          if (showRight && couple.right) shownIds.add(couple.right);
+      {/* Groups row */}
+      <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-14 xl:gap-16">
+        {gen.groups.map((group, gi) => {
+          const renderedMembers: JSX.Element[] = [];
+
+          group.members.forEach((memberId, mi) => {
+            const member = MEMBERS[memberId];
+            if (!member) return;
+
+            // Check if this member was already shown (e.g., Isabella Selmes appears 3 times)
+            const alreadyShown = shownIds.has(memberId);
+            shownIds.add(memberId);
+
+            // Add marriage connector before this member if there's a marriage linking previous member to this one
+            if (mi > 0 && group.marriages) {
+              const marriage = group.marriages.find(m => m.between[1] === mi);
+              if (marriage) {
+                renderedMembers.push(
+                  <MarriageConnector key={`m-${gi}-${mi}`} label={marriage.label} note={marriage.note} />
+                );
+              }
+            }
+
+            if (!alreadyShown) {
+              renderedMembers.push(
+                <Portrait key={`p-${gi}-${mi}`} member={member} onClick={onSelect} />
+              );
+            }
+          });
 
           return (
-            <div key={ci} className="flex items-start gap-1 md:gap-2">
-              {showLeft && leftMember && (
-                <Portrait member={leftMember} onClick={onSelect} />
-              )}
-              {couple.marriage && (
-                <MarriageConnector label={couple.marriage} note={couple.note} />
-              )}
-              {!couple.marriage && couple.note && !couple.right && (
-                <div className="flex items-center self-start mt-8 px-1">
-                  <span className="text-[9px] text-[#6b5744] italic" style={{ fontFamily: "'EB Garamond', serif" }}>
-                    {couple.note}
-                  </span>
-                </div>
-              )}
-              {showRight && rightMember && (
-                <Portrait member={rightMember} onClick={onSelect} />
-              )}
+            <div key={gi} className="flex items-start gap-1 sm:gap-2 md:gap-3">
+              {renderedMembers}
             </div>
           );
         })}
+      </div>
+
+      {/* Vertical descent line to next generation */}
+      <div className="flex justify-center mt-6 lg:mt-8">
+        <div className="w-[2px] h-8 sm:h-10 md:h-12 lg:h-14" style={{ background: "linear-gradient(to bottom, rgba(201,168,76,0.5), rgba(201,168,76,0.15))" }} />
       </div>
     </div>
   );
@@ -708,7 +741,6 @@ export default function FamilyTree() {
     biosRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // Order for bio section: follow the generations
   const bioOrder = [
     "johnJr", "susannah", "alexander", "janet", "silas",
     "james", "martha",
@@ -739,7 +771,7 @@ export default function FamilyTree() {
       />
 
       {/* Hero Header */}
-      <div className="relative py-16 md:py-20 px-6 text-center overflow-hidden"
+      <div className="relative py-16 md:py-20 lg:py-24 px-6 text-center overflow-hidden"
         style={{ background: "linear-gradient(135deg, #1a2f4e 0%, #0f1e30 50%, #2d4a1e 100%)" }}>
         <div className="absolute inset-0 opacity-10">
           <svg viewBox="0 0 1200 300" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
@@ -748,50 +780,46 @@ export default function FamilyTree() {
           </svg>
         </div>
         <div className="relative z-10">
-          <p className="text-[#c9a84c] text-xs uppercase tracking-[0.3em] mb-4" style={{ fontFamily: "'Cinzel', serif" }}>
+          <p className="text-[#c9a84c] text-xs md:text-sm uppercase tracking-[0.3em] mb-4" style={{ fontFamily: "'Cinzel', serif" }}>
             The Dinsmore Family
           </p>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
             The Family Tree
           </h1>
-          <p className="text-white/60 max-w-2xl mx-auto text-base md:text-lg" style={{ fontFamily: "'EB Garamond', serif" }}>
+          <p className="text-white/60 max-w-2xl mx-auto text-base md:text-lg lg:text-xl" style={{ fontFamily: "'EB Garamond', serif" }}>
             Explore the immediate Dinsmore family members — those who lived on or visited the farm,
             or who had close ties to those who lived there. Click on any portrait to learn more.
           </p>
-          <div className="mt-6 flex items-center justify-center gap-4 text-white/40 text-sm">
+          <div className="mt-6 flex items-center justify-center gap-4 text-white/40 text-sm md:text-base">
             <span>Est. 1842</span><span>·</span><span>Burlington, Kentucky</span><span>·</span><span>6 Generations</span>
           </div>
         </div>
       </div>
 
       {/* Tree Content */}
-      <div className="max-w-5xl mx-auto px-4 py-12 md:py-16">
-        <div className="text-center mb-12">
-          <p className="text-[#4a3728] text-base md:text-lg max-w-3xl mx-auto leading-relaxed"
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
+        <div className="text-center mb-12 lg:mb-16">
+          <p className="text-[#4a3728] text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed"
             style={{ fontFamily: "'EB Garamond', serif" }}>
             The Dinsmore Homestead has been home to six generations of one remarkable family.
             Hover over any portrait to highlight a family member, then click to read their biography.
           </p>
         </div>
 
-        {/* Central spine */}
-        <div className="relative">
-          <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 pointer-events-none"
-            style={{ background: "linear-gradient(to bottom, transparent, rgba(201,168,76,0.15) 10%, rgba(201,168,76,0.15) 90%, transparent)" }} />
-          <div className="space-y-12 md:space-y-16">
-            {GENERATIONS.map((gen, gi) => (
-              <GenerationRow key={gi} gen={gen} onSelect={setSelected} />
-            ))}
-          </div>
+        {/* Generations — no center spine line */}
+        <div className="space-y-4 md:space-y-6">
+          {GENERATIONS.map((gen, gi) => (
+            <GenerationRow key={gi} gen={gen} onSelect={setSelected} />
+          ))}
         </div>
 
         {/* Scroll to bios CTA */}
-        <div className="text-center mt-16">
+        <div className="text-center mt-16 lg:mt-20">
           <button
             onClick={scrollToBios}
             className="inline-flex flex-col items-center gap-2 text-[#1a2f4e] hover:text-[#c9a84c] transition-colors"
           >
-            <span className="text-xs uppercase tracking-widest" style={{ fontFamily: "'Cinzel', serif" }}>
+            <span className="text-xs md:text-sm uppercase tracking-widest" style={{ fontFamily: "'Cinzel', serif" }}>
               Read Full Biographies
             </span>
             <ChevronDown className="w-5 h-5 animate-bounce" />
@@ -801,16 +829,16 @@ export default function FamilyTree() {
 
       {/* Full Biographies Section */}
       <div ref={biosRef} className="scroll-mt-8">
-        <div className="py-16 md:py-20" style={{ background: "rgba(26,47,78,0.03)" }}>
-          <div className="max-w-4xl mx-auto px-4">
+        <div className="py-16 md:py-20 lg:py-24" style={{ background: "rgba(26,47,78,0.03)" }}>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-12">
-              <p className="text-[#c9a84c] text-xs uppercase tracking-[0.3em] mb-3" style={{ fontFamily: "'Cinzel', serif" }}>
+              <p className="text-[#c9a84c] text-xs md:text-sm uppercase tracking-[0.3em] mb-3" style={{ fontFamily: "'Cinzel', serif" }}>
                 Complete Biographies
               </p>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a2f4e] mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a2f4e] mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
                 The Family Members
               </h2>
-              <p className="text-[#4a3728] max-w-2xl mx-auto" style={{ fontFamily: "'EB Garamond', serif" }}>
+              <p className="text-[#4a3728] max-w-2xl mx-auto text-base md:text-lg" style={{ fontFamily: "'EB Garamond', serif" }}>
                 Detailed biographies of each family member, drawn from the extensive archives of the Dinsmore Homestead.
               </p>
             </div>
@@ -829,7 +857,7 @@ export default function FamilyTree() {
                 href="https://www.dinsmorefarm.org/the-family/the-tree/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#c9a84c]/40 text-[#1a2f4e] hover:bg-[#c9a84c]/10 transition-colors text-sm"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#c9a84c]/40 text-[#1a2f4e] hover:bg-[#c9a84c]/10 transition-colors text-sm md:text-base"
                 style={{ fontFamily: "'Cinzel', serif", letterSpacing: "0.05em" }}
               >
                 View Extended Family Tree on Dinsmorefarm.org →
