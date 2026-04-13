@@ -403,6 +403,13 @@ export default function Home() {
       icon: <Heart size={24} />,
       accent: C.cobalt,
     },
+    {
+      label: "School & Group Visits",
+      sublabel: "Programs for all ages",
+      href: "/group-tours",
+      icon: <GraduationCap size={24} />,
+      accent: C.richNavy,
+    },
   ];
 
   return (

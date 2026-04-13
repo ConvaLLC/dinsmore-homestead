@@ -350,3 +350,6 @@
 
 ## Family Tree Portrait Fix
 - [x] Fix Janet Macomb portrait crop — cleaned circular crop from master image, uploaded to CDN
+
+## Homepage Hero Tiles
+- [x] Add "School & Group Visits" tile to hero tiles section linking to /group-tours
