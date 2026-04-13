@@ -449,7 +449,7 @@
 /* The tile strip sits at the bottom of the hero wrapper — 4 parchment tiles */
 .hero-tile-strip {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   background: oklch(94.7% 0.029 89.6);
   border-top: 3px solid oklch(74.2% 0.118 90.2);
 }

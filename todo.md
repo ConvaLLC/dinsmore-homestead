@@ -353,3 +353,4 @@
 
 ## Homepage Hero Tiles
 - [x] Add "School & Group Visits" tile to hero tiles section linking to /group-tours
+- [x] Make all 5 hero tiles fit in a single row (no wrapping to second row)
