@@ -3,14 +3,14 @@ import { Link } from "wouter";
 
 // ── CDN URL for the v4 reel (no baked-in text, heritage color grade) ──────
 const VIDEO_URL =
-  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/UnmfNodCjcmjGbFI.mp4";
+  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663457620847/YcrPDTpBcuyvqXyG.mp4";
 
 // ── Slide definitions synced to video timecodes ────────────────────────────
-// Clip timing (from build script output):
-//   Clip 1: 0.0s – 5.5s   Exterior — white picket fence, homestead
+// Clip timing (from build script output — v5):
+//   Clip 1: 0.0s – 5.5s   Exterior — white picket fence, homestead (front angle)
 //   Clip 2: 5.5s – 10.5s  Women's Study — upstairs room pan
 //   Clip 3: 10.5s – 16.0s Parlor — green velvet sofa, fireplace, portrait
-//   Clip 4: 16.0s – 20.5s TR Rough Riders archival photo
+//   Clip 4: 16.0s – 20.5s Homestead side view from lawn (different angle)
 //   Clip 5: 20.5s – 25.0s Bookshelf close-up
 //   Clip 6: 25.0s – 31.5s Aerial drone — homestead and grounds
 const SLIDES = [
@@ -44,11 +44,11 @@ const SLIDES = [
   {
     start: 16.0,
     end: 20.5,
-    title: "Presidential Connections",
+    title: "Nestled in Kentucky's Licking River Valley",
     subtitle:
-      "The Dinsmore family's social circle reached all the way to the White House — come hear the full story",
-    linkUrl: "/history/family",
-    linkText: "Explore the History",
+      "The Dinsmore Homestead sits on 595 acres of rolling farmland and woodland — as beautiful today as it was in 1842",
+    linkUrl: "/visit",
+    linkText: "Plan Your Visit",
   },
   {
     start: 20.5,
