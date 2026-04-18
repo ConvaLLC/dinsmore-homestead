@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import HeroSlider from "@/components/HeroSlider";
+import HeroVideo from "@/components/HeroVideo";
 import { IMAGES } from "../../../shared/images";
 import { Calendar, Clock, MapPin, Ticket, Heart, BookOpen, ChevronRight, ChevronDown, Star, Users, Award, GraduationCap, House, HelpCircle } from "lucide-react";
 import { useState } from "react";
@@ -416,8 +417,8 @@ export default function Home() {
     <div style={{ background: C.warmWhite }}>
       {/* ── FULL-WIDTH HERO ── */}
       <div className="hero-wrapper" style={{ position: "relative", background: C.midnight }}>
-        {/* Full-width image slider */}
-        <HeroSlider />
+        {/* Full-width video hero reel */}
+        <HeroVideo />
 
         {/* ── Quick-Access Tile Strip (4 parchment tiles) ── */}
         <div className="hero-tile-strip">
